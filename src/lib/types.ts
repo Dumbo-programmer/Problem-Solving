@@ -12,6 +12,7 @@ export type {
 } from "../data/types";
 
 import type {
+  Localized,
   Problem,
   ProblemCategory,
   ProblemDifficulty,
@@ -61,7 +62,65 @@ export interface PracticeTest {
   timedOut?: boolean;
   /** Where the record lives: "cloud" = Supabase, "local" = this browser. */
   origin: "cloud" | "local";
+  /** Set when this entry belongs to a weekly/monthly scheduled test. */
+  scheduledTestId?: string;
+  /** Optional public name shown on the leaderboard for scheduled tests. */
+  displayName?: string;
 }
+
+/* ------------------------------------------------------------------ */
+/* Scheduled (weekly / monthly) tests + leaderboard                    */
+/* ------------------------------------------------------------------ */
+
+export type ScheduledTestKind = "WEEKLY" | "MONTHLY" | "CUSTOM";
+export type TestPhase = "upcoming" | "live" | "ended";
+
+/** A test published on a schedule — weekly, monthly or ad-hoc. */
+export interface ScheduledTest {
+  id: string;
+  kind: ScheduledTestKind;
+  title: Localized;
+  description: Localized;
+  /** ISO timestamps of the attempt window. */
+  startAt: string;
+  endAt: string;
+  durationMin: number;
+  problemIds: string[];
+  published: boolean;
+  /** Participants who have submitted (filled in by the API when known). */
+  participants?: number;
+}
+
+/** One row of a per-test standings table. */
+export interface StandingsRow {
+  rank: number;
+  entryId: string;
+  name: string;
+  clientId: string;
+  score: number;
+  maxScore: number;
+  pct: number;
+  timeTakenSec: number;
+  submittedAt: string;
+  isYou: boolean;
+}
+
+/** One row of the period leaderboard (weekly / monthly / all-time). */
+export interface PeriodRow {
+  rank: number;
+  name: string;
+  clientId: string;
+  tests: number;
+  correct: number;
+  /** Problems solved correctly across the window — the ranking metric. */
+  points: number;
+  avgPct: number;
+  bestPct: number;
+  timeTakenSec: number;
+  isYou: boolean;
+}
+
+export type LeaderboardWindow = "week" | "month" | "all";
 
 /** Problem payload returned by the API (identical shape to the bundled bank). */
 export type ApiProblem = Problem;

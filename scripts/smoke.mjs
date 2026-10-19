@@ -58,7 +58,7 @@ async function text() {
 }
 
 /* ---------- 1. every route renders ---------- */
-for (const path of ["/", "/problems", "/practice", "/past-tests"]) {
+for (const path of ["/", "/problems", "/practice", "/past-tests", "/tests", "/leaderboard", "/admin"]) {
   await goto(path);
   const t = await text();
   check(`route ${path} renders`, t.length > 400, `${t.length} chars`);
@@ -175,6 +175,62 @@ await new Promise((r) => setTimeout(r, 1500));
 const pastText = await text();
 check("past tests list is populated", !/এখনো কোনো টেস্ট নেই|No tests yet/i.test(pastText));
 check("past tests show a percentage", /\d+%/.test(pastText));
+
+/* ---------- 8. scheduled tests: calendar, countdown, standings ---------- */
+await goto("/tests");
+await new Promise((r) => setTimeout(r, 1200));
+const testsText = await text();
+check("tests page titles the calendar", /নির্ধারিত টেস্ট|Scheduled tests/i.test(testsText));
+check(
+  "weekly + monthly papers are listed",
+  /সাপ্তাহিক স্প্রিন্ট|Weekly Sprint/i.test(testsText) && /মাসিক চ্যালেঞ্জ|Monthly Challenge/i.test(testsText)
+);
+check("papers show a phase or countdown", /এখন চলছে|আসছে|শেষ হবে|শুরু হবে|Live now|Upcoming|Ends in|Starts in/i.test(testsText));
+
+// Expanding a contest's standings works whether the API answered or the
+// board came from the offline fallback.
+const openedStandings = await page.evaluate(() => {
+  const btn = [...document.querySelectorAll("button")].find(
+    (b) => /স্ট্যান্ডিংস|Standings/i.test(b.textContent) && !/লুকান|Hide/i.test(b.textContent)
+  );
+  if (btn) {
+    btn.click();
+    return true;
+  }
+  return false;
+});
+await page
+  .waitForFunction(() => /Score decides rank|র‍্যাঙ্ক নির্ধারণ করে স্কোর/i.test(document.body.innerText), { timeout: 5000 })
+  .catch(() => {});
+const standingsText = await text();
+check("standings toggle expands the board", openedStandings && /Score decides rank|র‍্যাঙ্ক নির্ধারণ করে স্কোর/i.test(standingsText));
+await page
+  .waitForFunction(() => /শিক্ষার্থী|Learner|এখনো কেউ জমা দেয়নি|No submissions yet/i.test(document.body.innerText), {
+    timeout: 5000
+  })
+  .catch(() => {});
+const standingsBody = await text();
+check(
+  "standings panel shows rows (or a friendly empty state)",
+  /শিক্ষার্থী|Learner|এখনো কেউ জমা দেয়নি|No submissions yet/i.test(standingsBody)
+);
+
+/* ---------- 9. leaderboard: title, tabs, source ---------- */
+await goto("/leaderboard");
+await new Promise((r) => setTimeout(r, 1200));
+const lbText = await text();
+check("leaderboard shows its title", /লিডারবোর্ড|Leaderboard/i.test(lbText));
+check("leaderboard has week/month/all tabs", /এই সপ্তাহ|এই মাস|সব সময়|This week|This month|All time/i.test(lbText));
+check("leaderboard lists ranked learners", /র‍্যাঙ্ক|Rank/i.test(lbText));
+check("leaderboard names its data source", /অফলাইন|ক্লাউড থেকে|Offline —|Live from the cloud/i.test(lbText));
+
+/* ---------- 10. admin dashboard gates on a login form ---------- */
+await goto("/admin");
+await new Promise((r) => setTimeout(r, 800));
+const adminText = await text();
+check("admin route shows the login gate", /অ্যাডমিন আইডি|Admin ID/i.test(adminText) && /পাসওয়ার্ড|Password/i.test(adminText));
+const hasPasswordField = await page.evaluate(() => Boolean(document.querySelector('input[type="password"]')));
+check("admin login has a password field", hasPasswordField);
 
 await browser.close();
 

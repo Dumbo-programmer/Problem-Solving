@@ -7,6 +7,9 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Problems from "./pages/Problems";
 import Practice from "./pages/Practice";
+import Tests from "./pages/Tests";
+import Leaderboard from "./pages/Leaderboard";
+import Admin from "./pages/Admin";
 import TestRunner from "./pages/TestRunner";
 import Results from "./pages/Results";
 import PastTests from "./pages/PastTests";
@@ -33,6 +36,9 @@ export default function App() {
               <Route path="/" element={<Home />} />
               <Route path="/problems" element={<Problems />} />
               <Route path="/practice" element={<Practice />} />
+              <Route path="/tests" element={<Tests />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/admin" element={<Admin />} />
               <Route path="/test/:id" element={<TestRunner />} />
               <Route path="/test/:id/results" element={<Results />} />
               <Route path="/past-tests" element={<PastTests />} />

@@ -5,224 +5,42 @@
  *   GET    /tests?clientId=
  *   POST   /tests
  *   DELETE /tests?id=&clientId=
+ *   GET    /scheduled-tests                 published weekly/monthly papers
+ *   GET    /standings?testId=               per-test standings
+ *   GET    /leaderboard?window=week|month|all
  *   GET    /health
  *
- * It talks to Supabase's PostgreSQL over a direct/pooled TCP connection using
- * `pg`. The schema is created lazily and idempotently on the first request, and
- * the bundled problem bank is seeded into the database the first time it comes
- * up empty — so a brand-new project works with zero manual setup.
+ *   POST   /admin/login                     { id, password } → bearer token
+ *   GET    /admin/overview                  counts + data source        (auth)
+ *   GET    /admin/submissions               contest submissions         (auth)
+ *   GET    /admin/scheduled-tests           incl. unpublished           (auth)
+ *   POST   /admin/problems                  upsert                      (auth)
+ *   DELETE /admin/problems?id=                                            (auth)
+ *   POST   /admin/scheduled-tests           upsert                      (auth)
+ *   DELETE /admin/scheduled-tests?id=                                   (auth)
  *
- * Every handler degrades safely: if the database is unreachable the API answers
- * with a 503 and the front end quietly falls back to the bundled bank plus
- * localStorage, so the learner never sees a broken page.
+ * Storage lives behind `lib/store.ts`: Supabase Postgres when a connection
+ * opens, otherwise a JSON file on disk — so the API answers everywhere and the
+ * front end only falls back to the bundled bank when it isn't reachable at all.
+ * Leaderboard maths is shared with the browser via `src/lib/leaderboard.ts`.
  */
 
 import type { Handler, HandlerEvent } from "@netlify/functions";
-import { readFileSync } from "node:fs";
-import { join } from "node:path";
-
-/* ------------------------------------------------------------------ */
-/* Database connection                                                 */
-/* ------------------------------------------------------------------ */
-
-const PROJECT_REF = "umyivdvsrimrbsxopgei";
-const DB_PASSWORD = "XphPQ2@J4jZAj2C";
-
-/** Connection strings tried in order. The first one that connects wins. */
-function candidates(): { label: string; url: string }[] {
-  const list: { label: string; url: string }[] = [];
-
-  if (process.env.DATABASE_URL) {
-    list.push({ label: "env", url: process.env.DATABASE_URL });
-  }
-
-  const enc = encodeURIComponent(DB_PASSWORD);
-  // Supabase direct connection (IPv4/IPv6 depending on region).
-  list.push({
-    label: "direct",
-    url: `postgresql://postgres:${enc}@db.${PROJECT_REF}.supabase.co:5432/postgres`
-  });
-  // Supabase transaction pooler — designed for serverless/IPv4 environments.
-  // Pooled connections require the `postgres.<ref>` username.
-  for (const region of ["ap-southeast-1", "us-east-1", "eu-west-1"]) {
-    list.push({
-      label: `pooler-${region}`,
-      url: `postgresql://postgres.${PROJECT_REF}:${enc}@aws-0-${region}.pooler.supabase.com:6543/postgres`
-    });
-  }
-  return list;
-}
-
-type PgClient = {
-  query: (text: string, params?: unknown[]) => Promise<{ rows: Record<string, unknown>[]; rowCount: number | null }>;
-  end: () => Promise<void>;
-  on: (event: string, cb: () => void) => void;
-};
-
-let cached: { client: PgClient; label: string } | null = null;
-let connecting: Promise<{ client: PgClient; label: string } | null> | null = null;
-
-async function connect(): Promise<{ client: PgClient; label: string } | null> {
-  if (cached) return cached;
-  if (connecting) return connecting;
-
-  connecting = (async () => {
-    // `pg` is loaded lazily so a missing/failed install never breaks cold starts
-    // for the routes that don't need the database.
-    let pg: typeof import("pg");
-    try {
-      pg = await import("pg");
-    } catch {
-      return null;
-    }
-
-    for (const candidate of candidates()) {
-      const client = new pg.Client({
-        connectionString: candidate.url,
-        ssl: { rejectUnauthorized: false },
-        connectionTimeoutMillis: 8000,
-        query_timeout: 12000,
-        application_name: "gonit-ishkul-api"
-      });
-      try {
-        await client.connect();
-        // Cheap round-trip to confirm the session is really usable.
-        await client.query("select 1");
-        cached = { client: client as unknown as PgClient, label: candidate.label };
-        return cached;
-      } catch {
-        try {
-          await client.end();
-        } catch {
-          /* ignore */
-        }
-      }
-    }
-    return null;
-  })();
-
-  try {
-    return await connecting;
-  } finally {
-    connecting = null;
-  }
-}
-
-/* ------------------------------------------------------------------ */
-/* Schema + seed                                                       */
-/* ------------------------------------------------------------------ */
-
-const SCHEMA = `
-create table if not exists problems (
-  id           text primary key,
-  slug         text unique not null,
-  type         text not null,
-  topic        text not null,
-  category     text not null,
-  difficulty   text not null,
-  title_bn     text not null,
-  title_en     text not null,
-  statement_bn text not null,
-  statement_en text not null,
-  answer       text not null,
-  solution_bn  text not null,
-  solution_en  text not null,
-  source       text not null default '',
-  created_at   timestamptz not null default now()
-);
-
-create index if not exists problems_topic_idx     on problems (topic);
-create index if not exists problems_type_idx      on problems (type);
-create index if not exists problems_category_idx  on problems (category);
-create index if not exists problems_difficulty_idx on problems (difficulty);
-
-create table if not exists practice_tests (
-  id            uuid primary key,
-  client_id     text not null,
-  title         text not null,
-  filters       jsonb not null default '{}'::jsonb,
-  problem_ids   jsonb not null default '[]'::jsonb,
-  duration_min  integer not null default 20,
-  status        text not null default 'IN_PROGRESS',
-  answers       jsonb not null default '[]'::jsonb,
-  score         integer not null default 0,
-  max_score     integer not null default 0,
-  correct_count integer not null default 0,
-  started_at    timestamptz not null,
-  submitted_at  timestamptz,
-  timed_out     boolean not null default false,
-  created_at    timestamptz not null default now()
-);
-
-create index if not exists practice_tests_client_idx on practice_tests (client_id, created_at desc);
-`;
-
-let prepared = false;
-
-/** Create the schema, then seed the bank if the table is empty. */
-async function ensurePrepared(client: PgClient): Promise<void> {
-  if (prepared) return;
-  await client.query(SCHEMA);
-
-  const count = await client.query("select count(*)::int as n from problems");
-  if ((count.rows[0]?.n as number) === 0) {
-    await seedProblems(client);
-  }
-  prepared = true;
-}
-
-/** Load the bundled JSON bank and upsert it into Postgres. */
-async function seedProblems(client: PgClient): Promise<void> {
-  let bank: Record<string, unknown>[];
-  try {
-    // Netlify's esbuild bundler inlines this asset at build time.
-    const raw = readFileSync(join(process.cwd(), "dist", "data", "problems.json"), "utf8");
-    bank = JSON.parse(raw) as Record<string, unknown>[];
-  } catch {
-    bank = FALLBACK_BANK;
-  }
-  if (!bank.length) return;
-
-  for (const p of bank) {
-    await client.query(
-      `insert into problems
-         (id, slug, type, topic, category, difficulty,
-          title_bn, title_en, statement_bn, statement_en,
-          answer, solution_bn, solution_en, source)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14)
-       on conflict (id) do update set
-         slug = excluded.slug, type = excluded.type, topic = excluded.topic,
-         category = excluded.category, difficulty = excluded.difficulty,
-         title_bn = excluded.title_bn, title_en = excluded.title_en,
-         statement_bn = excluded.statement_bn, statement_en = excluded.statement_en,
-         answer = excluded.answer, solution_bn = excluded.solution_bn,
-         solution_en = excluded.solution_en, source = excluded.source`,
-      [
-        p.id,
-        p.slug,
-        p.type,
-        p.topic,
-        p.category,
-        p.difficulty,
-        (p.title as { bn: string }).bn,
-        (p.title as { en: string }).en,
-        (p.statement as { bn: string }).bn,
-        (p.statement as { en: string }).en,
-        p.answer,
-        (p.solution as { bn: string }).bn,
-        (p.solution as { en: string }).en,
-        p.source
-      ]
-    );
-  }
-}
-
-/** Tiny inlined fallback used when the asset pipeline can't be read. */
-const FALLBACK_BANK: Record<string, unknown>[] = [];
+import type { PracticeTest, Problem, ScheduledTest } from "../../src/lib/types";
+import { overallLeaderboard, pctOf, standings, timeTakenSec, nameOf } from "../../src/lib/leaderboard";
+import { phaseOf } from "../../src/lib/scheduled";
+import { bearer, checkCredentials, signToken, verifyToken } from "./lib/auth";
+import { readyStore, type Store } from "./lib/store";
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
 /* ------------------------------------------------------------------ */
+
+const CORS = {
+  "access-control-allow-origin": "*",
+  "access-control-allow-headers": "content-type, authorization",
+  "access-control-allow-methods": "GET,POST,DELETE,OPTIONS"
+};
 
 function json(statusCode: number, body: unknown) {
   return {
@@ -230,9 +48,7 @@ function json(statusCode: number, body: unknown) {
     headers: {
       "content-type": "application/json; charset=utf-8",
       "cache-control": "no-store",
-      "access-control-allow-origin": "*",
-      "access-control-allow-headers": "content-type",
-      "access-control-allow-methods": "GET,POST,DELETE,OPTIONS"
+      ...CORS
     },
     body: JSON.stringify(body)
   };
@@ -253,197 +69,342 @@ function parseList(value: string | undefined, allowed: Set<string>): string[] {
     .filter((v) => allowed.has(v));
 }
 
+function bodyOf(event: HandlerEvent): Record<string, unknown> {
+  if (!event.body) return {};
+  try {
+    const raw = event.isBase64Encoded
+      ? Buffer.from(event.body, "base64").toString("utf8")
+      : event.body;
+    const parsed = JSON.parse(raw);
+    return typeof parsed === "object" && parsed !== null ? (parsed as Record<string, unknown>) : {};
+  } catch {
+    return {};
+  }
+}
+
+/** Participants per paper (distinct browsers with a submitted entry). */
+function participantCounts(entries: PracticeTest[]): Map<string, number> {
+  const seen = new Map<string, Set<string>>();
+  for (const e of entries) {
+    if (!e.scheduledTestId) continue;
+    const set = seen.get(e.scheduledTestId) ?? new Set<string>();
+    set.add(e.clientId);
+    seen.set(e.scheduledTestId, set);
+  }
+  return new Map([...seen].map(([id, set]) => [id, set.size]));
+}
+
+function withParticipants(tests: ScheduledTest[], counts: Map<string, number>): ScheduledTest[] {
+  return tests.map((t) => ({ ...t, participants: counts.get(t.id) ?? 0 }));
+}
+
+const str = (v: unknown, fallback = ""): string => (typeof v === "string" ? v : fallback);
+const num = (v: unknown, fallback = 0): number =>
+  typeof v === "number" && Number.isFinite(v) ? v : fallback;
+const bool = (v: unknown, fallback = false): boolean => (typeof v === "boolean" ? v : fallback);
+
+function localized(value: unknown): { bn: string; en: string } {
+  const o = (typeof value === "object" && value !== null ? value : {}) as Record<string, unknown>;
+  return { bn: str(o.bn), en: str(o.en) };
+}
+
 /* ------------------------------------------------------------------ */
-/* Handlers                                                            */
+/* Learner routes                                                      */
 /* ------------------------------------------------------------------ */
 
 async function handleProblems(params: Record<string, string | undefined>) {
-  const conn = await connect();
-  if (!conn) return json(503, { error: "database_unavailable", problems: [] });
-  await ensurePrepared(conn.client);
-
-  const types = parseList(params.type, ALLOWED.type);
-  const topics = parseList(params.topic, ALLOWED.topic);
-  const categories = parseList(params.category, ALLOWED.category);
-  const difficulties = parseList(params.difficulty, ALLOWED.difficulty);
-
-  const where: string[] = [];
-  const values: unknown[] = [];
-  const push = (column: string, list: string[]) => {
-    if (!list.length) return;
-    values.push(list);
-    where.push(`${column} = any($${values.length}::text[])`);
-  };
-  push("type", types);
-  push("topic", topics);
-  push("category", categories);
-  push("difficulty", difficulties);
-
-  const sql = `select id, slug, type, topic, category, difficulty,
-                      title_bn, title_en, statement_bn, statement_en,
-                      answer, solution_bn, solution_en, source
-               from problems
-               ${where.length ? `where ${where.join(" and ")}` : ""}
-               order by topic, difficulty, id`;
-
-  const res = await conn.client.query(sql, values);
-  const problems = res.rows.map((r) => ({
-    id: r.id,
-    slug: r.slug,
-    type: r.type,
-    topic: r.topic,
-    category: r.category,
-    difficulty: r.difficulty,
-    title: { bn: r.title_bn, en: r.title_en },
-    statement: { bn: r.statement_bn, en: r.statement_en },
-    answer: r.answer,
-    solution: { bn: r.solution_bn, en: r.solution_en },
-    source: r.source
-  }));
-
-  return json(200, { problems, count: problems.length, db: conn.label });
+  const store = await readyStore();
+  const problems = await store.listProblems({
+    types: parseList(params.type, ALLOWED.type),
+    topics: parseList(params.topic, ALLOWED.topic),
+    categories: parseList(params.category, ALLOWED.category),
+    difficulties: parseList(params.difficulty, ALLOWED.difficulty)
+  });
+  return json(200, { problems, count: problems.length, db: store.label, store: store.detail });
 }
 
 async function handleListTests(params: Record<string, string | undefined>) {
   const clientId = params.clientId;
   if (!clientId) return json(400, { error: "client_id_required" });
-
-  const conn = await connect();
-  if (!conn) return json(503, { error: "database_unavailable", tests: [] });
-  await ensurePrepared(conn.client);
-
-  const res = await conn.client.query(
-    `select id, client_id, title, filters, problem_ids, duration_min, status,
-            answers, score, max_score, correct_count, started_at, submitted_at, timed_out
-     from practice_tests
-     where client_id = $1
-     order by created_at desc
-     limit 200`,
-    [clientId]
-  );
-
-  const tests = res.rows.map((r) => ({
-    id: r.id,
-    clientId: r.client_id,
-    title: r.title,
-    filters: r.filters,
-    problemIds: r.problem_ids,
-    durationMin: r.duration_min,
-    status: r.status,
-    answers: r.answers,
-    score: r.score,
-    maxScore: r.max_score,
-    correctCount: r.correct_count,
-    startedAt: r.started_at,
-    submittedAt: r.submitted_at ?? undefined,
-    timedOut: Boolean(r.timed_out),
-    origin: "cloud" as const
-  }));
-
+  const store = await readyStore();
+  const tests = await store.listTests(clientId);
   return json(200, { tests });
 }
 
 async function handleSaveTest(body: Record<string, unknown>) {
-  const id = typeof body.id === "string" ? body.id : null;
-  const clientId = typeof body.clientId === "string" ? body.clientId : null;
+  const id = str(body.id);
+  const clientId = str(body.clientId);
   if (!id || !clientId) return json(400, { error: "id_and_client_id_required" });
 
-  const conn = await connect();
-  if (!conn) return json(503, { error: "database_unavailable" });
-  await ensurePrepared(conn.client);
-
-  const asArray = (v: unknown): unknown[] => (Array.isArray(v) ? v : []);
-  const num = (v: unknown, fallback = 0) => (typeof v === "number" && Number.isFinite(v) ? v : fallback);
-  const str = (v: unknown, fallback = "") => (typeof v === "string" ? v : fallback);
-
-  const submittedAt = typeof body.submittedAt === "string" ? body.submittedAt : null;
-
-  await conn.client.query(
-    `insert into practice_tests
-       (id, client_id, title, filters, problem_ids, duration_min, status,
-        answers, score, max_score, correct_count, started_at, submitted_at, timed_out)
-     values ($1,$2,$3,$4::jsonb,$5::jsonb,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14)
-     on conflict (id) do update set
-       title = excluded.title,
-       filters = excluded.filters,
-       problem_ids = excluded.problem_ids,
-       duration_min = excluded.duration_min,
-       status = excluded.status,
-       answers = excluded.answers,
-       score = excluded.score,
-       max_score = excluded.max_score,
-       correct_count = excluded.correct_count,
-       submitted_at = excluded.submitted_at,
-       timed_out = excluded.timed_out`,
-    [
-      id,
-      clientId,
-      str(body.title, "Practice test"),
-      JSON.stringify(body.filters ?? {}),
-      JSON.stringify(asArray(body.problemIds)),
-      Math.max(1, Math.min(240, Math.round(num(body.durationMin, 20)))),
-      str(body.status, "IN_PROGRESS"),
-      JSON.stringify(asArray(body.answers)),
-      Math.round(num(body.score)),
-      Math.round(num(body.maxScore)),
-      Math.round(num(body.correctCount)),
-      typeof body.startedAt === "string" ? body.startedAt : new Date().toISOString(),
-      submittedAt,
-      Boolean(body.timedOut)
-    ]
-  );
-
+  const store = await readyStore();
+  const test: PracticeTest = {
+    id,
+    clientId,
+    title: str(body.title, "Practice test"),
+    filters: (body.filters as PracticeTest["filters"]) ?? { types: [], topics: [], categories: [], difficulties: [] },
+    problemIds: Array.isArray(body.problemIds) ? (body.problemIds as string[]) : [],
+    durationMin: Math.max(1, Math.min(240, Math.round(num(body.durationMin, 20)))),
+    status: body.status === "SUBMITTED" ? "SUBMITTED" : "IN_PROGRESS",
+    answers: Array.isArray(body.answers) ? (body.answers as PracticeTest["answers"]) : [],
+    score: Math.round(num(body.score)),
+    maxScore: Math.round(num(body.maxScore)),
+    correctCount: Math.round(num(body.correctCount)),
+    startedAt: str(body.startedAt) || new Date().toISOString(),
+    submittedAt: typeof body.submittedAt === "string" ? body.submittedAt : undefined,
+    timedOut: bool(body.timedOut),
+    origin: "cloud",
+    scheduledTestId: str(body.scheduledTestId) || undefined,
+    displayName: str(body.displayName).slice(0, 40) || undefined
+  };
+  await store.saveTest(test);
   return json(200, { ok: true, id });
 }
 
 async function handleDeleteTest(params: Record<string, string | undefined>) {
-  const id = params.id;
-  const clientId = params.clientId;
+  const id = str(params.id);
+  const clientId = str(params.clientId);
   if (!id || !clientId) return json(400, { error: "id_and_client_id_required" });
-
-  const conn = await connect();
-  if (!conn) return json(503, { error: "database_unavailable" });
-  await ensurePrepared(conn.client);
-
-  // Scoped by client_id so one learner can never delete another's paper.
-  await conn.client.query("delete from practice_tests where id = $1::uuid and client_id = $2", [id, clientId]);
+  const store = await readyStore();
+  await store.deleteTest(id, clientId);
   return json(200, { ok: true });
 }
 
+/* ------------------------------------------------------------------ */
+/* Scheduled tests + leaderboards                                      */
+/* ------------------------------------------------------------------ */
+
+async function handleScheduledTests() {
+  const store = await readyStore();
+  const [tests, entries] = await Promise.all([store.listScheduled(false), store.listEntries()]);
+  return json(200, { tests: withParticipants(tests, participantCounts(entries)) });
+}
+
+async function handleStandings(params: Record<string, string | undefined>) {
+  const testId = str(params.testId);
+  if (!testId) return json(400, { error: "test_id_required" });
+  const store = await readyStore();
+  const entries = await store.listEntries();
+  const rows = standings(entries, testId).slice(0, 500);
+  return json(200, { rows, testId });
+}
+
+async function handleLeaderboard(params: Record<string, string | undefined>) {
+  const window = str(params.window, "all");
+  if (window !== "week" && window !== "month" && window !== "all") {
+    return json(400, { error: "bad_window" });
+  }
+  const store = await readyStore();
+  const entries = await store.listEntries();
+  const rows = overallLeaderboard(entries, { window }).slice(0, 200);
+  return json(200, { rows, window });
+}
+
+/* ------------------------------------------------------------------ */
+/* Admin routes                                                        */
+/* ------------------------------------------------------------------ */
+
+async function adminGate(event: HandlerEvent): Promise<Store | null> {
+  const token = bearer(event.headers?.authorization ?? event.headers?.Authorization);
+  if (!verifyToken(token)) return null;
+  return readyStore();
+}
+
+async function handleAdminLogin(body: Record<string, unknown>) {
+  const id = str(body.id);
+  const password = str(body.password);
+  if (!checkCredentials(id, password)) {
+    return json(401, { error: "bad_credentials" });
+  }
+  const { token, expiresAt } = signToken();
+  return json(200, { token, expiresAt });
+}
+
+async function handleAdminOverview(store: Store) {
+  const [counts, tests] = await Promise.all([store.overview(), store.listScheduled(true)]);
+  return json(200, {
+    source: store.label,
+    detail: store.detail,
+    ...counts,
+    live: tests.filter((t) => phaseOf(t) === "live").length
+  });
+}
+
+async function handleAdminSubmissions(store: Store) {
+  const [tests, entries] = await Promise.all([store.listScheduled(true), store.listEntries()]);
+  const titleById = new Map(tests.map((t) => [t.id, t.title.en || t.title.bn]));
+  const submissions = entries
+    .slice()
+    .sort((a, b) => (b.submittedAt ?? "").localeCompare(a.submittedAt ?? ""))
+    .slice(0, 500)
+    .map((e) => ({
+      entryId: e.id,
+      name: nameOf(e),
+      clientId: e.clientId,
+      testId: e.scheduledTestId ?? "",
+      testTitle: titleById.get(e.scheduledTestId ?? "") ?? e.title,
+      score: e.score,
+      maxScore: e.maxScore,
+      pct: pctOf(e),
+      timeTakenSec: timeTakenSec(e),
+      submittedAt: e.submittedAt ?? ""
+    }));
+  return json(200, { submissions });
+}
+
+async function handleAdminListScheduled(store: Store) {
+  const [tests, entries] = await Promise.all([store.listScheduled(true), store.listEntries()]);
+  return json(200, { tests: withParticipants(tests, participantCounts(entries)) });
+}
+
+function problemFromBody(body: Record<string, unknown>): Problem | null {
+  const raw = (typeof body.problem === "object" && body.problem !== null ? body.problem : {}) as Record<
+    string,
+    unknown
+  >;
+  const id = str(raw.id);
+  if (!id) return null;
+  if (!ALLOWED.type.has(str(raw.type))) return null;
+  if (!ALLOWED.topic.has(str(raw.topic))) return null;
+  if (!ALLOWED.category.has(str(raw.category))) return null;
+  if (!ALLOWED.difficulty.has(str(raw.difficulty))) return null;
+
+  const title = localized(raw.title);
+  const statement = localized(raw.statement);
+  const solution = localized(raw.solution);
+  if (!title.bn || !title.en || !statement.bn || !statement.en || !str(raw.answer)) return null;
+
+  return {
+    id,
+    slug: str(raw.slug) || id.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, ""),
+    type: str(raw.type) as Problem["type"],
+    topic: str(raw.topic) as Problem["topic"],
+    category: str(raw.category) as Problem["category"],
+    difficulty: str(raw.difficulty) as Problem["difficulty"],
+    title,
+    statement,
+    answer: str(raw.answer),
+    solution,
+    source: str(raw.source)
+  };
+}
+
+async function handleAdminSaveProblem(store: Store, body: Record<string, unknown>) {
+  const problem = problemFromBody(body);
+  if (!problem) return json(400, { error: "invalid_problem" });
+  await store.saveProblem(problem);
+  return json(200, { ok: true, id: problem.id });
+}
+
+async function handleAdminDeleteProblem(store: Store, params: Record<string, string | undefined>) {
+  const id = str(params.id);
+  if (!id) return json(400, { error: "id_required" });
+  await store.deleteProblem(id);
+  return json(200, { ok: true, id });
+}
+
+function testFromBody(body: Record<string, unknown>): ScheduledTest | null {
+  const raw = (typeof body.test === "object" && body.test !== null ? body.test : {}) as Record<string, unknown>;
+  const id = str(raw.id);
+  const startAt = str(raw.startAt);
+  const endAt = str(raw.endAt);
+  const problemIds = Array.isArray(raw.problemIds) ? (raw.problemIds as string[]).filter((v) => typeof v === "string") : [];
+  const title = localized(raw.title);
+  const description = localized(raw.description);
+
+  if (!id || !title.en || !title.bn) return null;
+  if (!Number.isFinite(Date.parse(startAt)) || !Number.isFinite(Date.parse(endAt))) return null;
+  if (Date.parse(endAt) <= Date.parse(startAt)) return null;
+  if (problemIds.length === 0) return null;
+
+  const kind = str(raw.kind, "CUSTOM");
+  return {
+    id,
+    kind: (kind === "WEEKLY" || kind === "MONTHLY" ? kind : "CUSTOM") as ScheduledTest["kind"],
+    title,
+    description,
+    startAt,
+    endAt,
+    durationMin: Math.max(1, Math.min(24 * 60, Math.round(num(raw.durationMin, 45)))),
+    problemIds,
+    published: bool(raw.published, true)
+  };
+}
+
+async function handleAdminSaveScheduled(store: Store, body: Record<string, unknown>) {
+  const test = testFromBody(body);
+  if (!test) return json(400, { error: "invalid_test" });
+  await store.saveScheduled(test);
+  return json(200, { ok: true, id: test.id });
+}
+
+async function handleAdminDeleteScheduled(store: Store, params: Record<string, string | undefined>) {
+  const id = str(params.id);
+  if (!id) return json(400, { error: "id_required" });
+  await store.deleteScheduled(id);
+  return json(200, { ok: true, id });
+}
+
+/* ------------------------------------------------------------------ */
+/* Health                                                              */
+/* ------------------------------------------------------------------ */
+
 async function handleHealth() {
-  const conn = await connect();
-  return json(200, { ok: true, database: conn ? conn.label : null });
+  const store = await readyStore();
+  return json(200, {
+    ok: true,
+    database: store.label === "postgres" ? store.detail : null,
+    store: store.label
+  });
 }
 
 /* ------------------------------------------------------------------ */
 /* Router                                                              */
 /* ------------------------------------------------------------------ */
 
-export const handler: Handler = async (event: HandlerEvent) => {
+export const handler: Handler = async (event) => {
   if (event.httpMethod === "OPTIONS") {
     return {
       statusCode: 204,
-      headers: {
-        "access-control-allow-origin": "*",
-        "access-control-allow-headers": "content-type",
-        "access-control-allow-methods": "GET,POST,DELETE,OPTIONS"
-      },
+      headers: { ...CORS },
       body: ""
     };
   }
 
   const path = (event.path || "").replace(/^\/\.netlify\/functions\/api/, "").replace(/^\/api/, "");
   const params = (event.queryStringParameters ?? {}) as Record<string, string | undefined>;
+  const method = event.httpMethod;
 
   try {
-    if (path === "/problems" && event.httpMethod === "GET") return await handleProblems(params);
-    if (path === "/tests" && event.httpMethod === "GET") return await handleListTests(params);
-    if (path === "/tests" && event.httpMethod === "POST") {
-      const body = event.body ? (JSON.parse(event.body) as Record<string, unknown>) : {};
-      return await handleSaveTest(body);
-    }
-    if (path === "/tests" && event.httpMethod === "DELETE") return await handleDeleteTest(params);
+    /* -- learner routes ---------------------------------------------- */
+    if (path === "/problems" && method === "GET") return await handleProblems(params);
+    if (path === "/tests" && method === "GET") return await handleListTests(params);
+    if (path === "/tests" && method === "POST") return await handleSaveTest(bodyOf(event));
+    if (path === "/tests" && method === "DELETE") return await handleDeleteTest(params);
+    if (path === "/scheduled-tests" && method === "GET") return await handleScheduledTests();
+    if (path === "/standings" && method === "GET") return await handleStandings(params);
+    if (path === "/leaderboard" && method === "GET") return await handleLeaderboard(params);
     if (path === "/health") return await handleHealth();
+
+    /* -- admin routes ------------------------------------------------- */
+    if (path === "/admin/login" && method === "POST") return await handleAdminLogin(bodyOf(event));
+
+    if (path.startsWith("/admin/")) {
+      const store = await adminGate(event);
+      if (!store) return json(401, { error: "unauthorized" });
+
+      if (path === "/admin/overview" && method === "GET") return await handleAdminOverview(store);
+      if (path === "/admin/submissions" && method === "GET") return await handleAdminSubmissions(store);
+      if (path === "/admin/scheduled-tests" && method === "GET") return await handleAdminListScheduled(store);
+      if (path === "/admin/scheduled-tests" && method === "POST")
+        return await handleAdminSaveScheduled(store, bodyOf(event));
+      if (path === "/admin/scheduled-tests" && method === "DELETE")
+        return await handleAdminDeleteScheduled(store, params);
+      if (path === "/admin/problems" && method === "POST")
+        return await handleAdminSaveProblem(store, bodyOf(event));
+      if (path === "/admin/problems" && method === "DELETE")
+        return await handleAdminDeleteProblem(store, params);
+      return json(404, { error: "not_found", path });
+    }
 
     return json(404, { error: "not_found", path });
   } catch (err) {

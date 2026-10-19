@@ -5,10 +5,12 @@ import { useI18n } from "../lib/i18n";
 import { useTheme } from "../lib/theme";
 
 const LINKS = [
-  { to: "/", key: "nav.home", end: true },
-  { to: "/problems", key: "nav.problems", end: false },
-  { to: "/practice", key: "nav.practice", end: false },
-  { to: "/past-tests", key: "nav.past", end: false }
+  { to: "/", key: "nav.home", end: true, compact: false },
+  { to: "/problems", key: "nav.problems", end: false, compact: false },
+  { to: "/practice", key: "nav.practice", end: false, compact: false },
+  { to: "/tests", key: "nav.tests", end: false, compact: true },
+  { to: "/leaderboard", key: "nav.leaderboard", end: false, compact: true },
+  { to: "/past-tests", key: "nav.past", end: false, compact: false }
 ];
 
 export default function Navbar() {
@@ -58,14 +60,14 @@ export default function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden items-center gap-1 md:flex">
+        <div className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {LINKS.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               end={link.end}
               className={({ isActive }) =>
-                `rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                `${link.compact ? "hidden lg:inline-flex" : ""} rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors xl:px-3 xl:text-sm ${
                   isActive
                     ? "bg-accent-500/10 text-accent-700 dark:text-accent-300"
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-ink-900 dark:hover:text-white"

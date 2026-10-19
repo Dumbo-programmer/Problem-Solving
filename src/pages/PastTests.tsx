@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, CalendarDays, Check, Clock, FlaskConical, Loader2, Trash2, Trophy } from "lucide-react";
+import { ArrowRight, CalendarDays, Check, Clock, FlaskConical, Loader2, Star, Trash2, Trophy } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { deletePastTest, fetchPastTests, getCloudState, onCloudStateChange } from "../lib/api";
 import type { CloudState } from "../lib/api";
@@ -71,8 +71,8 @@ export default function PastTests() {
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <SummaryCard icon={FlaskConical} label={t("past.totalTests")} value={String(summary.totalTests)} />
           <SummaryCard icon={Trophy} label={t("past.avgScore")} value={`${summary.avg}%`} />
-          <SummaryCard icon={Check} label={t("past.bestScore")} value={`${summary.best}%`} />
-          <SummaryCard icon={Clock} label={t("past.totalCorrect")} value={String(summary.solved)} />
+          <SummaryCard icon={Star} label={t("past.bestScore")} value={`${summary.best}%`} />
+          <SummaryCard icon={Check} label={t("past.totalCorrect")} value={String(summary.solved)} />
         </div>
       )}
 

@@ -137,7 +137,9 @@ export default function FilterPanel({ value, onChange, counts = {}, showSearch =
         </div>
       )}
 
-      <div className="mt-5 space-y-5">
+      {/* The facets scroll inside the panel so a short viewport never pushes
+          the page long — search and the reset button stay pinned above. */}
+      <div className="scroll-area mt-5 max-h-[55vh] space-y-5 overflow-y-auto pr-2 lg:max-h-[calc(100vh-12rem)]">
         <FacetRow
           label={t("filter.type")}
           options={TYPES.map((x) => ({ key: x.key, count: counts[x.key] }))}

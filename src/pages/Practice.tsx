@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check, ChevronRight, Dices, Shuffle, Timer } from "lucide-react";
-import { useI18n } from "../lib/i18n";
+import { TOPIC_LABELS, useI18n } from "../lib/i18n";
 import { useProblemBank } from "../lib/useProblems";
 import { filterProblems, pickProblems } from "../lib/filters";
 import FilterPanel, { EMPTY_FACETS, facetsToFilters, type FacetState } from "../components/FilterPanel";
@@ -308,15 +308,6 @@ function buildTitle(
 ): string {
   if (chosen.length === 0) return t("builder.title");
   const topics = [...new Set(chosen.map((p) => p.topic))];
-  const labelMap: Record<string, string> = {
-    NUMBER_THEORY: "Number Theory",
-    ALGEBRA: "Algebra",
-    GEOMETRY: "Geometry",
-    COMBINATORICS: "Combinatorics",
-    INEQUALITY: "Inequality",
-    PROBABILITY: "Probability"
-  };
-  void L;
-  const topicText = topics.map((tp) => labelMap[tp] ?? tp).join(" + ");
+  const topicText = topics.map((tp) => L(TOPIC_LABELS[tp])).join(" + ");
   return `${topicText} · ${chosen.length}`;
 }

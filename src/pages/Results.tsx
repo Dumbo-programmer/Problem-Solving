@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
-import { ArrowRight, Check, Clock, Home, Minus, X } from "lucide-react";
+import { ArrowRight, Check, Clock, Home, Minus, Trophy, X } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { getProblem, PROBLEMS } from "../data";
 import MathText from "../components/MathText";
 import { DifficultyBadge, TopicBadge } from "../components/Badges";
-import { readLocalTests } from "../lib/storage";
-import type { PracticeTest, Problem } from "../lib/types";
+import { fetchStandings } from "../lib/api";
+import { getClientId, readLocalTests } from "../lib/storage";
+import type { PracticeTest, Problem, StandingsRow } from "../lib/types";
 
 /** Letter-grade banding so the score reads at a glance. */
 function band(pct: number): { label: string; className: string } {
@@ -127,6 +128,9 @@ export default function Results() {
           </div>
         </div>
       </div>
+
+      {/* ---- contest standing (scheduled attempts only) ---- */}
+      {test.scheduledTestId && <ScheduledRank testId={test.scheduledTestId} entryId={test.id} />}
 
       {/* ---- per-problem review ---- */}
       <h2 className="mt-10 text-lg font-bold text-ink-900 dark:text-white">{t("result.review")}</h2>
@@ -253,6 +257,50 @@ function AnswerBox({ label, value, tone }: { label: string; value: string; tone:
         {label}
       </p>
       <p className="mt-0.5 font-mono text-base font-bold text-ink-900 dark:text-white">{value}</p>
+    </div>
+  );
+}
+
+/**
+ * Where this attempt landed on the contest's standings board — shown only for
+ * scheduled (weekly/monthly) attempts, with a link through to the full table.
+ */
+function ScheduledRank({ testId, entryId }: { testId: string; entryId: string }) {
+  const { t } = useI18n();
+  const [rows, setRows] = useState<StandingsRow[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void fetchStandings(testId).then((res) => {
+      if (!cancelled) setRows(res.rows);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [testId]);
+
+  if (rows === null) return null;
+  const row = rows.find((r) => r.entryId === entryId) ?? rows.find((r) => r.clientId === getClientId());
+  if (!row) return null;
+
+  return (
+    <div className="card mt-6 flex flex-wrap items-center justify-between gap-4 border-accent-500/30 bg-accent-500/5 p-5">
+      <div className="flex items-center gap-3">
+        <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500/15 text-accent-500">
+          <Trophy size={19} />
+        </span>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+            {t("results.rank")}
+          </p>
+          <p className="font-mono text-xl font-extrabold text-ink-900 dark:text-white">
+            {t("results.rankOf", { rank: row.rank, total: rows.length })}
+          </p>
+        </div>
+      </div>
+      <Link to={`/tests?standings=${encodeURIComponent(testId)}`} className="btn-ghost h-9 px-3.5 text-xs">
+        {t("results.standings")} <ArrowRight size={14} />
+      </Link>
     </div>
   );
 }

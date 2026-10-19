@@ -57,7 +57,7 @@ export const TOPICS: { key: ProblemTopic; en: string; bn: string; blurb: { en: s
   {
     key: "ALGEBRA",
     en: "Algebra",
-    bn: "বীজগাণিতিক",
+    bn: "বীজগণিত",
     blurb: {
       en: "Equations, identities, sequences and functional thinking.",
       bn: "সমীকরণ, সর্বসমিকা, ধারা ও ফাংশনভিত্তিক চিন্তা।"
@@ -66,7 +66,7 @@ export const TOPICS: { key: ProblemTopic; en: string; bn: string; blurb: { en: s
   {
     key: "GEOMETRY",
     en: "Geometry",
-    bn: "জ্যামিতিক",
+    bn: "জ্যামিতি",
     blurb: {
       en: "Triangles, circles, areas and beautiful configurations.",
       bn: "ত্রিভুজ, বৃত্ত, ক্ষেত্রফল ও সুন্দর কনফিগারেশন।"

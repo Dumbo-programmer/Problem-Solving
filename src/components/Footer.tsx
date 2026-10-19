@@ -59,8 +59,23 @@ export default function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/tests" className="text-sm text-slate-600 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400">
+                {t("nav.tests")}
+              </Link>
+            </li>
+            <li>
+              <Link to="/leaderboard" className="text-sm text-slate-600 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400">
+                {t("nav.leaderboard")}
+              </Link>
+            </li>
+            <li>
               <Link to="/past-tests" className="text-sm text-slate-600 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400">
                 {t("nav.past")}
+              </Link>
+            </li>
+            <li>
+              <Link to="/admin" className="text-sm text-slate-400 transition-colors hover:text-accent-600 dark:text-slate-500 dark:hover:text-accent-400">
+                {t("admin.title")}
               </Link>
             </li>
           </ul>

@@ -1,9 +1,24 @@
-import type { PracticeTest, Problem, TestFilters } from "./types";
+import type {
+  LeaderboardWindow,
+  PeriodRow,
+  PracticeTest,
+  Problem,
+  ScheduledTest,
+  StandingsRow,
+  TestFilters
+} from "./types";
 import { PROBLEMS } from "../data";
+import { buildDemoEntries, buildScheduledSeeds } from "./scheduled";
+import { markYou, overallLeaderboard, standings } from "./leaderboard";
 import {
+  clearAdminToken,
   getClientId,
+  readAdminToken,
+  readCachedScheduled,
   readLocalTests,
   upsertLocalTest,
+  writeAdminToken,
+  writeCachedScheduled,
   writeLocalTests
 } from "./storage";
 
@@ -15,7 +30,19 @@ import {
  * learner never hits a dead end.
  */
 
-const BASE = "/.netlify/functions/api";
+/** Netlify serves the function under /.netlify/functions; `npm run dev:api`
+ *  (and the smoke run) point this at a local server via VITE_API_BASE. */
+const BASE = (import.meta.env.VITE_API_BASE as string | undefined) || "/.netlify/functions/api";
+
+/** Thrown for non-2xx responses so callers can branch on the status. */
+export class HttpError extends Error {
+  constructor(
+    readonly status: number,
+    message = `HTTP ${status}`
+  ) {
+    super(message);
+  }
+}
 
 export type CloudState = "unknown" | "online" | "offline";
 
@@ -46,12 +73,14 @@ async function request<T>(path: string, init?: RequestInit, timeoutMs = 8000): P
       signal: ctrl.signal,
       headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) }
     });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) throw new HttpError(res.status);
     const json = (await res.json()) as T;
     setCloudState("online");
     return json;
   } catch (err) {
-    setCloudState("offline");
+    // A reachable server answering 4xx/5xx is still "online" — only real
+    // network failures flip the badge to offline.
+    if (!(err instanceof HttpError)) setCloudState("offline");
     throw err;
   } finally {
     clearTimeout(timer);
@@ -156,3 +185,163 @@ export async function deletePastTest(id: string): Promise<void> {
     /* local delete already applied */
   }
 }
+
+/* ------------------------------------------------------------------ */
+/* Scheduled tests                                                     */
+/* ------------------------------------------------------------------ */
+
+/** This browser's seed papers (bundled) + any cached cloud papers. */
+function localScheduled(): ScheduledTest[] {
+  const seeds = buildScheduledSeeds(PROBLEMS, new Date());
+  const seedIds = new Set(seeds.map((t) => t.id));
+  const cached = readCachedScheduled() ?? [];
+  const extra = cached.filter((t) => !seedIds.has(t.id) && phaseNotStale(t));
+  return [...seeds, ...extra].sort((a, b) => a.startAt.localeCompare(b.startAt));
+}
+
+/** Keep cached papers only while their window still has meaning (not long past). */
+function phaseNotStale(test: ScheduledTest): boolean {
+  return Date.parse(test.endAt) > Date.now() - 90 * 24 * 60 * 60 * 1000;
+}
+
+/** Demo + own submissions known to this device, for offline board maths. */
+function localEntries(tests: ScheduledTest[]): PracticeTest[] {
+  const mine = readLocalTests().filter((t) => t.status === "SUBMITTED" && Boolean(t.scheduledTestId));
+  return [...buildDemoEntries(tests), ...mine];
+}
+
+function countParticipants(tests: ScheduledTest[], entries: PracticeTest[]): ScheduledTest[] {
+  const counts = new Map<string, number>();
+  for (const e of entries) {
+    if (!e.scheduledTestId) continue;
+    counts.set(e.scheduledTestId, (counts.get(e.scheduledTestId) ?? 0) + 1);
+  }
+  return tests.map((t) => ({
+    ...t,
+    participants: Math.max(t.participants ?? 0, counts.get(t.id) ?? 0)
+  }));
+}
+
+/** Published weekly/monthly papers (cloud first, seeds as offline fallback). */
+export async function fetchScheduledTests(): Promise<{
+  tests: ScheduledTest[];
+  source: "cloud" | "local";
+}> {
+  try {
+    const data = await request<{ tests: ScheduledTest[] }>("/scheduled-tests");
+    const tests = Array.isArray(data.tests) ? data.tests : [];
+    writeCachedScheduled(tests);
+    return { tests, source: "cloud" };
+  } catch {
+    const tests = localScheduled();
+    return { tests: countParticipants(tests, localEntries(tests)), source: "local" };
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Leaderboards                                                        */
+/* ------------------------------------------------------------------ */
+
+/** Per-test standings (contests page + results page). */
+export async function fetchStandings(testId: string): Promise<{
+  rows: StandingsRow[];
+  source: "cloud" | "local";
+}> {
+  try {
+    const data = await request<{ rows: StandingsRow[] }>(`/standings?testId=${encodeURIComponent(testId)}`);
+    const rows = Array.isArray(data.rows) ? data.rows : [];
+    return { rows: markYou(rows, getClientId()), source: "cloud" };
+  } catch {
+    const tests = localScheduled();
+    const rows = standings(localEntries(tests), testId);
+    return { rows: markYou(rows, getClientId()), source: "local" };
+  }
+}
+
+/** The overall "problems solved" board (week / month / all time). */
+export async function fetchLeaderboard(window: LeaderboardWindow): Promise<{
+  rows: PeriodRow[];
+  source: "cloud" | "local";
+}> {
+  try {
+    const data = await request<{ rows: PeriodRow[] }>(`/leaderboard?window=${encodeURIComponent(window)}`);
+    const rows = Array.isArray(data.rows) ? data.rows : [];
+    return { rows: markYou(rows, getClientId()), source: "cloud" };
+  } catch {
+    const tests = localScheduled();
+    const rows = overallLeaderboard(localEntries(tests), { window, clientId: getClientId() });
+    return { rows, source: "local" };
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Admin                                                               */
+/* ------------------------------------------------------------------ */
+
+export interface AdminOverview {
+  source: "postgres" | "file";
+  problems: number;
+  tests: number;
+  submissions: number;
+  learners: number;
+}
+
+export interface AdminSubmission {
+  entryId: string;
+  name: string;
+  clientId: string;
+  testId: string;
+  testTitle: string;
+  score: number;
+  maxScore: number;
+  pct: number;
+  timeTakenSec: number;
+  submittedAt: string;
+}
+
+/** Sign in with the ADMIN_ID / ADMIN_PASSWORD pair; the token is stored locally. */
+export async function loginAdmin(id: string, password: string): Promise<number> {
+  const data = await request<{ token: string; expiresAt: number }>("/admin/login", {
+    method: "POST",
+    body: JSON.stringify({ id, password })
+  });
+  writeAdminToken(data.token, data.expiresAt);
+  return data.expiresAt;
+}
+
+export function logoutAdmin(): void {
+  clearAdminToken();
+}
+
+/** Authenticated call to an /admin/* route (clears the session on 401). */
+export async function adminFetch<T>(path: string, init?: RequestInit): Promise<T> {
+  const token = readAdminToken();
+  if (!token) throw new HttpError(401, "no admin session");
+  try {
+    return await request<T>(`/admin${path}`, {
+      ...init,
+      headers: { ...(init?.headers ?? {}), Authorization: `Bearer ${token}` }
+    });
+  } catch (err) {
+    if (err instanceof HttpError && err.status === 401) clearAdminToken();
+    throw err;
+  }
+}
+
+export const adminOverview = () => adminFetch<AdminOverview>("/overview");
+
+export const adminSubmissions = () => adminFetch<{ submissions: AdminSubmission[] }>("/submissions");
+
+export const adminListTests = () => adminFetch<{ tests: ScheduledTest[] }>("/scheduled-tests");
+
+export const adminSaveProblem = (problem: Problem) =>
+  adminFetch<{ ok: boolean }>("/problems", { method: "POST", body: JSON.stringify({ problem }) });
+
+export const adminDeleteProblem = (id: string) =>
+  adminFetch<{ ok: boolean }>(`/problems?id=${encodeURIComponent(id)}`, { method: "DELETE" });
+
+export const adminSaveTest = (test: ScheduledTest) =>
+  adminFetch<{ ok: boolean }>("/scheduled-tests", { method: "POST", body: JSON.stringify({ test }) });
+
+export const adminDeleteTest = (id: string) =>
+  adminFetch<{ ok: boolean }>(`/scheduled-tests?id=${encodeURIComponent(id)}`, { method: "DELETE" });
