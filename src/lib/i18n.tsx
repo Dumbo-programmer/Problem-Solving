@@ -14,6 +14,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   /* ---- brand / chrome ---- */
   "brand.name": { en: "Gonit Ishkul Problem Solving", bn: "গণিত ইশকুল প্রবলেম সলভিং" },
   "brand.short": { en: "Gonit Ishkul", bn: "গণিত ইশকুল" },
+  "brand.tagline": { en: "Problem Solving", bn: "প্রবলেম সলভিং" },
   "nav.home": { en: "Home", bn: "হোম" },
   "nav.problems": { en: "Problems", bn: "সমস্যা" },
   "nav.practice": { en: "Practice Test", bn: "প্র্যাকটিস টেস্ট" },
@@ -24,18 +25,18 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "lang.toggle": { en: "English", bn: "বাংলা" },
 
   /* ---- hero ---- */
-  "hero.badge": { en: "Free · Instant grading · No sign-up", bn: "বিনামূল্যে · সাথে সাথে গ্রেডিং · রেজিস্ট্রেশন লাগে না" },
-  "hero.title1": { en: "Build your own", bn: "নিজের প্র্যাকটিস টেস্ট" },
-  "hero.title2": { en: "maths paper.", bn: "তৈরি করুন।" },
+  "hero.badge": { en: "Free · Olympiad-flavoured · No sign-up", bn: "বিনামূল্যে · অলিম্পিয়াড ধাঁচের · রেজিস্ট্রেশন লাগে না" },
+  "hero.title1": { en: "Problem solving,", bn: "সমস্যা সমাধান," },
+  "hero.title2": { en: "one problem at a time.", bn: "একটি একটি করে।" },
   "hero.lede": {
-    en: "Choose the type, topic, category and difficulty — then sit a timed test and get graded the second you submit. Every solution is explained in Bangla and English.",
-    bn: "টাইপ, টপিক, ক্যাটাগরি ও ডিফিকাল্টি বেছে নিন — তারপর সময় ধরে টেস্ট দিন এবং জমা দেওয়ার সাথে সাথেই গ্রেডিং দেখুন। প্রতিটি সমাধান বাংলা ও ইংরেজি দুই ভাষাতেই আছে।"
+    en: "A free, bilingual home for maths learners in Bangladesh — {n} olympiad and academic problems across six topics and four levels. Explore the bank and solve at your own pace, check answers instantly with a full solution, or sit a timed practice test whenever you're ready.",
+    bn: "বাংলাদেশের গণিত শিক্ষার্থীদের জন্য একটি বিনামূল্যের দ্বিভাষিক ঠিকানা — ছয়টি টপিক ও চারটি স্তরে ছড়ানো {n}টি অলিম্পিয়াড ও একাডেমিক সমস্যা। নিজের গতিতে সমস্যা বেছে নিন ও সমাধান করুন, সাথে সাথে সঠিক উত্তর ও পুরো সমাধান দেখুন, কিংবা প্রস্তুত হলে সময় ধরে একটি প্র্যাকটিস টেস্ট দিন।"
   },
-  "hero.ctaPrimary": { en: "Create a practice test", bn: "প্র্যাকটিস টেস্ট তৈরি করুন" },
-  "hero.ctaSecondary": { en: "Browse problems", bn: "সমস্যা দেখুন" },
+  "cta.browseProblems": { en: "Browse the problem bank", bn: "সমস্যার মজুদ দেখুন" },
+  "cta.takeTest": { en: "Take a practice test", bn: "প্র্যাকটিস টেস্ট দিন" },
   "hero.statProblems": { en: "Problems in the bank", bn: "সমস্যার মজুদ" },
   "hero.statTopics": { en: "Topics covered", bn: "টপিক" },
-  "hero.statGraded": { en: "Auto-graded answers", bn: "স্বয়ংক্রিয় গ্রেডিং" },
+  "hero.statLevels": { en: "Levels, Primary → HSC", bn: "স্তর, প্রাথমিক → উচ্চ মাধ্যমিক" },
   "hero.statLangs": { en: "Languages", bn: "ভাষা" },
 
   /* ---- generic actions ---- */
@@ -56,6 +57,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
 
   /* ---- filters ---- */
   "filter.title": { en: "Filter problems", bn: "সমস্যা ফিল্টার করুন" },
+  "footer.quickLinks": { en: "Quick links", bn: "দ্রুত লিংক" },
   "filter.type": { en: "Type", bn: "টাইপ" },
   "filter.topic": { en: "Topic", bn: "টপিক" },
   "filter.category": { en: "Category", bn: "ক্যাটাগরি" },
@@ -164,37 +166,63 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "archive.from": { en: "Source", bn: "উৎস" },
 
   /* ---- home sections ---- */
+  "home.howEyebrow": { en: "Problem solving", bn: "সমস্যা সমাধান" },
   "home.howTitle": { en: "How it works", bn: "কীভাবে কাজ করে" },
-  "home.how1t": { en: "Filter the bank", bn: "সমস্যা ফিল্টার করুন" },
+  "home.how1t": { en: "Choose your level & topics", bn: "স্তর ও টপিক বেছে নিন" },
   "home.how1d": {
-    en: "Narrow 140+ problems down by type, topic, category and difficulty until you have exactly what you want to practise.",
-    bn: "১৪০+ সমস্যার মধ্যে টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা দিয়ে ফিল্টার করে ঠিক যা অনুশীলন করতে চান তা বেছে নিন।"
+    en: "Narrow 140+ problems down by type, topic, category and difficulty until you have exactly what you want to solve.",
+    bn: "১৪০+ সমস্যার মধ্যে টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা দিয়ে ফিল্টার করে ঠিক যা সমাধান করতে চান তা বেছে নিন।"
   },
-  "home.how2t": { en: "Sit a timed test", bn: "সময় ধরে টেস্ট দিন" },
+  "home.how2t": { en: "Solve and check instantly", bn: "সমাধান করে সাথে সাথে যাচাই" },
   "home.how2d": {
-    en: "Pick a question count and a clock. The countdown runs while you work, and the paper submits itself if time runs out.",
-    bn: "প্রশ্ন ও সময় নির্বাচন করুন। আপনি কাজ করার সময় ঘড়ি চলতে থাকে, আর সময় শেষ হলে কাগজ নিজে থেকেই জমা হয়ে যায়।"
+    en: "Every problem is auto-gradable, so you know the moment your answer is right — then read the full solution in Bangla or English.",
+    bn: "প্রতিটি সমস্যা স্বয়ংক্রিয়ভাবে যাচাই হয়, তাই উত্তর ঠিক হয়েছে কি না জানা যায় সঙ্গে সঙ্গে — এরপর বাংলা বা ইংরেজিতে পুরো সমাধানটি পড়ুন।"
   },
-  "home.how3t": { en: "Get graded instantly", bn: "সাথে সাথে গ্রেডিং" },
+  "home.how3t": { en: "Sit a timed practice test", bn: "সময় ধরে প্র্যাকটিস টেস্ট দিন" },
   "home.how3d": {
-    en: "Every answer is checked the moment you submit, with the correct answer and a full solution shown for each problem.",
-    bn: "জমা দেওয়ার মাত্রই প্রতিটি উত্তর যাচাই হয় — সাথে সঠিক উত্তর ও বিস্তারিত সমাধান দেখানো হয়।"
+    en: "When you're ready, gather your selection into a full paper — pick a question count, run the clock, and get graded the second you submit.",
+    bn: "প্রস্তুত হলে নির্বাচিত সমস্যা দিয়ে পুরো একটি কাগজ করুন — প্রশ্নের সংখ্যা ঠিক করুন, ঘড়ি চালু করুন, আর জমা দেওয়ার সাথে সাথেই গ্রেড পান।"
   },
-  "home.how4t": { en: "Revisit anytime", bn: "যেকোনো সময় ফিরে দেখুন" },
+  "home.how4t": { en: "Track your progress", bn: "অগ্রগতি দেখে নিন" },
   "home.how4d": {
-    en: "Each test is stored in your Past Practice Tests, so you can review your mistakes whenever you like.",
-    bn: "প্রতিটি টেস্ট পূর্ববর্তী প্র্যাকটিস টেস্টে জমা থাকে, তাই ভুলগুলো যেকোনো সময় দেখে নিতে পারবেন।"
+    en: "Each test is filed in your Past Practice Tests with every answer and solution, so you can revisit your mistakes whenever you like.",
+    bn: "প্রতিটি টেস্ট সব উত্তর ও সমাধান সহ পূর্ববর্তী প্র্যাকটিস টেস্টে জমা থাকে, তাই ভুলগুলো যেকোনো সময় দেখে নিতে পারবেন।"
   },
+
+  /* ---- platform parts (problem solving is the theme; tests are one part) ---- */
+  "home.partsEyebrow": { en: "The platform", bn: "প্ল্যাটফর্ম" },
+  "home.partsTitle": { en: "Practice tests are just one part of it", bn: "প্র্যাকটিস টেস্ট এর একটি অংশ মাত্র" },
+  "home.partsLede": {
+    en: "It starts with the problems themselves — solve, learn, and use tests when you want to measure yourself.",
+    bn: "এর শুরু সমস্যাগুলো নিজে থেকেই — সমাধান করুন, শিখুন, আর নিজেকে যাচাই করতে চাইলে টেস্ট ব্যবহার করুন।"
+  },
+  "home.partsBankT": { en: "Explore the problem bank", bn: "সমস্যার মজুদ ঘুরে দেখুন" },
+  "home.partsBankD": {
+    en: "{n} problems filterable by type, topic, category and difficulty — each with its own full bilingual solution.",
+    bn: "{n}টি সমস্যা — টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা অনুযায়ী ফিল্টারযোগ্য; প্রতিটিরই পূর্ণ দ্বিভাষিক সমাধান আছে।"
+  },
+  "home.partsTestT": { en: "Build a timed test", bn: "সময়বদ্ধ টেস্ট তৈরি করুন" },
+  "home.partsTestD": {
+    en: "Turn any selection of problems into a full paper with a countdown, auto-submit and instant grading.",
+    bn: "যেকোনো সমস্যানিয়ে ঘড়ি, স্বয়ংক্রিয় জমা ও সাথে সাথে গ্রেডিং সহ পুরো একটি কাগজ তৈরি করুন।"
+  },
+  "home.partsReviewT": { en: "Learn from solutions", bn: "সমাধান থেকে শিখুন" },
+  "home.partsReviewD": {
+    en: "Compare your answer with the correct one and work through a written solution — in the language you think in.",
+    bn: "নিজের উত্তর সঠিক উত্তরের সঙ্গে মেলান আর লিখিত সমাধানটি বুঝে নিন — আপনি যে ভাষায় ভাবেন সেই ভাষায়।"
+  },
+  "home.partsOpen": { en: "Open", bn: "খুলুন" },
+
   "home.topicsTitle": { en: "Explore by topic", bn: "টপিক অনুযায়ী দেখুন" },
   "home.topicsLede": {
     en: "Six pillars of competition mathematics, from primary level up to national olympiad standard.",
     bn: "প্রাথমিক থেকে জাতীয় অলিম্পিয়াড পর্যন্ত প্রতিযোগিতামূলক গণিতের ছয়টি স্তম্ভ।"
   },
   "home.problemsIn": { en: "problems", bn: "টি সমস্যা" },
-  "home.practiceCtaTitle": { en: "Ready to test yourself?", bn: "নিজেকে যাচাই করতে প্রস্তুত?" },
+  "home.practiceCtaTitle": { en: "Ready to solve your first problem?", bn: "প্রথম সমস্যাটি সমাধান করতে প্রস্তুত?" },
   "home.practiceCtaLede": {
-    en: "It takes about thirty seconds to build a paper. Pick a difficulty, set a timer, and go.",
-    bn: "একটি কাগজ তৈরি করতে মাত্র ত্রিশ সেকেন্ড লাগে। কঠিনতা বেছে নিন, ঘড়ি সেট করুন, আর শুরু করুন।"
+    en: "Open the bank and solve one in seconds — or gather a handful into a timed paper when you want a challenge.",
+    bn: "মজুদ খুলে কয়েক সেকেন্ডেই একটি সমস্যা সমাধান করুন — কিংবা চ্যালেঞ্জ চাইলে কয়েকটি নিয়ে একটি সময়বদ্ধ কাগজ করুন।"
   },
   "home.featuredBdmo": { en: "Olympiad-flavoured", bn: "অলিম্পিয়াড ধাঁচের" },
   "home.featuredBdmoD": {
@@ -224,8 +252,8 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "misc.online": { en: "Cloud synced", bn: "ক্লাউড সিঙ্ক" },
   "misc.offline": { en: "Offline mode", bn: "অফলাইন মোড" },
   "misc.footerNote": {
-    en: "A free, open practice tool for Bangladeshi maths learners.",
-    bn: "বাংলাদেশি গণিত শিক্ষার্থীদের জন্য একটি বিনামূল্যের উন্মুক্ত অনুশীলন সহায়ক।"
+    en: "A free, bilingual home for problem solving — olympiad and academic problems, full solutions and practice tests for every level.",
+    bn: "সমস্যা সমাধানের একটি বিনামূল্যের দ্বিভাষিক ঠিকানা — সব স্তরের জন্য অলিম্পিয়াড ও একাডেমিক সমস্যা, পূর্ণ সমাধান ও প্র্যাকটিস টেস্ট।"
   },
   "misc.copyright": { en: "© {year} Gonit Ishkul Problem Solving. All rights reserved.", bn: "© {year} গণিত ইশকুল প্রবলেম সলভিং। সর্বস্বত্ব সংরক্ষিত।" }
 };

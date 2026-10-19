@@ -45,9 +45,14 @@ export default function Footer() {
 
         <div>
           <h3 className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
-            {t("nav.home")}
+            {t("footer.quickLinks")}
           </h3>
           <ul className="mt-4 space-y-2.5">
+            <li>
+              <Link to="/problems" className="text-sm text-slate-600 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400">
+                {t("nav.problems")}
+              </Link>
+            </li>
             <li>
               <Link to="/practice" className="text-sm text-slate-600 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400">
                 {t("nav.practice")}

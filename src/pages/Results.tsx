@@ -58,7 +58,7 @@ export default function Results() {
         <h1 className="text-xl font-bold text-ink-900 dark:text-white">{t("runner.notFound")}</h1>
         <p className="max-w-sm text-sm text-neutral-500">{t("runner.notFoundHint")}</p>
         <Link to="/practice" className="btn-primary">
-          {t("hero.ctaPrimary")}
+          {t("cta.takeTest")}
         </Link>
       </div>
     );

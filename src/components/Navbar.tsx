@@ -53,7 +53,7 @@ export default function Navbar() {
               {t("brand.short")}
             </span>
             <span className="block text-[11px] font-medium text-slate-500 dark:text-slate-400">
-              {t("nav.practice")}
+              {t("brand.tagline")}
             </span>
           </span>
         </Link>
@@ -142,7 +142,7 @@ export default function Navbar() {
             </NavLink>
           ))}
           <Link to="/practice" className="btn-primary mt-3 w-full py-3">
-            {t("hero.ctaPrimary")}
+            {t("cta.takeTest")}
           </Link>
         </div>
       </div>

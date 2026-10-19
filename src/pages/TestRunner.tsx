@@ -159,7 +159,7 @@ export default function TestRunner() {
           <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{t("runner.notFoundHint")}</p>
         </div>
         <Link to="/practice" className="btn-primary">
-          {t("hero.ctaPrimary")}
+          {t("cta.takeTest")}
         </Link>
       </div>
     );

@@ -73,6 +73,10 @@ check("route /about now shows 404", /404|খুঁজছেন|find/i.test(gone)
 await goto("/");
 const home = await text();
 check("home shows hero copy", /প্র্যাকটিস|practice test/i.test(home));
+// The site must present itself as problem-solving themed, with the test
+// builder as one part of the platform (not as the whole product).
+check("home hero is problem-solving themed", /সমস্যা সমাধান|problem solving/i.test(home));
+check("home frames practice tests as one part", /এর একটি অংশ মাত্র|just one part of it/i.test(home));
 
 /* ---------- 3. archive lists problems ---------- */
 await goto("/problems");

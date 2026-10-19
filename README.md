@@ -1,13 +1,15 @@
 # গণিত ইশকুল প্রবলেম সলভিং · Gonit Ishkul Problem Solving
 
-A free, bilingual (বাংলা / English) maths practice platform for Bangladeshi school
-and olympiad students — modelled on the maths-education tradition of
+A free, bilingual (বাংলা / English) **problem solving** platform for Bangladeshi
+school and olympiad students — modelled on the maths-education tradition of
 *Prothom Alo Gonit Ishkul*.
 
-Pick a **Type**, **Topic**, **Category** and **Difficulty** → build a **timed
-practice test** → get graded **the instant you submit**, with the correct answer
-and a full worked solution for every problem. Every test is filed away under
-**Past Practice Tests** so you can revisit your mistakes later.
+The site is problem-solving themed first: explore the **problem bank**, solve
+problems and check them instantly, and read a full worked solution in Bangla or
+English. **Practice tests** are one part of that — pick a **Type**, **Topic**,
+**Category** and **Difficulty** → build a **timed paper** → get graded **the
+instant you submit**. Every test is filed away under **Past Practice Tests** so
+you can revisit your mistakes later.
 
 ---
 

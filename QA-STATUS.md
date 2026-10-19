@@ -12,7 +12,7 @@
 | Unit tests | `npm.cmd run test` | ✅ 23/23 (grading + filters) |
 | Production build | `npm.cmd run build` | ✅ `tsc -b` + `vite build` + bank merge → 144 problems (24 per topic, 36 per difficulty) |
 | Responsive layout | `node scripts/layout-check.mjs` | ✅ 25/25 (mobile/tablet/desktop × 4 routes + mobile menu) |
-| E2E smoke | `node scripts/smoke.mjs` | ✅ 18/18, **zero console errors** (full journey: home → archive → filter deep-link → build test → run → results → past tests) |
+| E2E smoke | `node scripts/smoke.mjs` | ✅ 20/20, **zero console errors** (full journey: home → archive → filter deep-link → build test → run → results → past tests; plus assertions that the site is problem-solving themed and frames practice tests as one part) |
 | Screenshots | `node scripts/screenshots.mjs` | ✅ PNGs in `screenshots/` (dark, light — About removed) |
 | Dev server | `npm.cmd run dev` | ✅ http://localhost:5173, CSS compiles (Tailwind opacity scale 8/12/14 fixed), all routes + modules 200 |
 
