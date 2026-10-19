@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowRight, CalendarDays, Clock, FlaskConical, Loader2, Play, Timer, Trophy, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock, FlaskConical, Loader2, Play, Timer, Trophy, UserRound, Users } from "lucide-react";
 import { useI18n } from "../lib/i18n";
+import { useAuth } from "../lib/auth";
 import { fetchPastTests, fetchScheduledTests, fetchStandings } from "../lib/api";
 import { countdownParts, phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
@@ -65,6 +66,7 @@ function reduceOwn(entries: PracticeTest[]): Map<string, PracticeTest> {
 
 export default function Tests() {
   const { t, L, lang } = useI18n();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const locale = lang === "bn" ? "bn-BD" : "en-GB";
@@ -188,6 +190,11 @@ export default function Tests() {
       resumeDraft(draft);
       return;
     }
+    // Signed-in learners compete under their account name — no name gate.
+    if (user) {
+      beginAttempt(test, user.displayName);
+      return;
+    }
     const saved = readDisplayName();
     if (saved) {
       beginAttempt(test, saved);
@@ -223,10 +230,21 @@ export default function Tests() {
         </Link>
       </header>
 
-      <p className="mt-5 inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">
-        <span className={`h-1.5 w-1.5 rounded-full ${source === "cloud" ? "bg-emerald-500" : "bg-amber-500"}`} />
-        {source === "cloud" ? t("lb.source.cloud") : t("lb.source.local")}
-      </p>
+      <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
+        <p className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">
+          <span className={`h-1.5 w-1.5 rounded-full ${source === "cloud" ? "bg-emerald-500" : "bg-amber-500"}`} />
+          {source === "cloud" ? t("lb.source.cloud") : t("lb.source.local")}
+        </p>
+        {user && (
+          <Link
+            to="/login"
+            className="chip max-w-full border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 dark:border-ink-700 dark:bg-ink-900/60 dark:text-slate-300"
+          >
+            <UserRound size={13} className="shrink-0" />
+            <span className="truncate">{t("auth.signedInAs", { name: user.displayName })}</span>
+          </Link>
+        )}
+      </div>
 
       {orderedTests === null ? (
         <div className="mt-6 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">

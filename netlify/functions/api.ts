@@ -10,6 +10,11 @@
  *   GET    /leaderboard?window=week|month|all
  *   GET    /health
  *
+ *   POST   /auth/signup                     { username, password, displayName }
+ *   POST   /auth/login                      { username, password } → session
+ *   GET    /auth/me                                           (auth)
+ *   PUT    /auth/profile                      { displayName }  (auth)
+ *
  *   POST   /admin/login                     { id, password } → bearer token
  *   GET    /admin/overview                  counts + data source        (auth)
  *   GET    /admin/submissions               contest submissions         (auth)
@@ -26,11 +31,23 @@
  */
 
 import type { Handler, HandlerEvent } from "@netlify/functions";
+import { randomUUID } from "node:crypto";
 import type { PracticeTest, Problem, ScheduledTest } from "../../src/lib/types";
 import { overallLeaderboard, pctOf, standings, timeTakenSec, nameOf } from "../../src/lib/leaderboard";
 import { phaseOf } from "../../src/lib/scheduled";
-import { bearer, checkCredentials, signToken, verifyToken } from "./lib/auth";
-import { readyStore, type Store } from "./lib/store";
+import {
+  bearer,
+  checkCredentials,
+  hashPassword,
+  normalizeUsername,
+  passwordOk,
+  signSession,
+  signToken,
+  verifyPassword,
+  verifySession,
+  verifyToken
+} from "./lib/auth";
+import { readyStore, type Store, type StoredUser } from "./lib/store";
 
 /* ------------------------------------------------------------------ */
 /* Helpers                                                             */
@@ -39,7 +56,7 @@ import { readyStore, type Store } from "./lib/store";
 const CORS = {
   "access-control-allow-origin": "*",
   "access-control-allow-headers": "content-type, authorization",
-  "access-control-allow-methods": "GET,POST,DELETE,OPTIONS"
+  "access-control-allow-methods": "GET,POST,PUT,DELETE,OPTIONS"
 };
 
 function json(statusCode: number, body: unknown) {
@@ -167,6 +184,86 @@ async function handleDeleteTest(params: Record<string, string | undefined>) {
   const store = await readyStore();
   await store.deleteTest(id, clientId);
   return json(200, { ok: true });
+}
+
+/* ------------------------------------------------------------------ */
+/* Learner accounts (sign up / sign in)                                */
+/* ------------------------------------------------------------------ */
+
+const MAX_NAME = 40;
+
+/** Public shape of an account — the password hash never leaves the server. */
+function userShape(u: StoredUser) {
+  return { id: u.id, username: u.username, displayName: u.displayName, createdAt: u.createdAt };
+}
+
+/** Resolves the bearer session to a user, or null when absent/expired. */
+async function sessionUser(event: HandlerEvent): Promise<StoredUser | null> {
+  const sub = verifySession(bearer(event.headers?.authorization ?? event.headers?.Authorization));
+  if (!sub) return null;
+  return (await readyStore()).findUserById(sub);
+}
+
+/** Burns the same CPU as a real verify so unknown usernames don't reply faster. */
+let timingPad: string | null = null;
+function dummyVerify(password: string): void {
+  if (timingPad === null) timingPad = hashPassword("gonit-ishkul-timing-pad");
+  verifyPassword(password, timingPad);
+}
+
+function sessionResponse(user: StoredUser) {
+  const { token, expiresAt } = signSession(user.id);
+  return json(200, { token, expiresAt, user: userShape(user) });
+}
+
+async function handleSignup(body: Record<string, unknown>) {
+  const username = normalizeUsername(body.username);
+  const displayName = str(body.displayName).replace(/\s+/g, " ").trim().slice(0, MAX_NAME);
+  if (!username) return json(400, { error: "invalid_username" });
+  if (!passwordOk(body.password)) return json(400, { error: "invalid_password" });
+  if (!displayName) return json(400, { error: "display_name_required" });
+
+  const store = await readyStore();
+  const user: StoredUser = {
+    id: randomUUID(),
+    username,
+    displayName,
+    passwordHash: hashPassword(body.password as string),
+    createdAt: new Date().toISOString()
+  };
+  // `createUser` is the race-free check: false means someone took it first.
+  const created = await store.createUser(user);
+  if (!created) return json(409, { error: "username_taken" });
+  return sessionResponse(user);
+}
+
+async function handleLogin(body: Record<string, unknown>) {
+  const username = normalizeUsername(body.username);
+  const password = typeof body.password === "string" ? body.password : "";
+  const store = await readyStore();
+  const user = username ? await store.findUserByUsername(username) : null;
+  if (!user || !password) {
+    if (password) dummyVerify(password);
+    return json(401, { error: "bad_credentials" });
+  }
+  if (!verifyPassword(password, user.passwordHash)) return json(401, { error: "bad_credentials" });
+  return sessionResponse(user);
+}
+
+async function handleMe(event: HandlerEvent) {
+  const user = await sessionUser(event);
+  if (!user) return json(401, { error: "unauthorized" });
+  return json(200, { user: userShape(user) });
+}
+
+async function handleProfile(event: HandlerEvent, body: Record<string, unknown>) {
+  const user = await sessionUser(event);
+  if (!user) return json(401, { error: "unauthorized" });
+  const displayName = str(body.displayName).replace(/\s+/g, " ").trim().slice(0, MAX_NAME);
+  if (!displayName) return json(400, { error: "display_name_required" });
+  const store = await readyStore();
+  await store.setUserDisplayName(user.id, displayName);
+  return json(200, { user: userShape({ ...user, displayName }) });
 }
 
 /* ------------------------------------------------------------------ */
@@ -384,6 +481,12 @@ export const handler: Handler = async (event) => {
     if (path === "/standings" && method === "GET") return await handleStandings(params);
     if (path === "/leaderboard" && method === "GET") return await handleLeaderboard(params);
     if (path === "/health") return await handleHealth();
+
+    /* -- learner accounts --------------------------------------------- */
+    if (path === "/auth/signup" && method === "POST") return await handleSignup(bodyOf(event));
+    if (path === "/auth/login" && method === "POST") return await handleLogin(bodyOf(event));
+    if (path === "/auth/me" && method === "GET") return await handleMe(event);
+    if (path === "/auth/profile" && method === "PUT") return await handleProfile(event, bodyOf(event));
 
     /* -- admin routes ------------------------------------------------- */
     if (path === "/admin/login" && method === "POST") return await handleAdminLogin(bodyOf(event));

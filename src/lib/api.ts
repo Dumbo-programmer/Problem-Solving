@@ -4,6 +4,7 @@ import type {
   PracticeTest,
   Problem,
   ScheduledTest,
+  SessionUser,
   StandingsRow,
   TestFilters
 } from "./types";
@@ -12,14 +13,18 @@ import { buildDemoEntries, buildScheduledSeeds } from "./scheduled";
 import { markYou, overallLeaderboard, standings } from "./leaderboard";
 import {
   clearAdminToken,
+  clearSession,
   getClientId,
   readAdminToken,
   readCachedScheduled,
   readLocalTests,
+  readSession,
   upsertLocalTest,
   writeAdminToken,
   writeCachedScheduled,
-  writeLocalTests
+  writeDisplayName,
+  writeLocalTests,
+  writeSession
 } from "./storage";
 
 /**
@@ -38,6 +43,8 @@ const BASE = (import.meta.env.VITE_API_BASE as string | undefined) || "/.netlify
 export class HttpError extends Error {
   constructor(
     readonly status: number,
+    /** Machine-readable code from the API body (`error` field), when present. */
+    readonly code: string | null = null,
     message = `HTTP ${status}`
   ) {
     super(message);
@@ -73,7 +80,17 @@ async function request<T>(path: string, init?: RequestInit, timeoutMs = 8000): P
       signal: ctrl.signal,
       headers: { "Content-Type": "application/json", ...(init?.headers ?? {}) }
     });
-    if (!res.ok) throw new HttpError(res.status);
+    if (!res.ok) {
+      // Surface the API's error code (e.g. "username_taken") to callers.
+      let code: string | null = null;
+      try {
+        const body = (await res.json()) as { error?: unknown };
+        if (typeof body?.error === "string") code = body.error;
+      } catch {
+        /* non-JSON error body — status alone will have to do */
+      }
+      throw new HttpError(res.status, code);
+    }
     const json = (await res.json()) as T;
     setCloudState("online");
     return json;
@@ -275,6 +292,86 @@ export async function fetchLeaderboard(window: LeaderboardWindow): Promise<{
 }
 
 /* ------------------------------------------------------------------ */
+/* Learner accounts                                                    */
+/* ------------------------------------------------------------------ */
+
+/** Authenticated learner call (adds the stored bearer; clears it on 401). */
+async function authedRequest<T>(path: string, init?: RequestInit): Promise<T> {
+  const session = readSession();
+  if (!session) throw new HttpError(401, "no_session", "no session");
+  try {
+    return await request<T>(path, {
+      ...init,
+      headers: { ...(init?.headers ?? {}), Authorization: `Bearer ${session.token}` }
+    });
+  } catch (err) {
+    if (err instanceof HttpError && err.status === 401) clearSession();
+    throw err;
+  }
+}
+
+/** Create an account; the session is stored and the display name adopted. */
+export async function signup(input: {
+  username: string;
+  password: string;
+  displayName: string;
+}): Promise<SessionUser> {
+  const data = await request<{ token: string; expiresAt: number; user: SessionUser }>("/auth/signup", {
+    method: "POST",
+    body: JSON.stringify(input)
+  });
+  writeSession({ token: data.token, expiresAt: data.expiresAt, user: data.user });
+  writeDisplayName(data.user.displayName);
+  return data.user;
+}
+
+/** Sign in to an existing account; the session is stored locally. */
+export async function login(input: { username: string; password: string }): Promise<SessionUser> {
+  const data = await request<{ token: string; expiresAt: number; user: SessionUser }>("/auth/login", {
+    method: "POST",
+    body: JSON.stringify(input)
+  });
+  writeSession({ token: data.token, expiresAt: data.expiresAt, user: data.user });
+  writeDisplayName(data.user.displayName);
+  return data.user;
+}
+
+/**
+ * Refresh the cached profile. When the API is unreachable the cached session
+ * is trusted (so signing in once survives going offline); only a 401 — an
+ * expired or revoked token — actually ends the session.
+ */
+export async function refreshSession(): Promise<SessionUser | null> {
+  const session = readSession();
+  if (!session) return null;
+  try {
+    const data = await authedRequest<{ user: SessionUser }>("/auth/me");
+    writeSession({ ...session, user: data.user });
+    return data.user;
+  } catch (err) {
+    if (err instanceof HttpError && (err.status === 401 || err.status === 404)) return null;
+    return session.user;
+  }
+}
+
+/** Rename the account (also updates the local session + display name). */
+export async function updateDisplayName(displayName: string): Promise<SessionUser> {
+  const data = await authedRequest<{ user: SessionUser }>("/auth/profile", {
+    method: "PUT",
+    body: JSON.stringify({ displayName })
+  });
+  const session = readSession();
+  if (session) writeSession({ ...session, user: data.user });
+  writeDisplayName(data.user.displayName);
+  return data.user;
+}
+
+/** Forget the local session (the server needs no round-trip). */
+export function logout(): void {
+  clearSession();
+}
+
+/* ------------------------------------------------------------------ */
 /* Admin                                                               */
 /* ------------------------------------------------------------------ */
 
@@ -284,6 +381,7 @@ export interface AdminOverview {
   tests: number;
   submissions: number;
   learners: number;
+  accounts: number;
 }
 
 export interface AdminSubmission {
@@ -316,7 +414,7 @@ export function logoutAdmin(): void {
 /** Authenticated call to an /admin/* route (clears the session on 401). */
 export async function adminFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const token = readAdminToken();
-  if (!token) throw new HttpError(401, "no admin session");
+  if (!token) throw new HttpError(401, "no_admin_session", "no admin session");
   try {
     return await request<T>(`/admin${path}`, {
       ...init,

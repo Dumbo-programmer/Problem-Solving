@@ -12,6 +12,7 @@ import {
   ShieldCheck,
   Trash2,
   Trophy,
+  UserRound,
   Users
 } from "lucide-react";
 import { useI18n } from "../lib/i18n";
@@ -258,12 +259,13 @@ function OverviewPanel({ onExpired }: { onExpired: () => void }) {
   }
 
   return (
-    <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+    <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
       <Stat icon={FlaskConical} label={t("admin.stat.problems")} value={data?.problems ?? 0} />
       <Stat icon={CalendarDays} label={t("admin.stat.tests")} value={data?.tests ?? 0} />
       <Stat icon={Trophy} label={t("admin.stat.submissions")} value={data?.submissions ?? 0} />
       <Stat icon={Users} label={t("admin.stat.learners")} value={data?.learners ?? 0} />
-      <div className="col-span-2 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm dark:border-ink-800 dark:bg-ink-900/50 sm:col-span-4">
+      <Stat icon={UserRound} label={t("admin.stat.accounts")} value={data?.accounts ?? 0} />
+      <div className="col-span-2 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm dark:border-ink-800 dark:bg-ink-900/50 sm:col-span-3 lg:col-span-5">
         <RefreshCw size={15} className="text-accent-500" />
         <span className="font-medium text-slate-600 dark:text-slate-300">{t("admin.stat.source")}:</span>
         <span className="font-mono font-semibold text-ink-900 dark:text-white">

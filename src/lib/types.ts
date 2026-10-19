@@ -122,5 +122,20 @@ export interface PeriodRow {
 
 export type LeaderboardWindow = "week" | "month" | "all";
 
+/** A signed-in learner account — the server never sends the password hash. */
+export interface SessionUser {
+  id: string;
+  username: string;
+  displayName: string;
+  createdAt: string;
+}
+
+/** Learner session: the bearer token plus the profile it belongs to. */
+export interface Session {
+  token: string;
+  expiresAt: number;
+  user: SessionUser;
+}
+
 /** Problem payload returned by the API (identical shape to the bundled bank). */
 export type ApiProblem = Problem;

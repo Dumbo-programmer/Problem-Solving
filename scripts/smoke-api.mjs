@@ -137,6 +137,72 @@ try {
   const delBad = await call("DELETE", "/tests");
   check("DELETE /tests without ids is a 400", delBad.status === 400, delBad.data?.error);
 
+  /* ---------- learner accounts ---------- */
+  const badUser = await call("POST", "/auth/signup", {
+    body: { username: "no spaces!", password: "long-enough", displayName: "X" }
+  });
+  check("signup rejects invalid usernames", badUser.status === 400 && badUser.data?.error === "invalid_username", badUser.data?.error);
+
+  const badPw = await call("POST", "/auth/signup", {
+    body: { username: "smokeuser", password: "short", displayName: "X" }
+  });
+  check("signup rejects short passwords", badPw.status === 400 && badPw.data?.error === "invalid_password", badPw.data?.error);
+
+  const noName = await call("POST", "/auth/signup", {
+    body: { username: "smokeuser", password: "long-enough", displayName: "   " }
+  });
+  check("signup requires a display name", noName.status === 400 && noName.data?.error === "display_name_required", noName.data?.error);
+
+  const signup = await call("POST", "/auth/signup", {
+    body: { username: "SmokeUser", password: "long-enough", displayName: "Smoke User" }
+  });
+  const learnerToken = signup.data?.token;
+  check("signup issues a learner session", signup.status === 200 && typeof learnerToken === "string", signup.data?.error ?? "token issued");
+  check("usernames are normalised to lowercase", signup.data?.user?.username === "smokeuser", signup.data?.user?.username);
+  check("signup echoes the profile", signup.data?.user?.displayName === "Smoke User" && typeof signup.data?.user?.createdAt === "string");
+  check("password hashes never leave the server", !JSON.stringify(signup.data).includes("passwordHash") && !JSON.stringify(signup.data).includes("scrypt$"));
+
+  const dup = await call("POST", "/auth/signup", {
+    body: { username: "smokeuser", password: "another-pass", displayName: "Impostor" }
+  });
+  check("duplicate usernames are a 409", dup.status === 409 && dup.data?.error === "username_taken", `${dup.status} ${dup.data?.error}`);
+
+  const ghost = await call("POST", "/auth/login", { body: { username: "ghost", password: "long-enough" } });
+  check("unknown usernames fail like wrong passwords", ghost.status === 401 && ghost.data?.error === "bad_credentials", ghost.data?.error);
+
+  const wrongPw = await call("POST", "/auth/login", { body: { username: "smokeuser", password: "wrong-password" } });
+  check("wrong passwords are a 401", wrongPw.status === 401 && wrongPw.data?.error === "bad_credentials", wrongPw.data?.error);
+
+  const loginLearner = await call("POST", "/auth/login", { body: { username: "SMOKEUSER ", password: "long-enough" } });
+  check("login accepts the username in any case", loginLearner.status === 200 && loginLearner.data?.user?.username === "smokeuser", loginLearner.data?.error ?? "ok");
+
+  const meNoTok = await call("GET", "/auth/me");
+  check("GET /auth/me without a session is a 401", meNoTok.status === 401, meNoTok.data?.error);
+
+  const meBadTok = await call("GET", "/auth/me", { token: "not-a-token" });
+  check("GET /auth/me rejects forged tokens", meBadTok.status === 401, meBadTok.data?.error);
+
+  // The documented admin pair (see the admin section below for its own use).
+  const adminForKind = await call("POST", "/admin/login", { body: { id: "admin", password: "gonit-ishkul" } });
+  const meAdminTok = await call("GET", "/auth/me", { token: adminForKind.data?.token });
+  check("an admin token is not a learner session", meAdminTok.status === 401, meAdminTok.data?.error);
+
+  const me = await call("GET", "/auth/me", { token: learnerToken });
+  check("GET /auth/me answers with the profile", me.status === 200 && me.data?.user?.username === "smokeuser", me.data?.user?.username);
+
+  const adminAsLearner = await call("GET", "/admin/overview", { token: learnerToken });
+  check("a learner session cannot open admin routes", adminAsLearner.status === 401, adminAsLearner.data?.error);
+
+  const rename = await call("PUT", "/auth/profile", { body: { displayName: "Smoke Renamed" }, token: learnerToken });
+  const meAfter = await call("GET", "/auth/me", { token: learnerToken });
+  check("PUT /auth/profile renames the account", rename.status === 200 && meAfter.data?.user?.displayName === "Smoke Renamed", meAfter.data?.user?.displayName);
+
+  const renameAnon = await call("PUT", "/auth/profile", { body: { displayName: "Hacker" } });
+  check("renaming requires a session", renameAnon.status === 401, renameAnon.data?.error);
+
+  const relogin = await call("POST", "/auth/login", { body: { username: "smokeuser", password: "long-enough" } });
+  check("renames survive a fresh login", relogin.data?.user?.displayName === "Smoke Renamed", relogin.data?.user?.displayName);
+
   /* ---------- admin: auth ---------- */
   const wrongLogin = await call("POST", "/admin/login", { body: { id: "admin", password: "nope" } });
   check("bad admin credentials are a 401", wrongLogin.status === 401, wrongLogin.data?.error);
@@ -157,6 +223,7 @@ try {
   check("overview counts cover the bank + papers", overview.data.problems >= 100 && overview.data.tests >= 5);
   check("overview reports its data source", overview.data.source === "file" || overview.data.source === "postgres", `${overview.data.source} (${overview.data.detail})`);
   check("overview counts live papers", typeof overview.data.live === "number" && overview.data.live >= 1, `${overview.data.live} live`);
+  check("overview counts learner accounts", typeof overview.data.accounts === "number" && overview.data.accounts >= 1, `${overview.data.accounts} accounts`);
 
   const subs = await call("GET", "/admin/submissions", { token });
   check("GET /admin/submissions lists seeded entries", subs.status === 200 && (subs.data?.submissions?.length ?? 0) >= 6, `${subs.data?.submissions?.length} submissions`);

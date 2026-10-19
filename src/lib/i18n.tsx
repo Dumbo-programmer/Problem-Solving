@@ -38,6 +38,10 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "hero.statTopics": { en: "Topics covered", bn: "টপিক" },
   "hero.statLevels": { en: "Levels, Primary → HSC", bn: "স্তর, প্রাথমিক → উচ্চ মাধ্যমিক" },
   "hero.statLangs": { en: "Languages", bn: "ভাষা" },
+  "hero.chip1": { en: "No sign-up needed", bn: "সাইন-আপ ছাড়াই" },
+  "hero.chip2": { en: "Instant answer + solution", bn: "সাথে সাথে উত্তর ও সমাধান" },
+  "hero.chip3": { en: "Weekly & monthly contests", bn: "সাপ্তাহিক ও মাসিক কনটেস্ট" },
+  "hero.chip4": { en: "Runs offline", bn: "অফলাইনেও চলে" },
 
   /* ---- generic actions ---- */
   "action.start": { en: "Start test", bn: "টেস্ট শুরু করুন" },
@@ -58,6 +62,17 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   /* ---- filters ---- */
   "filter.title": { en: "Filter problems", bn: "সমস্যা ফিল্টার করুন" },
   "footer.quickLinks": { en: "Quick links", bn: "দ্রুত লিংক" },
+  "footer.explore": { en: "Explore", bn: "দেখুন" },
+  "footer.compete": { en: "Compete", bn: "প্রতিযোগিতা" },
+  "footer.account": { en: "Account", bn: "অ্যাকাউন্ট" },
+  "footer.tagline": {
+    en: "A free, bilingual maths problem-solving school for Bangladesh — read, solve, compete.",
+    bn: "বাংলাদেশের জন্য একটি বিনামূল্যের দ্বিভাষিক গণিত সমস্যা সমাধানের ইশকুল — পড়ুন, সমাধান করুন, প্রতিযোগিতা করুন।"
+  },
+  "footer.statProblems": { en: "problems", bn: "টি সমস্যা" },
+  "footer.statTopics": { en: "topics", bn: "টপিক" },
+  "footer.statLevels": { en: "levels", bn: "স্তর" },
+  "footer.madeFor": { en: "Made for young problem solvers", bn: "তরুণ সমস্যা-সমাধানকারীদের জন্য" },
   "filter.type": { en: "Type", bn: "টাইপ" },
   "filter.topic": { en: "Topic", bn: "টপিক" },
   "filter.category": { en: "Category", bn: "ক্যাটাগরি" },
@@ -239,6 +254,23 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "The full problem bank ships with the site, so tests keep working even without a network.",
     bn: "পুরো সমস্যার মজুদ সাইটের সাথেই থাকে, তাই ইন্টারনেট ছাড়াও টেস্ট দেওয়া যায়।"
   },
+  "home.competeEyebrow": { en: "Compete", bn: "প্রতিযোগিতা" },
+  "home.competeTitle": { en: "Weekly sprints, monthly challenges", bn: "সাপ্তাহিক স্প্রিন্ট, মাসিক চ্যালেঞ্জ" },
+  "home.competeLede": {
+    en: "A fresh paper opens every week and a bigger one every month. One attempt each, timed, and ranked live — solve more problems to climb the board.",
+    bn: "প্রতি সপ্তাহে নতুন একটি কাগজ, প্রতি মাসে আরও বড় একটি। প্রতিটিতে একবারই, সময় ধরে, লাইভ র‍্যাঙ্কিং — যত বেশি সমস্যা সমাধান, তত উপরে।"
+  },
+  "home.competeWeeklyT": { en: "Weekly sprint", bn: "সাপ্তাহিক স্প্রিন্ট" },
+  "home.competeWeeklyD": { en: "8 problems · 45 minutes · every week", bn: "৮টি সমস্যা · ৪৫ মিনিট · প্রতি সপ্তাহে" },
+  "home.competeMonthlyT": { en: "Monthly challenge", bn: "মাসিক চ্যালেঞ্জ" },
+  "home.competeMonthlyD": { en: "12 problems · 90 minutes · every month", bn: "১২টি সমস্যা · ৯০ মিনিট · প্রতি মাসে" },
+  "home.competeBoardT": { en: "Live leaderboard", bn: "লাইভ লিডারবোর্ড" },
+  "home.competeBoardD": { en: "Problems solved across every paper you sit", bn: "যত কাগজ দিয়েছেন, তার সব মিলিয়ে সমাধান" },
+  "home.competeLive": { en: "Now live", bn: "এখন চলছে" },
+  "home.competeStandings": { en: "This week's top solvers", bn: "এই সপ্তাহের শীর্ষ সমাধানকারী" },
+  "home.competeOpen": { en: "See the papers & standings", bn: "কাগজ ও স্ট্যান্ডিংস দেখুন" },
+  "home.competeBoard": { en: "Full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড" },
+  "home.competeSolved": { en: "solved", bn: "সমাধান" },
 
   /* ---- 404 ---- */
   "notFound.body": {
@@ -403,6 +435,71 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "admin.f.optional": { en: "optional", bn: "ঐচ্ছিক" },
   "admin.window": { en: "{from} → {to}", bn: "{from} → {to}" },
   "admin.phase": { en: "Phase: {phase}", bn: "পর্ব: {phase}" },
+  "admin.stat.accounts": { en: "Accounts", bn: "অ্যাকাউন্ট" },
+
+  /* ---- learner accounts ---- */
+  "nav.signIn": { en: "Sign in", bn: "সাইন ইন" },
+  "nav.signOut": { en: "Sign out", bn: "সাইন আউট" },
+  "auth.eyebrow": { en: "Learner account", bn: "শিক্ষার্থী অ্যাকাউন্ট" },
+  "auth.account": { en: "My account", bn: "আমার অ্যাকাউন্ট" },
+  "auth.tab.signin": { en: "Sign in", bn: "সাইন ইন" },
+  "auth.tab.signup": { en: "Create account", bn: "নতুন অ্যাকাউন্ট" },
+  "auth.signin.title": { en: "Welcome back", bn: "ফিরে আসায় স্বাগতম" },
+  "auth.signin.sub": {
+    en: "Sign in to carry your name onto every contest and leaderboard.",
+    bn: "কনটেস্ট ও লিডারবোর্ডে নিজের নাম বহন করতে সাইন ইন করুন।"
+  },
+  "auth.signup.title": { en: "Create your account", bn: "অ্যাকাউন্ট খুলুন" },
+  "auth.signup.sub": {
+    en: "About a minute: pick a username, a password, and the name you will compete under.",
+    bn: "এক মিনিটেই হবে: ইউজারনেম, পাসওয়ার্ড আর প্রতিযোগিতার নাম দিন।"
+  },
+  "auth.username": { en: "Username", bn: "ইউজারনেম" },
+  "auth.username.ph": { en: "e.g. rafi2026", bn: "যেমন: rafi2026" },
+  "auth.username.hint": {
+    en: "3–20 letters, digits or underscores — you sign in with it.",
+    bn: "৩–২০ অক্ষর, সংখ্যা বা আন্ডারস্কোর — এটি দিয়েই সাইন ইন করবেন।"
+  },
+  "auth.password": { en: "Password", bn: "পাসওয়ার্ড" },
+  "auth.password.hint": { en: "At least 6 characters.", bn: "অন্তত ৬ অক্ষর।" },
+  "auth.displayName": { en: "Display name", bn: "ডিসপ্লে নাম" },
+  "auth.displayName.ph": { en: "e.g. Rafiq Rahman", bn: "যেমন: রফিক রহমান" },
+  "auth.displayName.hint": {
+    en: "The name shown on standings and leaderboards.",
+    bn: "স্ট্যান্ডিংস ও লিডারবোর্ডে এই নামটি দেখানো হবে।"
+  },
+  "auth.submit.signin": { en: "Sign in", bn: "সাইন ইন" },
+  "auth.submit.signup": { en: "Create account", bn: "অ্যাকাউন্ট খুলুন" },
+  "auth.err.username": { en: "Use 3–20 letters, digits or underscores.", bn: "৩–২০ অক্ষর, সংখ্যা বা আন্ডারস্কোর ব্যবহার করুন।" },
+  "auth.err.password": { en: "Password must be at least 6 characters.", bn: "পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে।" },
+  "auth.err.name": { en: "Please enter your display name.", bn: "অনুগ্রহ করে ডিসপ্লে নাম দিন।" },
+  "auth.err.taken": {
+    en: "That username is already taken — try another.",
+    bn: "এই ইউজারনেমটি ইতিমধ্যে নেওয়া — অন্য একটি চেষ্টা করুন।"
+  },
+  "auth.err.bad": { en: "Wrong username or password.", bn: "ইউজারনেম বা পাসওয়ার্ড ভুল।" },
+  "auth.err.offline": {
+    en: "Accounts need a connection — anonymous practice keeps working offline.",
+    bn: "অ্যাকাউন্টের জন্য ইন্টারনেট লাগবে — অফলাইনেও বিনানামে অনুশীলন চলতে থাকবে।"
+  },
+  "auth.err.generic": { en: "Something went wrong — please try again.", bn: "কিছু একটা সমস্যা হয়েছে — আবার চেষ্টা করুন।" },
+  "auth.signedInAs": { en: "Signed in as {name}", bn: "সাইন ইন করেছেন {name}" },
+  "auth.memberSince": { en: "Member since {when}", bn: "সদস্য {when} থেকে" },
+  "auth.nameSaved": { en: "Display name updated.", bn: "ডিসপ্লে নাম আপডেট হয়েছে।" },
+  "auth.save": { en: "Save name", bn: "নাম সংরক্ষণ" },
+  "auth.how.title": { en: "Why an account?", bn: "অ্যাকাউন্ট কেন?" },
+  "auth.how.point1": {
+    en: "Your name appears on contest standings and the leaderboard.",
+    bn: "কনটেস্টের স্ট্যান্ডিংস ও লিডারবোর্ডে আপনার নাম দেখা যাবে।"
+  },
+  "auth.how.point2": {
+    en: "One attempt per paper stays fair — account names stay unique.",
+    bn: "প্রতি পত্রে এক চেষ্টা ন্যায্য থাকে — অ্যাকাউন্টের নাম অদ্বিতীয় থাকে।"
+  },
+  "auth.how.point3": {
+    en: "Practice works signed out too — an account only adds your name.",
+    bn: "সাইন আউট থাকলেও অনুশীলন চলে — অ্যাকাউন্ট শুধু আপনার নাম যোগ করে।"
+  },
 
   /* ---- misc ---- */
   "misc.loading": { en: "Loading…", bn: "লোড হচ্ছে…" },

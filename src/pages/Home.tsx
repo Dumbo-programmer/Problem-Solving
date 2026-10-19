@@ -1,12 +1,27 @@
 import { Link } from "react-router-dom";
-import { ArrowRight, BookOpen, CheckCircle2, Globe, Layers, Sparkles, Timer, WifiOff } from "lucide-react";
+import {
+  ArrowRight,
+  BookOpen,
+  CalendarDays,
+  CheckCircle2,
+  Crown,
+  Globe,
+  Layers,
+  Medal,
+  Sparkles,
+  Timer,
+  Trophy,
+  WifiOff
+} from "lucide-react";
 import { useI18n, TOPIC_LABELS } from "../lib/i18n";
 import { CATEGORIES, TOPICS } from "../data/types";
 import { PROBLEMS } from "../data";
+import { buildDemoEntries, buildScheduledSeeds, phaseOf } from "../lib/scheduled";
+import { standings } from "../lib/leaderboard";
 import Reveal from "../components/Reveal";
 import MathText from "../components/MathText";
 import { DifficultyBadge, TopicBadge, TOPIC_DOT } from "../components/Badges";
-import type { ProblemTopic } from "../lib/types";
+import type { ProblemTopic, ScheduledTest, StandingsRow } from "../lib/types";
 
 /**
  * The hero shows a real problem from the bank rather than a mock-up, so it
@@ -16,6 +31,22 @@ import type { ProblemTopic } from "../lib/types";
 const HERO_PROBLEM = [...PROBLEMS]
   .filter((p) => p.difficulty === "OLYMPIAD")
   .sort((a, b) => a.statement.en.length + a.statement.bn.length - (b.statement.en.length + b.statement.bn.length))[0] ?? PROBLEMS[0];
+
+/**
+ * A preview of this week's standings for the home page, built from the same
+ * deterministic seeds the server and offline store use — so the podium matches
+ * whatever the real board shows. Falls back to the monthly paper (or nothing)
+ * when a weekly window is oddly absent.
+ */
+const PREVIEW: { test: ScheduledTest; top: StandingsRow[] } | null = (() => {
+  const tests = buildScheduledSeeds(PROBLEMS, new Date());
+  const live =
+    tests.find((x) => x.kind === "WEEKLY" && phaseOf(x) === "live") ??
+    tests.find((x) => phaseOf(x) === "live");
+  if (!live) return null;
+  const rows = standings(buildDemoEntries(tests), live.id).slice(0, 3);
+  return rows.length ? { test: live, top: rows } : null;
+})();
 
 export default function Home() {
   const { t, L } = useI18n();
@@ -36,6 +67,22 @@ export default function Home() {
     { to: "/problems", icon: Layers, title: t("home.partsBankT"), body: t("home.partsBankD", { n: PROBLEMS.length }) },
     { to: "/practice", icon: Timer, title: t("home.partsTestT"), body: t("home.partsTestD") },
     { to: "/past-tests", icon: BookOpen, title: t("home.partsReviewT"), body: t("home.partsReviewD") }
+  ];
+
+  const heroChips = [t("hero.chip1"), t("hero.chip2"), t("hero.chip3"), t("hero.chip4")];
+
+  const contests = [
+    { icon: Timer, title: t("home.competeWeeklyT"), body: t("home.competeWeeklyD") },
+    { icon: CalendarDays, title: t("home.competeMonthlyT"), body: t("home.competeMonthlyD") },
+    { icon: Trophy, title: t("home.competeBoardT"), body: t("home.competeBoardD") }
+  ];
+
+  const podiumOrder = PREVIEW ? [1, 0, 2].filter((i) => PREVIEW.top[i]).map((i) => PREVIEW.top[i]) : [];
+  const podiumHeights = ["h-24", "h-32", "h-20"];
+  const podiumTone = [
+    "from-slate-300 to-slate-400 dark:from-slate-600 dark:to-slate-700",
+    "from-amber-300 to-amber-500 dark:from-amber-500 dark:to-amber-700",
+    "from-orange-300 to-orange-500 dark:from-orange-500 dark:to-orange-700"
   ];
 
   return (
@@ -106,6 +153,20 @@ export default function Home() {
                   </div>
                 ))}
               </dl>
+            </Reveal>
+
+            <Reveal delay={360}>
+              <ul className="mt-8 flex flex-wrap gap-2">
+                {heroChips.map((chip) => (
+                  <li
+                    key={chip}
+                    className="chip border-slate-200 bg-white/70 text-slate-600 dark:border-ink-700 dark:bg-ink-900/60 dark:text-slate-300"
+                  >
+                    <CheckCircle2 size={13} className="text-emerald-500" />
+                    {chip}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </div>
 
@@ -213,6 +274,97 @@ export default function Home() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ---------------- Compete: contests + live podium ---------------- */}
+      <section className="shell py-14 lg:py-20">
+        <Reveal className="max-w-2xl">
+          <p className="eyebrow">{t("home.competeEyebrow")}</p>
+          <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white">
+            {t("home.competeTitle")}
+          </h2>
+          <p className="mt-3 text-slate-600 dark:text-slate-400">{t("home.competeLede")}</p>
+        </Reveal>
+
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.15fr]">
+          {/* three contest cards */}
+          <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
+            {contests.map((c, i) => (
+              <Reveal key={c.title} delay={i * 70}>
+                <div className="card flex h-full items-start gap-4 p-5">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-accent-400 to-accent-600 text-white shadow-soft">
+                    <c.icon size={19} />
+                  </span>
+                  <div>
+                    <h3 className="text-[15px] font-bold text-ink-900 dark:text-white">{c.title}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{c.body}</p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+
+          {/* live podium preview */}
+          <Reveal delay={140}>
+            <div className="relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-accent-50/60 p-6 shadow-soft dark:border-ink-800 dark:from-ink-900 dark:via-ink-950 dark:to-ink-900">
+              <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent-400/15 blur-3xl" />
+              <div className="relative flex flex-wrap items-center justify-between gap-2">
+                <h3 className="text-sm font-bold text-ink-900 dark:text-white">{t("home.competeStandings")}</h3>
+                {PREVIEW && (
+                  <span className="chip border-accent-500/40 bg-accent-500/10 text-accent-700 dark:text-accent-300">
+                    <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent-500" />
+                    {t("home.competeLive")}
+                  </span>
+                )}
+              </div>
+              <p className="relative mt-1 truncate text-xs text-slate-500 dark:text-slate-400">
+                {PREVIEW ? t("kind.weekly") : ""}
+              </p>
+
+              {PREVIEW ? (
+                <>
+                  <div className="relative mt-6 flex items-end justify-center gap-3">
+                    {podiumOrder.map((row) => {
+                      // Which of the three lanes this row sits in.
+                      const lane = PREVIEW.top.indexOf(row);
+                      return (
+                        <div key={row.clientId} className="flex w-1/3 flex-col items-center">
+                          <span className="mb-2 grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-accent-400 to-accent-600 text-[11px] font-bold text-white shadow-soft">
+                            {lane === 0 ? <Crown size={16} /> : <Medal size={16} />}
+                          </span>
+                          <span className="w-full truncate text-center text-xs font-semibold text-ink-900 dark:text-white">
+                            {row.name}
+                          </span>
+                          <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                            {row.score}/{row.maxScore} · {row.pct}%
+                          </span>
+                          <div
+                            className={`mt-2 w-full rounded-t-lg bg-gradient-to-b ${podiumHeights[lane]} ${podiumTone[lane]}`}
+                          >
+                            <span className="block pt-2 text-center font-mono text-lg font-bold text-white/90">
+                              {lane + 1}
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </>
+              ) : (
+                <p className="relative mt-6 text-sm text-slate-500 dark:text-slate-400">{t("lb.empty")}</p>
+              )}
+
+              <div className="relative mt-6 flex flex-wrap gap-3 border-t border-slate-200/70 pt-5 dark:border-ink-800">
+                <Link to="/tests" className="btn-primary h-9 px-3.5 text-xs">
+                  {t("home.competeOpen")}
+                </Link>
+                <Link to="/leaderboard" className="btn-ghost h-9 px-3.5 text-xs">
+                  <Trophy size={14} /> {t("home.competeBoard")}
+                </Link>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 

@@ -51,6 +51,46 @@
 - ⚠️ from the 20:15 note: the `import.meta.env` / `markYou` typecheck errors it
   reported are **resolved** — typecheck is clean as of this run.
 
+## ⏱ Update — 2026-10-19, 23:25 (learner accounts + design upgrade)
+
+- **Learner accounts shipped**: `/login` (sign-in / create-account toggle + signed-in
+  "my account" view for renaming), username+password only (no email). Passwords are
+  scrypt-hashed (`scrypt$N$r$p$salt$hash`, params bounded on verify); the bearer is a
+  30-day HMAC session (`kind: "learner"`) that can never open admin routes — and the
+  admin token can never act as a learner. Signing in attaches the real name to
+  contest entries and skips the name gate; anonymous practice is untouched, and an
+  offline network keeps the cached session alive.
+- **New API routes**: `POST /auth/signup`, `POST /auth/login`, `GET /auth/me`,
+  `PUT /auth/profile`; `Store` gained `users` (Pg table + file-store array) and
+  `overview()` now counts accounts (surfaced as a 5th admin tile).
+- **Error codes**: `invalid_username`, `invalid_password`, `display_name_required`,
+  `username_taken` (409), `bad_credentials` (401), `unauthorized` (401) — mapped to
+  bilingual messages client-side, unknown usernames still run a dummy verify so
+  timing doesn't leak existence.
+- **Design upgrade** ("more elements"): Home gained a hero feature-chip row and a
+  contests section with a **live top-3 podium** built from the same deterministic
+  demo entries the boards use; Leaderboard promotes its top three onto a podium
+  above the table; Footer is now brand + tagline + stat strip + three link columns
+  (explore / compete / account) + a two-line bottom bar. `/login` ships with a
+  maths-chip side panel ("why an account?").
+
+**Re-verified after these changes:**
+
+| Check | Command | Result |
+|---|---|---|
+| Typecheck | `npm.cmd run typecheck` | ✅ clean |
+| Unit tests | `npx.cmd vitest run` | ✅ 67/67 (+12 new `userAuth` hashing/username/session-kind tests) |
+| Production build | `npm.cmd run build` | ✅ 144 problems |
+| Responsive layout | `npm.cmd run layout` | ✅ all pass (43+ across 8 routes incl. `/login`) |
+| E2E smoke (offline) | `npm.cmd run smoke` | ✅ 46/46, **zero console errors** (+login journey, contests/podium/chips assertions) |
+| API contract smoke | `npm.cmd run smoke:api` | ✅ 71/71 (+20 account checks: signup rules, dupes, login, kind separation, rename) |
+| E2E smoke (API attached) | `npm.cmd run smoke:cloud` | ✅ 47/47 — full signup → navbar greeting → sign-out journey |
+
+- ⚠️ Supabase Postgres still unreachable from this machine (IPv6-only host, pooler
+  ports time out) — the Postgres path stays untested; the file store proves the
+  contract (as before). Remaining `npm audit` advisories are dev-toolchain only
+  (vitest/vite/tailwind majors deferred on purpose).
+
 ## Proofreading already applied (no action needed)
 
 - `src/data/problems-a.json`, `problems-b.json`, `problems-c.json` — all 144 answers math-verified; Bangla typos/mistranslations fixed (incl. `pr-h-02` title/statement/solution, সর্বশেষ, এংগেল, ক্যাটালান solution, compositions statement).

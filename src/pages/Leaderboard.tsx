@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Award, Loader2, Medal, Trophy, UserRound } from "lucide-react";
+import { Award, Crown, Loader2, Medal, Trophy, UserRound } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { fetchLeaderboard } from "../lib/api";
 import { formatDuration } from "../lib/leaderboard";
@@ -112,6 +112,58 @@ export default function Leaderboard() {
           </div>
         )}
       </div>
+
+      {/* ---- top-3 podium ---- */}
+      {rows && rows.length >= 3 && (
+        <div className="mt-6 grid gap-4 sm:grid-cols-3">
+          {[1, 0, 2].map((idx) => {
+            const row = rows[idx];
+            if (!row) return null;
+            const lane = idx; // 0 = champion, 1 = runner-up, 2 = third
+            const isYou = row.clientId === clientId || row.isYou;
+            const tone =
+              lane === 0
+                ? "border-amber-400/60 bg-gradient-to-br from-amber-50 to-white dark:from-amber-950/30 dark:to-ink-900"
+                : lane === 1
+                  ? "border-slate-300/70 bg-gradient-to-br from-slate-50 to-white dark:from-ink-800/60 dark:to-ink-900"
+                  : "border-orange-300/60 bg-gradient-to-br from-orange-50 to-white dark:from-orange-950/25 dark:to-ink-900";
+            return (
+              <div
+                key={row.clientId}
+                className={`relative flex flex-col items-center rounded-2xl border p-5 text-center shadow-soft ${tone} ${
+                  lane === 0 ? "sm:order-2" : lane === 1 ? "sm:order-1" : "sm:order-3"
+                }`}
+              >
+                <span
+                  className={`grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br text-white shadow-soft ${
+                    lane === 0
+                      ? "from-amber-300 to-amber-500"
+                      : lane === 1
+                        ? "from-slate-300 to-slate-500"
+                        : "from-orange-300 to-orange-500"
+                  }`}
+                >
+                  {lane === 0 ? <Crown size={20} /> : <Medal size={20} />}
+                </span>
+                <span className="mt-3 max-w-full truncate text-sm font-bold text-ink-900 dark:text-white">
+                  {row.name}
+                </span>
+                <span className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                  {t("lb.col.solved")}: <span className="font-mono font-bold text-ink-900 dark:text-white">{row.correct}</span>
+                </span>
+                <span className="mt-3 rounded-full bg-white/70 px-3 py-1 font-mono text-xs font-bold text-accent-700 shadow-soft dark:bg-ink-900/70 dark:text-accent-300">
+                  #{row.rank}
+                </span>
+                {isYou && (
+                  <span className="absolute right-3 top-3 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700 dark:text-accent-300">
+                    {t("lb.you")}
+                  </span>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      )}
 
       {/* ---- board ---- */}
       {rows === null ? (

@@ -58,7 +58,7 @@ async function text() {
 }
 
 /* ---------- 1. every route renders ---------- */
-for (const path of ["/", "/problems", "/practice", "/past-tests", "/tests", "/leaderboard", "/admin"]) {
+for (const path of ["/", "/problems", "/practice", "/past-tests", "/tests", "/login", "/leaderboard", "/admin"]) {
   await goto(path);
   const t = await text();
   check(`route ${path} renders`, t.length > 400, `${t.length} chars`);
@@ -77,6 +77,12 @@ check("home shows hero copy", /প্র্যাকটিস|practice test/i.te
 // builder as one part of the platform (not as the whole product).
 check("home hero is problem-solving themed", /সমস্যা সমাধান|problem solving/i.test(home));
 check("home frames practice tests as one part", /এর একটি অংশ মাত্র|just one part of it/i.test(home));
+// The design pass added a contests + live-standings section and hero chips.
+check("home shows the contests section", /সাপ্তাহিক স্প্রিন্ট|weekly sprint/i.test(home) && /মাসিক চ্যালেঞ্জ|monthly challenge/i.test(home));
+check("home previews the live standings", /শীর্ষ সমাধানকারী|top solvers/i.test(home));
+check("home carries the hero feature chips", /সাইন-আপ ছাড়াই|no sign-up needed/i.test(home) && /সাথে সাথে উত্তর|instant answer/i.test(home));
+const homePodium = await page.evaluate(() => document.querySelectorAll("span,h3").length);
+check("home renders a rich element set", homePodium > 40, `${homePodium} text nodes`);
 
 /* ---------- 3. archive lists problems ---------- */
 await goto("/problems");
@@ -223,6 +229,9 @@ check("leaderboard shows its title", /লিডারবোর্ড|Leaderboard
 check("leaderboard has week/month/all tabs", /এই সপ্তাহ|এই মাস|সব সময়|This week|This month|All time/i.test(lbText));
 check("leaderboard lists ranked learners", /র‍্যাঙ্ক|Rank/i.test(lbText));
 check("leaderboard names its data source", /অফলাইন|ক্লাউড থেকে|Offline —|Live from the cloud/i.test(lbText));
+// The design pass promotes the top three onto a podium above the table.
+const hasPodium = await page.evaluate(() => document.body.innerText.includes("#1"));
+check("leaderboard promotes a top-3 podium", hasPodium);
 
 /* ---------- 10. admin dashboard gates on a login form ---------- */
 await goto("/admin");
@@ -231,6 +240,73 @@ const adminText = await text();
 check("admin route shows the login gate", /অ্যাডমিন আইডি|Admin ID/i.test(adminText) && /পাসওয়ার্ড|Password/i.test(adminText));
 const hasPasswordField = await page.evaluate(() => Boolean(document.querySelector('input[type="password"]')));
 check("admin login has a password field", hasPasswordField);
+
+/* ---------- 11. learner accounts: /login renders + account journey ---------- */
+await goto("/login");
+const loginText = await text();
+check("login page shows the sign-in form", /ইউজারনেম|Username/i.test(loginText) && /পাসওয়ার্ড|Password/i.test(loginText));
+check("login page offers account creation", /নতুন অ্যাকাউন্ট|Create account/i.test(loginText));
+check("login page explains what an account adds", /অ্যাকাউন্ট কেন|Why an account/i.test(loginText));
+
+await goto("/login?mode=signup");
+const signupText = await text();
+check("signup mode asks for a display name", /ডিসপ্লে নাম|Display name/i.test(signupText));
+
+// Client-side validation must fire before any network call.
+await page.evaluate(() => {
+  const btn = [...document.querySelectorAll("button[type=submit]")].find((b) =>
+    /অ্যাকাউন্ট খুলুন|Create account/i.test(b.textContent)
+  );
+  if (btn) btn.click();
+});
+await new Promise((r) => setTimeout(r, 400));
+const hasAlert = await page.evaluate(() => Boolean(document.querySelector('[role="alert"]')));
+check("client-side validation blocks an empty form", hasAlert);
+
+// Full signup journey. With an API attached (smoke:cloud) the account is
+// created and the navbar greets the learner; offline it must degrade to the
+// bilingual "needs a connection" banner instead of a dead end.
+const uname = `smoke${Date.now().toString(36)}`;
+await page.evaluate((u) => {
+  const set = (id, val) => {
+    const el = document.querySelector(id);
+    if (!el) return;
+    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+    setter.call(el, val);
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+  };
+  set("#auth-name", "Smoke Tester");
+  set("#auth-username", u);
+  set("#auth-password", "long-enough");
+}, uname);
+await new Promise((r) => setTimeout(r, 100));
+await page.evaluate(() => {
+  const btn = [...document.querySelectorAll("button[type=submit]")].find((b) =>
+    /অ্যাকাউন্ট খুলুন|Create account/i.test(b.textContent)
+  );
+  if (btn) btn.click();
+});
+await new Promise((r) => setTimeout(r, 2500));
+const afterSignup = await text();
+const signedUp = page.url().replace(BASE, "") === "/" && /Smoke Tester/.test(afterSignup);
+const offlineBanner = await page.evaluate(() => Boolean(document.querySelector('[role="alert"]')));
+check("signup journey completes (or degrades offline)", signedUp || offlineBanner, signedUp ? "account created + greeted" : "offline banner shown");
+
+if (signedUp) {
+  const loggedOut = await page.evaluate(() => {
+    const btn = [...document.querySelectorAll("header button")].find((b) =>
+      (b.getAttribute("title") || "").match(/সাইন আউট|Sign out/i)
+    );
+    if (btn) {
+      btn.click();
+      return true;
+    }
+    return false;
+  });
+  await new Promise((r) => setTimeout(r, 600));
+  const afterLogout = await text();
+  check("sign-out returns the navbar to 'Sign in'", loggedOut && /সাইন ইন|Sign in/.test(afterLogout));
+}
 
 await browser.close();
 

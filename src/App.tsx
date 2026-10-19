@@ -2,12 +2,14 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { I18nProvider } from "./lib/i18n";
 import { ThemeProvider } from "./lib/theme";
+import { AuthProvider } from "./lib/auth";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Problems from "./pages/Problems";
 import Practice from "./pages/Practice";
 import Tests from "./pages/Tests";
+import Login from "./pages/Login";
 import Leaderboard from "./pages/Leaderboard";
 import Admin from "./pages/Admin";
 import TestRunner from "./pages/TestRunner";
@@ -28,25 +30,28 @@ export default function App() {
   return (
     <ThemeProvider>
       <I18nProvider>
-        <ScrollToTop />
-        <div className="flex min-h-screen flex-col">
-          <Navbar />
-          <main className="flex-1">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/problems" element={<Problems />} />
-              <Route path="/practice" element={<Practice />} />
-              <Route path="/tests" element={<Tests />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/test/:id" element={<TestRunner />} />
-              <Route path="/test/:id/results" element={<Results />} />
-              <Route path="/past-tests" element={<PastTests />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
+        <AuthProvider>
+          <ScrollToTop />
+          <div className="flex min-h-screen flex-col">
+            <Navbar />
+            <main className="flex-1">
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/problems" element={<Problems />} />
+                <Route path="/practice" element={<Practice />} />
+                <Route path="/tests" element={<Tests />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/test/:id" element={<TestRunner />} />
+                <Route path="/test/:id/results" element={<Results />} />
+                <Route path="/past-tests" element={<PastTests />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </main>
+            <Footer />
+          </div>
+        </AuthProvider>
       </I18nProvider>
     </ThemeProvider>
   );

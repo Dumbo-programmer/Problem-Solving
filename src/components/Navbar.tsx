@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, Moon, Sun, X, Languages } from "lucide-react";
+import { LogOut, Menu, Moon, Sun, UserRound, X, Languages } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useTheme } from "../lib/theme";
+import { useAuth } from "../lib/auth";
 
 const LINKS = [
   { to: "/", key: "nav.home", end: true, compact: false },
@@ -16,6 +17,7 @@ const LINKS = [
 export default function Navbar() {
   const { t, lang, toggle: toggleLang } = useI18n();
   const { theme, toggle: toggleTheme } = useTheme();
+  const { user, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
@@ -101,6 +103,35 @@ export default function Navbar() {
             {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
+          {user ? (
+            <>
+              <Link
+                to="/login"
+                className="btn-quiet hidden h-9 max-w-[11rem] px-2 text-xs md:inline-flex"
+                title={t("auth.signedInAs", { name: user.displayName })}
+              >
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent-400 to-accent-600 text-[10px] font-bold text-white">
+                  {user.displayName.slice(0, 2).toUpperCase()}
+                </span>
+                <span className="truncate">{user.displayName}</span>
+              </Link>
+              <button
+                type="button"
+                onClick={signOut}
+                className="btn-quiet hidden h-9 w-9 px-0 sm:inline-flex"
+                aria-label={t("nav.signOut")}
+                title={t("nav.signOut")}
+              >
+                <LogOut size={16} />
+              </button>
+            </>
+          ) : (
+            <Link to="/login" className="btn-quiet hidden h-9 px-3 text-xs sm:inline-flex">
+              <UserRound size={16} />
+              {t("nav.signIn")}
+            </Link>
+          )}
+
           <Link to="/practice" className="btn-primary hidden h-9 px-3.5 text-xs sm:inline-flex">
             {t("nav.practice")}
           </Link>
@@ -143,6 +174,41 @@ export default function Navbar() {
               {t(link.key)}
             </NavLink>
           ))}
+          {user ? (
+            <div
+              style={{ transitionDelay: `${LINKS.length * 30}ms` }}
+              className={`mt-1 flex items-center justify-between gap-2 rounded-xl bg-slate-50 px-4 py-3 transition-all dark:bg-ink-900 ${
+                open ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+              }`}
+            >
+              <span className="flex min-w-0 items-center gap-2.5">
+                <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent-400 to-accent-600 text-[11px] font-bold text-white">
+                  {user.displayName.slice(0, 2).toUpperCase()}
+                </span>
+                <span className="truncate text-sm font-semibold text-slate-800 dark:text-slate-100">
+                  {user.displayName}
+                </span>
+              </span>
+              <button
+                type="button"
+                onClick={signOut}
+                className="btn-quiet shrink-0 text-xs text-rose-600 dark:text-rose-400"
+              >
+                <LogOut size={14} />
+                {t("nav.signOut")}
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              style={{ transitionDelay: `${LINKS.length * 30}ms` }}
+              className={`rounded-xl px-4 py-3.5 text-base font-medium transition-all ${
+                open ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
+              } text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-ink-900`}
+            >
+              {t("nav.signIn")}
+            </Link>
+          )}
           <Link to="/practice" className="btn-primary mt-3 w-full py-3">
             {t("cta.takeTest")}
           </Link>

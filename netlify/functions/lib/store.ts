@@ -30,6 +30,17 @@ export interface StoreOverview {
   tests: number;
   submissions: number;
   learners: number;
+  /** Registered learner accounts (username + password). */
+  accounts: number;
+}
+
+/** A registered learner. `username` is normalized to lowercase at the edge. */
+export interface StoredUser {
+  id: string;
+  username: string;
+  displayName: string;
+  passwordHash: string;
+  createdAt: string;
 }
 
 export interface Store {
@@ -45,6 +56,12 @@ export interface Store {
   listTests(clientId: string): Promise<PracticeTest[]>;
   saveTest(test: PracticeTest): Promise<void>;
   deleteTest(id: string, clientId: string): Promise<void>;
+
+  findUserByUsername(username: string): Promise<StoredUser | null>;
+  findUserById(id: string): Promise<StoredUser | null>;
+  /** Creates the account; false when the username is already taken. */
+  createUser(user: StoredUser): Promise<boolean>;
+  setUserDisplayName(id: string, displayName: string): Promise<void>;
 
   listScheduled(includeUnpublished: boolean): Promise<ScheduledTest[]>;
   saveScheduled(test: ScheduledTest): Promise<void>;
@@ -223,6 +240,14 @@ create table if not exists practice_tests (
 
 create index if not exists practice_tests_client_idx    on practice_tests (client_id, created_at desc);
 create index if not exists practice_tests_scheduled_idx on practice_tests (scheduled_test_id);
+
+create table if not exists users (
+  id            text primary key,
+  username      text not null unique,
+  display_name  text not null,
+  password_hash text not null,
+  created_at    timestamptz not null default now()
+);
 
 create table if not exists scheduled_tests (
   id              text primary key,
@@ -568,6 +593,46 @@ export class PgStore implements Store {
     await this.client.query("delete from scheduled_tests where id = $1", [id]);
   }
 
+  private rowToUser(r: Record<string, unknown>): StoredUser {
+    return {
+      id: String(r.id),
+      username: String(r.username),
+      displayName: String(r.display_name),
+      passwordHash: String(r.password_hash),
+      createdAt: iso(r.created_at)
+    };
+  }
+
+  async findUserByUsername(username: string): Promise<StoredUser | null> {
+    const res = await this.client.query(
+      "select id, username, display_name, password_hash, created_at from users where username = $1",
+      [username]
+    );
+    return res.rows[0] ? this.rowToUser(res.rows[0]) : null;
+  }
+
+  async findUserById(id: string): Promise<StoredUser | null> {
+    const res = await this.client.query(
+      "select id, username, display_name, password_hash, created_at from users where id = $1",
+      [id]
+    );
+    return res.rows[0] ? this.rowToUser(res.rows[0]) : null;
+  }
+
+  async createUser(user: StoredUser): Promise<boolean> {
+    const res = await this.client.query(
+      `insert into users (id, username, display_name, password_hash, created_at)
+       values ($1,$2,$3,$4,$5)
+       on conflict (username) do nothing`,
+      [user.id, user.username, user.displayName, user.passwordHash, user.createdAt]
+    );
+    return (res.rowCount ?? 0) > 0;
+  }
+
+  async setUserDisplayName(id: string, displayName: string): Promise<void> {
+    await this.client.query("update users set display_name = $2 where id = $1", [id, displayName]);
+  }
+
   async listEntries(): Promise<PracticeTest[]> {
     return this.fetchTests(
       "where scheduled_test_id is not null and status = 'SUBMITTED'",
@@ -577,7 +642,7 @@ export class PgStore implements Store {
   }
 
   async overview(): Promise<StoreOverview> {
-    const [p, t, s, l] = await Promise.all([
+    const [p, t, s, l, a] = await Promise.all([
       this.client.query("select count(*)::int as n from problems"),
       this.client.query("select count(*)::int as n from scheduled_tests"),
       this.client.query(
@@ -585,13 +650,15 @@ export class PgStore implements Store {
       ),
       this.client.query(
         "select count(distinct client_id)::int as n from practice_tests where scheduled_test_id is not null and status = 'SUBMITTED'"
-      )
+      ),
+      this.client.query("select count(*)::int as n from users")
     ]);
     return {
       problems: Number(p.rows[0]?.n ?? 0),
       tests: Number(t.rows[0]?.n ?? 0),
       submissions: Number(s.rows[0]?.n ?? 0),
-      learners: Number(l.rows[0]?.n ?? 0)
+      learners: Number(l.rows[0]?.n ?? 0),
+      accounts: Number(a.rows[0]?.n ?? 0)
     };
   }
 }
@@ -604,9 +671,13 @@ interface FileShape {
   problems: Problem[];
   tests: PracticeTest[];
   scheduled: ScheduledTest[];
+  users: StoredUser[];
 }
 
-const EMPTY_FILE: FileShape = { problems: [], tests: [], scheduled: [] };
+/** Fresh arrays every call — the shape must never share mutable references. */
+function emptyFile(): FileShape {
+  return { problems: [], tests: [], scheduled: [], users: [] };
+}
 
 export class FileStore implements Store {
   readonly label = "file" as const;
@@ -629,13 +700,15 @@ export class FileStore implements Store {
         return {
           problems: Array.isArray(parsed.problems) ? parsed.problems : [],
           tests: Array.isArray(parsed.tests) ? parsed.tests : [],
-          scheduled: Array.isArray(parsed.scheduled) ? parsed.scheduled : []
+          scheduled: Array.isArray(parsed.scheduled) ? parsed.scheduled : [],
+          // Stores written before accounts existed simply start with none.
+          users: Array.isArray(parsed.users) ? parsed.users : []
         };
       }
     } catch {
       /* corrupt file — start clean rather than crash */
     }
-    return { ...EMPTY_FILE };
+    return emptyFile();
   }
 
   private persist(): void {
@@ -737,6 +810,28 @@ export class FileStore implements Store {
     if (this.data.tests.length !== before) this.persist();
   }
 
+  async findUserByUsername(username: string): Promise<StoredUser | null> {
+    return this.data.users.find((u) => u.username === username) ?? null;
+  }
+
+  async findUserById(id: string): Promise<StoredUser | null> {
+    return this.data.users.find((u) => u.id === id) ?? null;
+  }
+
+  async createUser(user: StoredUser): Promise<boolean> {
+    if (this.data.users.some((u) => u.username === user.username)) return false;
+    this.data.users.push(user);
+    this.persist();
+    return true;
+  }
+
+  async setUserDisplayName(id: string, displayName: string): Promise<void> {
+    const user = this.data.users.find((u) => u.id === id);
+    if (!user || user.displayName === displayName) return;
+    user.displayName = displayName;
+    this.persist();
+  }
+
   async listScheduled(includeUnpublished: boolean): Promise<ScheduledTest[]> {
     return this.data.scheduled
       .filter((t) => includeUnpublished || t.published)
@@ -767,7 +862,8 @@ export class FileStore implements Store {
       problems: this.data.problems.length,
       tests: this.data.scheduled.length,
       submissions: entries.length,
-      learners: learners.size
+      learners: learners.size,
+      accounts: this.data.users.length
     };
   }
 }
