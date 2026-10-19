@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.netlify/
+
+# Environment — never commit real credentials
+.env
+.env.local
+.env.*.local
+
+# Logs & editor noise
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.DS_Store
+*.local
+.vscode/
+.idea/
+
+# Test / coverage
+coverage/

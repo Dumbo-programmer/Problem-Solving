@@ -1,0 +1,171 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Base                                                                */
+/* ------------------------------------------------------------------ */
+
+:root {
+  --ring: 222 47% 58%;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  @apply bg-white text-slate-800 antialiased;
+  font-feature-settings: "ss01" on, "cv01" on;
+}
+
+.dark body {
+  @apply bg-ink-950 text-slate-200;
+}
+
+/* MathJax-free KaTeX host: keep inline maths on the text baseline. */
+.katex-inline {
+  @apply inline-block align-middle;
+}
+.katex-display {
+  @apply my-3 overflow-x-auto overflow-y-hidden;
+}
+
+/* Nice selection colour everywhere. */
+::selection {
+  @apply bg-accent-300/60 text-ink-900;
+}
+.dark ::selection {
+  @apply bg-accent-500/40 text-accent-50;
+}
+
+/* Slim, themed scrollbars. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(120, 128, 201, 0.4) transparent;
+}
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-300/70;
+}
+.dark *::-webkit-scrollbar-thumb {
+  @apply bg-ink-700/80;
+}
+
+/* ------------------------------------------------------------------ */
+/* Components                                                          */
+/* ------------------------------------------------------------------ */
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white shadow-soft;
+  }
+  .dark .card {
+    @apply border-ink-800/80 bg-ink-900/60;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:focus-visible:ring-offset-ink-950;
+  }
+  .btn-primary {
+    @apply btn bg-gradient-to-r from-accent-500 to-accent-600 text-white shadow-soft hover:from-accent-400 hover:to-accent-600 hover:shadow-lift active:scale-[0.99];
+  }
+  .btn-ghost {
+    @apply btn border border-slate-200 bg-white/70 text-slate-700 hover:border-slate-300 hover:bg-white;
+  }
+  .dark .btn-ghost {
+    @apply border-ink-700 bg-ink-900/60 text-slate-200 hover:border-ink-600 hover:bg-ink-900;
+  }
+  .btn-quiet {
+    @apply btn text-slate-600 hover:bg-slate-100;
+  }
+  .dark .btn-quiet {
+    @apply text-slate-300 hover:bg-ink-900;
+  }
+
+  .field {
+    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400/40;
+  }
+  .dark .field {
+    @apply border-ink-700 bg-ink-900/70 text-slate-100 placeholder:text-slate-500;
+  }
+
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-600 dark:text-accent-400;
+  }
+
+  /* Toggle-style filter button used across the builder + archive. */
+  .toggle-chip {
+    @apply inline-flex select-none items-center gap-1.5 rounded-full border px-3 py-1.5 text-sm font-medium transition-all duration-150;
+  }
+  .toggle-chip-off {
+    @apply border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900;
+  }
+  .dark .toggle-chip-off {
+    @apply border-ink-700 bg-ink-900/50 text-slate-400 hover:border-ink-600 hover:text-slate-200;
+  }
+  .toggle-chip-on {
+    @apply border-accent-500/60 bg-accent-500/12 text-accent-700 shadow-[inset_0_0_0_1px_rgba(249,140,7,0.25)];
+  }
+  .dark .toggle-chip-on {
+    @apply border-accent-500/60 bg-accent-500/15 text-accent-300;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                           */
+/* ------------------------------------------------------------------ */
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .fade-mask {
+    -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  }
+  .animate-in-view {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .animate-in-view.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+  .no-spin::-webkit-outer-spin-button,
+  .no-spin::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .no-spin {
+    -moz-appearance: textfield;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-in-view {
+    opacity: 1;
+    transform: none;
+  }
+}

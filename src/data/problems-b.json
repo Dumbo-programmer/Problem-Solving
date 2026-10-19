@@ -1,0 +1,1058 @@
+[
+  {
+    "id": "ge-e-01",
+    "slug": "right-triangle-legs-8-and-15",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Hypotenuse of a right triangle",
+      "bn": "সমকোণী ত্রিভুজের অতিভুজ"
+    },
+    "statement": {
+      "en": "A right triangle has legs $8$ and $15$. Find the length of its hypotenuse.",
+      "bn": "একটি সমকোণী ত্রিভুজের সমকোণের দুই বাহুর দৈর্ঘ্য $8$ ও $15$। অতিভুজের দৈর্ঘ্য কত?"
+    },
+    "answer": "17",
+    "solution": {
+      "en": "By the Pythagorean theorem, $8^2+15^2=64+225=289=17^2$, so the hypotenuse is $17$.",
+      "bn": "পিথাগোরসের উপপাদ্য অনুযায়ী, $8^2+15^2=64+225=289=17^2$; তাই অতিভুজের দৈর্ঘ্য $17$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-e-02",
+    "slug": "area-from-base-and-height",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "PRIMARY",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Area from base and height",
+      "bn": "ভিত্তি ও উচ্চতা থেকে ক্ষেত্রফল"
+    },
+    "statement": {
+      "en": "A triangle has a base of length $14$ and the height corresponding to that base is $9$. Find the area of the triangle.",
+      "bn": "একটি ত্রিভুজের এক বাহুর দৈর্ঘ্য $14$ এবং সেই বাহুর ওপর অঙ্কিত উচ্চতার দৈর্ঘ্য $9$। ত্রিভুজটির ক্ষেত্রফল কত?"
+    },
+    "answer": "63",
+    "solution": {
+      "en": "The area is $\\frac{1}{2} \\times 14 \\times 9 = 63$.",
+      "bn": "ক্ষেত্রফল $=\\frac{1}{2} \\times 14 \\times 9 = 63$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-e-03",
+    "slug": "third-angle-of-a-triangle",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "PRIMARY",
+    "difficulty": "EASY",
+    "title": {
+      "en": "The third angle of a triangle",
+      "bn": "ত্রিভুজের তৃতীয় কোণ"
+    },
+    "statement": {
+      "en": "Two angles of a triangle measure $55^{\\circ}$ and $68^{\\circ}$. Find the measure of the third angle in degrees.",
+      "bn": "একটি ত্রিভুজের দুটি কোণের পরিমাণ যথাক্রমে $55^{\\circ}$ ও $68^{\\circ}$। তৃতীয় কোণটির পরিমাণ কত ডিগ্রি?"
+    },
+    "answer": "57",
+    "solution": {
+      "en": "The angles of a triangle sum to $180^{\\circ}$, so the third angle is $180^{\\circ}-55^{\\circ}-68^{\\circ}=57^{\\circ}$.",
+      "bn": "ত্রিভুজের তিন কোণের সমষ্টি $180^{\\circ}$; তাই তৃতীয় কোণ $=180^{\\circ}-55^{\\circ}-68^{\\circ}=57^{\\circ}$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-e-04",
+    "slug": "interior-angle-of-regular-hexagon",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Interior angle of a regular hexagon",
+      "bn": "নিয়মিত ষড়ভুজের অন্তঃকোণ"
+    },
+    "statement": {
+      "en": "Each side and each interior angle of a regular hexagon are equal. Find the measure of one interior angle in degrees.",
+      "bn": "নিয়মিত ষড়ভুজের সব বাহু ও সব অন্তঃকোণ সমান। একটি অন্তঃকোণের পরিমাণ কত ডিগ্রি?"
+    },
+    "answer": "120",
+    "solution": {
+      "en": "The interior angle sum is $(6-2)\\times 180^{\\circ}=720^{\\circ}$, so each angle is $720^{\\circ}/6=120^{\\circ}$.",
+      "bn": "অন্তঃকোণের সমষ্টি $=(6-2)\\times 180^{\\circ}=720^{\\circ}$; তাই প্রতিটি কোণ $=720^{\\circ}/6=120^{\\circ}$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-e-05",
+    "slug": "height-of-isosceles-triangle-10-10-12",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Height of an isosceles triangle",
+      "bn": "সমদ্বিবাহু ত্রিভুজের উচ্চতা"
+    },
+    "statement": {
+      "en": "An isosceles triangle has two equal sides of length $10$ and a third side of length $12$. Find the length of the altitude drawn to the side of length $12$.",
+      "bn": "একটি সমদ্বিবাহু ত্রিভুজের দুই সমান বাহুর দৈর্ঘ্য $10$ এবং তৃতীয় বাহুর দৈর্ঘ্য $12$। দৈর্ঘ্য $12$ বাহুর ওপর অঙ্কিত উচ্চতার দৈর্ঘ্য কত?"
+    },
+    "answer": "8",
+    "solution": {
+      "en": "The altitude bisects the base, leaving a right triangle with hypotenuse $10$ and leg $12/2=6$; hence the height is $\\sqrt{10^2-6^2}=\\sqrt{64}=8$.",
+      "bn": "উচ্চতাটি ভিত্তিকে সমদ্বিখণ্ডন করে; ফলে প্রাপ্ত সমকোণী ত্রিভুজের অতিভুজ $10$ ও এক বাহু $12/2=6$। তাই উচ্চতা $=\\sqrt{10^2-6^2}=\\sqrt{64}=8$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-e-06",
+    "slug": "radius-from-circle-area-36-pi",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Radius from the area of a circle",
+      "bn": "বৃত্তের ক্ষেত্রফল থেকে ব্যাসার্ধ"
+    },
+    "statement": {
+      "en": "The area of a circle is $36\\pi$. Find the radius of the circle.",
+      "bn": "একটি বৃত্তের ক্ষেত্রফল $36\\pi$। বৃত্তটির ব্যাসার্ধ কত?"
+    },
+    "answer": "6",
+    "solution": {
+      "en": "From $\\pi r^2 = 36\\pi$ we get $r^2 = 36$, so $r = 6$.",
+      "bn": "$\\pi r^2 = 36\\pi$ হতে $r^2 = 36$; তাই $r = 6$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-m-01",
+    "slug": "tangent-secant-power-find-pb",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Tangent and secant from a point",
+      "bn": "বহিঃবিন্দু থেকে স্পর্শক ও ছেদক"
+    },
+    "statement": {
+      "en": "From a point $P$ outside a circle, a tangent touches the circle at $T$ and a secant meets the circle at $A$ and $B$, with $A$ between $P$ and $B$. If $PT = 12$ and $PA = 8$, find the length of $PB$.",
+      "bn": "কোনো বৃত্তের বাইরের একটি বিন্দু $P$ থেকে স্পর্শক $T$ বিন্দুতে বৃত্তকে স্পর্শ করে এবং একটি ছেদক $P$ হয়ে বৃত্তকে $A$ ও $B$ বিন্দুতে ছেদ করে, যেখানে $A$, $P$ ও $B$-এর মধ্যে অবস্থিত। $PT = 12$ ও $PA = 8$ হলে, $PB$-এর দৈর্ঘ্য কত?"
+    },
+    "answer": "18",
+    "solution": {
+      "en": "By the tangent-secant power of a point, $PT^2 = PA \\cdot PB$, so $144 = 8 \\cdot PB$ and $PB = 18$.",
+      "bn": "স্পর্শক-ছেদক ক্ষমতার উপপাদ্য অনুযায়ী, $PT^2 = PA \\cdot PB$; অর্থাৎ $144 = 8 \\cdot PB$, তাই $PB = 18$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-m-02",
+    "slug": "trapezoid-area-via-similar-triangles",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Area of a trapezoid inside a triangle",
+      "bn": "ত্রিভুজের ভেতরের সমান্তরাল চতুর্ভুজের ক্ষেত্রফল"
+    },
+    "statement": {
+      "en": "In triangle $ABC$, points $D$ on $AB$ and $E$ on $AC$ are such that $DE$ is parallel to $BC$. If $AD = 6$, $DB = 4$ and the area of triangle $ADE$ is $36$, find the area of trapezoid $DBCE$.",
+      "bn": "ত্রিভুজ $ABC$-এর $AB$ বাহুতে $D$ ও $AC$ বাহুতে $E$ এমনভাবে অবস্থিত যে $DE \\parallel BC$। $AD = 6$, $DB = 4$ এবং ত্রিভুজ $ADE$-এর ক্ষেত্রফল $36$ হলে, সমান্তরাল চতুর্ভুজ $DBCE$-এর ক্ষেত্রফল কত?"
+    },
+    "answer": "64",
+    "solution": {
+      "en": "Since $DE \\parallel BC$, triangle $ADE$ is similar to triangle $ABC$ with ratio $AD/AB = 6/10 = 3/5$. Area scales by $(3/5)^2 = 9/25$, so $[ABC] = 36 \\cdot 25/9 = 100$ and $[DBCE] = 100 - 36 = 64$.",
+      "bn": "$DE \\parallel BC$ হওয়ায় $\\triangle ADE \\sim \\triangle ABC$ এবং সদৃশতার অনুপাত $AD/AB = 6/10 = 3/5$। ক্ষেত্রফলের অনুপাত $(3/5)^2 = 9/25$; তাই $[ABC] = 36 \\times 25/9 = 100$ এবং $[DBCE] = 100 - 36 = 64$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-m-03",
+    "slug": "median-length-via-apollonius",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Length of a median",
+      "bn": "মধ্যমার দৈর্ঘ্য"
+    },
+    "statement": {
+      "en": "In triangle $ABC$ we have $AB = 7$, $AC = 9$ and $BC = 8$. The median from $A$ meets $BC$ at $M$. Find the length of $AM$.",
+      "bn": "$ABC$ ত্রিভুজে $AB = 7$, $AC = 9$ ও $BC = 8$। $A$ থেকে আনা মধ্যমা $BC$-কে $M$ বিন্দুতে ছেদ করে। $AM$-এর দৈর্ঘ্য কত?"
+    },
+    "answer": "7",
+    "solution": {
+      "en": "By Apollonius' theorem, $AB^2 + AC^2 = 2(AM^2 + BM^2)$, so $49 + 81 = 2(AM^2 + 16)$, giving $AM^2 = 49$ and $AM = 7$.",
+      "bn": "অ্যাপোলোনিয়াসের উপপাদ্য অনুযায়ী, $AB^2 + AC^2 = 2(AM^2 + BM^2)$; অর্থাৎ $49 + 81 = 2(AM^2 + 16)$, এতে $AM^2 = 49$, তাই $AM = 7$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-m-04",
+    "slug": "intersecting-chords-find-segment",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Two chords meeting inside a circle",
+      "bn": "বৃত্তের ভেতরে ছেদকরা দুটি জ্যা"
+    },
+    "statement": {
+      "en": "Two chords $AB$ and $CD$ of a circle meet at an interior point $P$. If $AP = 4$, $PB = 6$ and $CP = 3$, find the length of $PD$.",
+      "bn": "একটি বৃত্তের দুটি জ্যা $AB$ ও $CD$ বৃত্তের ভেতরের একটি বিন্দু $P$-তে ছেদ করে। $AP = 4$, $PB = 6$ ও $CP = 3$ হলে, $PD$-এর দৈর্ঘ্য কত?"
+    },
+    "answer": "8",
+    "solution": {
+      "en": "By the intersecting chords theorem, $AP \\cdot PB = CP \\cdot PD$, so $4 \\cdot 6 = 3 \\cdot PD$ and $PD = 8$.",
+      "bn": "ছেদকরা জ্যার উপপাদ্য অনুযায়ী, $AP \\cdot PB = CP \\cdot PD$; অর্থাৎ $4 \\times 6 = 3 \\times PD$, তাই $PD = 8$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-m-05",
+    "slug": "heron-area-13-14-15",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Area of a 13-14-15 triangle",
+      "bn": "১৩-১৪-১৫ ত্রিভুজের ক্ষেত্রফল"
+    },
+    "statement": {
+      "en": "A triangle has side lengths $13$, $14$ and $15$. Find its area.",
+      "bn": "একটি ত্রিভুজের বাহু তিনটির দৈর্ঘ্য যথাক্রমে $13$, $14$ ও $15$। ত্রিভুজটির ক্ষেত্রফল কত?"
+    },
+    "answer": "84",
+    "solution": {
+      "en": "The semiperimeter is $s = (13+14+15)/2 = 21$. By Heron's formula the area is $\\sqrt{21 \\cdot 8 \\cdot 7 \\cdot 6} = \\sqrt{7056} = 84$.",
+      "bn": "অর্ধ-পরিমাপ $s = (13+14+15)/2 = 21$। হিরনের সূত্রে ক্ষেত্রফল $=\\sqrt{21 \\cdot 8 \\cdot 7 \\cdot 6} = \\sqrt{7056} = 84$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-m-06",
+    "slug": "rectangle-area-from-diagonal-and-perimeter",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Area from diagonal and perimeter",
+      "bn": "কর্ণ ও পরিমাপ থেকে আয়তক্ষেত্রের ক্ষেত্রফল"
+    },
+    "statement": {
+      "en": "A rectangle has diagonal of length $13$ and perimeter $34$. Find its area.",
+      "bn": "একটি আয়তক্ষেত্রের কর্ণের দৈর্ঘ্য $13$ এবং পরিমাপ $34$। আয়তক্ষেত্রটির ক্ষেত্রফল কত?"
+    },
+    "answer": "60",
+    "solution": {
+      "en": "Let the sides be $a$ and $b$. Then $a + b = 17$ and $a^2 + b^2 = 169$, so $2ab = 17^2 - 169 = 120$ and $ab = 60$.",
+      "bn": "বাহু দুটিকে $a$ ও $b$ ধরি। তবে $a + b = 17$ ও $a^2 + b^2 = 169$; সুতরাং $2ab = 17^2 - 169 = 120$, অর্থাৎ $ab = 60$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-h-01",
+    "slug": "cyclic-trapezoid-diagonal-ptolemy",
+    "type": "OLYMPIAD",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Diagonal of a cyclic isosceles trapezoid",
+      "bn": "চক্রীয় সমদ্বিবাহু সমান্তরাল চতুর্ভুজের কর্ণ"
+    },
+    "statement": {
+      "en": "An isosceles trapezoid is inscribed in a circle. Its two parallel sides have lengths $4$ and $12$, and each of the other two sides has length $11$. Find the length of a diagonal.",
+      "bn": "একটি সমদ্বিবাহু সমান্তরাল চতুর্ভুজ একটি বৃত্তের ভেতরে অঙ্কিত। সমান্তরাল দুটি বাহুর দৈর্ঘ্য $4$ ও $12$ এবং অবশিষ্ট দুটি বাহুর প্রতিটির দৈর্ঘ্য $11$। একটি কর্ণের দৈর্ঘ্য কত?"
+    },
+    "answer": "13",
+    "solution": {
+      "en": "Label the vertices so the parallel sides are $4$ and $12$ and the legs are $11$ each. An isosceles trapezoid is cyclic with equal diagonals $d$, so Ptolemy's theorem gives $d^2 = 11 \\cdot 11 + 4 \\cdot 12 = 121 + 48 = 169$, hence $d = 13$.",
+      "bn": "শীর্ষবিন্দুগুলো এমনভাবে নামকরণ করি যে সমান্তরাল বাহু দুটির দৈর্ঘ্য $4$ ও $12$ এবং বাকি দুটি বাহু $11$। সমদ্বিবাহু সমান্তরাল চতুর্ভুজ চক্রীয় এবং তার কর্ণ দুটি সমান; প্টলেমির উপপাদ্য থেকে $d^2 = 11 \\cdot 11 + 4 \\cdot 12 = 121 + 48 = 169$, তাই $d = 13$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-h-02",
+    "slug": "area-of-isosceles-trapezoid-10-16-5",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Area of an isosceles trapezoid",
+      "bn": "সমদ্বিবাহু সমান্তরাল চতুর্ভুজের ক্ষেত্রফল"
+    },
+    "statement": {
+      "en": "An isosceles trapezoid has parallel sides of lengths $10$ and $16$ and the two non-parallel sides each have length $5$. Find its area.",
+      "bn": "একটি সমদ্বিবাহু সমান্তরাল চতুর্ভুজের সমান্তরাল দুটি বাহুর দৈর্ঘ্য $10$ ও $16$ এবং অবশিষ্ট দুটি বাহুর প্রতিটির দৈর্ঘ্য $5$। চতুর্ভুজটির ক্ষেত্রফল কত?"
+    },
+    "answer": "52",
+    "solution": {
+      "en": "Dropping perpendiculars gives a right triangle with hypotenuse $5$ and leg $(16-10)/2 = 3$, so the height is $\\sqrt{25-9} = 4$. The area is $\\frac{10+16}{2} \\cdot 4 = 52$.",
+      "bn": "লম্ব নামালে অতিভুজ $5$ ও বাহু $(16-10)/2 = 3$ সহ একটি সমকোণী ত্রিভুজ পাওয়া যায়; তাই উচ্চতা $=\\sqrt{25-9} = 4$। ক্ষেত্রফল $=\\frac{10+16}{2} \\times 4 = 52$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-h-03",
+    "slug": "secant-chord-from-tangent-and-radius",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Chord cut by a secant through an external point",
+      "bn": "বহিঃবিন্দুস্থ ছেদক দ্বারা কাটা জ্যা"
+    },
+    "statement": {
+      "en": "A point $P$ is at distance $10$ from the centre $O$ of a circle of radius $6$. A line through $P$ meets the circle at $A$ and $B$ with $PA = 4$ (and $A$ between $P$ and $B$). Find the length of the chord $AB$.",
+      "bn": "ব্যাসার্ধ $6$ এবং কেন্দ্র $O$ বিশিষ্ট একটি বৃত্তের বাইরে $O$ হতে দূরত্বে $10$ অবস্থিত একটি বিন্দু $P$। $P$ দিয়ে যাওয়া একটি রেখা বৃত্তকে $A$ ও $B$ বিন্দুতে ছেদ করে, যেখানে $PA = 4$ এবং $A$, $P$ ও $B$-এর মধ্যে অবস্থিত। জ্যা $AB$-এর দৈর্ঘ্য কত?"
+    },
+    "answer": "12",
+    "solution": {
+      "en": "The power of $P$ is $OP^2 - r^2 = 100 - 36 = 64$. Since $PA \\cdot PB = 64$ and $PA = 4$, we get $PB = 16$, so $AB = PB - PA = 12$.",
+      "bn": "$P$ বিন্দুর ক্ষমতা $= OP^2 - r^2 = 100 - 36 = 64$। আবার $PA \\cdot PB = 64$ ও $PA = 4$ হতে $PB = 16$; সুতরাং $AB = PB - PA = 12$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-h-04",
+    "slug": "quadrilateral-area-by-shoelace",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Area of a coordinate quadrilateral",
+      "bn": "স্থানাঙ্কিত চতুর্ভুজের ক্ষেত্রফল"
+    },
+    "statement": {
+      "en": "A convex quadrilateral has vertices $A(0,0)$, $B(6,2)$, $C(7,6)$ and $D(1,5)$ in that order. Find its area.",
+      "bn": "একটি উত্তল চতুর্ভুজের শীর্ষবিন্দুগুলো ক্রমানুসারে $A(0,0)$, $B(6,2)$, $C(7,6)$ ও $D(1,5)$। চতুর্ভুজটির ক্ষেত্রফল কত?"
+    },
+    "answer": "51/2",
+    "solution": {
+      "en": "By the shoelace formula, $\\frac{1}{2}\\big|(0\\cdot2+6\\cdot6+7\\cdot5+1\\cdot0)-(0\\cdot6+2\\cdot7+6\\cdot1+5\\cdot0)\\big| = \\frac{1}{2}|71-20| = \\frac{51}{2}$.",
+      "bn": "শুইলেস সূত্রে ক্ষেত্রফল $=\\frac{1}{2}\\big|(0\\cdot2+6\\cdot6+7\\cdot5+1\\cdot0)-(0\\cdot6+2\\cdot7+6\\cdot1+5\\cdot0)\\big| = \\frac{1}{2}|71-20| = \\frac{51}{2}$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-h-05",
+    "slug": "distance-between-parallel-chords",
+    "type": "ACADEMICS",
+    "topic": "GEOMETRY",
+    "category": "SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Distance between two parallel chords",
+      "bn": "দুটি সমান্তরাল জ্যার মধ্যবর্তী দূরত্ব"
+    },
+    "statement": {
+      "en": "A circle has radius $13$. Two parallel chords of lengths $10$ and $24$ lie on the same side of the centre. Find the distance between the two chords.",
+      "bn": "একটি বৃত্তের ব্যাসার্ধ $13$। কেন্দ্রের একই পাশে $10$ ও $24$ দৈর্ঘ্যের দুটি সমান্তরাল জ্যা অবস্থিত। দুই জ্যার মধ্যবর্তী দূরত্ব কত?"
+    },
+    "answer": "7",
+    "solution": {
+      "en": "The distances from the centre are $\\sqrt{13^2-5^2}=12$ for the chord of length $10$ and $\\sqrt{13^2-12^2}=5$ for the chord of length $24$. On the same side the gap is $12-5=7$.",
+      "bn": "কেন্দ্র হতে দূরত্ব: দৈর্ঘ্য $10$ জ্যার জন্য $\\sqrt{13^2-5^2}=12$ এবং দৈর্ঘ্য $24$ জ্যার জন্য $\\sqrt{13^2-12^2}=5$। একই পাশে থাকায় দূরত্ব $=12-5=7$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-h-06",
+    "slug": "angle-bisector-segment-in-right-triangle",
+    "type": "OLYMPIAD",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Segment made by an angle bisector",
+      "bn": "সমদ্বিখণ্ডকের সৃষ্ট খণ্ড"
+    },
+    "statement": {
+      "en": "In triangle $ABC$, $BC = 15$, $AC = 20$ and $AB = 25$. The bisector of angle $C$ meets $AB$ at $D$. Find the length of $AD$.",
+      "bn": "$ABC$ ত্রিভুজে $BC = 15$, $AC = 20$ ও $AB = 25$। কোণ $C$-এর সমদ্বিখণ্ডক $AB$-কে $D$ বিন্দুতে ছেদ করে। $AD$-এর দৈর্ঘ্য কত?"
+    },
+    "answer": "100/7",
+    "solution": {
+      "en": "By the angle bisector theorem, $AD:DB = AC:BC = 20:15 = 4:3$. With $AB = 25$ this gives $AD = 25 \\cdot \\frac{4}{7} = \\frac{100}{7}$.",
+      "bn": "সমদ্বিখণ্ডকের উপপাদ্য অনুযায়ী, $AD:DB = AC:BC = 20:15 = 4:3$। $AB = 25$ হওয়ায় $AD = 25 \\times \\frac{4}{7} = \\frac{100}{7}$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-o-01",
+    "slug": "mass-points-ratio-ap-over-pd",
+    "type": "OLYMPIAD",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Ratio on a cevian (mass points)",
+      "bn": "এক সারিতে অনুপাত (ভরবিন্দু)"
+    },
+    "statement": {
+      "en": "In triangle $ABC$, point $D$ lies on $BC$ with $BD:DC = 3:2$, and point $E$ lies on $AC$ with $AE:EC = 1:4$. The segments $AD$ and $BE$ meet at $P$. Find the ratio $AP/PD$ as a fraction.",
+      "bn": "$ABC$ ত্রিভুজের $BC$ বাহুতে $D$ এমনভাবে অবস্থিত যে $BD:DC = 3:2$, এবং $AC$ বাহুতে $E$ যেন $AE:EC = 1:4$। $AD$ ও $BE$ খণ্ডগুলি $P$ বিন্দুতে ছেদ করে। ভগ্নাংশ আকারে $AP/PD$ কত?"
+    },
+    "answer": "5/12",
+    "solution": {
+      "en": "Mass points: balance $BC$ at $D$ with masses $B=2$, $C=3$; then $AE:EC = 1:4$ forces mass $A = 3 \\cdot 4 = 12$. On the cevian $AD$ we get $AP:PD = (2+3):12 = 5:12$, so $AP/PD = 5/12$.",
+      "bn": "ভরবিন্দু পদ্ধতিতে $BC$-কে $D$-তে ভারসাম্য করতে ধরি $B$-এর ভর $2$ ও $C$-এর ভর $3$; তারপর $AE:EC = 1:4$ অনুযায়ী $A$-এর ভর $= 3 \\times 4 = 12$। সারি $AD$-তে $AP:PD = (2+3):12 = 5:12$, অর্থাৎ $AP/PD = 5/12$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-o-02",
+    "slug": "circumradius-of-isosceles-triangle",
+    "type": "OLYMPIAD",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Circumradius of a triangle",
+      "bn": "ত্রিভুজের পরিবৃত্তের ব্যাসার্ধ"
+    },
+    "statement": {
+      "en": "A triangle has side lengths $10$, $10$ and $12$. Find the radius of its circumscribed circle.",
+      "bn": "একটি ত্রিভুজের বাহু তিনটির দৈর্ঘ্য $10$, $10$ ও $12$। তার পরিবৃত্তের ব্যাসার্ধ কত?"
+    },
+    "answer": "25/4",
+    "solution": {
+      "en": "The semiperimeter is $16$ and by Heron's formula the area is $\\sqrt{16 \\cdot 6 \\cdot 6 \\cdot 4} = 48$. Then $R = \\frac{abc}{4K} = \\frac{10 \\cdot 10 \\cdot 12}{4 \\cdot 48} = \\frac{25}{4}$.",
+      "bn": "অর্ধ-পরিমাপ $16$ এবং হিরনের সূত্রে ক্ষেত্রফল $=\\sqrt{16 \\cdot 6 \\cdot 6 \\cdot 4} = 48$। তখন $R = \\frac{abc}{4K} = \\frac{10 \\cdot 10 \\cdot 12}{4 \\cdot 48} = \\frac{25}{4}$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-o-03",
+    "slug": "common-external-tangent-segment",
+    "type": "OLYMPIAD",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Tangent segment between two circles",
+      "bn": "দুটি বৃত্তের মধ্যে স্পর্শক খণ্ড"
+    },
+    "statement": {
+      "en": "Two circles of radii $4$ and $9$ are externally tangent to each other, and both are tangent to a line $\\ell$ from the same side. The points of tangency with $\\ell$ are $X$ and $Y$. Find the length $XY$.",
+      "bn": "ব্যাসার্ধ $4$ ও $9$ এর দুটি বৃত্ত পরস্পরকে বহিঃস্পর্শ করে এবং দুটিই একই পাশ থেকে একটি রেখা $\\ell$ কে স্পর্শ করে। $\\ell$-এর স্পর্শবিন্দু দুটি $X$ ও $Y$। $XY$-এর দৈর্ঘ্য কত?"
+    },
+    "answer": "12",
+    "solution": {
+      "en": "Place $\\ell$ as the $x$-axis, so the centres are $(a,4)$ and $(b,9)$ with $|b-a|$ the horizontal gap. The centre distance is $4+9=13$, so $(b-a)^2 + 5^2 = 13^2$ giving $|b-a| = 12$, which is exactly $XY$.",
+      "bn": "$\\ell$-কে $x$-অক্ষ ধরি; তখন কেন্দ্রগুলো $(a,4)$ ও $(b,9)$, এবং কেন্দ্র দুটির দূরত্ব $4+9=13$। সুতরাং $(b-a)^2 + 5^2 = 13^2$ থেকে $|b-a| = 12$, যা ঠিক $XY$-ই হয়।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "ge-o-04",
+    "slug": "sphere-plane-cross-section-radius",
+    "type": "OLYMPIAD",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Cross-section of a sphere",
+      "bn": "গোলকের অনুচ্ছেদ"
+    },
+    "statement": {
+      "en": "A plane at distance $3$ from the centre of a sphere of radius $\\sqrt{13}$ cuts the sphere. Find the radius of the resulting circular cross-section.",
+      "bn": "ব্যাসার্ধ $\\sqrt{13}$ এর একটি গোলকের কেন্দ্র হতে দূরত্ব $3$ অবস্থিত একটি সমতল গোলকটিকে কাটছে। ফলে যে বৃত্তাকার অনুচ্ছেদ তৈরি হয় তার ব্যাসার্ধ কত?"
+    },
+    "answer": "2",
+    "solution": {
+      "en": "The radius $r$ of the section satisfies $r^2 + 3^2 = (\\sqrt{13})^2$, so $r^2 = 13 - 9 = 4$ and $r = 2$.",
+      "bn": "অনুচ্ছেদের ব্যাসার্ধ $r$ হলে $r^2 + 3^2 = (\\sqrt{13})^2$; অর্থাৎ $r^2 = 13 - 9 = 4$, তাই $r = 2$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-o-05",
+    "slug": "cyclic-quadrilateral-with-diameter-diagonal",
+    "type": "OLYMPIAD",
+    "topic": "GEOMETRY",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Other diagonal of a cyclic quadrilateral",
+      "bn": "চক্রীয় চতুর্ভুজের অন্য কর্ণ"
+    },
+    "statement": {
+      "en": "Quadrilateral $PQRS$ is inscribed in a circle and $PR = 50$ is a diameter of the circle. The sides are $PQ = 30$, $QR = 40$, $RS = 48$ and $SP = 14$. Find the length of the other diagonal $QS$.",
+      "bn": "$PQRS$ চতুর্ভুজটি একটি বৃত্তের ভেতরে অঙ্কিত এবং $PR = 50$ বৃত্তটির ব্যাস। বাহুগুলির দৈর্ঘ্য $PQ = 30$, $QR = 40$, $RS = 48$ ও $SP = 14$। অন্য কর্ণ $QS$-এর দৈর্ঘ্য কত?"
+    },
+    "answer": "40",
+    "solution": {
+      "en": "Since $PR$ is a diameter, angles $Q$ and $S$ are right angles (indeed $30^2+40^2=50^2$ and $14^2+48^2=50^2$). Ptolemy's theorem gives $PQ\\cdot RS + QR\\cdot SP = PR\\cdot QS$, so $30\\cdot48 + 40\\cdot14 = 50\\cdot QS$, i.e. $2000 = 50\\cdot QS$ and $QS = 40$.",
+      "bn": "$PR$ ব্যাস হওয়ায় কোণ $Q$ ও $S$ সমকোণ ($30^2+40^2=50^2$ এবং $14^2+48^2=50^2$ যাচাই করা যায়)। প্টলেমির উপপাদ্যে $PQ\\cdot RS + QR\\cdot SP = PR\\cdot QS$; অর্থাৎ $30\\times48 + 40\\times14 = 50\\times QS$, বা $2000 = 50\\times QS$, তাই $QS = 40$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "ge-o-06",
+    "slug": "trapezoid-diagonal-triangle-area",
+    "type": "OLYMPIAD",
+    "topic": "GEOMETRY",
+    "category": "SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Triangle areas from intersecting diagonals",
+      "bn": "ছেদকরা কর্ণসৃষ্ট ত্রিভুজের ক্ষেত্রফল"
+    },
+    "statement": {
+      "en": "In trapezoid $ABCD$ we have $AD \\parallel BC$ with $AD = 6$ and $BC = 14$. The diagonals $AC$ and $BD$ meet at $P$. If the area of triangle $APD$ is $9$, find the area of triangle $BPC$.",
+      "bn": "$ABCD$ সমান্তরাল চতুর্ভুজে $AD \\parallel BC$, যেখানে $AD = 6$ ও $BC = 14$। কর্ণ $AC$ ও $BD$ $P$ বিন্দুতে ছেদ করে। $APD$ ত্রিভুজের ক্ষেত্রফল $9$ হলে, $BPC$ ত্রিভুজের ক্ষেত্রফল কত?"
+    },
+    "answer": "49",
+    "solution": {
+      "en": "Triangles $APD$ and $CPB$ are similar with ratio $AD/BC = 6/14 = 3/7$, so their areas are in ratio $9/49$. Hence $[BPC] = 9 \\cdot 49/9 = 49$.",
+      "bn": "$\\triangle APD \\sim \\triangle CPB$ এবং সদৃশতার অনুপাত $AD/BC = 6/14 = 3/7$; তাই ক্ষেত্রফলের অনুপাত $9/49$। সুতরাং $[BPC] = 9 \\times 49/9 = 49$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-e-01",
+    "slug": "choose-three-from-ten",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Choosing three students",
+      "bn": "তিন জন শিক্ষার্থী নির্বাচন"
+    },
+    "statement": {
+      "en": "A committee of $3$ students is to be chosen from a group of $10$ students. In how many ways can this be done?",
+      "bn": "$10$ জন শিক্ষার্থীর একটি দল থেকে $3$ জন শিক্ষার্থীকে একটি কমিটিতে নিয়োগ দিতে হবে। এতে কতভাবে সম্ভব?"
+    },
+    "answer": "120",
+    "solution": {
+      "en": "The order does not matter, so the number is $\\binom{10}{3} = \\frac{10 \\cdot 9 \\cdot 8}{3 \\cdot 2 \\cdot 1} = 120$.",
+      "bn": "নির্বাচনের ক্রম গুরুত্বপূর্ণ নয়, তাই সংখ্যাটি $\\binom{10}{3} = \\frac{10 \\cdot 9 \\cdot 8}{3 \\cdot 2 \\cdot 1} = 120$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-e-02",
+    "slug": "arrangements-of-the-word-apple",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Arranging the letters of APPLE",
+      "bn": "APPLE শব্দের অক্ষর সাজানো"
+    },
+    "statement": {
+      "en": "In how many different orders can the five letters of the word APPLE be arranged in a row?",
+      "bn": "APPLE শব্দের পাঁচটি অক্ষরকে এক সারিতে কতভাবে সাজানো যায়?"
+    },
+    "answer": "60",
+    "solution": {
+      "en": "There are $5!$ arrangements, but the letter $L$ repeats twice, so the count is $5!/2! = 120/2 = 60$.",
+      "bn": "সবগুলি বিন্যাস $5!$; কিন্তু $L$ অক্ষরটি দুবার আছে, তাই সংখ্যা $=5!/2! = 120/2 = 60$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-e-03",
+    "slug": "handshakes-among-ten-people",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Handshakes at a party",
+      "bn": "অনুষ্ঠানে হাত মেলানো"
+    },
+    "statement": {
+      "en": "At a party every person shakes hands exactly once with every other person. If there are $10$ people, how many handshakes take place?",
+      "bn": "একটি অনুষ্ঠানে প্রত্যেক ব্যক্তি অন্য প্রত্যেক ব্যক্তির সাথে ঠিক একবার হাত মেলান। $10$ জন ব্যক্তি থাকলে মোট কতবার হাত মেলানো হয়?"
+    },
+    "answer": "45",
+    "solution": {
+      "en": "Each handshake involves $2$ people, so the number is $\\binom{10}{2} = \\frac{10 \\cdot 9}{2} = 45$.",
+      "bn": "প্রতিটি হাত মেলানোয় $2$ জন অংশ নেয়, তাই সংখ্যা $=\\binom{10}{2} = \\frac{10 \\cdot 9}{2} = 45$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-e-04",
+    "slug": "squares-in-a-3x3-grid",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Squares in a 3x3 grid",
+      "bn": "$3\\times3$ জালে বর্গক্ষেত্র"
+    },
+    "statement": {
+      "en": "A square board is divided into $3$ rows and $3$ columns of unit squares, forming a $3 \\times 3$ grid. How many squares of all sizes are there on the board?",
+      "bn": "একটি বর্গাকার ফলককে $3$ সারি ও $3$ কলামে ভাগ করে $3 \\times 3$ জাল তৈরি করা হয়েছে। ফলকটিতে সব আকারের মোট কতটি বর্গ আছে?"
+    },
+    "answer": "14",
+    "solution": {
+      "en": "Count by size: there are $3 \\times 3 = 9$ squares of side $1$, $2 \\times 2 = 4$ of side $2$ and $1$ of side $3$, giving $9+4+1 = 14$.",
+      "bn": "আকার অনুযায়ী গণনা: বাহু $1$-এর $3 \\times 3 = 9$টি, বাহু $2$-এর $2 \\times 2 = 4$টি এবং বাহু $3$-এর $1$টি বর্গ; যোগফল $=9+4+1 = 14$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-e-05",
+    "slug": "subsets-of-a-five-element-set",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "PRIMARY",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Subsets of a five-element set",
+      "bn": "পাঁচ উপাদানবিশিষ্ট সেটের উপসমষ্টি"
+    },
+    "statement": {
+      "en": "A set has exactly $5$ elements. How many subsets (including the empty set and the set itself) does it have?",
+      "bn": "একটি সেটে ঠিক $5$টি উপাদান আছে। এর কতটি উপসমষ্টি আছে (শূন্য সেট ও নিজ সেট সহ)?"
+    },
+    "answer": "32",
+    "solution": {
+      "en": "Each element is either included or excluded, giving $2^5 = 32$ subsets.",
+      "bn": "প্রতিটি উপাদান নেওয়া বা না নেওয়া — দুইভাবেই যায়; তাই উপসমষ্টির সংখ্যা $2^5 = 32$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-e-06",
+    "slug": "president-and-treasurer-from-eight",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "JUNIOR",
+    "difficulty": "EASY",
+    "title": {
+      "en": "Choosing a president and a treasurer",
+      "bn": "সভাপতি ও কোষাধ্যক্ষ নির্বাচন"
+    },
+    "statement": {
+      "en": "A club has $8$ members. In how many ways can a president and a treasurer be chosen if the two posts must go to different members?",
+      "bn": "একটি ক্লাবের $8$ জন সদস্য আছে। দুটি পদ ভিন্ন ভিন্ন সদস্যকে দিতে হবে — এভাবে সভাপতি ও কোষাধ্যক্ষ নির্বাচন কতভাবে সম্ভব?"
+    },
+    "answer": "56",
+    "solution": {
+      "en": "There are $8$ choices for president and then $7$ remaining choices for treasurer, giving $8 \\times 7 = 56$.",
+      "bn": "সভাপতির জন্য $8$টি পছন্দ, তারপর কোষাধ্যক্ষের জন্য অবশিষ্ট $7$টি; মোট $8 \\times 7 = 56$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-m-01",
+    "slug": "stars-and-bars-three-variables",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Solutions of $x+y+z=15$",
+      "bn": "$x+y+z=15$-এর সমাধান সংখ্যা"
+    },
+    "statement": {
+      "en": "How many ordered triples of non-negative integers $(x,y,z)$ satisfy $x+y+z = 15$?",
+      "bn": "ঋণাত্মক নয় এমন পূর্ণসংখ্যা $(x,y,z)$-এর কতটি সুনির্দিষ্ট ত্রিমিতি সমীকরণ $x+y+z = 15$ পূরণ করে?"
+    },
+    "answer": "136",
+    "solution": {
+      "en": "By stars and bars the count is $\\binom{15+3-1}{3-1} = \\binom{17}{2} = 136$.",
+      "bn": "তারা ও বার পদ্ধতিতে সংখ্যা $=\\binom{15+3-1}{3-1} = \\binom{17}{2} = 136$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-m-02",
+    "slug": "lattice-paths-to-6-4",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Lattice path to $(6,4)$",
+      "bn": "$(6,4)$ পর্যন্ত জালিপথ"
+    },
+    "statement": {
+      "en": "How many shortest lattice paths are there from $(0,0)$ to $(6,4)$ if each step moves one unit to the right or one unit up?",
+      "bn": "$(0,0)$ থেকে $(6,4)$ পর্যন্ত কতগুলো সবচেয়ে ছোট জালিপথ আছে, যদি প্রতিটি ধাপ এক একক ডানে বা এক একক উপরে যায়?"
+    },
+    "answer": "210",
+    "solution": {
+      "en": "A path uses $6$ right steps and $4$ up steps; only their order matters, so the number is $\\binom{10}{4} = 210$.",
+      "bn": "একটি পথে $6$টি ডানের ধাপ ও $4$টি উপরের ধাপ থাকে; শুধু ক্রম নির্বাচিত হয়, তাই সংখ্যা $=\\binom{10}{4} = 210$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-m-03",
+    "slug": "divisible-by-3-or-5-up-to-200",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Divisible by 3 or 5 up to 200",
+      "bn": "$200$ পর্যন্ত $3$ বা $5$ দ্বারা বিভাজ্য"
+    },
+    "statement": {
+      "en": "How many integers from $1$ to $200$ inclusive are divisible by $3$ or by $5$ (or both)?",
+      "bn": "$1$ থেকে $200$ (দুটি সহ) মধ্যে কতগুলো পূর্ণসংখ্যা $3$ দ্বারা বা $5$ দ্বারা (বা দুটি দ্বারাই) বিভাজ্য?"
+    },
+    "answer": "93",
+    "solution": {
+      "en": "There are $\\lfloor 200/3 \\rfloor = 66$ multiples of $3$, $\\lfloor 200/5 \\rfloor = 40$ of $5$ and $\\lfloor 200/15 \\rfloor = 13$ of $15$. By inclusion-exclusion: $66 + 40 - 13 = 93$.",
+      "bn": "$3$-এর গুণিতক $\\lfloor 200/3 \\rfloor = 66$টি, $5$-এর $\\lfloor 200/5 \\rfloor = 40$টি ও $15$-এর $\\lfloor 200/15 \\rfloor = 13$টি। অন্তর্ভুক্তি-বর্জন নীতিতে: $66 + 40 - 13 = 93$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-m-04",
+    "slug": "circular-seating-of-six-people",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Seating around a round table",
+      "bn": "গোল টেবিল ঘিরে আসনবিন্যাস"
+    },
+    "statement": {
+      "en": "In how many ways can $6$ different people be seated around a round table? (Two seatings that differ only by a rotation are considered the same.)",
+      "bn": "একটি গোল টেবিল ঘিরে $6$ ভিন্ন ব্যক্তিকে কতভাবে বসানো যায়? (কেবল ঘূর্ণনের ফলে আলাদা হলেও সেগুলো একই ধরা হবে।)"
+    },
+    "answer": "120",
+    "solution": {
+      "en": "Fix one person to remove rotational symmetry; the remaining $5$ can be arranged in $5! = 120$ ways.",
+      "bn": "ঘূর্ণনের কারণে সমতুল্য বিন্যাস একই ধরা হয়, সেটি এড়াতে একজনকে স্থির রাখি; অবশিষ্ট $5$ জনকে $5! = 120$ ভাবে সাজানো যায়।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-m-05",
+    "slug": "climbing-eight-stairs",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Climbing eight stairs",
+      "bn": "আটটি ধাপে সিঁড়ি ওঠা"
+    },
+    "statement": {
+      "en": "A person climbs a staircase of $8$ stairs, taking one stair or two stairs at a time. In how many ways can the person reach the top?",
+      "bn": "এক ব্যক্তি $8$ ধাপের একটি সিঁড়ি ওঠে, প্রতিবার এক বা দুই ধাপ করে। উপরে পৌঁছাতে তার কতভাবে যাওয়া সম্ভব?"
+    },
+    "answer": "34",
+    "solution": {
+      "en": "Let $f(n)$ be the number of ways for $n$ stairs: $f(1)=1$, $f(2)=2$ and $f(n)=f(n-1)+f(n-2)$. This gives $3,5,8,13,21$ for $n=3,4,5,6,7$ and $f(8)=34$.",
+      "bn": "$n$ ধাপের জন্য উপায় সংখ্যা $f(n)$ ধরি: $f(1)=1$, $f(2)=2$ এবং $f(n)=f(n-1)+f(n-2)$। এতে $n=3,4,5,6,7$-এর জন্য $3,5,8,13,21$ এবং $f(8)=34$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-m-06",
+    "slug": "number-of-digits-of-two-to-50",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "SECONDARY",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Number of digits of $2^{50}$",
+      "bn": "$2^{50}$-এর অঙ্ক সংখ্যা"
+    },
+    "statement": {
+      "en": "How many digits does the number $2^{50}$ have when written in base $10$?",
+      "bn": "$2^{50}$ সংখ্যাটি দশমিক পদ্ধতিতে লিখলে তাতে কতটি অঙ্ক থাকে?"
+    },
+    "answer": "16",
+    "solution": {
+      "en": "$2^{50} = 1125899906842624$, which has $16$ digits. Equivalently, $50\\log_{10}2 \\approx 15.05$, so the number lies between $10^{15}$ and $10^{16}$.",
+      "bn": "$2^{50} = 1125899906842624$, যাতে $16$টি অঙ্ক আছে। বিকল্পভাবে, $50\\log_{10}2 \\approx 15.05$; তাই সংখ্যাটি $10^{15}$ ও $10^{16}$-এর মধ্যে অবস্থিত।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-h-01",
+    "slug": "inclusion-exclusion-2-3-5-up-to-300",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Divisible by 2, 3 or 5 up to 300",
+      "bn": "$300$ পর্যন্ত $2$, $3$ বা $5$ দ্বারা বিভাজ্য"
+    },
+    "statement": {
+      "en": "How many integers from $1$ to $300$ inclusive are divisible by at least one of $2$, $3$, $5$?",
+      "bn": "$1$ থেকে $300$ (দুটি সহ) মধ্যে কতগুলো পূর্ণসংখ্যা $2$, $3$, $5$-এর অন্তত একটি দ্বারা বিভাজ্য?"
+    },
+    "answer": "220",
+    "solution": {
+      "en": "Counts of multiples: $150$, $100$, $60$ for $2,3,5$; $50$, $30$, $20$ for $6,10,15$; $10$ for $30$. Inclusion-exclusion gives $310 - 100 + 10 = 220$.",
+      "bn": "গুণিতক সংখ্যা: $2,3,5$-এর জন্য যথাক্রমে $150$, $100$, $60$; $6,10,15$-এর জন্য $50$, $30$, $20$; এবং $30$-এর জন্য $10$। অন্তর্ভুক্তি-বর্জনে $310 - 100 + 10 = 220$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-h-02",
+    "slug": "no-letter-in-its-own-envelope-7",
+    "type": "OLYMPIAD",
+    "topic": "COMBINATORICS",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Letters in the wrong envelopes",
+      "bn": "নিজ নিজ খামে ভুল চিঠি"
+    },
+    "statement": {
+      "en": "$7$ letters are placed into $7$ addressed envelopes, one letter per envelope. In how many ways can this be done so that no letter goes into the envelope bearing its own address?",
+      "bn": "$7$টি চিঠি $7$টি ঠিকানাযুক্ত খামে একটি খামে একটি করে রাখতে হবে। এমন কতভাবে সম্ভব যে কোনো চিঠিই নিজের ঠিকানাযুক্ত খামে যাবে না?"
+    },
+    "answer": "1854",
+    "solution": {
+      "en": "With $D_n = (n-1)(D_{n-1}+D_{n-2})$, $D_1=0$, $D_2=1$: $D_3=2$, $D_4=9$, $D_5=44$, $D_6=265$, $D_7=1854$.",
+      "bn": "$D_n = (n-1)(D_{n-1}+D_{n-2})$, যেখানে $D_1=0$, $D_2=1$: এতে $D_3=2$, $D_4=9$, $D_5=44$, $D_6=265$, $D_7=1854$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-h-03",
+    "slug": "binary-strings-no-consecutive-zeros-10",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Binary strings with no two adjacent zeros",
+      "bn": "পাশাপাশি দুটি শূন্য নেই এমন দ্বিমাত্রিক স্ট্রিং"
+    },
+    "statement": {
+      "en": "How many binary strings (sequences of $0$s and $1$s) of length $10$ contain no two consecutive $0$s?",
+      "bn": "দৈর্ঘ্য $10$ এমন কতগুলো দ্বিমাত্রিক স্ট্রিং ($0$ ও $1$ নিয়ে গঠিত ধারা) আছে যাতে পাশাপাশি দুটি $0$ থাকে না?"
+    },
+    "answer": "144",
+    "solution": {
+      "en": "Let $a_n$ count such strings of length $n$. Then $a_1=2$, $a_2=3$ and $a_n=a_{n-1}+a_{n-2}$, giving $5,8,13,21,34,55,89,144$ for $n=3,\\dots,10$.",
+      "bn": "দৈর্ঘ্য $n$ এমন স্ট্রিং সংখ্যা $a_n$ ধরি। তবে $a_1=2$, $a_2=3$ এবং $a_n=a_{n-1}+a_{n-2}$; এতে $n=3,\\dots,10$-এর জন্য পাওয়া যায় $5,8,13,21,34,55,89,144$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-h-04",
+    "slug": "five-digit-123-strings-using-all-three",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Strings over $\\{1,2,3\\}$ using every digit",
+      "bn": "$\\{1,2,3\\}$ থেকে সব অঙ্ক ব্যবহারকারী স্ট্রিং"
+    },
+    "statement": {
+      "en": "How many $5$-digit numbers are there that use only the digits $1$, $2$, $3$ and contain each of the three digits at least once?",
+      "bn": "কতগুলো $5$-অঙ্কের সংখ্যা আছে যা কেবল $1$, $2$, $3$ অঙ্ক ব্যবহার করে এবং প্রতিটি অঙ্ক অন্তত একবার আছে?"
+    },
+    "answer": "150",
+    "solution": {
+      "en": "Total strings: $3^5 = 243$. By inclusion-exclusion subtract those missing a digit: $3 \\cdot 2^5 = 96$, then add back the $3$ strings using only one digit: $243 - 96 + 3 = 150$.",
+      "bn": "মোট স্ট্রিং $3^5 = 243$। অন্তর্ভুক্তি-বর্জনে কোনো অঙ্ক অনুপস্থিত থাকা স্ট্রিং বাদ দিই: $3 \\times 2^5 = 96$, তারপর একটিমাত্র অঙ্কবিশিষ্ট $3$টি স্ট্রিং যোগ করি: $243 - 96 + 3 = 150$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-h-05",
+    "slug": "lattice-paths-avoiding-midpoint",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Paths avoiding a forbidden point",
+      "bn": "নিষিদ্ধ বিন্দু এড়িয়ে জালিপথ"
+    },
+    "statement": {
+      "en": "How many shortest lattice paths from $(0,0)$ to $(10,10)$ (steps right or up, one unit each) do NOT pass through the point $(5,5)$?",
+      "bn": "$(0,0)$ থেকে $(10,10)$ পর্যন্ত কতগুলো সবচেয়ে ছোট জালিপথ আছে (প্রতি ধাপ এক একক ডানে বা উপরে), যেগুলো $(5,5)$ বিন্দু দিয়ে যায় না?"
+    },
+    "answer": "121252",
+    "solution": {
+      "en": "Total paths: $\\binom{20}{10} = 184756$. Paths through $(5,5)$: $\\binom{10}{5}^2 = 252^2 = 63504$. The answer is $184756 - 63504 = 121252$.",
+      "bn": "মোট পথ $=\\binom{20}{10} = 184756$। $(5,5)$ দিয়ে যাওয়া পথ $=\\binom{10}{5}^2 = 252^2 = 63504$। উত্তর $=184756 - 63504 = 121252$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-h-06",
+    "slug": "digit-sum-equals-10-below-1000",
+    "type": "ACADEMICS",
+    "topic": "COMBINATORICS",
+    "category": "SECONDARY",
+    "difficulty": "HARD",
+    "title": {
+      "en": "Digit sum equal to 10",
+      "bn": "অঙ্কের যোগফল $10$"
+    },
+    "statement": {
+      "en": "How many integers from $1$ to $999$ inclusive have a sum of digits equal to $10$?",
+      "bn": "$1$ থেকে $999$ (দুটি সহ) মধ্যে কতগুলো পূর্ণসংখ্যার অঙ্কের যোগফল $10$?"
+    },
+    "answer": "63",
+    "solution": {
+      "en": "Write the number as $d_1d_2d_3$ with leading zeros allowed; we need $d_1+d_2+d_3=10$, $0 \\le d_i \\le 9$. Unrestricted count is $\\binom{12}{2}=66$; subtract the $3$ solutions with some $d_i \\ge 10$: $66-3=63$.",
+      "bn": "প্রারম্ভিক শূন্য ধরে সংখ্যাটিকে $d_1d_2d_3$ আকারে লিখি; প্রয়োজন $d_1+d_2+d_3=10$, $0 \\le d_i \\le 9$। সীমাহীন সমাধান $\\binom{12}{2}=66$; কোনো $d_i \\ge 10$ এমন $3$টি সমাধান বাদ দিলে $66-3=63$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-o-01",
+    "slug": "subsets-of-1-to-10-with-large-sum",
+    "type": "OLYMPIAD",
+    "topic": "COMBINATORICS",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Subsets with sum greater than 27",
+      "bn": "যোগফল $27$-এর চেয়ে বড় উপসমষ্টি"
+    },
+    "statement": {
+      "en": "How many subsets of the set $\\{1,2,3,\\dots,10\\}$ have a sum of elements greater than $27$?",
+      "bn": "$\\{1,2,3,\\dots,10\\}$ সেটের কতগুলো উপসমষ্টির উপাদানগুলির যোগফল $27$-এর চেয়ে বড়?"
+    },
+    "answer": "512",
+    "solution": {
+      "en": "The total sum is $55$. Complementation maps a subset with sum $s$ to one with sum $55-s$, and $s > 27$ iff $55-s < 28$; no subset sums to $27.5$, so the two classes are complementary and each contains exactly half of the $2^{10}=1024$ subsets: $512$.",
+      "bn": "মোট যোগফল $55$। পূরক প্রক্রিয়ায় যোগফল $s$ সহ উপসমষ্টির পূরকের যোগফল $55-s$, এবং $s > 27$ হলে $55-s < 28$। $27.5$ কোনো উপসমষ্টির যোগফল হতে পারে না, তাই দুটি শ্রেণি পরিপূরক এবং প্রতিটিতে $2^{10}=1024$-এর ঠিক অর্ধেক, অর্থাৎ $512$টি উপসমষ্টি আছে।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-o-02",
+    "slug": "dyck-paths-from-0-0-to-8-8",
+    "type": "OLYMPIAD",
+    "topic": "COMBINATORICS",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Paths that never cross the diagonal",
+      "bn": "সরলরেখা অতিক্রম না করা জালিপথ"
+    },
+    "statement": {
+      "en": "How many shortest lattice paths from $(0,0)$ to $(8,8)$ using unit steps right and up never rise above the line $y = x$ (they may touch it)?",
+      "bn": "$(0,0)$ থেকে $(8,8)$ পর্যন্ত এক একক ডানে ও উপরের ধাপে সবচেয়ে ছোট কতগুলো জালিপথ আছে, যেগুলো কখনোই $y = x$ রেখার উপরে উঠে যায় না (রেখা স্পর্শ করা যাবে)?"
+    },
+    "answer": "1430",
+    "solution": {
+      "en": "These are the Dyck paths counted by the Catalan number $C_8 = \\frac{1}{9}\\binom{16}{8} = \\frac{12870}{9} = 1430$.",
+      "bn": "এগুলোই ডাইক পথ, যার সংখ্যা নির্ণয় করে ক্যাটালান সংখ্যা $C_8$: $C_8 = \\frac{1}{9}\\binom{16}{8} = \\frac{12870}{9} = 1430$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-o-03",
+    "slug": "pigeonhole-pairs-summing-to-31",
+    "type": "OLYMPIAD",
+    "topic": "COMBINATORICS",
+    "category": "SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Guaranteeing a pair that sums to 31",
+      "bn": "যোগফল $31$ হওয়া জোড়া নিশ্চিত করা"
+    },
+    "statement": {
+      "en": "Integers are chosen from $\\{1,2,\\dots,30\\}$. What is the smallest number of choices that guarantees that two of the chosen integers add up to $31$?",
+      "bn": "$\\{1,2,\\dots,30\\}$ থেকে পূর্ণসংখ্যা নির্বাচন করা হচ্ছে। নির্বাচিত সংখ্যাগুলির দুটির যোগফল $31$ হওয়া নিশ্চিত করতে কতগুলো সংখ্যা নির্বাচন করা প্রয়োজন — তার ন্যূনতম সংখ্যা কত?"
+    },
+    "answer": "16",
+    "solution": {
+      "en": "The $15$ pairs $\\{1,30\\},\\{2,29\\},\\dots,\\{15,16\\}$ partition the set, and at most one number can be taken from each pair without summing to $31$. So $15$ numbers can be chosen safely, while any $16$ force a pair: the answer is $16$.",
+      "bn": "$15$টি জোড়া $\\{1,30\\},\\{2,29\\},\\dots,\\{15,16\\}$ সেটটিকে ভাগ করে; যোগফল $31$ না হওয়া পর্যন্ত প্রতিটি জোড়া থেকে সর্বোচ্চ একটি করে সংখ্যা নেওয়া যায়। তাই $15$টি সংখ্যায় নিরাপদ, কিন্তু $16$টি সংখ্যায় জোড়া নিশ্চিত — উত্তর $16$।"
+    },
+    "source": "Classic"
+  },
+  {
+    "id": "co-o-04",
+    "slug": "compositions-of-10-with-parts-1-2-3",
+    "type": "OLYMPIAD",
+    "topic": "COMBINATORICS",
+    "category": "SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Ways to write 10 as a sum of 1s, 2s and 3s",
+      "bn": "$10$ কে $1$, $2$, $3$ যোগে লেখার উপায়"
+    },
+    "statement": {
+      "en": "In how many ordered ways can $10$ be written as a sum of terms each equal to $1$, $2$ or $3$?",
+      "bn": "$10$-কে $1$, $2$ বা $3$ এমন পদগুলির যোগে কতভাবে (ক্রমসহ) লেখা সম্ভব?"
+    },
+    "answer": "274",
+    "solution": {
+      "en": "Let $f(n)$ be the number of ways: $f(0)=1$ and $f(n)=f(n-1)+f(n-2)+f(n-3)$. This yields $f(1)=1$, $f(2)=2$, $f(3)=4$, then $7,13,24,44,81,149$, so $f(10)=274$.",
+      "bn": "উপায় সংখ্যা $f(n)$ ধরি: $f(0)=1$ এবং $f(n)=f(n-1)+f(n-2)+f(n-3)$। এতে $f(1)=1$, $f(2)=2$, $f(3)=4$, তারপর $7,13,24,44,81,149$; সুতরাং $f(10)=274$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-o-05",
+    "slug": "strictly-increasing-four-digit-numbers",
+    "type": "OLYMPIAD",
+    "topic": "COMBINATORICS",
+    "category": "SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Strictly increasing four-digit numbers",
+      "bn": "ক্রমানুসারে বৃদ্ধিপ্রাপ্ত চার অঙ্কের সংখ্যা"
+    },
+    "statement": {
+      "en": "How many four-digit numbers have four digits that are strictly increasing from left to right (for example $1357$)?",
+      "bn": "কতগুলো চার অঙ্কের সংখ্যা আছে যার অঙ্কগুলি বাম থেকে ডানে কঠোরভাবে বাড়তে থাকে (যেমন $1357$)?"
+    },
+    "answer": "126",
+    "solution": {
+      "en": "Such a number is determined by its set of four distinct digits chosen from $1,\\dots,9$ (the leading digit cannot be $0$), and every such set gives exactly one number: $\\binom{9}{4} = 126$.",
+      "bn": "এসব সংখ্যা $1,\\dots,9$ থেকে নেওয়া চারটি ভিন্ন অঙ্কের সেট দিয়েই নির্ধারিত হয় (প্রথম অঙ্ক $0$ হতে পারে না), এবং প্রতিটি সেট ঠিক একটি সংখ্যা দেয়: $\\binom{9}{4} = 126$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  },
+  {
+    "id": "co-o-06",
+    "slug": "triangles-from-four-by-four-grid",
+    "type": "OLYMPIAD",
+    "topic": "COMBINATORICS",
+    "category": "HIGHER_SECONDARY",
+    "difficulty": "OLYMPIAD",
+    "title": {
+      "en": "Triangles in a $4 \\times 4$ dot grid",
+      "bn": "$4 \\times 4$ বিন্দুজালে ত্রিভুজ"
+    },
+    "statement": {
+      "en": "A square grid contains $16$ points arranged in $4$ rows and $4$ columns. How many triangles have all three vertices among these $16$ points? (Three points lie on one line only when they lie on a row, a column or one of the grid's diagonals.)",
+      "bn": "একটি বর্গাকার জালে $4$ সারি ও $4$ কলামে মোট $16$টি বিন্দু আছে। এই $16$টি বিন্দুর মধ্য থেকে তিনটি বিন্দু নিয়ে কতগুলো ত্রিভুজ গঠিত হয়? (তিনটি বিন্দু তখনই একই রেখায় পড়ে, যখন তিনটি একই সারি, একই কলাম বা জালের কোনো একটি কর্ণে অবস্থিত হয়।)"
+    },
+    "answer": "516",
+    "solution": {
+      "en": "Choose any $3$ of the $16$ points: $\\binom{16}{3} = 560$. Subtract collinear triples: each of the $4$ rows and $4$ columns contains $\\binom{4}{3} = 4$ of them ($32$ in total), the two long diagonals contain $4$ each ($8$), and the four shorter diagonals $1$ each ($4$). Thus $560 - 44 = 516$.",
+      "bn": "$16$টি বিন্দু থেকে $3$টি নেওয়া যায় $\\binom{16}{3} = 560$ ভাবে। একই রেখায় পড়া ত্রিভুজগুলি বাদ দিই: $4$ সারি ও $4$ কলামে প্রতিটিতে $4$ করে ($32$), দুটি দীর্ঘ কর্ণে $4$ করে ($8$) এবং চারটি ছোট কর্ণে $1$ করে ($4$)। সুতরাং $560 - 44 = 516$।"
+    },
+    "source": "Gonit Ishkul Practice"
+  }
+]
