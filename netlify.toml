@@ -40,6 +40,11 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
+  for = "/logo-landscape.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
   for = "/prothom-alo.svg"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
