@@ -25,8 +25,7 @@ for (const theme of ["dark", "light"]) {
   for (const [name, path] of [
     ["home", "/"],
     ["problems", "/problems"],
-    ["practice", "/practice"],
-    ["about", "/about"]
+    ["practice", "/practice"]
   ]) {
     await page.goto(`${BASE}${path}`, { waitUntil: "networkidle2", timeout: 30000 });
     await new Promise((r) => setTimeout(r, 1400));

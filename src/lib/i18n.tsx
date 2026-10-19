@@ -18,7 +18,6 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "nav.problems": { en: "Problems", bn: "সমস্যা" },
   "nav.practice": { en: "Practice Test", bn: "প্র্যাকটিস টেস্ট" },
   "nav.past": { en: "Past Tests", bn: "পূর্ববর্তী টেস্ট" },
-  "nav.about": { en: "About", bn: "আমাদের সম্পর্কে" },
   "nav.menu": { en: "Menu", bn: "মেনু" },
   "nav.close": { en: "Close", bn: "বন্ধ" },
   "theme.toggle": { en: "Toggle theme", bn: "থিম বদলান" },
@@ -212,23 +211,6 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "The full problem bank ships with the site, so tests keep working even without a network.",
     bn: "পুরো সমস্যার মজুদ সাইটের সাথেই থাকে, তাই ইন্টারনেট ছাড়াও টেস্ট দেওয়া যায়।"
   },
-
-  /* ---- about ---- */
-  "about.title": { en: "About this platform", bn: "এই প্ল্যাটফর্ম সম্পর্কে" },
-  "about.p1": {
-    en: "Gonit Ishkul Problem Solving is a free practice arena for school and olympiad mathematics in Bangladesh. It is modelled on the Bengali maths-education tradition of Prothom Alo Gonit Ishkul, where learners of every level meet the same love of problem solving.",
-    bn: "গণিত ইশকুল প্রবলেম সলভিং বাংলাদেশের স্কুল ও অলিম্পিয়াড গণিতের জন্য একটি বিনামূল্যের অনুশীলন কেন্দ্র। এটি প্রথম আলো গণিত ইশকুলের বাংলা গণিত-শিক্ষা ঐতিহ্যের আদলে তৈরি, যেখানে সব ধরনের শিক্ষার্থী একই সমস্যা-সমাধানের আনন্দে মিলিত হয়।"
-  },
-  "about.p2": {
-    en: "Choose a Type (Olympiad or Academics), a Topic, a Category from Primary to Higher Secondary, and a Difficulty from Easy to Olympiad. The builder assembles a timed paper from your selection, grades it the instant you submit, and files it away under Past Practice Tests.",
-    bn: "টাইপ (অলিম্পিয়াড বা একাডেমিক), টপিক, প্রাথমিক থেকে উচ্চ মাধ্যমিক পর্যন্ত ক্যাটাগরি এবং সহজ থেকে অলিম্পিয়াড পর্যন্ত কঠিনতা বেছে নিন। বিল্ডার আপনার নির্বাচন থেকে একটি সময়বদ্ধ কাগজ তৈরি করে, জমা দেওয়ার সাথে সাথেই গ্রেড করে এবং পূর্ববর্তী প্র্যাকটিস টেস্টে সংরক্ষণ করে।"
-  },
-  "about.p3": {
-    en: "There are no accounts and no sign-up. Your history is tied to this browser and, when the database is connected, quietly synced so it survives a new device.",
-    bn: "কোনো অ্যাকাউন্ট বা সাইন-আপ লাগে না। আপনার ইতিহাস এই ব্রাউজারের সাথে যুক্ত থাকে, আর ডাটাবেস যুক্ত থাকলে নীরবে সিঙ্ক হয়ে যায় ফলে নতুন ডিভাইসেও থেকে যায়।"
-  },
-  "about.contact": { en: "Contact", bn: "যোগাযোগ" },
-  "about.stack": { en: "Built with", bn: "যেসব জিনিস দিয়ে তৈরি" },
 
   /* ---- 404 ---- */
   "notFound.body": {

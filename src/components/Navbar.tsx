@@ -8,8 +8,7 @@ const LINKS = [
   { to: "/", key: "nav.home", end: true },
   { to: "/problems", key: "nav.problems", end: false },
   { to: "/practice", key: "nav.practice", end: false },
-  { to: "/past-tests", key: "nav.past", end: false },
-  { to: "/about", key: "nav.about", end: false }
+  { to: "/past-tests", key: "nav.past", end: false }
 ];
 
 export default function Navbar() {

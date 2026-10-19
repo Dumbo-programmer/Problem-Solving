@@ -58,11 +58,6 @@ export default function Footer() {
                 {t("nav.past")}
               </Link>
             </li>
-            <li>
-              <Link to="/about" className="text-sm text-slate-600 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400">
-                {t("nav.about")}
-              </Link>
-            </li>
           </ul>
         </div>
       </div>

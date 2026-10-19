@@ -10,7 +10,6 @@ import Practice from "./pages/Practice";
 import TestRunner from "./pages/TestRunner";
 import Results from "./pages/Results";
 import PastTests from "./pages/PastTests";
-import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
 /** Reset scroll position on every route change (SPA behaviour users expect). */
@@ -37,7 +36,6 @@ export default function App() {
               <Route path="/test/:id" element={<TestRunner />} />
               <Route path="/test/:id/results" element={<Results />} />
               <Route path="/past-tests" element={<PastTests />} />
-              <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

@@ -21,3 +21,9 @@ pnpm-debug.log*
 
 # Test / coverage
 coverage/
+
+# Local QA artifacts (screenshots, layout dumps)
+screenshots/
+
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo

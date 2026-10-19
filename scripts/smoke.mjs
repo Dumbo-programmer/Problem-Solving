@@ -28,7 +28,15 @@ const browser = await puppeteer.launch({
 const page = await browser.newPage();
 await page.setViewport({ width: 1280, height: 900 });
 page.on("console", (msg) => {
-  if (msg.type() === "error") errors.push(msg.text());
+  if (msg.type() !== "error") return;
+  // Chrome logs a generic "Failed to load resource … 404" line for the
+  // Netlify function, which does not exist under `vite preview`. Same
+  // exemption as the response listener below.
+  const from = msg.location()?.url || "";
+  if (msg.text().includes("Failed to load resource") && from.includes("/.netlify/functions/")) {
+    return;
+  }
+  errors.push(msg.text());
 });
 page.on("pageerror", (err) => errors.push(`pageerror: ${err.message}`));
 page.on("response", (res) => {
@@ -50,11 +58,16 @@ async function text() {
 }
 
 /* ---------- 1. every route renders ---------- */
-for (const path of ["/", "/problems", "/practice", "/past-tests", "/about"]) {
+for (const path of ["/", "/problems", "/practice", "/past-tests"]) {
   await goto(path);
   const t = await text();
   check(`route ${path} renders`, t.length > 400, `${t.length} chars`);
 }
+
+/* ---------- 1b. the retired /about route degrades to the 404 page ---------- */
+await goto("/about");
+const gone = await text();
+check("route /about now shows 404", /404|খুঁজছেন|find/i.test(gone) && gone.length > 400, `${gone.length} chars`);
 
 /* ---------- 2. home shows the problem count ---------- */
 await goto("/");
