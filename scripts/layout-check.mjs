@@ -56,11 +56,41 @@ for (const vp of VIEWPORTS) {
       }
       const header = document.querySelector("header");
       const footer = document.querySelector("footer");
-      return { overflow, culprit, hasHeader: !!header, hasFooter: !!footer };
+      // The co-brand lockup must actually paint: Prothom Alo above the Gonit
+      // Ishkul logo, both with real box sizes (catches a missing/hidden asset).
+      // Each mark has a light + dark variant, so pick the one that is visible.
+      const visible = (el) => {
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return r.width > 1 && r.height > 1 ? el : null;
+      };
+      const navImgs = Array.from(document.querySelectorAll("nav img")).filter(visible);
+      const palo = navImgs.find((i) => i.src.includes("prothom-alo"));
+      const gonit = navImgs.find((i) => i.src.includes("logo"));
+      const box = (el) => {
+        if (!el) return null;
+        const r = el.getBoundingClientRect();
+        return { w: Math.round(r.width), h: Math.round(r.height) };
+      };
+      const brand = {
+        palo: box(palo),
+        gonit: box(gonit),
+        stacked: Boolean(palo && gonit && palo.getBoundingClientRect().bottom <= gonit.getBoundingClientRect().top + 2)
+      };
+      return { overflow, culprit, hasHeader: !!header, hasFooter: !!footer, brand };
     });
 
     report(res.overflow <= 1, `${vp.name.padEnd(7)} ${route.padEnd(12)} no horizontal overflow${res.culprit ? ` (culprit: ${res.culprit})` : ""}`);
     report(res.hasHeader && res.hasFooter, `${vp.name.padEnd(7)} ${route.padEnd(12)} header + footer present`);
+    report(
+      res.brand.palo && res.brand.gonit && res.brand.palo.w > 20 && res.brand.gonit.w > 20,
+      `${vp.name.padEnd(7)} ${route.padEnd(12)} brand lockup paints (palo ${res.brand.palo?.w}x${res.brand.palo?.h}, gonit ${res.brand.gonit?.w}x${res.brand.gonit?.h})`
+    );
+    report(
+      Boolean(res.brand.gonit && res.brand.gonit.w > res.brand.gonit.h * 1.3),
+      `${vp.name.padEnd(7)} ${route.padEnd(12)} Gonit logo is landscape (${res.brand.gonit?.w}x${res.brand.gonit?.h})`
+    );
+    report(res.brand.stacked, `${vp.name.padEnd(7)} ${route.padEnd(12)} Prothom Alo stacked above Gonit Ishkul`);
   }
 
   // Mobile menu must actually open.

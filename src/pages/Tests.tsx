@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowRight, CalendarDays, Clock, FlaskConical, Loader2, Play, Timer, Trophy, UserRound, Users } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
+import PageDecor from "../components/PageDecor";
 import { fetchPastTests, fetchScheduledTests, fetchStandings } from "../lib/api";
 import { countdownParts, phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
@@ -216,7 +217,9 @@ export default function Tests() {
   };
 
   return (
-    <div className="shell py-10 lg:py-14">
+    <div className="relative">
+      <PageDecor seed={6} />
+      <div className="shell py-10 lg:py-14">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
           <p className="eyebrow">{t("tests.eyebrow")}</p>
@@ -254,7 +257,7 @@ export default function Tests() {
         <div className="card mt-6 flex flex-col items-center gap-3 px-6 py-20 text-center">
           <CalendarDays size={28} className="text-slate-300 dark:text-slate-600" />
           <p className="text-lg font-semibold text-ink-900 dark:text-white">{t("tests.title")}</p>
-          <p className="max-w-sm text-sm text-slate-500 dark:text-slate-400">{t("lb.empty")}</p>
+          <p className="max-w-sm text-sm text-slate-500 dark:text-slate-400">{t("tests.empty")}</p>
           <Link to="/practice" className="btn-primary mt-2">
             {t("cta.takeTest")}
           </Link>
@@ -444,6 +447,7 @@ export default function Tests() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }

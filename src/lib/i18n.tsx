@@ -73,6 +73,12 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "footer.statTopics": { en: "topics", bn: "টপিক" },
   "footer.statLevels": { en: "levels", bn: "স্তর" },
   "footer.madeFor": { en: "Made for young problem solvers", bn: "তরুণ সমস্যা-সমাধানকারীদের জন্য" },
+  "footer.partner": {
+    en: "In partnership with Prothom Alo's Gonit Ishkul",
+    bn: "প্রথম আলোর গণিত ইশকুলের সঙ্গে যৌথ উদ্যোগ"
+  },
+  "footer.partnerShort": { en: "Prothom Alo · Gonit Ishkul", bn: "প্রথম আলো · গণিত ইশকুল" },
+  "footer.visitPalo": { en: "Prothom Alo Math School", bn: "প্রথম আলো গণিত ইশকুল" },
   "filter.type": { en: "Type", bn: "টাইপ" },
   "filter.topic": { en: "Topic", bn: "টপিক" },
   "filter.category": { en: "Category", bn: "ক্যাটাগরি" },
@@ -265,12 +271,26 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.competeMonthlyT": { en: "Monthly challenge", bn: "মাসিক চ্যালেঞ্জ" },
   "home.competeMonthlyD": { en: "12 problems · 90 minutes · every month", bn: "১২টি সমস্যা · ৯০ মিনিট · প্রতি মাসে" },
   "home.competeBoardT": { en: "Live leaderboard", bn: "লাইভ লিডারবোর্ড" },
-  "home.competeBoardD": { en: "Problems solved across every paper you sit", bn: "যত কাগজ দিয়েছেন, তার সব মিলিয়ে সমাধান" },
+  "home.competeBoardD": { en: "Problems solved across every paper you sit", bn: "যত কাগজ দিয়েছেন, তার সব মিলিয়ে সমাধান করা সমস্যা" },
   "home.competeLive": { en: "Now live", bn: "এখন চলছে" },
   "home.competeStandings": { en: "This week's top solvers", bn: "এই সপ্তাহের শীর্ষ সমাধানকারী" },
   "home.competeOpen": { en: "See the papers & standings", bn: "কাগজ ও স্ট্যান্ডিংস দেখুন" },
   "home.competeBoard": { en: "Full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড" },
   "home.competeSolved": { en: "solved", bn: "সমাধান" },
+  "home.motionEyebrow": { en: "Maths in motion", bn: "গণিত চলমান" },
+  "home.motionTitle": { en: "Curves, graphs, and infinities", bn: "বক্ররেখা, লেখচিত্র ও অসীম" },
+  "home.motionLede": {
+    en: "A little visual maths for the fun of it — the same shapes you'll meet in the bank, drawn live.",
+    bn: "আনন্দের জন্য একটু দৃশ্যমান গণিত — মজুদে যেসব আকৃতি পাবেন, সেগুলোই জীবন্ত হয়ে ফুটে ওঠে।"
+  },
+  "home.motionCurveT": { en: "Sine waves", bn: "সাইন তরঙ্গ" },
+  "home.motionCurveD": { en: "Smooth, periodic, everywhere in nature.", bn: "মসৃণ, পর্যায়ক্রমিক — প্রকৃতিতে সর্বত্র।" },
+  "home.motionGraphT": { en: "Parabolas", bn: "পরাবৃত্ত" },
+  "home.motionGraphD": { en: "Every quadratic bends into the same curve.", bn: "প্রতিটি দ্বিঘাত একই বক্রে বেঁকে যায়।" },
+  "home.motionGridT": { en: "Infinite grids", bn: "অসীম গ্রিড" },
+  "home.motionGridD": { en: "Counting forever, one cell at a time.", bn: "একটি একটি ঘর গুনে অনন্তকাল।" },
+  "home.motionInfT": { en: "Infinity", bn: "অসীম" },
+  "home.motionInfD": { en: "Not a number — a direction you can never finish.", bn: "এটি সংখ্যা নয় — এক দিক, যা কখনো শেষ হয় না।" },
 
   /* ---- 404 ---- */
   "notFound.body": {
@@ -331,6 +351,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     bn: "এই টেস্টে আর চেষ্টা করা যাচ্ছে না।"
   },
   "tests.notFound": { en: "That test could not be loaded.", bn: "টেস্টটি খোঁজা যায়নি।" },
+  "tests.empty": { en: "No scheduled tests right now — a fresh paper lands every week.", bn: "এখন কোনো নির্ধারিত টেস্ট নেই — প্রতি সপ্তাহে নতুন একটি পত্র আসে।" },
 
   /* ---- leaderboard (problems solved) ---- */
   "lb.eyebrow": { en: "Problems solved", bn: "সমাধান করা সমস্যা" },
@@ -361,6 +382,10 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   },
   "lb.source.local": { en: "Offline — standings from this device.", bn: "অফলাইন — এই ডিভাইসের স্ট্যান্ডিংস দেখানো হচ্ছে।" },
   "lb.source.cloud": { en: "Live from the cloud.", bn: "ক্লাউড থেকে লাইভ।" },
+  "lb.hint": {
+    en: "Solved count sets the rank; ties break on best score, then time.",
+    bn: "র‍্যাঙ্ক নির্ধারণ করে সমাধান করা সমস্যার সংখ্যা; সমতায় আগে সেরা স্কোর, তারপর সময়।"
+  },
   "results.standings": { en: "See the standings", bn: "স্ট্যান্ডিংস দেখুন" },
   "results.rank": { en: "Your rank", bn: "আপনার র‍্যাঙ্ক" },
   "results.rankOf": { en: "#{rank} of {total}", bn: "{total} জনের মধ্যে #{rank}" },
@@ -410,6 +435,10 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "admin.tests.count": { en: "{n} scheduled tests", bn: "{n}টি নির্ধারিত টেস্ট" },
   "admin.submissions.col.date": { en: "Submitted", bn: "জমা" },
   "admin.tests.invalid": { en: "Title, window and at least one problem are required.", bn: "শিরোনাম, সময় ও অন্তত একটি সমস্যা লাগবে।" },
+  "admin.problems.invalid": {
+    en: "ID, both titles, both statements and an answer are required.",
+    bn: "আইডি, দুই ভাষার শিরোনাম ও প্রশ্ন, এবং উত্তর দেওয়া বাধ্যতামূলক।"
+  },
   "admin.submissions.empty": { en: "No submissions yet.", bn: "এখনো কিছু জমা পড়েনি।" },
   "admin.confirmProblem": { en: "Delete this problem?", bn: "এই সমস্যাটি মুছবেন?" },
   "admin.f.kind": { en: "Kind", bn: "ধরন" },
@@ -417,8 +446,8 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "admin.f.titleEn": { en: "Title — English", bn: "শিরোনাম — ইংরেজি" },
   "admin.f.descBn": { en: "Description — Bangla", bn: "বিবরণ — বাংলা" },
   "admin.f.descEn": { en: "Description — English", bn: "বিবরণ — ইংরেজি" },
-  "admin.f.statementBn": { en: "Statement — Bangla", bn: "শর্ট — বাংলা" },
-  "admin.f.statementEn": { en: "Statement — English", bn: "শর্ট — ইংরেজি" },
+  "admin.f.statementBn": { en: "Statement — Bangla", bn: "প্রশ্ন — বাংলা" },
+  "admin.f.statementEn": { en: "Statement — English", bn: "প্রশ্ন — ইংরেজি" },
   "admin.f.solutionBn": { en: "Solution — Bangla", bn: "সমাধান — বাংলা" },
   "admin.f.solutionEn": { en: "Solution — English", bn: "সমাধান — ইংরেজি" },
   "admin.f.answer": { en: "Answer (exact)", bn: "উত্তর (নিখুঁত)" },
@@ -432,6 +461,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "admin.f.durationMin": { en: "Duration (minutes)", bn: "সময় (মিনিট)" },
   "admin.f.problemIds": { en: "Problem IDs (comma separated)", bn: "সমস্যার আইডি (কমা দিয়ে)" },
   "admin.f.published": { en: "Published", bn: "প্রকাশিত" },
+  "admin.f.draft": { en: "Draft", bn: "খসড়া" },
   "admin.f.optional": { en: "optional", bn: "ঐচ্ছিক" },
   "admin.window": { en: "{from} → {to}", bn: "{from} → {to}" },
   "admin.phase": { en: "Phase: {phase}", bn: "পর্ব: {phase}" },
@@ -447,12 +477,12 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "auth.signin.title": { en: "Welcome back", bn: "ফিরে আসায় স্বাগতম" },
   "auth.signin.sub": {
     en: "Sign in to carry your name onto every contest and leaderboard.",
-    bn: "কনটেস্ট ও লিডারবোর্ডে নিজের নাম বহন করতে সাইন ইন করুন।"
+    bn: "কনটেস্ট ও লিডারবোর্ডে নিজের নাম দেখাতে সাইন ইন করুন।"
   },
   "auth.signup.title": { en: "Create your account", bn: "অ্যাকাউন্ট খুলুন" },
   "auth.signup.sub": {
     en: "About a minute: pick a username, a password, and the name you will compete under.",
-    bn: "এক মিনিটেই হবে: ইউজারনেম, পাসওয়ার্ড আর প্রতিযোগিতার নাম দিন।"
+    bn: "এক মিনিটেই হবে: ইউজারনেম, পাসওয়ার্ড আর ডিসপ্লে নাম দিন।"
   },
   "auth.username": { en: "Username", bn: "ইউজারনেম" },
   "auth.username.ph": { en: "e.g. rafi2026", bn: "যেমন: rafi2026" },

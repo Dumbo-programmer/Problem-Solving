@@ -6,6 +6,7 @@ import { useProblemBank } from "../lib/useProblems";
 import { filterProblems, pickProblems } from "../lib/filters";
 import FilterPanel, { EMPTY_FACETS, facetsToFilters, type FacetState } from "../components/FilterPanel";
 import MathText from "../components/MathText";
+import PageDecor from "../components/PageDecor";
 import { DifficultyBadge, TopicBadge } from "../components/Badges";
 import { newTestId } from "../lib/storage";
 import type { PracticeTest, Problem } from "../lib/types";
@@ -78,7 +79,9 @@ export default function Practice() {
   const perProblem = chosen.length ? (duration / chosen.length).toFixed(1) : "0";
 
   return (
-    <div className="shell py-10 lg:py-14">
+    <div className="relative">
+      <PageDecor seed={7} />
+      <div className="shell py-10 lg:py-14">
       <header className="max-w-2xl">
         <p className="eyebrow">{t("nav.practice")}</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
@@ -286,6 +289,7 @@ export default function Practice() {
             </p>
           </div>
         </aside>
+      </div>
       </div>
     </div>
   );

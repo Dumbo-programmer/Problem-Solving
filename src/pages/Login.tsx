@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
+import PageDecor from "../components/PageDecor";
 import { HttpError } from "../lib/api";
 
 const USERNAME_RE = /^[a-z0-9_]{3,20}$/i;
@@ -38,10 +39,13 @@ export default function Login() {
   const mode: Mode = params.get("mode") === "signup" ? "signup" : "signin";
 
   return (
-    <div className="shell py-10 lg:py-16">
+    <div className="relative">
+      <PageDecor seed={9} count={12} />
+      <div className="shell py-10 lg:py-16">
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-12">
         {user ? <AccountCard locale={locale} /> : <AuthCard mode={mode} />}
         <PerksPanel t={t} />
+      </div>
       </div>
     </div>
   );
@@ -188,8 +192,7 @@ function AuthCard({ mode }: { mode: Mode }) {
           </p>
         )}
 
-        <button type="submit" className="btn-primary w-full" disabled={busy}>
-          {busy ? (
+        <button type="submit" className="btn-primary w-full" disabled={busy}>          {busy ? (
             t("misc.loading")
           ) : (
             <>
@@ -335,7 +338,15 @@ function PerksPanel({ t }: { t: (key: string) => string }) {
     { icon: WifiOff, text: t("auth.how.point3") }
   ];
   return (
-    <aside className="relative overflow-hidden rounded-3xl border border-accent-200/60 bg-gradient-to-br from-accent-50 via-white to-sky-50 p-6 pt-16 sm:p-8 sm:pt-20 dark:border-accent-900/40 dark:from-ink-900 dark:via-ink-950 dark:to-ink-900">
+    <aside className="relative overflow-hidden rounded-3xl border border-neon-pink/25 bg-gradient-to-br from-accent-50 via-white to-sky-50 p-6 pt-16 sm:p-8 sm:pt-20 dark:border-neon-violet/40 dark:from-ink-900 dark:via-ink-950 dark:to-ink-900">
+      {/* neon glow + rolling floor on dark */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-neon-pink/15 blur-3xl dark:bg-neon-pink/25" />
+        <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-neon-cyan/15 blur-3xl dark:bg-neon-cyan/20" />
+        <div className="absolute inset-x-0 bottom-0 h-32 overflow-hidden">
+          <div className="retro-horizon !h-32 opacity-0 dark:opacity-100" />
+        </div>
+      </div>
       {/* Floating maths chips */}
       <div aria-hidden className="pointer-events-none absolute inset-0 select-none">
         <span className="absolute right-6 top-6 rotate-6 rounded-xl border border-accent-200/70 bg-white/80 px-2.5 py-1 font-mono text-xs font-semibold text-accent-700 shadow-soft dark:border-ink-700 dark:bg-ink-900/80 dark:text-accent-300">

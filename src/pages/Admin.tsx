@@ -31,6 +31,7 @@ import {
   logoutAdmin
 } from "../lib/api";
 import { readAdminToken } from "../lib/storage";
+import PageDecor from "../components/PageDecor";
 import { phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
 import type { AdminOverview, AdminSubmission } from "../lib/api";
@@ -175,7 +176,9 @@ function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: (
   const [tab, setTab] = useState<Tab>("overview");
 
   return (
-    <div className="shell py-10 lg:py-14">
+    <div className="relative">
+      <PageDecor seed={12} />
+      <div className="shell py-10 lg:py-14">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="eyebrow">{t("admin.eyebrow")}</p>
@@ -209,6 +212,7 @@ function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: (
       {tab === "problems" && <ProblemsPanel onExpired={onExpired} />}
       {tab === "tests" && <TestsPanel onExpired={onExpired} />}
       {tab === "submissions" && <SubmissionsPanel onExpired={onExpired} />}
+      </div>
     </div>
   );
 }
@@ -587,7 +591,7 @@ function ProblemEditor({
         <Field label={t("admin.f.source")} value={draft.source} onChange={(v) => patch({ source: v })} />
       </div>
 
-      {error && <p className="mt-3 text-xs font-medium text-rose-500">{t("admin.tests.invalid")}</p>}
+      {error && <p className="mt-3 text-xs font-medium text-rose-500">{t("admin.problems.invalid")}</p>}
 
       <div className="mt-5 flex gap-2">
         <button type="button" onClick={submit} disabled={busy} className="btn-primary h-9 px-4 text-xs">
@@ -846,7 +850,7 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
                       : "border-slate-400/40 bg-slate-400/10 text-slate-500 dark:text-slate-300"
                   }`}
                 >
-                  {test.published ? t(`tests.phase.${phase}`) : t("admin.f.published")}
+                  {test.published ? t(`tests.phase.${phase}`) : t("admin.f.draft")}
                 </span>
                 <button type="button" onClick={() => openEditor(test)} className="btn-quiet h-8 px-2.5 text-xs">
                   <Pencil size={13} /> {t("admin.problems.edit")}

@@ -91,6 +91,51 @@
   contract (as before). Remaining `npm audit` advisories are dev-toolchain only
   (vitest/vite/tailwind majors deferred on purpose).
 
+## ⏱ Update — 2026-10-19, 23:55 (retrowave theme + Prothom Alo co-brand)
+
+- **Retrowave/synthwave theme**: Tailwind gained a `neon` ramp (pink/magenta/purple/
+  violet/indigo/cyan/teal/yellow) and a `palo` brand red, plus keyframes
+  (`gridflow`, `drift`, `dash`, `pulseGlow`, `scan`, `marquee`) and horizon/sky/
+  sheen gradients. `index.css` adds a fixed "infinity-mirror" dark backdrop
+  (two offset neon grids + violet/cyan glows), neon card/button/field treatments,
+  the `.retro-horizon` rolling perspective floor, `.retro-scanlines`, `.neon-text`,
+  and reduced-motion still freezes all of it.
+- **Moving maths**: new decorative components — `FloatingMath` (seeded field of
+  π ∑ √ ∫ θ Δ ∞ glyphs, each with its own bob timing), `MathPlots` (`SinePlot`
+  self-drawing wave, `CurvePlot` parabola with pulsing markers, `OrbitRing`), and
+  `PageDecor` (ambient glow + glyphs + grid floor behind page headers). Home gains
+  a "Maths in motion" band; the hero, CTA panel and Login side panel are retrowave.
+- **Co-branded header**: `BrandLockup` stacks the Prothom Alo mark above the Gonit
+  Ishkul lockup with a neon hairline, and **renders no wordmark text** (both logos
+  spell their names). The Prothom Alo SVG has a near-black wordmark, so a
+  `prothom-alo-dark.svg` variant (white ink, brand red kept) is swapped in via
+  `dark:` classes. Navbar is `h-24`; the mobile sheet offset follows.
+- **Bigger landscape logo**: the square `Logo.png` (2250×2250) actually contains a
+  1492×1016 wordmark floating in transparent margins — cropping to the opaque
+  bounds (+24 px pad) produced `public/logo-landscape.png` (1565×1065, ratio 1.47,
+  84 KB). The navbar now paints a genuinely wide mark (79×54 desktop vs the old
+  36×36 square) at a higher position in the hierarchy.
+- **Prothom Alo credit**: hero chip linking to
+  `prothomalo.com/collection/math-school`, a footer partnership line, and a
+  brand-red footer badge. `index.html` gains co-brand meta + `/slogan.png` OG image.
+- **Netlify**: `netlify.toml` now caches `/prothom-alo.svg`, `/prothom-alo-dark.svg`,
+  `/slogan*.png`, `/gonit-bhaiya.jpeg` and `/assets/*` immutably.
+
+**Re-verified after these changes:**
+
+| Check | Command | Result |
+|---|---|---|
+| Typecheck | `npm.cmd run typecheck` | ✅ clean |
+| Unit tests | `npx.cmd vitest run` | ✅ 67/67 |
+| Production build | `npm.cmd run build` | ✅ 144 problems, all brand assets in `dist/` |
+| Responsive layout | `npm.cmd run layout` | ✅ all pass (+2 checks/route: lockup paints, Gonit mark is landscape, Prothom Alo stacked above it) |
+| E2E smoke (offline) | `npm.cmd run smoke` | ✅ 53/53, **zero console errors** (+7 co-brand/theme checks) |
+| API contract smoke | `npm.cmd run smoke:api` | ✅ 71/71 |
+| E2E smoke (API attached) | `npm.cmd run smoke:cloud` | ✅ 54/54 |
+
+- ⚠️ Visual QA stays programmatic (the model cannot view images); the brand checks
+  assert geometry (painted size, landscape ratio, stacking order) rather than looks.
+
 ## Proofreading already applied (no action needed)
 
 - `src/data/problems-a.json`, `problems-b.json`, `problems-c.json` — all 144 answers math-verified; Bangla typos/mistranslations fixed (incl. `pr-h-02` title/statement/solution, সর্বশেষ, এংগেল, ক্যাটালান solution, compositions statement).
@@ -109,6 +154,21 @@
   `L()` (test titles in Past Tests were hardcoded English, `void L`); English output unchanged.
 - `src/pages/PastTests.tsx` (20:08) — summary icons: Best score `Check`→`Star`,
   Problems solved right `Clock`→`Check` (clock implied time on a correctness metric).
+- `src/lib/i18n.tsx` (23:40) — new-copy fixes: `admin.f.statementBn/En` "শর্ট"→"প্রশ্ন"
+  (not a word); `auth.signin.sub` calque "নাম বহন করতে"→"নাম দেখাতে"; `auth.signup.sub`
+  "প্রতিযোগিতার নাম" (read as *the contest's name*)→"ডিসপ্লে নাম" (matches the field);
+  `home.competeBoardD` missing head noun → "…সমাধান করা সমস্যা".
+- `src/lib/i18n.tsx` (23:45) — 4 new keys for wrong-reuse fixes below: `tests.empty`,
+  `lb.hint`, `admin.problems.invalid`, `admin.f.draft`.
+- `src/pages/Tests.tsx` (23:45) — empty-calendar state now says "No scheduled tests"
+  (`tests.empty`), not the submissions-flavoured `lb.empty`.
+- `src/pages/Leaderboard.tsx` (23:45) — bottom hint is `lb.hint` (solved-count rank,
+  tie-breaks) — was `tests.standings.hint` ("Score decides rank"), contradicting the
+  page's own `lb.intro`.
+- `src/pages/Admin.tsx` (23:45) — problem editor error now `admin.problems.invalid`
+  (ID/titles/statements/answer) — was `admin.tests.invalid` (mentioned times +
+  paper problems); unpublished test chip now reads "Draft"/খসড়া — it rendered
+  "Published"/প্রকাশিত on unpublished tests.
 
 ## Resolved
 

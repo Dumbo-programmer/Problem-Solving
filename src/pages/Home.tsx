@@ -20,6 +20,8 @@ import { buildDemoEntries, buildScheduledSeeds, phaseOf } from "../lib/scheduled
 import { standings } from "../lib/leaderboard";
 import Reveal from "../components/Reveal";
 import MathText from "../components/MathText";
+import FloatingMath from "../components/FloatingMath";
+import { CurvePlot, SinePlot } from "../components/MathPlots";
 import { DifficultyBadge, TopicBadge, TOPIC_DOT } from "../components/Badges";
 import type { ProblemTopic, ScheduledTest, StandingsRow } from "../lib/types";
 
@@ -89,20 +91,29 @@ export default function Home() {
     <>
       {/* ---------------- Hero ---------------- */}
       <section className="relative overflow-hidden">
-        {/* decorative background */}
+        {/* decorative background — the retrowave horizon */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-grid-fade [background-size:26px_26px] dark:opacity-[0.35]" />
-          <div className="absolute -top-32 right-[-10%] h-[28rem] w-[28rem] rounded-full bg-accent-400/20 blur-3xl dark:bg-accent-600/10" />
-          <div className="absolute -left-24 top-24 h-[22rem] w-[22rem] rounded-full bg-ink-400/20 blur-3xl dark:bg-ink-600/15" />
+          <div className="absolute inset-0 bg-grid-fade [background-size:26px_26px] opacity-60 dark:opacity-[0.25]" />
+          {/* neon sky glows */}
+          <div className="absolute -top-32 right-[-10%] h-[28rem] w-[28rem] rounded-full bg-accent-400/20 blur-3xl dark:bg-neon-pink/20" />
+          <div className="absolute -left-24 top-24 h-[22rem] w-[22rem] rounded-full bg-ink-400/20 blur-3xl dark:bg-neon-violet/25" />
+          <div className="absolute left-1/2 top-0 h-[30rem] w-[36rem] -translate-x-1/2 rounded-full bg-neon-cyan/10 blur-[80px] dark:bg-neon-cyan/15" />
+          {/* drifting maths glyphs */}
+          <FloatingMath count={18} seed={3} className="opacity-80 dark:opacity-100" />
+          {/* the rolling perspective floor */}
+          <div className="absolute inset-x-0 bottom-0 h-64 overflow-hidden dark:block">
+            <div className="retro-horizon" />
+          </div>
+          <div className="retro-scanlines" />
         </div>
 
         <div className="shell grid items-center gap-10 pb-16 pt-12 lg:grid-cols-[1.15fr_0.85fr] lg:pb-24 lg:pt-20">
           <div>
             <Reveal>
-              <span className="chip inline-flex border border-accent-500/40 bg-accent-500/10 text-accent-700 dark:text-accent-300">
+              <span className="chip inline-flex border border-neon-pink/40 bg-neon-pink/10 text-neon-magenta dark:border-neon-pink/50 dark:bg-neon-pink/12 dark:text-neon-pink">
                 <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-400 opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-accent-500" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon-pink opacity-75" />
+                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-neon-pink" />
                 </span>
                 {t("hero.badge")}
               </span>
@@ -111,7 +122,7 @@ export default function Home() {
             <Reveal delay={80}>
               <h1 className="mt-5 text-balance text-4xl font-extrabold leading-[1.08] tracking-tight text-ink-900 dark:text-white sm:text-5xl lg:text-6xl">
                 {t("hero.title1")}{" "}
-                <span className="bg-gradient-to-r from-accent-500 via-accent-400 to-accent-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-accent-500 via-accent-400 to-accent-600 bg-clip-text text-transparent dark:from-neon-pink dark:via-neon-purple dark:to-neon-cyan">
                   {t("hero.title2")}
                 </span>
               </h1>
@@ -153,6 +164,22 @@ export default function Home() {
                   </div>
                 ))}
               </dl>
+            </Reveal>
+
+            <Reveal delay={300}>
+              <a
+                href="https://www.prothomalo.com/collection/math-school"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-7 inline-flex items-center gap-2.5 rounded-2xl border border-palo/20 bg-white/70 px-3.5 py-2.5 shadow-soft backdrop-blur transition-colors hover:border-palo/40 dark:bg-ink-900/50"
+              >
+                <img src="/prothom-alo.svg" alt="প্রথম আলো" className="h-5 w-auto dark:hidden" loading="lazy" decoding="async" />
+                <img src="/prothom-alo-dark.svg" alt="প্রথম আলো" className="hidden h-5 w-auto dark:block" loading="lazy" decoding="async" />
+                <span className="h-6 w-px bg-slate-200 dark:bg-ink-700" aria-hidden />
+                <span className="text-xs font-medium text-slate-600 dark:text-slate-300">
+                  {t("footer.visitPalo")}
+                </span>
+              </a>
             </Reveal>
 
             <Reveal delay={360}>
@@ -212,6 +239,19 @@ export default function Home() {
                 <div className="flex items-center gap-2 text-sm font-semibold text-accent-600 dark:text-accent-400">
                   <BookOpen size={16} /> {t("result.explanation")}
                 </div>
+              </div>
+
+              {/* floating live-plot card — the maths literally moving */}
+              <div
+                className="absolute -right-6 -top-8 hidden animate-floaty rounded-2xl border border-slate-200 bg-white/85 px-3 py-2 shadow-soft backdrop-blur xl:block dark:border-neon-cyan/30 dark:bg-ink-900/80"
+                style={{ animationDelay: "0.8s" }}
+              >
+                <SinePlot className="h-16 w-40 text-slate-400" phase={0.6} />
+              </div>
+
+              {/* glowing orbit mirror behind the card */}
+              <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
+                <div className="h-72 w-72 rounded-full bg-gradient-to-br from-neon-pink/25 via-neon-violet/20 to-neon-cyan/25 blur-3xl dark:from-neon-pink/30 dark:via-neon-violet/25 dark:to-neon-cyan/30" />
               </div>
             </div>
           </Reveal>
@@ -408,6 +448,54 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ---------------- Maths in motion (decorative) ---------------- */}
+      <section className="relative overflow-hidden border-y border-slate-200 py-14 dark:border-ink-800 lg:py-16">
+        <div className="pointer-events-none absolute inset-0 -z-10">
+          <div className="absolute inset-0 bg-neon-sheen opacity-40 dark:opacity-100" />
+          <FloatingMath count={12} seed={11} className="opacity-70" />
+        </div>
+        <div className="shell">
+          <Reveal className="max-w-2xl">
+            <p className="eyebrow">{t("home.motionEyebrow")}</p>
+            <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white">
+              {t("home.motionTitle")}
+            </h2>
+            <p className="mt-3 text-slate-600 dark:text-slate-400">{t("home.motionLede")}</p>
+          </Reveal>
+
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { key: "home.motionCurveT", body: t("home.motionCurveD"), plot: <SinePlot className="h-24 w-full text-slate-400" phase={0.4} /> },
+              { key: "home.motionGraphT", body: t("home.motionGraphD"), plot: <CurvePlot className="h-24 w-full" /> },
+              { key: "home.motionGridT", body: t("home.motionGridD"), plot: null },
+              { key: "home.motionInfT", body: t("home.motionInfD"), plot: null }
+            ].map((card, i) => (
+              <Reveal key={card.key} delay={i * 70}>
+                <div className="retro-panel flex h-full flex-col p-5">
+                  {card.plot ? (
+                    <div className="mb-4 flex h-24 items-center justify-center overflow-hidden rounded-xl border border-slate-200/70 bg-white/60 dark:border-neon-violet/20 dark:bg-ink-950/60">
+                      {card.plot}
+                    </div>
+                  ) : (
+                    <div className="mb-4 grid h-24 place-items-center overflow-hidden rounded-xl border border-slate-200/70 bg-white/60 dark:border-neon-violet/20 dark:bg-ink-950/60">
+                      {card.key === "home.motionGridT" ? (
+                        <div className="relative h-full w-full overflow-hidden">
+                          <div className="retro-horizon !h-24" />
+                        </div>
+                      ) : (
+                        <span className="animate-pulse-glow font-mono text-3xl font-bold neon-text">∞</span>
+                      )}
+                    </div>
+                  )}
+                  <h3 className="text-[15px] font-bold text-ink-900 dark:text-white">{t(card.key)}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{card.body}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ---------------- Feature strip + CTA ---------------- */}
       <section className="shell py-14 lg:py-20">
         <div className="grid gap-5 lg:grid-cols-3">
@@ -431,7 +519,12 @@ export default function Home() {
         <Reveal delay={120}>
           <div className="relative mt-14 overflow-hidden rounded-3xl bg-gradient-to-br from-ink-800 via-ink-900 to-ink-950 p-8 text-center shadow-lift sm:p-14">
             <div className="pointer-events-none absolute inset-0 bg-grid-fade [background-size:22px_22px] opacity-30" />
-            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-accent-500/25 blur-3xl" />
+            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-neon-pink/30 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-neon-cyan/25 blur-3xl" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 overflow-hidden">
+              <div className="retro-horizon !h-40" />
+            </div>
+            <div className="retro-scanlines" />
             <div className="relative">
               <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 {t("home.practiceCtaTitle")}

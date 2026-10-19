@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Award, Crown, Loader2, Medal, Trophy, UserRound } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { fetchLeaderboard } from "../lib/api";
+import PageDecor from "../components/PageDecor";
 import { formatDuration } from "../lib/leaderboard";
 import { getClientId } from "../lib/storage";
 import type { LeaderboardWindow, PeriodRow } from "../lib/types";
@@ -55,7 +56,9 @@ export default function Leaderboard() {
   const you = useMemo(() => rows?.find((r) => r.clientId === clientId), [rows, clientId]);
 
   return (
-    <div className="shell py-10 lg:py-14">
+    <div className="relative">
+      <PageDecor seed={4} />
+      <div className="shell py-10 lg:py-14">
       <header className="max-w-3xl">
         <p className="eyebrow">{t("lb.eyebrow")}</p>
         <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
@@ -242,11 +245,12 @@ export default function Leaderboard() {
 
       <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
         <span className="inline-flex items-center gap-1.5">
-          <Award size={14} className="text-accent-500" /> {t("tests.standings.hint")}
+          <Award size={14} className="text-accent-500" /> {t("lb.hint")}
         </span>
         <Link to="/tests" className="font-medium text-accent-600 hover:text-accent-500 dark:text-accent-400">
           {t("nav.tests")} →
         </Link>
+      </div>
       </div>
     </div>
   );

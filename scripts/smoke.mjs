@@ -83,6 +83,28 @@ check("home previews the live standings", /শীর্ষ সমাধানক
 check("home carries the hero feature chips", /সাইন-আপ ছাড়াই|no sign-up needed/i.test(home) && /সাথে সাথে উত্তর|instant answer/i.test(home));
 const homePodium = await page.evaluate(() => document.querySelectorAll("span,h3").length);
 check("home renders a rich element set", homePodium > 40, `${homePodium} text nodes`);
+// Theme pass: co-branded lockup (Prothom Alo above Gonit Ishkul) and the
+// "maths in motion" band with its animated SVG plots.
+const brand = await page.evaluate(() => {
+  const imgs = Array.from(document.querySelectorAll("header img, nav img"));
+  return {
+    palo: imgs.some((i) => i.src.includes("prothom-alo")),
+    gonit: imgs.some((i) => i.src.includes("logo")),
+    order: (() => {
+      const palo = imgs.find((i) => i.src.includes("prothom-alo"));
+      const gonit = imgs.find((i) => i.src.includes("logo"));
+      if (!palo || !gonit) return false;
+      return Boolean(palo.compareDocumentPosition(gonit) & Node.DOCUMENT_POSITION_FOLLOWING);
+    })()
+  };
+});
+check("navbar shows the Prothom Alo mark", brand.palo);
+check("navbar shows the Gonit Ishkul logo", brand.gonit);
+check("Prothom Alo sits above Gonit Ishkul", brand.order);
+check("home shows the maths-in-motion band", /গণিত চলমান|maths in motion/i.test(home));
+check("home carries animated plot SVGs", (await page.evaluate(() => document.querySelectorAll("svg[aria-hidden] path").length)) > 0);
+check("home credits the Prothom Alo math school", /প্রথম আলো গণিত ইশকুল|Prothom Alo Math School/i.test(home));
+check("footer badges the Prothom Alo partnership", /প্রথম আলো · গণিত ইশকুল|Prothom Alo · Gonit Ishkul/i.test(home));
 
 /* ---------- 3. archive lists problems ---------- */
 await goto("/problems");

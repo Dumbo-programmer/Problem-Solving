@@ -4,6 +4,7 @@ import { ArrowRight, CalendarDays, Check, Clock, FlaskConical, Loader2, Star, Tr
 import { useI18n } from "../lib/i18n";
 import { deletePastTest, fetchPastTests, getCloudState, onCloudStateChange } from "../lib/api";
 import type { CloudState } from "../lib/api";
+import PageDecor from "../components/PageDecor";
 import type { PracticeTest } from "../lib/types";
 
 function fmtDate(iso?: string): string {
@@ -52,7 +53,9 @@ export default function PastTests() {
   };
 
   return (
-    <div className="shell py-10 lg:py-14">
+    <div className="relative">
+      <PageDecor seed={8} />
+      <div className="shell py-10 lg:py-14">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
           <p className="eyebrow">{t("nav.past")}</p>
@@ -175,6 +178,7 @@ export default function PastTests() {
           })}
         </div>
       )}
+      </div>
     </div>
   );
 }

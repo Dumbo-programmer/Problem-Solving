@@ -4,6 +4,7 @@ import { LogOut, Menu, Moon, Sun, UserRound, X, Languages } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useTheme } from "../lib/theme";
 import { useAuth } from "../lib/auth";
+import BrandLockup from "./BrandLockup";
 
 const LINKS = [
   { to: "/", key: "nav.home", end: true, compact: false },
@@ -47,20 +48,8 @@ export default function Navbar() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="shell flex h-16 items-center justify-between gap-4">
-        <Link to="/" className="group flex items-center gap-3" aria-label={t("brand.name")}>
-          <span className="relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-xl bg-gradient-to-br from-ink-700 to-ink-900 shadow-soft ring-1 ring-black/5">
-            <img src="/logo.png" alt="" className="h-full w-full object-cover" loading="eager" />
-          </span>
-          <span className="leading-tight">
-            <span className="block text-[15px] font-bold tracking-tight text-ink-900 dark:text-white">
-              {t("brand.short")}
-            </span>
-            <span className="block text-[11px] font-medium text-slate-500 dark:text-slate-400">
-              {t("brand.tagline")}
-            </span>
-          </span>
-        </Link>
+      <nav className="shell flex h-24 items-center justify-between gap-4">
+        <BrandLockup size="sm" />
 
         <div className="hidden items-center gap-0.5 md:flex lg:gap-1">
           {LINKS.map((link) => (
@@ -150,7 +139,7 @@ export default function Navbar() {
 
       {/* Mobile sheet */}
       <div
-        className={`fixed inset-0 top-16 z-30 bg-white transition-opacity duration-200 dark:bg-ink-950 md:hidden ${
+        className={`fixed inset-0 top-24 z-30 bg-white transition-opacity duration-200 dark:bg-ink-950 md:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
