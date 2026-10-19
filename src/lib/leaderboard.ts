@@ -32,6 +32,29 @@ export function isLeaderboardEntry(test: PracticeTest): boolean {
   return test.status === "SUBMITTED" && Boolean(test.scheduledTestId) && Boolean(test.submittedAt);
 }
 
+/**
+ * Seeded demo entries fill the boards so a fresh deploy never looks empty.
+ * They are identified by their `demo-` client-id prefix and never belong to a
+ * real learner.
+ */
+export function isDemoEntry(test: Pick<PracticeTest, "clientId">): boolean {
+  return test.clientId.startsWith("demo-");
+}
+
+/**
+ * A submitted entry that may be *ranked*. Boards count attempts sat under a
+ * signed-in account, plus the seeded demo rows that pad the board. Anonymous
+ * on-device practice (no account) never appears publicly.
+ */
+export function isRankedEntry(test: PracticeTest): boolean {
+  return isLeaderboardEntry(test) && (Boolean(test.accountId) || isDemoEntry(test));
+}
+
+/** The identity a board groups rows by: the account, else the browser. */
+export function entryOwner(test: Pick<PracticeTest, "accountId" | "clientId">): string {
+  return test.accountId?.trim() || `anon:${test.clientId}`;
+}
+
 /** Public name for a row — display name, else a stable anonymous label. */
 export function nameOf(test: Pick<PracticeTest, "displayName" | "clientId">): string {
   const name = (test.displayName ?? "").trim();
@@ -65,9 +88,16 @@ export function formatDuration(totalSec: number): string {
  * Standings for a single test: score % desc, then faster submission, then
  * earlier submission (matches the reference app's contest tie-break).
  */
+/**
+ * Standings for a single test: score % desc, then faster submission, then
+ * earlier submission (matches the reference app's contest tie-break).
+ *
+ * Anonymous attempts are excluded — a paper's winners board is for signed-in
+ * learners (plus the seeded demo field).
+ */
 export function standings(entries: PracticeTest[], testId?: string): StandingsRow[] {
   const rows = entries
-    .filter(isLeaderboardEntry)
+    .filter(isRankedEntry)
     .filter((e) => (testId ? e.scheduledTestId === testId : true))
     .sort((a, b) => {
       const pctDiff = pctOf(b) - pctOf(a);
@@ -82,6 +112,7 @@ export function standings(entries: PracticeTest[], testId?: string): StandingsRo
     entryId: e.id,
     name: nameOf(e),
     clientId: e.clientId,
+    accountId: e.accountId,
     score: e.score,
     maxScore: e.maxScore,
     pct: pctOf(e),
@@ -91,10 +122,17 @@ export function standings(entries: PracticeTest[], testId?: string): StandingsRo
   }));
 }
 
-/** Highlight rows belonging to this browser's anonymous id. */
-export function markYou<T extends { clientId: string; isYou: boolean }>(rows: T[], clientId?: string): T[] {
-  if (!clientId) return rows;
-  return rows.map((r) => (r.clientId === clientId ? { ...r, isYou: true } : r));
+/** Highlight rows belonging to this browser's id or signed-in account. */
+export function markYou<T extends { clientId: string; accountId?: string; isYou: boolean }>(
+  rows: T[],
+  clientId?: string,
+  accountId?: string
+): T[] {
+  if (!clientId && !accountId) return rows;
+  return rows.map((r) => {
+    const mine = (accountId && r.accountId === accountId) || (!r.accountId && r.clientId === clientId);
+    return mine ? { ...r, isYou: true } : r;
+  });
 }
 
 interface Aggregate {
@@ -113,20 +151,25 @@ interface Aggregate {
  *
  * "Solved" is the sum of correctCount over submitted scheduled tests, so the
  * board reads exactly as "how many problems has each learner solved".
+ *
+ * Only entries sat under a signed-in account are ranked (`isRankedEntry`), and
+ * rows are grouped by account so a learner's attempts merge across devices.
  */
 export function overallLeaderboard(
   entries: PracticeTest[],
-  opts: { window?: LeaderboardWindow; clientId?: string; now?: number } = {}
+  opts: { window?: LeaderboardWindow; clientId?: string; accountId?: string; now?: number } = {}
 ): PeriodRow[] {
   const start = windowStart(opts.window ?? "all", opts.now ?? Date.now());
   const byPerson = new Map<string, Aggregate>();
 
   for (const e of entries) {
-    if (!isLeaderboardEntry(e)) continue;
+    if (!isRankedEntry(e)) continue;
     const submitted = Date.parse(e.submittedAt ?? "");
     if (start !== null && submitted < start) continue;
 
-    const agg = byPerson.get(e.clientId) ?? {
+    // Group by account id, so a learner's attempts from several devices merge.
+    const owner = entryOwner(e);
+    const agg = byPerson.get(owner) ?? {
       name: nameOf(e),
       solved: 0,
       max: 0,
@@ -144,11 +187,11 @@ export function overallLeaderboard(
     agg.pctSum += pct;
     // Prefer the most recently used display name.
     if ((e.displayName ?? "").trim()) agg.name = nameOf(e);
-    byPerson.set(e.clientId, agg);
+    byPerson.set(owner, agg);
   }
 
-  const rows = [...byPerson.entries()].map(([clientId, agg]) => ({
-    clientId,
+  const rows = [...byPerson.entries()].map(([owner, agg]) => ({
+    clientId: owner,
     name: agg.name,
     tests: agg.tests,
     solved: agg.solved,
@@ -175,12 +218,11 @@ export function overallLeaderboard(
     avgPct: r.avgPct,
     bestPct: r.bestPct,
     timeTakenSec: r.time,
-    isYou: opts.clientId === r.clientId,
+    isYou: r.clientId === opts.accountId || r.clientId === `anon:${opts.clientId}`,
   }));
 }
 
-/** Find this browser's own row in an overall board (undefined = not ranked). */
-export function findYou(rows: PeriodRow[], clientId?: string): PeriodRow | undefined {
-  if (!clientId) return undefined;
-  return rows.find((r) => r.isYou || r.clientId === clientId);
+/** Find this learner's own row in an overall board (undefined = not ranked). */
+export function findYou(rows: PeriodRow[], clientId?: string, accountId?: string): PeriodRow | undefined {
+  return rows.find((r) => r.isYou || (accountId && r.clientId === accountId) || r.clientId === `anon:${clientId}`);
 }

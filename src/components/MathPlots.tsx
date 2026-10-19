@@ -7,6 +7,8 @@
  * global `prefers-reduced-motion` rule freezes them for anyone who asked.
  */
 
+import { useMemo } from "react";
+
 interface SinePlotProps {
   className?: string;
   /** Seed the phase so two instances never look identical. */
@@ -147,3 +149,93 @@ export function OrbitRing({ className = "", count = 12 }: { className?: string; 
     </div>
   );
 }
+
+/* ------------------------------------------------------------------ */
+/* Random plot field — decoration, not a section                       */
+/* ------------------------------------------------------------------ */
+
+/** Tiny deterministic PRNG (mulberry32) — same trick as the glyph field. */
+function mulberry32(seed: number): () => number {
+  let a = seed >>> 0;
+  return () => {
+    a = (a + 0x6d2b79f5) >>> 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+
+interface FloatingPlotsProps {
+  /** How many plots to scatter. */
+  count?: number;
+  /** Seed so different sections get different (but stable) layouts. */
+  seed?: number;
+  className?: string;
+}
+
+/**
+ * A scattered field of live maths plots — sine waves, parabolas, orbit rings
+ * and a lone ∞ — drifting behind a page as pure decoration. Positions come
+ * from a fixed seed so every reload agrees; each plot keeps its own size,
+ * phase, opacity and bob timing so the field never pulses in unison.
+ *
+ * Purely decorative: hidden from assistive tech and pointer events.
+ */
+export function FloatingPlots({ count = 5, seed = 13, className = "" }: FloatingPlotsProps) {
+  const plots = useMemo(() => {
+    const rnd = mulberry32(seed * 6089 + count);
+    return Array.from({ length: count }, (_, i) => {
+      const kind = i % 4; // 0 sine, 1 curve, 2 orbit, 3 infinity
+      const size = 120 + Math.round(rnd() * 130);
+      return {
+        key: `${i}-${kind}`,
+        kind,
+        left: `${Math.round(rnd() * 84)}%`,
+        top: `${Math.round(rnd() * 82)}%`,
+        width: size,
+        height: Math.round(size * 0.62),
+        phase: rnd() * Math.PI * 2,
+        opacity: 0.12 + rnd() * 0.2,
+        delay: `${(rnd() * 10).toFixed(2)}s`,
+        duration: `${12 + rnd() * 10}s`,
+        rotate: `${Math.round(rnd() * 30 - 15)}deg`
+      };
+    });
+  }, [count, seed]);
+
+  return (
+    <div aria-hidden className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}>
+      {plots.map((p) => (
+        <div
+          key={p.key}
+          className="absolute"
+          style={{
+            left: p.left,
+            top: p.top,
+            opacity: p.opacity,
+            transform: `rotate(${p.rotate})`,
+            animation: `floaty ${p.duration} ease-in-out ${p.delay} infinite`
+          }}
+        >
+          {p.kind === 0 ? (
+            <SinePlot className="text-slate-400 dark:text-neon-cyan/70" phase={p.phase} />
+          ) : p.kind === 1 ? (
+            <CurvePlot className="dark:opacity-90" />
+          ) : p.kind === 2 ? (
+            <div className="relative" style={{ width: p.width, height: p.width }}>
+              <OrbitRing count={9} />
+            </div>
+          ) : (
+            <span
+              className="block font-mono font-bold neon-text"
+              style={{ fontSize: `${p.width * 0.4}px`, lineHeight: 1 }}
+            >
+              ∞
+            </span>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+

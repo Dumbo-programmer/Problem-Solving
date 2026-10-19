@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
   formatDuration,
+  isDemoEntry,
   isLeaderboardEntry,
+  isRankedEntry,
   markYou,
   nameOf,
   overallLeaderboard,
@@ -15,6 +17,7 @@ import type { PracticeTest } from "./types";
 
 const EMPTY_FILTERS = { types: [], topics: [], categories: [], difficulties: [] };
 
+/** A ranked fixture: submitted, scheduled, and sat under a signed-in account. */
 function entry(over: Partial<PracticeTest> = {}): PracticeTest {
   return {
     id: over.id ?? "e-1",
@@ -33,6 +36,7 @@ function entry(over: Partial<PracticeTest> = {}): PracticeTest {
     origin: "local",
     scheduledTestId: "wk-2026-42",
     displayName: "Rafiq R.",
+    accountId: "user-default",
     ...over
   };
 }
@@ -72,25 +76,38 @@ describe("per-test standings", () => {
     expect(isLeaderboardEntry(entry({ scheduledTestId: undefined }))).toBe(false);
   });
 
-  it("highlights this browser's row via markYou", () => {
-    const rows = standings([entry({ id: "mine", clientId: "client-x" })]);
-    expect(rows[0].isYou).toBe(false);
-    expect(markYou(rows, "client-x")[0].isYou).toBe(true);
-    expect(markYou(rows, "someone-else")[0].isYou).toBe(false);
+  it("excludes anonymous attempts but keeps the seeded demo field", () => {
+    const rows = standings([
+      entry({ id: "anon", clientId: "real-browser", accountId: undefined }),
+      entry({ id: "account", clientId: "browser-2", accountId: "user-1" }),
+      entry({ id: "demo", clientId: "demo-01", accountId: undefined })
+    ]);
+    expect(rows.map((r) => r.entryId).sort()).toEqual(["account", "demo"]);
+  });
+
+  it("highlights a signed-in learner's row via markYou by account", () => {
+    const rows = standings([
+      entry({ id: "mine", clientId: "browser-2", accountId: "user-1" }),
+      entry({ id: "theirs", clientId: "browser-9", accountId: "user-2" })
+    ]);
+    const marked = markYou(rows, "browser-2", "user-1");
+    expect(marked.find((r) => r.entryId === "mine")?.isYou).toBe(true);
+    expect(marked.find((r) => r.entryId === "theirs")?.isYou).toBe(false);
   });
 });
 
 describe("overall leaderboard", () => {
-  it("sums problems solved per learner and ranks by solved", () => {
+  it("sums problems solved per account and ranks by solved", () => {
     const rows = overallLeaderboard(
       [
-        entry({ id: "a1", clientId: "alpha", displayName: "Alpha", correctCount: 3, score: 3 }),
-        entry({ id: "a2", clientId: "alpha", displayName: "Alpha", correctCount: 2, score: 2 }),
-        entry({ id: "b1", clientId: "beta", displayName: "Beta", correctCount: 4, score: 4 })
+        entry({ id: "a1", clientId: "c-a", accountId: "alpha", displayName: "Alpha", correctCount: 3, score: 3 }),
+        entry({ id: "a2", clientId: "c-a2", accountId: "alpha", displayName: "Alpha", correctCount: 2, score: 2 }),
+        entry({ id: "b1", clientId: "c-b", accountId: "beta", displayName: "Beta", correctCount: 4, score: 4 })
       ],
       { window: "all" }
     );
     expect(rows).toHaveLength(2);
+    // A learner's attempts from two devices merge under one account row.
     expect(rows[0].clientId).toBe("alpha");
     expect(rows[0].correct).toBe(5); // 3 + 2 across two papers
     expect(rows[0].tests).toBe(2);
@@ -98,10 +115,35 @@ describe("overall leaderboard", () => {
     expect(rows[1].correct).toBe(4);
   });
 
+  it("ignores anonymous attempts but keeps seeded demo rows", () => {
+    const rows = overallLeaderboard(
+      [
+        entry({ id: "anon", clientId: "real-browser", accountId: undefined }),
+        entry({ id: "acct", clientId: "c-a", accountId: "user-1" }),
+        entry({ id: "demo", clientId: "demo-07", accountId: undefined })
+      ],
+      { window: "all" }
+    );
+    const owners = rows.map((r) => r.clientId).sort();
+    expect(owners).toContain("user-1");
+    expect(owners).toContain("anon:demo-07");
+    expect(owners).not.toContain("anon:real-browser");
+  });
+
   it("respects the rolling window", () => {
     const now = Date.parse("2026-10-19T12:00:00.000Z");
-    const fresh = entry({ id: "new", clientId: "fresh-client", submittedAt: "2026-10-18T10:00:00.000Z" });
-    const old = entry({ id: "old", clientId: "old-client", submittedAt: "2026-09-01T10:00:00.000Z" });
+    const fresh = entry({
+      id: "new",
+      clientId: "c-new",
+      accountId: "fresh-client",
+      submittedAt: "2026-10-18T10:00:00.000Z"
+    });
+    const old = entry({
+      id: "old",
+      clientId: "c-old",
+      accountId: "old-client",
+      submittedAt: "2026-09-01T10:00:00.000Z"
+    });
 
     const week = overallLeaderboard([fresh, old], { window: "week", now });
     expect(week).toHaveLength(1);
@@ -114,8 +156,8 @@ describe("overall leaderboard", () => {
     expect(overallLeaderboard([fresh, old], { window: "all", now })).toHaveLength(2);
   });
 
-  it("marks this browser's row", () => {
-    const rows = overallLeaderboard([entry({ clientId: "mine" })], { clientId: "mine" });
+  it("marks this account's row", () => {
+    const rows = overallLeaderboard([entry({ clientId: "c-mine", accountId: "mine" })], { accountId: "mine" });
     expect(rows[0].isYou).toBe(true);
   });
 
@@ -145,5 +187,13 @@ describe("helpers", () => {
     expect(nameOf({ displayName: "  Tasnim  ", clientId: "abc-123-def" })).toBe("Tasnim");
     expect(nameOf({ displayName: "", clientId: "abc-123-def" })).toBe("Learner abc123");
     expect(shortId("!!xyz!!")).toBe("xyz");
+  });
+
+  it("ranks only account-linked or seeded demo entries", () => {
+    expect(isRankedEntry(entry({ accountId: "user-1" }))).toBe(true);
+    expect(isRankedEntry(entry({ accountId: undefined, clientId: "browser-1" }))).toBe(false);
+    expect(isRankedEntry(entry({ accountId: undefined, clientId: "demo-03" }))).toBe(true);
+    expect(isDemoEntry({ clientId: "demo-03" })).toBe(true);
+    expect(isDemoEntry({ clientId: "browser-1" })).toBe(false);
   });
 });

@@ -23,6 +23,9 @@ export const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days (learners)
 /* ------------------------------------------------------------------ */
 
 const USERNAME_RE = /^[a-z0-9_]{3,20}$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+/** Digits, optionally with spaces, dashes or a leading + country code. */
+const PHONE_RE = /^\+?[0-9][0-9\s-]{7,17}$/;
 export const MIN_PASSWORD = 6;
 export const MAX_PASSWORD = 72;
 
@@ -31,6 +34,22 @@ export function normalizeUsername(raw: unknown): string | null {
   if (typeof raw !== "string") return null;
   const username = raw.trim().toLowerCase();
   return USERNAME_RE.test(username) ? username : null;
+}
+
+/** Lowercases + trims, then validates. Returns the email or null. */
+export function normalizeEmail(raw: unknown): string | null {
+  if (typeof raw !== "string") return null;
+  const email = raw.trim().toLowerCase();
+  return email.length <= 254 && EMAIL_RE.test(email) ? email : null;
+}
+
+/** Strips separators, then validates. Returns the phone digits or null. */
+export function normalizePhone(raw: unknown): string | null {
+  if (typeof raw !== "string") return null;
+  const phone = raw.trim();
+  if (!PHONE_RE.test(phone)) return null;
+  // Canonical form: the digits (and any leading +) with spaces/dashes removed.
+  return phone.replace(/[\s-]/g, "");
 }
 
 /** Password policy: 6–72 characters (longer values are truncated by bcrypt-style

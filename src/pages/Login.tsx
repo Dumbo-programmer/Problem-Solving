@@ -7,9 +7,12 @@ import {
   Check,
   Eye,
   EyeOff,
+  LockKeyhole,
   LogIn,
   LogOut,
+  Mail,
   Pencil,
+  Phone,
   ShieldCheck,
   Sparkles,
   Trophy,
@@ -23,6 +26,8 @@ import { HttpError } from "../lib/api";
 
 const USERNAME_RE = /^[a-z0-9_]{3,20}$/i;
 const MIN_PASSWORD = 6;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const PHONE_RE = /^\+?[0-9][0-9\s-]{7,17}$/;
 
 type Mode = "signin" | "signup";
 
@@ -37,11 +42,22 @@ export default function Login() {
   const [params] = useSearchParams();
   const locale = lang === "bn" ? "bn-BD" : "en-GB";
   const mode: Mode = params.get("mode") === "signup" ? "signup" : "signin";
+  // Arrived through a route guard? Tell the visitor why they're here.
+  const gated = Boolean(params.get("next"));
 
   return (
     <div className="relative">
       <PageDecor seed={9} count={12} />
       <div className="shell py-10 lg:py-16">
+      {gated && !user && (
+        <div className="card mb-6 flex items-start gap-3 border-accent-500/40 bg-accent-500/5 p-4">
+          <LockKeyhole size={18} className="mt-0.5 shrink-0 text-accent-500" />
+          <div>
+            <p className="font-semibold text-ink-900 dark:text-white">{t("auth.gate.title")}</p>
+            <p className="mt-0.5 text-sm text-slate-600 dark:text-slate-400">{t("auth.gate.body")}</p>
+          </div>
+        </div>
+      )}
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-12">
         {user ? <AccountCard locale={locale} /> : <AuthCard mode={mode} />}
         <PerksPanel t={t} />
@@ -65,6 +81,8 @@ function AuthCard({ mode }: { mode: Mode }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [displayName, setDisplayName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [showPw, setShowPw] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -77,7 +95,11 @@ function AuthCard({ mode }: { mode: Mode }) {
   const validate = (): string | null => {
     if (!USERNAME_RE.test(username.trim())) return t("auth.err.username");
     if (password.length < MIN_PASSWORD) return t("auth.err.password");
-    if (isSignup && !displayName.trim()) return t("auth.err.name");
+    if (isSignup) {
+      if (!displayName.trim()) return t("auth.err.name");
+      if (!EMAIL_RE.test(email.trim())) return t("auth.err.email");
+      if (!PHONE_RE.test(phone.trim())) return t("auth.err.phone");
+    }
     return null;
   };
 
@@ -91,8 +113,17 @@ function AuthCard({ mode }: { mode: Mode }) {
     setError(null);
     setBusy(true);
     try {
-      if (isSignup) await auth.signUp(username.trim(), password, displayName.trim());
-      else await auth.signIn(username.trim(), password);
+      if (isSignup) {
+        await auth.signUp({
+          username: username.trim(),
+          password,
+          displayName: displayName.trim(),
+          email: email.trim(),
+          phone: phone.trim()
+        });
+      } else {
+        await auth.signIn(username.trim(), password);
+      }
       navigate(params.get("next") || "/", { replace: true });
     } catch (err) {
       setError(mapAuthError(err, t));
@@ -141,6 +172,40 @@ function AuthCard({ mode }: { mode: Mode }) {
               placeholder={t("auth.displayName.ph")}
               maxLength={40}
               autoComplete="name"
+            />
+          </FieldLabel>
+        )}
+
+        {isSignup && (
+          <FieldLabel htmlFor="auth-email" hint={t("auth.email.hint")}>
+            {t("auth.email")}
+            <input
+              id="auth-email"
+              type="email"
+              className="field mt-1.5"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder={t("auth.email.ph")}
+              maxLength={254}
+              autoCapitalize="none"
+              spellCheck={false}
+              autoComplete="email"
+            />
+          </FieldLabel>
+        )}
+
+        {isSignup && (
+          <FieldLabel htmlFor="auth-phone" hint={t("auth.phone.hint")}>
+            {t("auth.phone")}
+            <input
+              id="auth-phone"
+              type="tel"
+              className="field mt-1.5"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              placeholder={t("auth.phone.ph")}
+              maxLength={20}
+              autoComplete="tel"
             />
           </FieldLabel>
         )}
@@ -265,6 +330,18 @@ function AccountCard({ locale }: { locale: string }) {
         <span className="chip border-slate-200 bg-slate-50 font-mono text-slate-700 dark:border-ink-700 dark:bg-ink-900/60 dark:text-slate-300">
           @{me.username}
         </span>
+        {me.email && (
+          <span className="chip border-slate-200 bg-slate-50 text-slate-700 dark:border-ink-700 dark:bg-ink-900/60 dark:text-slate-300">
+            <Mail className="h-3.5 w-3.5" />
+            {me.email}
+          </span>
+        )}
+        {me.phone && (
+          <span className="chip border-slate-200 bg-slate-50 font-mono text-slate-700 dark:border-ink-700 dark:bg-ink-900/60 dark:text-slate-300">
+            <Phone className="h-3.5 w-3.5" />
+            {me.phone}
+          </span>
+        )}
         <span className="chip border-slate-200 bg-white text-slate-500 dark:border-ink-700 dark:bg-ink-900/40 dark:text-slate-400">
           <CalendarDays className="h-3.5 w-3.5" />
           {t("auth.memberSince", { when: since })}
@@ -440,9 +517,12 @@ function FieldLabel({
 function mapAuthError(err: unknown, t: (key: string) => string): string {
   if (err instanceof HttpError) {
     if (err.code === "username_taken") return t("auth.err.taken");
+    if (err.code === "email_taken") return t("auth.err.emailTaken");
     if (err.code === "bad_credentials") return t("auth.err.bad");
     if (err.code === "invalid_username") return t("auth.err.username");
     if (err.code === "invalid_password") return t("auth.err.password");
+    if (err.code === "invalid_email") return t("auth.err.email");
+    if (err.code === "invalid_phone") return t("auth.err.phone");
     if (err.status === 0 || err.status >= 500) return t("auth.err.offline");
     return t("auth.err.generic");
   }

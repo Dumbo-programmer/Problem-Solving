@@ -39,6 +39,9 @@ export interface StoredUser {
   id: string;
   username: string;
   displayName: string;
+  /** Contact details captured at sign-up (optional on legacy accounts). */
+  email?: string;
+  phone?: string;
   passwordHash: string;
   createdAt: string;
 }
@@ -59,6 +62,8 @@ export interface Store {
 
   findUserByUsername(username: string): Promise<StoredUser | null>;
   findUserById(id: string): Promise<StoredUser | null>;
+  /** True when the email is already registered to another account. */
+  findUserByEmail(email: string): Promise<StoredUser | null>;
   /** Creates the account; false when the username is already taken. */
   createUser(user: StoredUser): Promise<boolean>;
   setUserDisplayName(id: string, displayName: string): Promise<void>;
@@ -235,19 +240,25 @@ create table if not exists practice_tests (
   timed_out         boolean not null default false,
   scheduled_test_id text,
   display_name      text,
+  account_id        text,
   created_at        timestamptz not null default now()
 );
 
 create index if not exists practice_tests_client_idx    on practice_tests (client_id, created_at desc);
 create index if not exists practice_tests_scheduled_idx on practice_tests (scheduled_test_id);
+create index if not exists practice_tests_account_idx   on practice_tests (account_id);
 
 create table if not exists users (
   id            text primary key,
   username      text not null unique,
   display_name  text not null,
+  email         text,
+  phone         text,
   password_hash text not null,
   created_at    timestamptz not null default now()
 );
+
+create unique index if not exists users_email_idx on users (lower(email)) where email is not null;
 
 create table if not exists scheduled_tests (
   id              text primary key,
@@ -270,7 +281,14 @@ const MIGRATIONS = [
   // The original table used uuid ids; demo/admin ids are not UUIDs.
   "alter table practice_tests alter column id type text using id::text",
   "alter table practice_tests add column if not exists scheduled_test_id text",
-  "alter table practice_tests add column if not exists display_name text"
+  "alter table practice_tests add column if not exists display_name text",
+  // Boards only rank attempts tied to a signed-in account.
+  "alter table practice_tests add column if not exists account_id text",
+  "create index if not exists practice_tests_account_idx on practice_tests (account_id)",
+  // Contact details captured at sign-up.
+  "alter table users add column if not exists email text",
+  "alter table users add column if not exists phone text",
+  "create unique index if not exists users_email_idx on users (lower(email)) where email is not null"
 ];
 
 export class PgStore implements Store {
@@ -426,7 +444,7 @@ export class PgStore implements Store {
     const res = await this.client.query(
       `select id, client_id, title, filters, problem_ids, duration_min, status,
               answers, score, max_score, correct_count, started_at, submitted_at,
-              timed_out, scheduled_test_id, display_name
+              timed_out, scheduled_test_id, display_name, account_id
        from practice_tests
        ${where}
        order by created_at desc
@@ -454,7 +472,8 @@ export class PgStore implements Store {
       timedOut: Boolean(r.timed_out),
       origin: "cloud",
       scheduledTestId: r.scheduled_test_id ? String(r.scheduled_test_id) : undefined,
-      displayName: r.display_name ? String(r.display_name) : undefined
+      displayName: r.display_name ? String(r.display_name) : undefined,
+      accountId: r.account_id ? String(r.account_id) : undefined
     };
   }
 
@@ -467,8 +486,8 @@ export class PgStore implements Store {
       `insert into practice_tests
          (id, client_id, title, filters, problem_ids, duration_min, status,
           answers, score, max_score, correct_count, started_at, submitted_at,
-          timed_out, scheduled_test_id, display_name)
-       values ($1,$2,$3,$4::jsonb,$5::jsonb,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16)
+          timed_out, scheduled_test_id, display_name, account_id)
+       values ($1,$2,$3,$4::jsonb,$5::jsonb,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16,$17)
        on conflict (id) do nothing`,
       [
         t.id,
@@ -486,7 +505,8 @@ export class PgStore implements Store {
         t.submittedAt ?? null,
         Boolean(t.timedOut),
         t.scheduledTestId ?? null,
-        t.displayName ?? null
+        t.displayName ?? null,
+        t.accountId ?? null
       ]
     );
   }
@@ -496,8 +516,8 @@ export class PgStore implements Store {
       `insert into practice_tests
          (id, client_id, title, filters, problem_ids, duration_min, status,
           answers, score, max_score, correct_count, started_at, submitted_at,
-          timed_out, scheduled_test_id, display_name)
-       values ($1,$2,$3,$4::jsonb,$5::jsonb,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16)
+          timed_out, scheduled_test_id, display_name, account_id)
+       values ($1,$2,$3,$4::jsonb,$5::jsonb,$6,$7,$8::jsonb,$9,$10,$11,$12,$13,$14,$15,$16,$17)
        on conflict (id) do update set
          title = excluded.title,
          filters = excluded.filters,
@@ -511,7 +531,8 @@ export class PgStore implements Store {
          submitted_at = excluded.submitted_at,
          timed_out = excluded.timed_out,
          scheduled_test_id = excluded.scheduled_test_id,
-         display_name = excluded.display_name`,
+         display_name = excluded.display_name,
+         account_id = excluded.account_id`,
       [
         t.id,
         t.clientId,
@@ -528,7 +549,8 @@ export class PgStore implements Store {
         t.submittedAt ?? null,
         Boolean(t.timedOut),
         t.scheduledTestId ?? null,
-        t.displayName ?? null
+        t.displayName ?? null,
+        t.accountId ?? null
       ]
     );
   }
@@ -598,14 +620,18 @@ export class PgStore implements Store {
       id: String(r.id),
       username: String(r.username),
       displayName: String(r.display_name),
+      email: r.email ? String(r.email) : undefined,
+      phone: r.phone ? String(r.phone) : undefined,
       passwordHash: String(r.password_hash),
       createdAt: iso(r.created_at)
     };
   }
 
+  private static readonly USER_COLS = "id, username, display_name, email, phone, password_hash, created_at";
+
   async findUserByUsername(username: string): Promise<StoredUser | null> {
     const res = await this.client.query(
-      "select id, username, display_name, password_hash, created_at from users where username = $1",
+      `select ${PgStore.USER_COLS} from users where username = $1`,
       [username]
     );
     return res.rows[0] ? this.rowToUser(res.rows[0]) : null;
@@ -613,18 +639,34 @@ export class PgStore implements Store {
 
   async findUserById(id: string): Promise<StoredUser | null> {
     const res = await this.client.query(
-      "select id, username, display_name, password_hash, created_at from users where id = $1",
+      `select ${PgStore.USER_COLS} from users where id = $1`,
       [id]
+    );
+    return res.rows[0] ? this.rowToUser(res.rows[0]) : null;
+  }
+
+  async findUserByEmail(email: string): Promise<StoredUser | null> {
+    const res = await this.client.query(
+      `select ${PgStore.USER_COLS} from users where lower(email) = lower($1)`,
+      [email]
     );
     return res.rows[0] ? this.rowToUser(res.rows[0]) : null;
   }
 
   async createUser(user: StoredUser): Promise<boolean> {
     const res = await this.client.query(
-      `insert into users (id, username, display_name, password_hash, created_at)
-       values ($1,$2,$3,$4,$5)
+      `insert into users (id, username, display_name, email, phone, password_hash, created_at)
+       values ($1,$2,$3,$4,$5,$6,$7)
        on conflict (username) do nothing`,
-      [user.id, user.username, user.displayName, user.passwordHash, user.createdAt]
+      [
+        user.id,
+        user.username,
+        user.displayName,
+        user.email ?? null,
+        user.phone ?? null,
+        user.passwordHash,
+        user.createdAt
+      ]
     );
     return (res.rowCount ?? 0) > 0;
   }
@@ -818,8 +860,16 @@ export class FileStore implements Store {
     return this.data.users.find((u) => u.id === id) ?? null;
   }
 
+  async findUserByEmail(email: string): Promise<StoredUser | null> {
+    const needle = email.trim().toLowerCase();
+    return this.data.users.find((u) => (u.email ?? "").trim().toLowerCase() === needle) ?? null;
+  }
+
   async createUser(user: StoredUser): Promise<boolean> {
     if (this.data.users.some((u) => u.username === user.username)) return false;
+    if (user.email && this.data.users.some((u) => (u.email ?? "").toLowerCase() === user.email!.toLowerCase())) {
+      return false;
+    }
     this.data.users.push(user);
     this.persist();
     return true;

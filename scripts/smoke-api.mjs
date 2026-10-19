@@ -102,6 +102,19 @@ try {
   check("window defaults to all-time", (await call("GET", "/leaderboard")).data?.window === "all");
 
   /* ---------- learner entry round-trip ---------- */
+  // Boards only rank attempts tied to a signed-in account, so this entry is
+  // posted with a learner bearer (the server derives the account from it).
+  const entryUser = await call("POST", "/auth/signup", {
+    body: {
+      username: `entry${Date.now().toString(36)}`,
+      password: "long-enough",
+      displayName: "Smoke Tester",
+      email: `entry${Date.now().toString(36)}@example.com`,
+      phone: "+8801700000009"
+    }
+  });
+  const entryToken = entryUser.data?.token;
+
   const entryId = `smoke-${Date.now()}`;
   const entry = {
     id: entryId,
@@ -121,7 +134,7 @@ try {
     displayName: "Smoke Tester"
   };
 
-  const saved = await call("POST", "/tests", { body: entry });
+  const saved = await call("POST", "/tests", { body: entry, token: entryToken });
   check("POST /tests files an entry", saved.status === 200 && saved.data?.ok === true);
 
   const mine = await call("GET", "/tests?clientId=smoke-client");
@@ -130,12 +143,30 @@ try {
   const st2 = await call("GET", `/standings?testId=${encodeURIComponent(livePaper?.id)}`);
   check("entry lands in the standings", (st2.data?.rows ?? []).some((r) => r.name === "Smoke Tester"), `${st2.data.rows.length} rows`);
 
+  const st2You = await call("GET", `/standings?testId=${encodeURIComponent(livePaper?.id)}`, { token: entryToken });
+  check(
+    "standings mark the caller's own row",
+    (st2You.data?.rows ?? []).some((r) => r.name === "Smoke Tester" && r.isYou === true),
+    "isYou flag"
+  );
+
   const del = await call("DELETE", `/tests?id=${entryId}&clientId=smoke-client`);
   const st3 = await call("GET", `/standings?testId=${encodeURIComponent(livePaper?.id)}`);
   check("DELETE /tests removes the entry", del.status === 200 && !(st3.data?.rows ?? []).some((r) => r.name === "Smoke Tester"));
 
   const delBad = await call("DELETE", "/tests");
   check("DELETE /tests without ids is a 400", delBad.status === 400, delBad.data?.error);
+
+  // An anonymous attempt is filed but must never appear on a public board.
+  const anonEntry = { ...entry, id: `${entryId}-anon`, clientId: "smoke-anon" };
+  await call("POST", "/tests", { body: anonEntry });
+  const stAnon = await call("GET", `/standings?testId=${encodeURIComponent(livePaper?.id)}`);
+  check(
+    "anonymous attempts stay off the boards",
+    !(stAnon.data?.rows ?? []).some((r) => r.clientId === "smoke-anon"),
+    "not ranked"
+  );
+  await call("DELETE", `/tests?id=${entryId}-anon&clientId=smoke-anon`);
 
   /* ---------- learner accounts ---------- */
   const badUser = await call("POST", "/auth/signup", {
@@ -149,23 +180,76 @@ try {
   check("signup rejects short passwords", badPw.status === 400 && badPw.data?.error === "invalid_password", badPw.data?.error);
 
   const noName = await call("POST", "/auth/signup", {
-    body: { username: "smokeuser", password: "long-enough", displayName: "   " }
+    body: {
+      username: "smokeuser",
+      password: "long-enough",
+      displayName: "   ",
+      email: "smoke@example.com",
+      phone: "+8801700000000"
+    }
   });
   check("signup requires a display name", noName.status === 400 && noName.data?.error === "display_name_required", noName.data?.error);
 
+  const badEmail = await call("POST", "/auth/signup", {
+    body: {
+      username: "smokeuser",
+      password: "long-enough",
+      displayName: "Smoke User",
+      email: "not-an-email",
+      phone: "+8801700000000"
+    }
+  });
+  check("signup rejects malformed emails", badEmail.status === 400 && badEmail.data?.error === "invalid_email", badEmail.data?.error);
+
+  const badPhone = await call("POST", "/auth/signup", {
+    body: {
+      username: "smokeuser",
+      password: "long-enough",
+      displayName: "Smoke User",
+      email: "smoke@example.com",
+      phone: "12"
+    }
+  });
+  check("signup rejects malformed phone numbers", badPhone.status === 400 && badPhone.data?.error === "invalid_phone", badPhone.data?.error);
+
   const signup = await call("POST", "/auth/signup", {
-    body: { username: "SmokeUser", password: "long-enough", displayName: "Smoke User" }
+    body: {
+      username: "SmokeUser",
+      password: "long-enough",
+      displayName: "Smoke User",
+      email: "Smoke@Example.com",
+      phone: "+880 1700-000000"
+    }
   });
   const learnerToken = signup.data?.token;
   check("signup issues a learner session", signup.status === 200 && typeof learnerToken === "string", signup.data?.error ?? "token issued");
   check("usernames are normalised to lowercase", signup.data?.user?.username === "smokeuser", signup.data?.user?.username);
   check("signup echoes the profile", signup.data?.user?.displayName === "Smoke User" && typeof signup.data?.user?.createdAt === "string");
+  check("emails are normalised to lowercase", signup.data?.user?.email === "smoke@example.com", signup.data?.user?.email);
+  check("phone numbers are stored as digits", signup.data?.user?.phone === "+8801700000000", signup.data?.user?.phone);
   check("password hashes never leave the server", !JSON.stringify(signup.data).includes("passwordHash") && !JSON.stringify(signup.data).includes("scrypt$"));
 
   const dup = await call("POST", "/auth/signup", {
-    body: { username: "smokeuser", password: "another-pass", displayName: "Impostor" }
+    body: {
+      username: "smokeuser",
+      password: "another-pass",
+      displayName: "Impostor",
+      email: "other@example.com",
+      phone: "+8801700000001"
+    }
   });
   check("duplicate usernames are a 409", dup.status === 409 && dup.data?.error === "username_taken", `${dup.status} ${dup.data?.error}`);
+
+  const dupEmail = await call("POST", "/auth/signup", {
+    body: {
+      username: "smokeuser2",
+      password: "another-pass",
+      displayName: "Impostor Two",
+      email: "SMOKE@example.com",
+      phone: "+8801700000002"
+    }
+  });
+  check("duplicate emails are a 409", dupEmail.status === 409 && dupEmail.data?.error === "email_taken", `${dupEmail.status} ${dupEmail.data?.error}`);
 
   const ghost = await call("POST", "/auth/login", { body: { username: "ghost", password: "long-enough" } });
   check("unknown usernames fail like wrong passwords", ghost.status === 401 && ghost.data?.error === "bad_credentials", ghost.data?.error);

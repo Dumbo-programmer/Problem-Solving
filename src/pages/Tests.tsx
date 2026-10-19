@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowRight, CalendarDays, Clock, FlaskConical, Loader2, Play, Timer, Trophy, UserRound, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock, Crown, FlaskConical, Loader2, Play, Timer, Trophy, UserRound, Users } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
 import PageDecor from "../components/PageDecor";
@@ -82,6 +82,7 @@ export default function Tests() {
   const [askingName, setAskingName] = useState<ScheduledTest | null>(null);
   const [nameValue, setNameValue] = useState("");
   const [nameError, setNameError] = useState(false);
+  const [winners, setWinners] = useState<{ test: ScheduledTest; rows: StandingsRow[] } | null>(null);
 
   const load = useCallback(async () => {
     const [scheduled, past] = await Promise.all([fetchScheduledTests(), fetchPastTests()]);
@@ -114,6 +115,29 @@ export default function Tests() {
         : a.startAt.localeCompare(b.startAt); // live/upcoming: soonest first
     });
   }, [tests, now]);
+
+  // The paper whose winners board leads the page: the most recent one that is
+  // live or has ended (a live paper shows its provisional leaders).
+  const featured = useMemo(() => {
+    if (!orderedTests) return null;
+    return orderedTests.find((t) => phaseOf(t, now) !== "upcoming") ?? null;
+  }, [orderedTests, now]);
+
+  // Fetch that paper's standings for the winners board at the top of the page.
+  useEffect(() => {
+    if (!featured) {
+      setWinners(null);
+      return;
+    }
+    let cancelled = false;
+    void fetchStandings(featured.id).then((res) => {
+      if (cancelled) return;
+      setWinners({ test: featured, rows: res.rows });
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [featured]);
 
   // A leftover draft is meaningless once its attempt has been submitted.
   useEffect(() => {
@@ -249,6 +273,18 @@ export default function Tests() {
         )}
       </div>
 
+      {winners && winners.rows.length > 0 && (
+        <WinnersBoard
+          test={winners.test}
+          rows={winners.rows.slice(0, 3)}
+          now={now}
+          onSeeAll={() => {
+            setOpenStandings(winners.test.id);
+            document.getElementById(`test-${winners.test.id}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+          }}
+        />
+      )}
+
       {orderedTests === null ? (
         <div className="mt-6 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
           <Loader2 size={16} className="animate-spin" /> {t("misc.loading")}
@@ -279,7 +315,7 @@ export default function Tests() {
                   : 0;
 
             return (
-              <article key={test.id} className="card flex flex-col p-5">
+              <article key={test.id} id={`test-${test.id}`} className="card flex flex-col scroll-mt-24 p-5">
                 <div className="flex flex-wrap items-center gap-2">
                   <span className="chip border border-accent-500/40 bg-accent-500/10 text-accent-700 dark:text-accent-300">
                     {test.kind === "WEEKLY"
@@ -400,7 +436,7 @@ export default function Tests() {
                         {t("tests.standings.empty")}
                       </p>
                     ) : (
-                      <StandingsTable rows={rows} clientId={getClientId()} />
+                      <StandingsTable rows={rows} clientId={getClientId()} accountId={user?.id} />
                     )}
                     <p className="mt-3 text-[11px] text-slate-400 dark:text-slate-500">
                       {t("tests.standings.hint")}
@@ -453,7 +489,7 @@ export default function Tests() {
 }
 
 /** Ranked list: score %, then faster hand-in (shared maths in lib/leaderboard). */
-export function StandingsTable({ rows, clientId }: { rows: StandingsRow[]; clientId: string }) {
+export function StandingsTable({ rows, clientId, accountId }: { rows: StandingsRow[]; clientId: string; accountId?: string }) {
   const { t } = useI18n();
   return (
     <div className="mt-3 overflow-hidden rounded-xl border border-slate-200 dark:border-ink-800">
@@ -468,7 +504,7 @@ export function StandingsTable({ rows, clientId }: { rows: StandingsRow[]; clien
         </thead>
         <tbody>
           {rows.slice(0, 50).map((row) => {
-            const you = row.isYou || row.clientId === clientId;
+            const you = row.isYou || (accountId ? row.accountId === accountId : row.clientId === clientId);
             return (
               <tr
                 key={row.entryId}
@@ -495,5 +531,99 @@ export function StandingsTable({ rows, clientId }: { rows: StandingsRow[]; clien
         </tbody>
       </table>
     </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/* Winners board — recent test leaders, above the papers               */
+/* ------------------------------------------------------------------ */
+
+const MEDALS = ["🥇", "🥈", "🥉"];
+
+/**
+ * The winners of the most recent weekly/monthly paper, shown at the top of the
+ * tests page so the contest result is visible without opening a standings
+ * panel. A live paper shows its provisional leaders; an ended paper shows the
+ * final board.
+ */
+export function WinnersBoard({
+  test,
+  rows,
+  now,
+  onSeeAll
+}: {
+  test: ScheduledTest;
+  rows: StandingsRow[];
+  now: number;
+  onSeeAll: () => void;
+}) {
+  const { t, lang } = useI18n();
+  const L = (v: { en: string; bn: string }) => (lang === "bn" ? v.bn : v.en);
+  const live = phaseOf(test, now) === "live";
+
+  return (
+    <section
+      aria-labelledby="winners-title"
+      className="card relative mt-6 overflow-hidden p-5 sm:p-6"
+    >
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-amber-400/15 blur-3xl"
+      />
+      <div className="relative flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="eyebrow inline-flex items-center gap-1.5">
+            <Crown size={13} /> {t("tests.winners.eyebrow")}
+          </p>
+          <h2 id="winners-title" className="mt-1.5 text-xl font-bold tracking-tight text-ink-900 dark:text-white">
+            {t("tests.winners.title")}
+          </h2>
+          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+            {L(test.title)} ·{" "}
+            {test.kind === "WEEKLY" ? t("kind.weekly") : t("kind.monthly")} ·{" "}
+            <span className={live ? "text-emerald-500" : "text-slate-400"}>
+              {live ? t("tests.winners.live") : t("tests.winners.ended")}
+            </span>
+          </p>
+        </div>
+        <button type="button" onClick={onSeeAll} className="btn-ghost h-9 px-3.5 text-xs">
+          <Trophy size={14} /> {t("tests.winners.all")}
+        </button>
+      </div>
+
+      {rows.length === 0 ? (
+        <p className="relative mt-4 text-sm text-slate-500 dark:text-slate-400">{t("tests.winners.empty")}</p>
+      ) : (
+        <ol className="relative mt-4 grid gap-3 sm:grid-cols-3">
+          {rows.map((row, i) => (
+            <li
+              key={row.entryId}
+              className={`flex items-center gap-3 rounded-xl border p-3 ${
+                row.isYou
+                  ? "border-accent-500/50 bg-accent-500/10"
+                  : "border-slate-200 bg-slate-50/60 dark:border-ink-800 dark:bg-ink-900/50"
+              }`}
+            >
+              <span className="text-2xl leading-none" aria-hidden>
+                {MEDALS[i] ?? row.rank}
+              </span>
+              <div className="min-w-0">
+                <p className="truncate font-semibold text-ink-900 dark:text-white">
+                  {row.name}
+                  {row.isYou && (
+                    <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700 dark:text-accent-300">
+                      {t("lb.you")}
+                    </span>
+                  )}
+                </p>
+                <p className="mt-0.5 font-mono text-xs text-slate-500 dark:text-slate-400">
+                  {row.pct}% · {formatDuration(row.timeTakenSec)}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      )}
+    </section>
   );
 }

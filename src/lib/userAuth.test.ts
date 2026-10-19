@@ -4,6 +4,8 @@ import {
   MIN_PASSWORD,
   SESSION_TTL_MS,
   hashPassword,
+  normalizeEmail,
+  normalizePhone,
   normalizeUsername,
   passwordOk,
   signSession,
@@ -33,8 +35,40 @@ describe("username rules", () => {
   });
 });
 
-describe("password policy", () => {
-  it("accepts 6–72 characters", () => {
+describe("email rules", () => {
+  it("lowercases + trims, then accepts a normal address", () => {
+    expect(normalizeEmail("Rafiq@Example.COM")).toBe("rafiq@example.com");
+    expect(normalizeEmail("  a.b+tag@mail.co.uk  ")).toBe("a.b+tag@mail.co.uk");
+  });
+
+  it("rejects malformed addresses and non-strings", () => {
+    expect(normalizeEmail("no-at-sign")).toBeNull();
+    expect(normalizeEmail("missing@tld")).toBeNull();
+    expect(normalizeEmail("spaces in@mail.com")).toBeNull();
+    expect(normalizeEmail("")).toBeNull();
+    expect(normalizeEmail(undefined)).toBeNull();
+    expect(normalizeEmail(42)).toBeNull();
+  });
+});
+
+describe("phone rules", () => {
+  it("keeps digits and a leading +, dropping spaces and dashes", () => {
+    expect(normalizePhone("+880 1700-000000")).toBe("+8801700000000");
+    expect(normalizePhone("01700000000")).toBe("01700000000");
+    expect(normalizePhone("  +1 555 123 4567 ")).toBe("+15551234567");
+  });
+
+  it("rejects too short/long and non-strings", () => {
+    expect(normalizePhone("123")).toBeNull();
+    expect(normalizePhone("1".repeat(19))).toBeNull();
+    expect(normalizePhone("not-a-number")).toBeNull();
+    expect(normalizePhone("")).toBeNull();
+    expect(normalizePhone(undefined)).toBeNull();
+    expect(normalizePhone(1700000000)).toBeNull();
+  });
+});
+
+describe("password policy", () => {  it("accepts 6–72 characters", () => {
     expect(passwordOk("x".repeat(MIN_PASSWORD))).toBe(true);
     expect(passwordOk("x".repeat(MAX_PASSWORD))).toBe(true);
     expect(passwordOk("secret123")).toBe(true);

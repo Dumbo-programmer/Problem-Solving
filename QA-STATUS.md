@@ -136,6 +136,75 @@
 - ⚠️ Visual QA stays programmatic (the model cannot view images); the brand checks
   assert geometry (painted size, landscape ratio, stacking order) rather than looks.
 
+## ⏱ Update — 2026-10-20, 00:40 (ops: dev server + proofread re-verify)
+
+- **Dev server (5173) is back up.** It died twice to Vite's `fs.watch` throwing
+  `EBUSY` while a build/deploy wrote a locked file (`public/prothom-alo.svg`, then
+  the `dist-cloud/` churn) — a Windows file-lock flake, not a code fault. It now
+  runs with **`CHOKIDAR_USEPOLLING=true`** so watcher-polling tolerates those locks
+  (a shell env var only — no `vite.config.ts` change). 5173 and your preview on
+  4173 both answer **200**.
+- **Proofread fixes from 23:40–23:45 are intact** after your 12:26–12:31 `i18n.tsx`
+  rewrites (verified key-by-key); key coverage re-checked: **369/369, 0 missing**.
+  `typecheck` clean, `vitest` 67/67.
+- **New-copy pass on the co-brand/theme batch** (00:50): `tests.winners.ended` বাংলা
+  "চূড়ান্ত ফলাফল" → "চূড়ান্ত স্ট্যান্ডিংস" (five sibling keys all say স্ট্যান্ডিংস);
+  `builder.pool` বাংলা "পাওয়া যায় এমন" (dangling adjective) → "মজুদ" (the site's word
+  for the bank); `home.partsLede` বাংলা "এর শুরু সমস্যাগুলো **নিজে থেকেই**" → "শুরুটা
+  সমস্যাগুলো দিয়েই" ("themselves" had been misread as "automatically"). New email/phone
+  account copy (`auth.email*`, `auth.phone*`, `auth.err.email/phone/emailTaken`) reviewed
+  — correct. Zero hardcoded strings remain in any page (grep-verified).
+
+## ⏱ Update — 2026-10-20, 00:45 (two boards, mandatory sign-in, contact fields)
+
+- **Board ranking rule changed**: an attempt now carries an optional `accountId`, and
+  only **account-linked** entries (plus the seeded `demo-*` field) rank. Anonymous
+  real attempts are filed and stay visible in Past Tests but never appear on a public
+  board — the link is derived **server-side** from the session bearer in
+  `handleSaveTest` (never trusted from the request body).
+- **Two distinct leaderboards**:
+  - `/tests` leads with a **Recent test winners** board — the featured paper's top
+    three on a podium (medals, live/final label) plus a "Full standings" jump to the
+    per-paper table; each paper keeps its own `?standings=` deep link.
+  - `/leaderboard` stays the **overall problem-solver** board (problems solved only,
+    week/month/all tabs, own-row highlight by account).
+  - Shared maths in `src/lib/leaderboard.ts`: `isRankedEntry`, `isDemoEntry`,
+    `entryOwner`, `markYou(rows, clientId?, accountId?)`, `findYou`.
+- **Sign-in is mandatory for the competitive parts** (user decision): Home,
+  `/problems` and `/practice` stay open; `/tests`, `/leaderboard`, `/past-tests` are
+  wrapped in the new `RequireAuth`, which redirects to `/login?next=…` and returns you
+  there after signing in. `/test/:id` deliberately stays **open** so anonymous practice
+  still works — the scheduled papers enforce sign-in at their start flow (`/tests`).
+- **Sign-up now collects email + phone + username + password** (login stays
+  username+password). Server validates with `normalizeEmail` / `normalizePhone`
+  (phone stored as digits with a leading `+`), emails are unique
+  (`users_email_idx` on `lower(email)`, 409 `email_taken`), and the signed-in account
+  card shows both. New error codes: `invalid_email`, `invalid_phone`, `email_taken`.
+- **Store/API**: `StoredUser` gained `email?`/`phone?`; Pg schema + `MIGRATIONS` add
+  the columns/index; `Store` gained `findUserByEmail`; `userShape` exposes both
+  (hashes never leave the server).
+- **Decorations replaced the removed section**: the labelled "Maths in motion" band is
+  gone (and its 11 i18n keys). The graphs are now ambient — new `FloatingPlots`
+  (scattered sine/parabola/orbit-ring/∞, seeded, own opacity/bob timings) rides in
+  `PageDecor` on every page, and the Home hero carries a richer 6-plot field.
+
+**Re-verified after these changes:**
+
+| Check | Command | Result |
+|---|---|---|
+| Typecheck | `npm.cmd run typecheck` | ✅ clean |
+| Unit tests | `npx.cmd vitest run` | ✅ 74/74 (+4 `normalizeEmail`/`normalizePhone`, +3 `isRankedEntry`/`isDemoEntry`; board tests now account-aware) |
+| Production build | `npm.cmd run build` | ✅ 144 problems |
+| Responsive layout | `npm.cmd run layout` | ✅ all pass |
+| E2E smoke (offline) | `npm.cmd run smoke` | ✅ 46/46, **zero console errors** — gated routes now assert the `/login?next=…` bounce; practice → runner → results still walks end-to-end |
+| API contract smoke | `npm.cmd run smoke:api` | ✅ 78/78 (+7: email/phone rules, dup email 409, own-row `isYou`, anonymous attempts stay off the boards) |
+| E2E smoke (API attached) | `npm.cmd run smoke:cloud` | ✅ 57/57 — adds the signed-in journeys: winners board, leaderboard tabs/podium, past tests, sign-out |
+
+- ⚠️ Still true: Supabase Postgres is unreachable from this machine (IPv6-only host,
+  pooler ports time out) — the Postgres `email/phone` columns and the account filter
+  are exercised through the file store, not the real database.
+- ⚠️ npm advisories remain dev-toolchain only (vitest/vite/tailwind majors deferred).
+
 ## Proofreading already applied (no action needed)
 
 - `src/data/problems-a.json`, `problems-b.json`, `problems-c.json` — all 144 answers math-verified; Bangla typos/mistranslations fixed (incl. `pr-h-02` title/statement/solution, সর্বশেষ, এংগেল, ক্যাটালান solution, compositions statement).

@@ -57,6 +57,48 @@ async function text() {
   return page.evaluate(() => document.body.innerText);
 }
 
+/**
+ * Are we on the login gate? Gated routes redirect signed-out visitors to
+ * `/login?next=…`, so the URL is the reliable signal.
+ */
+function gated() {
+  return page.url().includes("/login");
+}
+
+/**
+ * Signs up a throwaway account through the real form. Returns true when the
+ * account was created (an API is attached — `smoke:cloud`); false when the app
+ * degraded to the offline banner (`vite preview` with no functions).
+ */
+async function trySignup() {
+  await goto("/login?mode=signup");
+  const uname = `smoke${Date.now().toString(36)}`;
+  await page.evaluate((u) => {
+    const set = (id, val) => {
+      const el = document.querySelector(id);
+      if (!el) return;
+      const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
+      setter.call(el, val);
+      el.dispatchEvent(new Event("input", { bubbles: true }));
+    };
+    set("#auth-name", "Smoke Tester");
+    set("#auth-email", `${u}@example.com`);
+    set("#auth-phone", "+8801700000000");
+    set("#auth-username", u);
+    set("#auth-password", "long-enough");
+  }, uname);
+  await new Promise((r) => setTimeout(r, 100));
+  await page.evaluate(() => {
+    const btn = [...document.querySelectorAll("button[type=submit]")].find((b) =>
+      /অ্যাকাউন্ট খুলুন|Create account/i.test(b.textContent)
+    );
+    if (btn) btn.click();
+  });
+  await new Promise((r) => setTimeout(r, 2500));
+  const after = await text();
+  return page.url().replace(BASE, "") === "/" && /Smoke Tester/.test(after);
+}
+
 /* ---------- 1. every route renders ---------- */
 for (const path of ["/", "/problems", "/practice", "/past-tests", "/tests", "/login", "/leaderboard", "/admin"]) {
   await goto(path);
@@ -101,7 +143,6 @@ const brand = await page.evaluate(() => {
 check("navbar shows the Prothom Alo mark", brand.palo);
 check("navbar shows the Gonit Ishkul logo", brand.gonit);
 check("Prothom Alo sits above Gonit Ishkul", brand.order);
-check("home shows the maths-in-motion band", /গণিত চলমান|maths in motion/i.test(home));
 check("home carries animated plot SVGs", (await page.evaluate(() => document.querySelectorAll("svg[aria-hidden] path").length)) > 0);
 check("home credits the Prothom Alo math school", /প্রথম আলো গণিত ইশকুল|Prothom Alo Math School/i.test(home));
 check("footer badges the Prothom Alo partnership", /প্রথম আলো · গণিত ইশকুল|Prothom Alo · Gonit Ishkul/i.test(home));
@@ -200,60 +241,20 @@ check("results show correct-answer boxes", /সঠিক উত্তর|Correct
 /* ---------- 7. the test was filed under Past Tests ---------- */
 await goto("/past-tests");
 await new Promise((r) => setTimeout(r, 1500));
-const pastText = await text();
-check("past tests list is populated", !/এখনো কোনো টেস্ট নেই|No tests yet/i.test(pastText));
-check("past tests show a percentage", /\d+%/.test(pastText));
+// Past tests are a gated route: signed-out visitors bounce to the login gate.
+check("past tests gate signed-out visitors", gated(), page.url().replace(BASE, ""));
 
-/* ---------- 8. scheduled tests: calendar, countdown, standings ---------- */
+/* ---------- 8. scheduled tests are gated for signed-out visitors ---------- */
 await goto("/tests");
 await new Promise((r) => setTimeout(r, 1200));
-const testsText = await text();
-check("tests page titles the calendar", /নির্ধারিত টেস্ট|Scheduled tests/i.test(testsText));
-check(
-  "weekly + monthly papers are listed",
-  /সাপ্তাহিক স্প্রিন্ট|Weekly Sprint/i.test(testsText) && /মাসিক চ্যালেঞ্জ|Monthly Challenge/i.test(testsText)
-);
-check("papers show a phase or countdown", /এখন চলছে|আসছে|শেষ হবে|শুরু হবে|Live now|Upcoming|Ends in|Starts in/i.test(testsText));
+check("scheduled tests gate signed-out visitors", gated(), page.url().replace(BASE, ""));
+const gateText = await text();
+check("login gate explains why sign-in is needed", /সাইন ইন করুন|Sign in to continue/i.test(gateText));
 
-// Expanding a contest's standings works whether the API answered or the
-// board came from the offline fallback.
-const openedStandings = await page.evaluate(() => {
-  const btn = [...document.querySelectorAll("button")].find(
-    (b) => /স্ট্যান্ডিংস|Standings/i.test(b.textContent) && !/লুকান|Hide/i.test(b.textContent)
-  );
-  if (btn) {
-    btn.click();
-    return true;
-  }
-  return false;
-});
-await page
-  .waitForFunction(() => /Score decides rank|র‍্যাঙ্ক নির্ধারণ করে স্কোর/i.test(document.body.innerText), { timeout: 5000 })
-  .catch(() => {});
-const standingsText = await text();
-check("standings toggle expands the board", openedStandings && /Score decides rank|র‍্যাঙ্ক নির্ধারণ করে স্কোর/i.test(standingsText));
-await page
-  .waitForFunction(() => /শিক্ষার্থী|Learner|এখনো কেউ জমা দেয়নি|No submissions yet/i.test(document.body.innerText), {
-    timeout: 5000
-  })
-  .catch(() => {});
-const standingsBody = await text();
-check(
-  "standings panel shows rows (or a friendly empty state)",
-  /শিক্ষার্থী|Learner|এখনো কেউ জমা দেয়নি|No submissions yet/i.test(standingsBody)
-);
-
-/* ---------- 9. leaderboard: title, tabs, source ---------- */
+/* ---------- 9. leaderboard is gated for signed-out visitors ---------- */
 await goto("/leaderboard");
 await new Promise((r) => setTimeout(r, 1200));
-const lbText = await text();
-check("leaderboard shows its title", /লিডারবোর্ড|Leaderboard/i.test(lbText));
-check("leaderboard has week/month/all tabs", /এই সপ্তাহ|এই মাস|সব সময়|This week|This month|All time/i.test(lbText));
-check("leaderboard lists ranked learners", /র‍্যাঙ্ক|Rank/i.test(lbText));
-check("leaderboard names its data source", /অফলাইন|ক্লাউড থেকে|Offline —|Live from the cloud/i.test(lbText));
-// The design pass promotes the top three onto a podium above the table.
-const hasPodium = await page.evaluate(() => document.body.innerText.includes("#1"));
-check("leaderboard promotes a top-3 podium", hasPodium);
+check("leaderboard gates signed-out visitors", gated(), page.url().replace(BASE, ""));
 
 /* ---------- 10. admin dashboard gates on a login form ---------- */
 await goto("/admin");
@@ -273,6 +274,8 @@ check("login page explains what an account adds", /অ্যাকাউন্�
 await goto("/login?mode=signup");
 const signupText = await text();
 check("signup mode asks for a display name", /ডিসপ্লে নাম|Display name/i.test(signupText));
+check("signup mode asks for an email", /ইমেইল|Email/i.test(signupText));
+check("signup mode asks for a phone number", /মোবাইল নম্বর|Phone number/i.test(signupText));
 
 // Client-side validation must fire before any network call.
 await page.evaluate(() => {
@@ -288,33 +291,50 @@ check("client-side validation blocks an empty form", hasAlert);
 // Full signup journey. With an API attached (smoke:cloud) the account is
 // created and the navbar greets the learner; offline it must degrade to the
 // bilingual "needs a connection" banner instead of a dead end.
-const uname = `smoke${Date.now().toString(36)}`;
-await page.evaluate((u) => {
-  const set = (id, val) => {
-    const el = document.querySelector(id);
-    if (!el) return;
-    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value").set;
-    setter.call(el, val);
-    el.dispatchEvent(new Event("input", { bubbles: true }));
-  };
-  set("#auth-name", "Smoke Tester");
-  set("#auth-username", u);
-  set("#auth-password", "long-enough");
-}, uname);
-await new Promise((r) => setTimeout(r, 100));
-await page.evaluate(() => {
-  const btn = [...document.querySelectorAll("button[type=submit]")].find((b) =>
-    /অ্যাকাউন্ট খুলুন|Create account/i.test(b.textContent)
-  );
-  if (btn) btn.click();
-});
-await new Promise((r) => setTimeout(r, 2500));
-const afterSignup = await text();
-const signedUp = page.url().replace(BASE, "") === "/" && /Smoke Tester/.test(afterSignup);
-const offlineBanner = await page.evaluate(() => Boolean(document.querySelector('[role="alert"]')));
-check("signup journey completes (or degrades offline)", signedUp || offlineBanner, signedUp ? "account created + greeted" : "offline banner shown");
+const signedUp = await trySignup();
+if (!signedUp) {
+  const offlineBanner = await page.evaluate(() => Boolean(document.querySelector('[role="alert"]')));
+  check("signup journey completes (or degrades offline)", offlineBanner, "offline banner shown");
+} else {
+  check("signup journey completes (or degrades offline)", true, "account created + greeted");
+}
 
 if (signedUp) {
+  /* ---------- 12. signed-in journeys through the gates ---------- */
+
+  // The past-test archive is reachable now.
+  await goto("/past-tests");
+  await new Promise((r) => setTimeout(r, 1500));
+  const pastText = await text();
+  check("signed-in: past tests list opens", !gated() && !/এখনো কোনো টেস্ট নেই|No tests yet/i.test(pastText));
+
+  // Scheduled tests: papers, phases, and the winners board that leads the page.
+  await goto("/tests");
+  await new Promise((r) => setTimeout(r, 1500));
+  const testsText = await text();
+  check("signed-in: scheduled tests open", !gated() && /নির্ধারিত টেস্ট|Scheduled tests/i.test(testsText));
+  check(
+    "signed-in: weekly + monthly papers are listed",
+    /সাপ্তাহিক স্প্রিন্ট|Weekly Sprint/i.test(testsText) && /মাসিক চ্যালেঞ্জ|Monthly Challenge/i.test(testsText)
+  );
+  // The winners board promotes the most recent paper's top solvers up top.
+  check("signed-in: winners board leads the page", /সাম্প্রতিক টেস্টের বিজয়ী|Recent test winners/i.test(testsText));
+  check("signed-in: winners board lists top solvers", /শীর্ষ সমাধানকারী|Top solvers/i.test(testsText));
+
+  // The leaderboard: title, tabs, source, ranked rows and the top-3 podium.
+  await goto("/leaderboard");
+  await new Promise((r) => setTimeout(r, 1500));
+  const lbText = await text();
+  check("signed-in: leaderboard opens", !gated() && /লিডারবোর্ড|Leaderboard/i.test(lbText));
+  check("signed-in: leaderboard has week/month/all tabs", /এই সপ্তাহ|এই মাস|সব সময়|This week|This month|All time/i.test(lbText));
+  check("signed-in: leaderboard names its data source", /অফলাইন|ক্লাউড থেকে|Offline —|Live from the cloud/i.test(lbText));
+  check("signed-in: leaderboard lists ranked learners", /র‍্যাঙ্ক|Rank/i.test(lbText));
+  const hasPodium = await page.evaluate(() => document.body.innerText.includes("#1"));
+  check("signed-in: leaderboard promotes a top-3 podium", hasPodium);
+
+  // Signing out returns the navbar to the signed-out state.
+  await goto("/");
+  await new Promise((r) => setTimeout(r, 600));
   const loggedOut = await page.evaluate(() => {
     const btn = [...document.querySelectorAll("header button")].find((b) =>
       (b.getAttribute("title") || "").match(/সাইন আউট|Sign out/i)
@@ -329,6 +349,7 @@ if (signedUp) {
   const afterLogout = await text();
   check("sign-out returns the navbar to 'Sign in'", loggedOut && /সাইন ইন|Sign in/.test(afterLogout));
 }
+
 
 await browser.close();
 

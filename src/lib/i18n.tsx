@@ -104,7 +104,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "builder.minutes": { en: "minutes", bn: "মিনিট" },
   "builder.minutesShort": { en: "min", bn: "মি." },
   "builder.perProblem": { en: "≈ {n} min per problem", bn: "≈ প্রতি সমস্যা {n} মিনিট" },
-  "builder.pool": { en: "Available pool", bn: "পাওয়া যায় এমন" },
+  "builder.pool": { en: "Available pool", bn: "মজুদ" },
   "builder.selected": { en: "selected", bn: "নির্বাচিত" },
   "builder.autoPick": { en: "Auto-pick for me", bn: "নিজে থেকে বেছে দিন" },
   "builder.manualPick": { en: "I'll choose", bn: "আমি নিজে বাছব" },
@@ -215,7 +215,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.partsTitle": { en: "Practice tests are just one part of it", bn: "প্র্যাকটিস টেস্ট এর একটি অংশ মাত্র" },
   "home.partsLede": {
     en: "It starts with the problems themselves — solve, learn, and use tests when you want to measure yourself.",
-    bn: "এর শুরু সমস্যাগুলো নিজে থেকেই — সমাধান করুন, শিখুন, আর নিজেকে যাচাই করতে চাইলে টেস্ট ব্যবহার করুন।"
+    bn: "শুরুটা সমস্যাগুলো দিয়েই — সমাধান করুন, শিখুন, আর নিজেকে যাচাই করতে চাইলে টেস্ট ব্যবহার করুন।"
   },
   "home.partsBankT": { en: "Explore the problem bank", bn: "সমস্যার মজুদ ঘুরে দেখুন" },
   "home.partsBankD": {
@@ -277,20 +277,6 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.competeOpen": { en: "See the papers & standings", bn: "কাগজ ও স্ট্যান্ডিংস দেখুন" },
   "home.competeBoard": { en: "Full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড" },
   "home.competeSolved": { en: "solved", bn: "সমাধান" },
-  "home.motionEyebrow": { en: "Maths in motion", bn: "গণিত চলমান" },
-  "home.motionTitle": { en: "Curves, graphs, and infinities", bn: "বক্ররেখা, লেখচিত্র ও অসীম" },
-  "home.motionLede": {
-    en: "A little visual maths for the fun of it — the same shapes you'll meet in the bank, drawn live.",
-    bn: "আনন্দের জন্য একটু দৃশ্যমান গণিত — মজুদে যেসব আকৃতি পাবেন, সেগুলোই জীবন্ত হয়ে ফুটে ওঠে।"
-  },
-  "home.motionCurveT": { en: "Sine waves", bn: "সাইন তরঙ্গ" },
-  "home.motionCurveD": { en: "Smooth, periodic, everywhere in nature.", bn: "মসৃণ, পর্যায়ক্রমিক — প্রকৃতিতে সর্বত্র।" },
-  "home.motionGraphT": { en: "Parabolas", bn: "পরাবৃত্ত" },
-  "home.motionGraphD": { en: "Every quadratic bends into the same curve.", bn: "প্রতিটি দ্বিঘাত একই বক্রে বেঁকে যায়।" },
-  "home.motionGridT": { en: "Infinite grids", bn: "অসীম গ্রিড" },
-  "home.motionGridD": { en: "Counting forever, one cell at a time.", bn: "একটি একটি ঘর গুনে অনন্তকাল।" },
-  "home.motionInfT": { en: "Infinity", bn: "অসীম" },
-  "home.motionInfD": { en: "Not a number — a direction you can never finish.", bn: "এটি সংখ্যা নয় — এক দিক, যা কখনো শেষ হয় না।" },
 
   /* ---- 404 ---- */
   "notFound.body": {
@@ -338,6 +324,15 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "Score decides rank; a faster hand-in wins ties.",
     bn: "র‍্যাঙ্ক নির্ধারণ করে স্কোর; সমতায় দ্রুত জমা দেওয়াকে অগ্রাধিকার।"
   },
+  "tests.winners.eyebrow": { en: "Recent test winners", bn: "সাম্প্রতিক টেস্টের বিজয়ীরা" },
+  "tests.winners.title": { en: "Top solvers", bn: "শীর্ষ সমাধানকারী" },
+  "tests.winners.live": { en: "Live — provisional", bn: "চলছে — সাময়িক" },
+  "tests.winners.ended": { en: "Final standings", bn: "চূড়ান্ত স্ট্যান্ডিংস" },
+  "tests.winners.empty": {
+    en: "No winners yet — this paper's first place is still open.",
+    bn: "এখনো কোনো বিজয়ী নেই — এই পত্রের প্রথম স্থান এখনো খালি।"
+  },
+  "tests.winners.all": { en: "Full standings", bn: "সব স্ট্যান্ডিংস" },
   "tests.name.title": { en: "Pick a display name", bn: "ডিসপ্লে নাম দিন" },
   "tests.name.hint": {
     en: "Shown on the standings and leaderboard. You can change it before your next attempt.",
@@ -498,6 +493,18 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "The name shown on standings and leaderboards.",
     bn: "স্ট্যান্ডিংস ও লিডারবোর্ডে এই নামটি দেখানো হবে।"
   },
+  "auth.email": { en: "Email", bn: "ইমেইল" },
+  "auth.email.ph": { en: "e.g. rafiq@example.com", bn: "যেমন: rafiq@example.com" },
+  "auth.email.hint": {
+    en: "Used to reach you about contests — never shown publicly.",
+    bn: "কনটেস্টের খবর জানাতে ব্যবহার হবে — কখনো প্রকাশ্যে দেখানো হবে না।"
+  },
+  "auth.phone": { en: "Phone number", bn: "মোবাইল নম্বর" },
+  "auth.phone.ph": { en: "e.g. +8801XXXXXXXXX", bn: "যেমন: +৮৮০১XXXXXXXXX" },
+  "auth.phone.hint": {
+    en: "Digits only (a leading + is fine) — never shown publicly.",
+    bn: "শুধু সংখ্যা (শুরুতে + চলবে) — কখনো প্রকাশ্যে দেখানো হবে না।"
+  },
   "auth.submit.signin": { en: "Sign in", bn: "সাইন ইন" },
   "auth.submit.signup": { en: "Create account", bn: "অ্যাকাউন্ট খুলুন" },
   "auth.err.username": { en: "Use 3–20 letters, digits or underscores.", bn: "৩–২০ অক্ষর, সংখ্যা বা আন্ডারস্কোর ব্যবহার করুন।" },
@@ -508,12 +515,26 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     bn: "এই ইউজারনেমটি ইতিমধ্যে নেওয়া — অন্য একটি চেষ্টা করুন।"
   },
   "auth.err.bad": { en: "Wrong username or password.", bn: "ইউজারনেম বা পাসওয়ার্ড ভুল।" },
+  "auth.err.email": { en: "Please enter a valid email address.", bn: "অনুগ্রহ করে একটি সঠিক ইমেইল ঠিকানা দিন।" },
+  "auth.err.phone": {
+    en: "Please enter a valid phone number (8–18 digits).",
+    bn: "অনুগ্রহ করে একটি সঠিক মোবাইল নম্বর দিন (৮–১৮ সংখ্যা)।"
+  },
+  "auth.err.emailTaken": {
+    en: "That email is already registered — try signing in.",
+    bn: "এই ইমেইলটি ইতিমধ্যে নিবন্ধিত — সাইন ইন করার চেষ্টা করুন।"
+  },
   "auth.err.offline": {
     en: "Accounts need a connection — anonymous practice keeps working offline.",
     bn: "অ্যাকাউন্টের জন্য ইন্টারনেট লাগবে — অফলাইনেও বিনানামে অনুশীলন চলতে থাকবে।"
   },
   "auth.err.generic": { en: "Something went wrong — please try again.", bn: "কিছু একটা সমস্যা হয়েছে — আবার চেষ্টা করুন।" },
   "auth.signedInAs": { en: "Signed in as {name}", bn: "সাইন ইন করেছেন {name}" },
+  "auth.gate.title": { en: "Sign in to continue", bn: "চালিয়ে যেতে সাইন ইন করুন" },
+  "auth.gate.body": {
+    en: "Weekly and monthly tests, their standings, the leaderboard and your past papers all live behind a learner account. Sign in (or create one) and we'll take you straight back.",
+    bn: "সাপ্তাহিক ও মাসিক টেস্ট, স্ট্যান্ডিংস, লিডারবোর্ড এবং আপনার পুরোনো পত্রগুলো দেখতে শিক্ষার্থী অ্যাকাউন্ট লাগবে। সাইন ইন করুন (বা নতুন অ্যাকাউন্ট খুলুন) — আমরা আপনাকে সরাসরি ফিরিয়ে নিয়ে যাব।"
+  },
   "auth.memberSince": { en: "Member since {when}", bn: "সদস্য {when} থেকে" },
   "auth.nameSaved": { en: "Display name updated.", bn: "ডিসপ্লে নাম আপডেট হয়েছে।" },
   "auth.save": { en: "Save name", bn: "নাম সংরক্ষণ" },

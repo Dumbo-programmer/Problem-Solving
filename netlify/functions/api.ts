@@ -39,6 +39,8 @@ import {
   bearer,
   checkCredentials,
   hashPassword,
+  normalizeEmail,
+  normalizePhone,
   normalizeUsername,
   passwordOk,
   signSession,
@@ -148,10 +150,14 @@ async function handleListTests(params: Record<string, string | undefined>) {
   return json(200, { tests });
 }
 
-async function handleSaveTest(body: Record<string, unknown>) {
+async function handleSaveTest(event: HandlerEvent, body: Record<string, unknown>) {
   const id = str(body.id);
   const clientId = str(body.clientId);
   if (!id || !clientId) return json(400, { error: "id_and_client_id_required" });
+
+  // The account link comes from the session, never the body — a learner must
+  // not be able to post an attempt under someone else's account.
+  const owner = await sessionUser(event);
 
   const store = await readyStore();
   const test: PracticeTest = {
@@ -171,7 +177,8 @@ async function handleSaveTest(body: Record<string, unknown>) {
     timedOut: bool(body.timedOut),
     origin: "cloud",
     scheduledTestId: str(body.scheduledTestId) || undefined,
-    displayName: str(body.displayName).slice(0, 40) || undefined
+    displayName: (owner?.displayName ?? str(body.displayName)).slice(0, 40) || undefined,
+    accountId: owner?.id
   };
   await store.saveTest(test);
   return json(200, { ok: true, id });
@@ -194,7 +201,14 @@ const MAX_NAME = 40;
 
 /** Public shape of an account — the password hash never leaves the server. */
 function userShape(u: StoredUser) {
-  return { id: u.id, username: u.username, displayName: u.displayName, createdAt: u.createdAt };
+  return {
+    id: u.id,
+    username: u.username,
+    displayName: u.displayName,
+    email: u.email,
+    phone: u.phone,
+    createdAt: u.createdAt
+  };
 }
 
 /** Resolves the bearer session to a user, or null when absent/expired. */
@@ -219,15 +233,24 @@ function sessionResponse(user: StoredUser) {
 async function handleSignup(body: Record<string, unknown>) {
   const username = normalizeUsername(body.username);
   const displayName = str(body.displayName).replace(/\s+/g, " ").trim().slice(0, MAX_NAME);
+  const email = normalizeEmail(body.email);
+  const phone = normalizePhone(body.phone);
   if (!username) return json(400, { error: "invalid_username" });
   if (!passwordOk(body.password)) return json(400, { error: "invalid_password" });
   if (!displayName) return json(400, { error: "display_name_required" });
+  if (!email) return json(400, { error: "invalid_email" });
+  if (!phone) return json(400, { error: "invalid_phone" });
 
   const store = await readyStore();
+  // Email must be unique too — a friendly check up front, then the DB index.
+  if (await store.findUserByEmail(email)) return json(409, { error: "email_taken" });
+
   const user: StoredUser = {
     id: randomUUID(),
     username,
     displayName,
+    email,
+    phone,
     passwordHash: hashPassword(body.password as string),
     createdAt: new Date().toISOString()
   };
@@ -276,23 +299,25 @@ async function handleScheduledTests() {
   return json(200, { tests: withParticipants(tests, participantCounts(entries)) });
 }
 
-async function handleStandings(params: Record<string, string | undefined>) {
+async function handleStandings(event: HandlerEvent, params: Record<string, string | undefined>) {
   const testId = str(params.testId);
   if (!testId) return json(400, { error: "test_id_required" });
   const store = await readyStore();
-  const entries = await store.listEntries();
-  const rows = standings(entries, testId).slice(0, 500);
+  const [entries, owner] = await Promise.all([store.listEntries(), sessionUser(event)]);
+  const rows = standings(entries, testId)
+    .map((r) => (owner && r.accountId === owner.id ? { ...r, isYou: true } : r))
+    .slice(0, 500);
   return json(200, { rows, testId });
 }
 
-async function handleLeaderboard(params: Record<string, string | undefined>) {
+async function handleLeaderboard(event: HandlerEvent, params: Record<string, string | undefined>) {
   const window = str(params.window, "all");
   if (window !== "week" && window !== "month" && window !== "all") {
     return json(400, { error: "bad_window" });
   }
   const store = await readyStore();
-  const entries = await store.listEntries();
-  const rows = overallLeaderboard(entries, { window }).slice(0, 200);
+  const [entries, owner] = await Promise.all([store.listEntries(), sessionUser(event)]);
+  const rows = overallLeaderboard(entries, { window, accountId: owner?.id }).slice(0, 200);
   return json(200, { rows, window });
 }
 
@@ -475,11 +500,11 @@ export const handler: Handler = async (event) => {
     /* -- learner routes ---------------------------------------------- */
     if (path === "/problems" && method === "GET") return await handleProblems(params);
     if (path === "/tests" && method === "GET") return await handleListTests(params);
-    if (path === "/tests" && method === "POST") return await handleSaveTest(bodyOf(event));
+    if (path === "/tests" && method === "POST") return await handleSaveTest(event, bodyOf(event));
     if (path === "/tests" && method === "DELETE") return await handleDeleteTest(params);
     if (path === "/scheduled-tests" && method === "GET") return await handleScheduledTests();
-    if (path === "/standings" && method === "GET") return await handleStandings(params);
-    if (path === "/leaderboard" && method === "GET") return await handleLeaderboard(params);
+    if (path === "/standings" && method === "GET") return await handleStandings(event, params);
+    if (path === "/leaderboard" && method === "GET") return await handleLeaderboard(event, params);
     if (path === "/health") return await handleHealth();
 
     /* -- learner accounts --------------------------------------------- */

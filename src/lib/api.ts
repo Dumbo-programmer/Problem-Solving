@@ -71,6 +71,11 @@ function setCloudState(next: CloudState) {
   for (const fn of listeners) fn(next);
 }
 
+/** The signed-in learner's account id, or undefined when anonymous. */
+export function currentAccountId(): string | undefined {
+  return readSession()?.user.id;
+}
+
 async function request<T>(path: string, init?: RequestInit, timeoutMs = 8000): Promise<T> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);
@@ -152,12 +157,13 @@ function filterLocal(filters: Partial<TestFilters>): Problem[] {
 
 /** Persist a submitted test to Supabase, mirroring it locally regardless. */
 export async function saveTest(test: PracticeTest): Promise<{ origin: "cloud" | "local" }> {
-  const local = upsertLocalTest({ ...test, origin: "local" });
-  void local;
+  // Stamp the attempt with the signed-in account so boards can rank it.
+  const stamped: PracticeTest = { ...test, clientId: getClientId(), accountId: currentAccountId() };
+  upsertLocalTest({ ...stamped, origin: "local" });
   try {
     await request("/tests", {
       method: "POST",
-      body: JSON.stringify({ ...test, clientId: getClientId() })
+      body: JSON.stringify(stamped)
     });
     return { origin: "cloud" };
   } catch {
@@ -264,14 +270,18 @@ export async function fetchStandings(testId: string): Promise<{
   rows: StandingsRow[];
   source: "cloud" | "local";
 }> {
+  const accountId = currentAccountId();
   try {
-    const data = await request<{ rows: StandingsRow[] }>(`/standings?testId=${encodeURIComponent(testId)}`);
+    const data = await request<{ rows: StandingsRow[] }>(
+      `/standings?testId=${encodeURIComponent(testId)}`,
+      withSession()
+    );
     const rows = Array.isArray(data.rows) ? data.rows : [];
-    return { rows: markYou(rows, getClientId()), source: "cloud" };
+    return { rows: markYou(rows, getClientId(), accountId), source: "cloud" };
   } catch {
     const tests = localScheduled();
     const rows = standings(localEntries(tests), testId);
-    return { rows: markYou(rows, getClientId()), source: "local" };
+    return { rows: markYou(rows, getClientId(), accountId), source: "local" };
   }
 }
 
@@ -280,15 +290,26 @@ export async function fetchLeaderboard(window: LeaderboardWindow): Promise<{
   rows: PeriodRow[];
   source: "cloud" | "local";
 }> {
+  const accountId = currentAccountId();
   try {
-    const data = await request<{ rows: PeriodRow[] }>(`/leaderboard?window=${encodeURIComponent(window)}`);
+    const data = await request<{ rows: PeriodRow[] }>(
+      `/leaderboard?window=${encodeURIComponent(window)}`,
+      withSession()
+    );
     const rows = Array.isArray(data.rows) ? data.rows : [];
-    return { rows: markYou(rows, getClientId()), source: "cloud" };
+    return { rows, source: "cloud" };
   } catch {
     const tests = localScheduled();
-    const rows = overallLeaderboard(localEntries(tests), { window, clientId: getClientId() });
+    const rows = overallLeaderboard(localEntries(tests), { window, clientId: getClientId(), accountId });
     return { rows, source: "local" };
   }
+}
+
+/** Adds the learner bearer when signed in, so boards can mark the caller. */
+function withSession(): RequestInit | undefined {
+  const session = readSession();
+  if (!session) return undefined;
+  return { headers: { Authorization: `Bearer ${session.token}` } };
 }
 
 /* ------------------------------------------------------------------ */
@@ -315,6 +336,8 @@ export async function signup(input: {
   username: string;
   password: string;
   displayName: string;
+  email: string;
+  phone: string;
 }): Promise<SessionUser> {
   const data = await request<{ token: string; expiresAt: number; user: SessionUser }>("/auth/signup", {
     method: "POST",

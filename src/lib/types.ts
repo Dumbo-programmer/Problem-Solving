@@ -66,6 +66,11 @@ export interface PracticeTest {
   scheduledTestId?: string;
   /** Optional public name shown on the leaderboard for scheduled tests. */
   displayName?: string;
+  /**
+   * The signed-in learner account this entry was sat under. Boards only rank
+   * entries that carry one, so anonymous local attempts stay on-device.
+   */
+  accountId?: string;
 }
 
 /* ------------------------------------------------------------------ */
@@ -97,6 +102,8 @@ export interface StandingsRow {
   entryId: string;
   name: string;
   clientId: string;
+  /** Set when the attempt was sat under a signed-in account. */
+  accountId?: string;
   score: number;
   maxScore: number;
   pct: number;
@@ -127,6 +134,9 @@ export interface SessionUser {
   id: string;
   username: string;
   displayName: string;
+  /** Contact details captured at sign-up (absent on legacy accounts). */
+  email?: string;
+  phone?: string;
   createdAt: string;
 }
 

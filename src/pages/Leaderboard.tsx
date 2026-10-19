@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { Award, Crown, Loader2, Medal, Trophy, UserRound } from "lucide-react";
 import { useI18n } from "../lib/i18n";
+import { useAuth } from "../lib/auth";
 import { fetchLeaderboard } from "../lib/api";
 import PageDecor from "../components/PageDecor";
 import { formatDuration } from "../lib/leaderboard";
@@ -11,7 +12,8 @@ import type { LeaderboardWindow, PeriodRow } from "../lib/types";
 /**
  * The overall leaderboard: how many problems has each learner solved across
  * every scheduled test? Tabs roll the window (week / month / all time) without
- * changing the metric; the browser's own row is always highlighted.
+ * changing the metric; the signed-in learner's own row is always highlighted.
+ * Anonymous attempts never rank — an account is required to appear here.
  */
 
 const TABS: { key: LeaderboardWindow; label: string }[] = [
@@ -29,10 +31,12 @@ function rankMedal(rank: number) {
 
 export default function Leaderboard() {
   const { t } = useI18n();
+  const { user } = useAuth();
   const [tab, setTab] = useState<LeaderboardWindow>("all");
   const [rows, setRows] = useState<PeriodRow[] | null>(null);
   const [source, setSource] = useState<"cloud" | "local">("local");
   const clientId = getClientId();
+  const accountId = user?.id;
 
   useEffect(() => {
     let cancelled = false;
@@ -53,7 +57,14 @@ export default function Leaderboard() {
     };
   }, [tab]);
 
-  const you = useMemo(() => rows?.find((r) => r.clientId === clientId), [rows, clientId]);
+  // A learner is "you" when the board row is theirs: server-marked, or the
+  // row's owner id matches the signed-in account / this browser.
+  const isMe = (row: PeriodRow) => row.isYou || (accountId ? row.clientId === accountId : row.clientId === `anon:${clientId}`);
+  const you = useMemo(
+    () => rows?.find((r) => isMe(r)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [rows, accountId, clientId]
+  );
 
   return (
     <div className="relative">
@@ -123,7 +134,7 @@ export default function Leaderboard() {
             const row = rows[idx];
             if (!row) return null;
             const lane = idx; // 0 = champion, 1 = runner-up, 2 = third
-            const isYou = row.clientId === clientId || row.isYou;
+            const isYou = isMe(row);
             const tone =
               lane === 0
                 ? "border-amber-400/60 bg-gradient-to-br from-amber-50 to-white dark:from-amber-950/30 dark:to-ink-900"
@@ -204,7 +215,7 @@ export default function Leaderboard() {
             </thead>
             <tbody>
               {rows.slice(0, 100).map((row) => {
-                const isYou = row.clientId === clientId || row.isYou;
+                const isYou = isMe(row);
                 return (
                   <tr
                     key={row.clientId}

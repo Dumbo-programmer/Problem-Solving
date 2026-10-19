@@ -21,7 +21,7 @@ import { standings } from "../lib/leaderboard";
 import Reveal from "../components/Reveal";
 import MathText from "../components/MathText";
 import FloatingMath from "../components/FloatingMath";
-import { CurvePlot, SinePlot } from "../components/MathPlots";
+import { FloatingPlots, SinePlot } from "../components/MathPlots";
 import { DifficultyBadge, TopicBadge, TOPIC_DOT } from "../components/Badges";
 import type { ProblemTopic, ScheduledTest, StandingsRow } from "../lib/types";
 
@@ -98,8 +98,9 @@ export default function Home() {
           <div className="absolute -top-32 right-[-10%] h-[28rem] w-[28rem] rounded-full bg-accent-400/20 blur-3xl dark:bg-neon-pink/20" />
           <div className="absolute -left-24 top-24 h-[22rem] w-[22rem] rounded-full bg-ink-400/20 blur-3xl dark:bg-neon-violet/25" />
           <div className="absolute left-1/2 top-0 h-[30rem] w-[36rem] -translate-x-1/2 rounded-full bg-neon-cyan/10 blur-[80px] dark:bg-neon-cyan/15" />
-          {/* drifting maths glyphs */}
+          {/* drifting maths glyphs + live plots */}
           <FloatingMath count={18} seed={3} className="opacity-80 dark:opacity-100" />
+          <FloatingPlots count={6} seed={21} className="opacity-60 dark:opacity-80" />
           {/* the rolling perspective floor */}
           <div className="absolute inset-x-0 bottom-0 h-64 overflow-hidden dark:block">
             <div className="retro-horizon" />
@@ -442,54 +443,6 @@ export default function Home() {
                     {t("cta.browseProblems")} <ArrowRight size={13} />
                   </span>
                 </Link>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ---------------- Maths in motion (decorative) ---------------- */}
-      <section className="relative overflow-hidden border-y border-slate-200 py-14 dark:border-ink-800 lg:py-16">
-        <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-neon-sheen opacity-40 dark:opacity-100" />
-          <FloatingMath count={12} seed={11} className="opacity-70" />
-        </div>
-        <div className="shell">
-          <Reveal className="max-w-2xl">
-            <p className="eyebrow">{t("home.motionEyebrow")}</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white">
-              {t("home.motionTitle")}
-            </h2>
-            <p className="mt-3 text-slate-600 dark:text-slate-400">{t("home.motionLede")}</p>
-          </Reveal>
-
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { key: "home.motionCurveT", body: t("home.motionCurveD"), plot: <SinePlot className="h-24 w-full text-slate-400" phase={0.4} /> },
-              { key: "home.motionGraphT", body: t("home.motionGraphD"), plot: <CurvePlot className="h-24 w-full" /> },
-              { key: "home.motionGridT", body: t("home.motionGridD"), plot: null },
-              { key: "home.motionInfT", body: t("home.motionInfD"), plot: null }
-            ].map((card, i) => (
-              <Reveal key={card.key} delay={i * 70}>
-                <div className="retro-panel flex h-full flex-col p-5">
-                  {card.plot ? (
-                    <div className="mb-4 flex h-24 items-center justify-center overflow-hidden rounded-xl border border-slate-200/70 bg-white/60 dark:border-neon-violet/20 dark:bg-ink-950/60">
-                      {card.plot}
-                    </div>
-                  ) : (
-                    <div className="mb-4 grid h-24 place-items-center overflow-hidden rounded-xl border border-slate-200/70 bg-white/60 dark:border-neon-violet/20 dark:bg-ink-950/60">
-                      {card.key === "home.motionGridT" ? (
-                        <div className="relative h-full w-full overflow-hidden">
-                          <div className="retro-horizon !h-24" />
-                        </div>
-                      ) : (
-                        <span className="animate-pulse-glow font-mono text-3xl font-bold neon-text">∞</span>
-                      )}
-                    </div>
-                  )}
-                  <h3 className="text-[15px] font-bold text-ink-900 dark:text-white">{t(card.key)}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{card.body}</p>
-                </div>
               </Reveal>
             ))}
           </div>
