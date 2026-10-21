@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { I18nProvider } from "./lib/i18n";
 import { AuthProvider } from "./lib/auth";
@@ -8,7 +8,7 @@ import RequireAuth from "./components/RequireAuth";
 import Home from "./pages/Home";
 import Problems from "./pages/Problems";
 import Practice from "./pages/Practice";
-import Tests from "./pages/Tests";
+import Contests from "./pages/Contests";
 import Login from "./pages/Login";
 import Leaderboard from "./pages/Leaderboard";
 import Admin from "./pages/Admin";
@@ -39,18 +39,27 @@ export default function App() {
               <Route path="/problems" element={<Problems />} />
               <Route path="/practice" element={<Practice />} />
               <Route path="/login" element={<Login />} />
-              {/* Competitive routes require a signed-in learner. */}
+              {/* Competitive routes require a signed-in learner: the contest
+                  tab (papers + contest rating) and the problems-solved
+                  leaderboard both belong to registered learners. */}
               <Route
-                path="/tests"
+                path="/contests"
                 element={
                   <RequireAuth>
-                    <Tests />
+                    <Contests />
                   </RequireAuth>
                 }
               />
-              {/* The leaderboard is public: anyone may read the standings,
-                    only joining (appearing on the board) needs an account. */}
-              <Route path="/leaderboard" element={<Leaderboard />} />
+              {/* The old scheduled-test address now points at the contest tab. */}
+              <Route path="/tests" element={<Navigate to="/contests" replace />} />
+              <Route
+                path="/leaderboard"
+                element={
+                  <RequireAuth>
+                    <Leaderboard />
+                  </RequireAuth>
+                }
+              />
               {/* The runner stays open so anonymous practice still works; the
                   scheduled papers enforce sign-in at their start flow. */}
               <Route path="/test/:id" element={<TestRunner />} />

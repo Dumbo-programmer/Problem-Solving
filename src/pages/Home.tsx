@@ -389,7 +389,7 @@ export default function Home() {
               )}
 
               <div className="relative mt-6 flex flex-wrap gap-3 border-t border-slate-200/70 pt-5">
-                <Link to="/tests" className="btn-primary h-9 px-3.5 text-xs">
+                <Link to="/contests" className="btn-primary h-9 px-3.5 text-xs">
                   {t("home.competeOpen")}
                 </Link>
                 <Link to="/leaderboard" className="btn-ghost h-9 px-3.5 text-xs">

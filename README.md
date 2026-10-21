@@ -22,7 +22,8 @@ you can revisit your mistakes later.
 | ⏱️ **Timed runner** | Live countdown, question grid, per-question navigation, and automatic submission when time runs out. |
 | ✅ **Instant grading** | Forgiving answer parsing (`5,050`, `5050`, `2/4`, `0.5` all work), exact rational comparison, and a full solution for every problem. |
 | 🕘 **Past practice tests** | Every paper is saved with its answers, score, grade band and review — synced to the cloud when available. |
-| 🏆 **Public leaderboard** | The board is open to everyone — sign in to put your name, score and rank on it. |
+| 🏆 **Leaderboard** | The problems-solved board for registered learners — week / month / all time, with your own row highlighted. |
+| ⚔️ **Contest tab** | Weekly and monthly papers plus the contests your admin hands to you, with a live **contest rating** board (Elo-style points). |
 | 🌗 **One clean edition** | A single light, printed-day edition — warm paper, serif headlines, Prothom Alo red. |
 | 🌏 **Bangla + English** | Every string, problem statement and solution exists in both languages. |
 | 📴 **Works offline** | The full bank ships with the site, so tests keep working with no network at all. |
@@ -69,11 +70,12 @@ source of truth and the local copy acts as a cache — so nothing ever breaks.
 │   │   └── problems-c.json # Inequality + Probability
 │   ├── lib/
 │   │   ├── api.ts          # API client + graceful offline fallback
+│   │   ├── contestRating.ts # Elo-style contest rating (contest tab)
 │   │   ├── grading.ts      # Exact-rational answer parser & grader
 │   │   ├── filters.ts      # Facet filtering + balanced problem picking
 │   │   ├── i18n.tsx        # Bangla/English dictionary + provider
 │   │   ├── storage.ts      # localStorage mirror + anonymous client id
-│   └── pages/              # Home, Problems, Practice, TestRunner, Results…
+│   └── pages/              # Home, Problems, Practice, Contests, TestRunner, Results…
 └── netlify.toml
 ```
 

@@ -298,7 +298,7 @@ function ScheduledRank({ testId, entryId }: { testId: string; entryId: string })
           </p>
         </div>
       </div>
-      <Link to={`/tests?standings=${encodeURIComponent(testId)}`} className="btn-ghost h-9 px-3.5 text-xs">
+      <Link to={`/contests?standings=${encodeURIComponent(testId)}`} className="btn-ghost h-9 px-3.5 text-xs">
         {t("results.standings")} <ArrowRight size={14} />
       </Link>
     </div>

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Award, Crown, Globe, Loader2, Medal, Sparkles, Trophy, UserRound } from "lucide-react";
+import { Award, Crown, Loader2, Medal, Trophy, UserRound } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
 import { fetchLeaderboard } from "../lib/api";
@@ -14,8 +14,11 @@ import type { LeaderboardWindow, PeriodRow } from "../lib/types";
  * every scheduled test? Tabs roll the window (week / month / all time) without
  * changing the metric; the signed-in learner's own row is always highlighted.
  *
- * The board is public — anyone may read it. Anonymous attempts never rank, so
- * an account is only needed to appear on the board.
+ * This is the *problems solved* board. Contest rating lives on the contest
+ * tab — the two never mix.
+ *
+ * The board is for learners: an account is required, and only attempts sat
+ * under an account are ever ranked.
  */
 
 const TABS: { key: LeaderboardWindow; label: string }[] = [
@@ -78,9 +81,6 @@ export default function Leaderboard() {
           {t("lb.title")}
         </h1>
         <p className="mt-3 text-slate-600">{t("lb.intro")}</p>
-        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">
-          <Globe size={12} /> {t("lb.public")}
-        </p>
       </header>
 
       {/* ---- window tabs + sync state ---- */}
@@ -125,32 +125,11 @@ export default function Leaderboard() {
         ) : user ? (
           <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
             <p className="text-sm text-slate-600">{t("lb.notRanked")}</p>
-            <Link to="/tests" className="btn-primary h-9 px-3.5 text-xs">
-              <Trophy size={14} /> {t("nav.tests")}
+            <Link to="/contests" className="btn-primary h-9 px-3.5 text-xs">
+              <Trophy size={14} /> {t("nav.contests")}
             </Link>
           </div>
-        ) : (
-          /* Signed-out visitors may read the whole board; only joining it
-             needs an account. */
-          <div className="card flex flex-wrap items-center justify-between gap-4 border-accent-500/30 bg-accent-500/5 p-4 sm:p-5">
-            <div className="min-w-0">
-              <p className="inline-flex items-center gap-2 text-sm font-bold text-ink-900">
-                <Sparkles size={15} className="text-accent-500" /> {t("lb.join.title")}
-              </p>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600">
-                {t("lb.join.body")}
-              </p>
-            </div>
-            <div className="flex shrink-0 flex-wrap items-center gap-2">
-              <Link to="/login?mode=signup" className="btn-primary h-9 px-3.5 text-xs">
-                {t("lb.join.cta")}
-              </Link>
-              <Link to="/login" className="btn-ghost h-9 px-3.5 text-xs">
-                {t("nav.signIn")}
-              </Link>
-            </div>
-          </div>
-        )}
+        ) : null}
       </div>
 
       {/* ---- top-3 podium ---- */}
@@ -214,8 +193,8 @@ export default function Leaderboard() {
         <div className="card mt-6 flex flex-col items-center gap-3 px-6 py-20 text-center">
           <Trophy size={28} className="text-slate-300" />
           <p className="max-w-sm text-sm text-slate-500">{t("lb.empty")}</p>
-          <Link to="/tests" className="btn-primary mt-2">
-            {t("nav.tests")}
+          <Link to="/contests" className="btn-primary mt-2">
+            {t("nav.contests")}
           </Link>
         </div>
       ) : (
@@ -284,8 +263,8 @@ export default function Leaderboard() {
         <span className="inline-flex items-center gap-1.5">
           <Award size={14} className="text-accent-500" /> {t("lb.hint")}
         </span>
-        <Link to="/tests" className="font-medium text-accent-600 hover:text-accent-500">
-          {t("nav.tests")} →
+        <Link to="/contests" className="font-medium text-accent-600 hover:text-accent-500">
+          {t("nav.contests")} →
         </Link>
       </div>
       </div>

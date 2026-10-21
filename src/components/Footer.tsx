@@ -80,8 +80,8 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/tests" className={linkClass}>
-                {t("nav.tests")}
+              <Link to="/contests" className={linkClass}>
+                {t("nav.contests")}
               </Link>
             </li>
             <li>

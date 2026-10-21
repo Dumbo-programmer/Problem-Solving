@@ -17,8 +17,8 @@ const LINKS = [
   { to: "/", key: "nav.home", end: true, tier: "md" },
   { to: "/problems", key: "nav.problems", end: false, tier: "md" },
   { to: "/leaderboard", key: "nav.leaderboard", end: false, tier: "md" },
-  { to: "/past-tests", key: "nav.past", end: false, tier: "lg" },
-  { to: "/tests", key: "nav.tests", end: false, tier: "lg" }
+  { to: "/contests", key: "nav.contests", end: false, tier: "md" },
+  { to: "/past-tests", key: "nav.past", end: false, tier: "lg" }
 ] as const;
 
 /** Hide a link below its tier (the mobile sheet always shows every link). */

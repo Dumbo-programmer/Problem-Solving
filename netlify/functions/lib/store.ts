@@ -72,6 +72,9 @@ export interface Store {
   saveScheduled(test: ScheduledTest): Promise<void>;
   deleteScheduled(id: string): Promise<void>;
 
+  /** Every registered learner — used by the admin's "give this contest to…" picker. */
+  listUsers(): Promise<StoredUser[]>;
+
   /** Applies schema/migrations and seeds the bank, papers and demo entries. */
   ensureSeeded(): Promise<void>;
 
@@ -272,6 +275,7 @@ create table if not exists scheduled_tests (
   duration_min    integer not null default 45,
   problem_ids     jsonb not null default '[]'::jsonb,
   published       boolean not null default true,
+  assigned_to     jsonb not null default '[]'::jsonb,
   created_at      timestamptz not null default now()
 );
 `;
@@ -288,7 +292,9 @@ const MIGRATIONS = [
   // Contact details captured at sign-up.
   "alter table users add column if not exists email text",
   "alter table users add column if not exists phone text",
-  "create unique index if not exists users_email_idx on users (lower(email)) where email is not null"
+  "create unique index if not exists users_email_idx on users (lower(email)) where email is not null",
+  // Contests handed to specific learners by the admin.
+  "alter table scheduled_tests add column if not exists assigned_to jsonb not null default '[]'::jsonb"
 ];
 
 export class PgStore implements Store {
@@ -559,11 +565,10 @@ export class PgStore implements Store {
     // Scoped by client_id so one learner can never delete another's paper.
     await this.client.query("delete from practice_tests where id = $1 and client_id = $2", [id, clientId]);
   }
-
   async listScheduled(includeUnpublished: boolean): Promise<ScheduledTest[]> {
     const res = await this.client.query(
       `select id, kind, title_bn, title_en, description_bn, description_en,
-              start_at, end_at, duration_min, problem_ids, published
+              start_at, end_at, duration_min, problem_ids, published, assigned_to
        from scheduled_tests
        ${includeUnpublished ? "" : "where published = true"}
        order by start_at desc`
@@ -577,7 +582,8 @@ export class PgStore implements Store {
       endAt: iso(r.end_at),
       durationMin: Number(r.duration_min ?? 45),
       problemIds: (r.problem_ids as string[]) ?? [],
-      published: Boolean(r.published)
+      published: Boolean(r.published),
+      assignedTo: (r.assigned_to as string[]) ?? []
     }));
   }
 
@@ -585,16 +591,18 @@ export class PgStore implements Store {
     await this.client.query(
       `insert into scheduled_tests
          (id, kind, title_bn, title_en, description_bn, description_en,
-          start_at, end_at, duration_min, problem_ids, published)
-       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10::jsonb,$11)
+          start_at, end_at, duration_min, problem_ids, published, assigned_to)
+       values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10::jsonb,$11,$12::jsonb)
        on conflict (id) do update set
          kind = excluded.kind,
          title_bn = excluded.title_bn, title_en = excluded.title_en,
          description_bn = excluded.description_bn, description_en = excluded.description_en,
-         start_at = excluded.start_at, end_at = excluded.end_at,
+         start_at = excluded.start_at,
+         end_at = excluded.end_at,
          duration_min = excluded.duration_min,
          problem_ids = excluded.problem_ids,
-         published = excluded.published`,
+         published = excluded.published,
+         assigned_to = excluded.assigned_to`,
       [
         t.id,
         t.kind,
@@ -606,13 +614,21 @@ export class PgStore implements Store {
         t.endAt,
         Math.max(1, Math.min(24 * 60, Math.round(t.durationMin || 45))),
         JSON.stringify(t.problemIds ?? []),
-        Boolean(t.published)
+        Boolean(t.published),
+        JSON.stringify(t.assignedTo ?? [])
       ]
     );
   }
 
   async deleteScheduled(id: string): Promise<void> {
     await this.client.query("delete from scheduled_tests where id = $1", [id]);
+  }
+
+  async listUsers(): Promise<StoredUser[]> {
+    const res = await this.client.query(
+      `select ${PgStore.USER_COLS} from users order by created_at desc limit 1000`
+    );
+    return res.rows.map((r) => this.rowToUser(r));
   }
 
   private rowToUser(r: Record<string, unknown>): StoredUser {
@@ -890,8 +906,9 @@ export class FileStore implements Store {
 
   async saveScheduled(t: ScheduledTest): Promise<void> {
     const idx = this.data.scheduled.findIndex((x) => x.id === t.id);
-    if (idx >= 0) this.data.scheduled[idx] = t;
-    else this.data.scheduled.push(t);
+    const next: ScheduledTest = { ...t, assignedTo: t.assignedTo ?? [] };
+    if (idx >= 0) this.data.scheduled[idx] = next;
+    else this.data.scheduled.push(next);
     this.persist();
   }
 
@@ -899,6 +916,10 @@ export class FileStore implements Store {
     const before = this.data.scheduled.length;
     this.data.scheduled = this.data.scheduled.filter((t) => t.id !== id);
     if (this.data.scheduled.length !== before) this.persist();
+  }
+
+  async listUsers(): Promise<StoredUser[]> {
+    return [...this.data.users].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
   }
 
   async listEntries(): Promise<PracticeTest[]> {

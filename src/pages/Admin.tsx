@@ -23,6 +23,7 @@ import {
   adminCredentialStatus,
   adminDeleteProblem,
   adminDeleteTest,
+  adminListLearners,
   adminListTests,
   adminOverview,
   adminSaveProblem,
@@ -37,7 +38,7 @@ import PageDecor from "../components/PageDecor";
 import { phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
 import { DEFAULT_ADMIN_ID, DEFAULT_ADMIN_PASSWORD } from "../lib/adminCredentials";
-import type { AdminOverview, AdminSubmission } from "../lib/api";
+import type { AdminLearner, AdminOverview, AdminSubmission } from "../lib/api";
 import type { Problem, ProblemCategory, ProblemDifficulty, ProblemTopic, ProblemType, ScheduledTest, ScheduledTestKind } from "../lib/types";
 
 /**
@@ -223,16 +224,18 @@ const TABS: { key: Tab; label: string }[] = [
   { key: "submissions", label: "admin.tab.submissions" }
 ];
 
-/** Weekly / monthly / custom badge for a scheduled paper. */
+/** Weekly / monthly / contest / custom badge for a scheduled paper. */
 const KIND_LABEL: Record<ScheduledTestKind, string> = {
   WEEKLY: "kind.weekly",
   MONTHLY: "kind.monthly",
+  CONTEST: "kind.contest",
   CUSTOM: "kind.custom"
 };
 
 const KIND_CHIP: Record<ScheduledTestKind, string> = {
   WEEKLY: "chip border border-sky-500/40 bg-sky-500/10 text-sky-700",
   MONTHLY: "chip border border-violet-500/40 bg-violet-500/10 text-violet-700",
+  CONTEST: "chip border border-accent-500/40 bg-accent-500/10 text-accent-700",
   CUSTOM: "chip border border-slate-300/70 bg-slate-400/10 text-slate-600"
 };
 
@@ -683,7 +686,8 @@ const EMPTY_TEST: ScheduledTest = {
   endAt: new Date(Date.now() + 7 * 86_400_000).toISOString(),
   durationMin: 45,
   problemIds: [],
-  published: true
+  published: true,
+  assignedTo: []
 };
 
 /** ISO ⇄ datetime-local (the input works in local time). */
@@ -710,12 +714,20 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
   const [list, setList] = useState<ScheduledTest[] | null>(null);
   const [editing, setEditing] = useState<ScheduledTest | null>(null);
   const [idsText, setIdsText] = useState("");
+  const [learners, setLearners] = useState<AdminLearner[]>([]);
   const [notice, setNotice] = useState<{ kind: "ok" | "err"; text: string } | null>(null);
   const [busy, setBusy] = useState(false);
 
   const refresh = useCallback(async () => {
     const res = await guard(adminListTests);
     if (res) setList(res.tests);
+  }, [guard]);
+
+  // The learner list feeds the "give this contest to…" picker.
+  useEffect(() => {
+    void guard(adminListLearners).then((res) => {
+      if (res) setLearners(res.learners);
+    });
   }, [guard]);
 
   useEffect(() => {
@@ -814,6 +826,7 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
               options={[
                 { key: "WEEKLY" as ScheduledTestKind, en: "Weekly", bn: "সাপ্তাহিক" },
                 { key: "MONTHLY" as ScheduledTestKind, en: "Monthly", bn: "মাসিক" },
+                { key: "CONTEST" as ScheduledTestKind, en: "Contest", bn: "প্রতিযোগিতা" },
                 { key: "CUSTOM" as ScheduledTestKind, en: "Custom", bn: "কাস্টম" }
               ]}
               onChange={(v) => setEditing({ ...editing, kind: v as ScheduledTestKind })}
@@ -869,6 +882,55 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
                 required
               />
             </div>
+            <div className="sm:col-span-2">
+              <p className="text-xs font-semibold text-slate-500">{t("admin.f.assignTo")}</p>
+              <p className="mt-1 text-xs text-slate-500">{t("admin.f.assignToHint")}</p>
+              {(editing.assignedTo ?? []).length > 0 && (
+                <p className="mt-2 inline-flex items-center gap-1.5 chip border border-violet-500/40 bg-violet-500/10 text-violet-700">
+                  <Users size={13} /> {t("admin.f.assignedCount", { n: (editing.assignedTo ?? []).length })}
+                </p>
+              )}
+              {learners.length === 0 ? (
+                <p className="mt-2 text-xs text-slate-400">{t("admin.f.noLearners")}</p>
+              ) : (
+                <div className="mt-2 max-h-56 overflow-y-auto rounded-xl border border-slate-200">
+                  {learners.map((learner) => {
+                    const on = (editing.assignedTo ?? []).includes(learner.id);
+                    return (
+                      <label
+                        key={learner.id}
+                        className={`flex cursor-pointer items-center gap-3 border-b border-slate-100 px-3 py-2 last:border-b-0 ${
+                          on ? "bg-accent-500/5" : "hover:bg-slate-50"
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={on}
+                          onChange={(e) =>
+                            setEditing({
+                              ...editing,
+                              assignedTo: e.target.checked
+                                ? [...(editing.assignedTo ?? []), learner.id]
+                                : (editing.assignedTo ?? []).filter((id) => id !== learner.id)
+                            })
+                          }
+                          className="h-4 w-4 shrink-0 accent-accent-500"
+                        />
+                        <span className="min-w-0 flex-1">
+                          <span className="block truncate text-sm font-medium text-ink-900">
+                            {learner.displayName}
+                          </span>
+                          <span className="block truncate text-xs text-slate-500">
+                            @{learner.username}
+                            {learner.email ? ` · ${learner.email}` : ""}
+                          </span>
+                        </span>
+                      </label>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
             <label className="flex items-center gap-2 text-sm font-medium text-slate-600">
               <input
                 type="checkbox"
@@ -909,6 +971,11 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
                   {fmtWhen(test.startAt)} → {fmtWhen(test.endAt)}
                 </span>
                 <span className={KIND_CHIP[test.kind]}>{t(KIND_LABEL[test.kind])}</span>
+                {(test.assignedTo ?? []).length > 0 && (
+                  <span className="chip border border-violet-500/40 bg-violet-500/10 text-violet-700">
+                    <Users size={13} /> {t("admin.f.assignedCount", { n: (test.assignedTo ?? []).length })}
+                  </span>
+                )}
                 <span
                   className={`chip border ${
                     test.published

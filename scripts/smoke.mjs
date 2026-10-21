@@ -101,7 +101,7 @@ async function trySignup() {
 }
 
 /* ---------- 1. every route renders ---------- */
-for (const path of ["/", "/problems", "/practice", "/past-tests", "/tests", "/login", "/leaderboard", "/admin"]) {
+for (const path of ["/", "/problems", "/practice", "/past-tests", "/contests", "/login", "/leaderboard", "/admin"]) {
   await goto(path);
   const t = await text();
   check(`route ${path} renders`, t.length > 400, `${t.length} chars`);
@@ -282,23 +282,22 @@ await new Promise((r) => setTimeout(r, 1500));
 // Past tests are a gated route: signed-out visitors bounce to the login gate.
 check("past tests gate signed-out visitors", gated(), page.url().replace(BASE, ""));
 
-/* ---------- 8. scheduled tests are gated for signed-out visitors ---------- */
-await goto("/tests");
+/* ---------- 8. the contest tab gates signed-out visitors ---------- */
+await goto("/contests");
 await new Promise((r) => setTimeout(r, 1200));
-check("scheduled tests gate signed-out visitors", gated(), page.url().replace(BASE, ""));
+check("contests gate signed-out visitors", gated(), page.url().replace(BASE, ""));
 const gateText = await text();
 check("login gate explains why sign-in is needed", /সাইন ইন করুন|Sign in to continue/i.test(gateText));
 
-/* ---------- 9. leaderboard is public: anyone may read the board ---------- */
+/* ---------- 8b. the old /tests address now lands on the contest tab ---------- */
+await goto("/tests");
+await new Promise((r) => setTimeout(r, 1200));
+check("/tests redirects to /contests", /contests/.test(page.url()), page.url().replace(BASE, ""));
+
+/* ---------- 9. the leaderboard is a learner board: sign-in required ---------- */
 await goto("/leaderboard");
 await new Promise((r) => setTimeout(r, 1200));
-check("leaderboard is open to everyone", !gated(), page.url().replace(BASE, ""));
-const publicBoardText = await text();
-check(
-  "leaderboard invites signed-out visitors to join",
-  /বোর্ডে যোগ দিন|Join the board/i.test(publicBoardText),
-  publicBoardText.slice(0, 60)
-);
+check("leaderboard gates signed-out visitors", gated(), page.url().replace(BASE, ""));
 
 /* ---------- 10. admin dashboard gates on a login form ---------- */
 await goto("/admin");
@@ -322,7 +321,7 @@ check(
   "login page previews a learner dashboard",
   /ড্যাশবোর্ড|Dashboard/i.test(loginText) && /এক নজরে আপনার অগ্রগতি|Your progress, at a glance/i.test(loginText)
 );
-check("login page shows the public board", /সবার জন্য উন্মুক্ত|Open to everyone/i.test(loginText));
+check("login page no longer advertises an open board", !/সবার জন্য উন্মুক্ত|Open to everyone/i.test(loginText));
 
 await goto("/login?mode=signup");
 const signupText = await text();
@@ -361,11 +360,11 @@ if (signedUp) {
   const pastText = await text();
   check("signed-in: past tests list opens", !gated() && !/এখনো কোনো টেস্ট নেই|No tests yet/i.test(pastText));
 
-  // Scheduled tests: papers, phases, and the winners board that leads the page.
-  await goto("/tests");
+  // The contest tab: papers, phases, the winners board and the rating board.
+  await goto("/contests");
   await new Promise((r) => setTimeout(r, 1500));
   const testsText = await text();
-  check("signed-in: scheduled tests open", !gated() && /নির্ধারিত টেস্ট|Scheduled tests/i.test(testsText));
+  check("signed-in: contests open", !gated() && /প্রতিযোগিতা|Contests/i.test(testsText));
   check(
     "signed-in: weekly + monthly papers are listed",
     /সাপ্তাহিক স্প্রিন্ট|Weekly Sprint/i.test(testsText) && /মাসিক চ্যালেঞ্জ|Monthly Challenge/i.test(testsText)
@@ -373,6 +372,9 @@ if (signedUp) {
   // The winners board promotes the most recent paper's top solvers up top.
   check("signed-in: winners board leads the page", /সাম্প্রতিক টেস্টের বিজয়ী|Recent test winners/i.test(testsText));
   check("signed-in: winners board lists top solvers", /শীর্ষ সমাধানকারী|Top solvers/i.test(testsText));
+  // The contest rating lives on the contest tab, not on the leaderboard.
+  check("signed-in: contest rating board shows", /প্রতিযোগিতা রেটিং|Contest rating/i.test(testsText));
+  check("signed-in: contest rating lists points", /রেটিং|Rating/i.test(testsText));
 
   // The leaderboard: title, tabs, source, ranked rows and the top-3 podium.
   await goto("/leaderboard");
@@ -384,6 +386,8 @@ if (signedUp) {
   check("signed-in: leaderboard lists ranked learners", /র‍্যাঙ্ক|Rank/i.test(lbText));
   const hasPodium = await page.evaluate(() => document.body.innerText.includes("#1"));
   check("signed-in: leaderboard promotes a top-3 podium", hasPodium);
+  // The leaderboard stays the problems-solved board — no rating column on it.
+  check("signed-in: leaderboard shows no contest rating", !/প্রতিযোগিতা রেটিং|Contest rating/i.test(lbText));
 
   // Signing out returns the navbar to the signed-out state.
   await goto("/");

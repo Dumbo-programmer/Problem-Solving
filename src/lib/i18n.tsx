@@ -299,18 +299,19 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   },
   "notFound.action": { en: "Back to home", bn: "হোমে ফিরে যান" },
 
-  /* ---- scheduled tests (weekly / monthly) ---- */
-  "nav.tests": { en: "Scheduled Tests", bn: "নির্ধারিত টেস্ট" },
+  /* ---- scheduled tests (weekly / monthly / contests) ---- */
+  "nav.contests": { en: "Contests", bn: "প্রতিযোগিতা" },
   "nav.leaderboard": { en: "Leaderboard", bn: "লিডারবোর্ড" },
   "kind.weekly": { en: "Weekly", bn: "সাপ্তাহিক" },
   "kind.monthly": { en: "Monthly", bn: "মাসিক" },
+  "kind.contest": { en: "Contest", bn: "প্রতিযোগিতা" },
   "kind.custom": { en: "Custom", bn: "কাস্টম" },
   "time.d": { en: "d", bn: "দি" },
-  "tests.eyebrow": { en: "Weekly & monthly", bn: "সাপ্তাহিক ও মাসিক" },
-  "tests.title": { en: "Scheduled tests", bn: "নির্ধারিত টেস্ট" },
+  "tests.eyebrow": { en: "Weekly, monthly & assigned", bn: "সাপ্তাহিক, মাসিক ও নির্দিষ্ট" },
+  "tests.title": { en: "Contests", bn: "প্রতিযোগিতা" },
   "tests.intro": {
-    en: "A fresh paper every week and a bigger challenge every month — one attempt each, timed, ranked live.",
-    bn: "প্রতি সপ্তাহে নতুন একটি পত্র আর প্রতি মাসে বড় একটি চ্যালেঞ্জ — প্রতিটিতে একবারই দেওয়া যাবে, সময় ধরে, লাইভ র‍্যাঙ্কিংসহ।"
+    en: "A fresh paper every week, a bigger challenge every month, and the contests your teacher hands to you — one attempt each, timed, ranked live.",
+    bn: "প্রতি সপ্তাহে নতুন একটি পত্র, প্রতি মাসে বড় একটি চ্যালেঞ্জ, আর শিক্ষক যেসব প্রতিযোগিতা দেন — প্রতিটিতে একবারই দেওয়া যাবে, সময় ধরে, লাইভ র‍্যাঙ্কিংসহ।"
   },
   "tests.phase.live": { en: "Live now", bn: "এখন চলছে" },
   "tests.phase.upcoming": { en: "Upcoming", bn: "আসছে" },
@@ -360,7 +361,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     bn: "এই টেস্টে আর চেষ্টা করা যাচ্ছে না।"
   },
   "tests.notFound": { en: "That test could not be loaded.", bn: "টেস্টটি খোঁজা যায়নি।" },
-  "tests.empty": { en: "No scheduled tests right now — a fresh paper lands every week.", bn: "এখন কোনো নির্ধারিত টেস্ট নেই — প্রতি সপ্তাহে নতুন একটি পত্র আসে।" },
+  "tests.empty": { en: "No contests right now — a fresh paper lands every week.", bn: "এখন কোনো প্রতিযোগিতা নেই — প্রতি সপ্তাহে নতুন একটি পত্র আসে।" },
 
   /* ---- leaderboard (problems solved) ---- */
   "lb.eyebrow": { en: "Problems solved", bn: "সমাধান করা সমস্যা" },
@@ -382,8 +383,8 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "lb.you": { en: "You", bn: "আপনি" },
   "lb.yourRank": { en: "You: #{rank} · {solved} solved", bn: "আপনি: #{rank} · {solved} সমাধান" },
   "lb.notRanked": {
-    en: "You're not on the board yet — sit a scheduled test to enter.",
-    bn: "আপনি এখনো বোর্ডে নেই — নির্ধারিত টেস্ট দিয়ে অংশ নিন।"
+    en: "You're not on the board yet — sit a contest to enter.",
+    bn: "আপনি এখনো বোর্ডে নেই — একটি প্রতিযোগিতায় অংশ নিন।"
   },
   "lb.empty": {
     en: "No submissions in this window yet — the first board is yours to take.",
@@ -391,13 +392,6 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   },
   "lb.source.local": { en: "Offline — standings from this device.", bn: "অফলাইন — এই ডিভাইসের স্ট্যান্ডিংস দেখানো হচ্ছে।" },
   "lb.source.cloud": { en: "Live from the cloud.", bn: "ক্লাউড থেকে লাইভ।" },
-  "lb.public": { en: "Open to everyone — no account needed to read the board", bn: "সবার জন্য উন্মুক্ত — বোর্ড দেখতে অ্যাকাউন্ট লাগে না" },
-  "lb.join.title": { en: "Join the board", bn: "বোর্ডে যোগ দিন" },
-  "lb.join.body": {
-    en: "Anyone can read this board. Sign in and your name, score and rank stay on it.",
-    bn: "এই বোর্ড সবাই দেখতে পারেন। সাইন ইন করলে আপনার নাম, স্কোর ও র‍্যাঙ্ক বোর্ডে থেকে যাবে।"
-  },
-  "lb.join.cta": { en: "Create an account", bn: "অ্যাকাউন্ট খুলুন" },
   "lb.hint": {
     en: "Solved count sets the rank; ties break on best score, then time.",
     bn: "র‍্যাঙ্ক নির্ধারণ করে সমাধান করা সমস্যার সংখ্যা; সমতায় আগে সেরা স্কোর, তারপর সময়।"
@@ -405,6 +399,30 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "results.standings": { en: "See the standings", bn: "স্ট্যান্ডিংস দেখুন" },
   "results.rank": { en: "Your rank", bn: "আপনার র‍্যাঙ্ক" },
   "results.rankOf": { en: "#{rank} of {total}", bn: "{total} জনের মধ্যে #{rank}" },
+
+  /* ---- contest rating (contest tab) ---- */
+  "rating.eyebrow": { en: "Contest rating", bn: "প্রতিযোগিতা রেটিং" },
+  "rating.title": { en: "Contest standings", bn: "প্রতিযোগিতার ফলাফল" },
+  "rating.intro": {
+    en: "Rating points earned in contests — a win against a stronger learner is worth more. Separate from the problems-solved leaderboard.",
+    bn: "প্রতিযোগিতায় অর্জিত রেটিং পয়েন্ট — শক্তিশালী প্রতিপক্ষকে হারলে বেশি পয়েন্ট। সমাধান করা সমস্যার লিডারবোর্ড থেকে আলাদা।"
+  },
+  "rating.points": { en: "pts", bn: "পয়েন্ট" },
+  "rating.wins": { en: "wins", bn: "জয়" },
+  "rating.col.rating": { en: "Rating", bn: "রেটিং" },
+  "rating.col.contests": { en: "Contests", bn: "প্রতিযোগিতা" },
+  "rating.col.wins": { en: "Wins", bn: "জয়" },
+  "rating.col.best": { en: "Best place", bn: "সেরা স্থান" },
+  "rating.empty": {
+    en: "No contest results yet — the first rating is yours to take.",
+    bn: "এখনো কোনো প্রতিযোগিতার ফলাফল নেই — প্রথম রেটিং আপনার জন্যই।"
+  },
+  "rating.hint": {
+    en: "Everyone starts on 1000 points. Beating a stronger learner earns more; a draw earns half.",
+    bn: "সবাই ১০০০ পয়েন্ট থেকে শুরু করেন। শক্তিশালী প্রতিপক্ষকে হারলে বেশি পয়েন্ট; ড্র হলে অর্ধেক।"
+  },
+  "rating.leaderboardLink": { en: "Problems solved", bn: "সমাধান করা সমস্যা" },
+  "tests.assigned": { en: "Given to you", bn: "আপনাকে দেওয়া" },
 
   /* ---- admin dashboard ---- */
   "admin.title": { en: "Admin dashboard", bn: "অ্যাডমিন ড্যাশবোর্ড" },
@@ -487,6 +505,13 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "admin.f.published": { en: "Published", bn: "প্রকাশিত" },
   "admin.f.draft": { en: "Draft", bn: "খসড়া" },
   "admin.f.optional": { en: "optional", bn: "ঐচ্ছিক" },
+  "admin.f.assignTo": { en: "Give this contest to", bn: "এই প্রতিযোগিতা যাদের দেওয়া হবে" },
+  "admin.f.assignToHint": {
+    en: "Pick the learners this contest is for. Leave everyone unchecked to open it to all.",
+    bn: "যাদের জন্য এই প্রতিযোগিতা, তাদের বেছে নিন। কাউকে বাছাই না করলে সবার জন্য খোলা থাকবে।"
+  },
+  "admin.f.assignedCount": { en: "{n} learners", bn: "{n} জন শিক্ষার্থী" },
+  "admin.f.noLearners": { en: "No learners have signed up yet.", bn: "এখনো কোনো শিক্ষার্থী সাইন আপ করেননি।" },
   "admin.window": { en: "{from} → {to}", bn: "{from} → {to}" },
   "admin.phase": { en: "Phase: {phase}", bn: "পর্ব: {phase}" },
   "admin.stat.accounts": { en: "Accounts", bn: "অ্যাকাউন্ট" },

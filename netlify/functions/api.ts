@@ -5,9 +5,10 @@
  *   GET    /tests?clientId=
  *   POST   /tests
  *   DELETE /tests?id=&clientId=
- *   GET    /scheduled-tests                 published weekly/monthly papers
+ *   GET    /scheduled-tests                 published papers (assigned ones for their learners)
  *   GET    /standings?testId=               per-test standings
  *   GET    /leaderboard?window=week|month|all
+ *   GET    /contest-rating?clientId=        contest rating board (Elo)
  *   GET    /health
  *
  *   POST   /auth/signup                     { username, password, displayName }
@@ -20,6 +21,7 @@
  *   GET    /admin/overview                  counts + data source        (auth)
  *   GET    /admin/submissions               contest submissions         (auth)
  *   GET    /admin/scheduled-tests           incl. unpublished           (auth)
+ *   GET    /admin/learners                  registered learners          (auth)
  *   POST   /admin/problems                  upsert                      (auth)
  *   DELETE /admin/problems?id=                                            (auth)
  *   POST   /admin/scheduled-tests           upsert                      (auth)
@@ -35,6 +37,7 @@ import type { Handler, HandlerEvent } from "@netlify/functions";
 import { randomUUID } from "node:crypto";
 import type { PracticeTest, Problem, ScheduledTest } from "../../src/lib/types";
 import { overallLeaderboard, pctOf, standings, timeTakenSec, nameOf } from "../../src/lib/leaderboard";
+import { contestRatings } from "../../src/lib/contestRating";
 import { phaseOf } from "../../src/lib/scheduled";
 import {
   adminUsesDefaults,
@@ -295,10 +298,29 @@ async function handleProfile(event: HandlerEvent, body: Record<string, unknown>)
 /* Scheduled tests + leaderboards                                      */
 /* ------------------------------------------------------------------ */
 
-async function handleScheduledTests() {
+/**
+ * A paper is visible to a learner when it is open to everybody (no
+ * assignment) or when the admin handed it to that learner. Signed-out
+ * visitors only ever see the open papers.
+ */
+function visibleToUser(test: ScheduledTest, accountId?: string): boolean {
+  const assigned = test.assignedTo ?? [];
+  if (assigned.length === 0) return true;
+  return Boolean(accountId) && assigned.includes(accountId!);
+}
+
+async function handleScheduledTests(event: HandlerEvent) {
   const store = await readyStore();
+  const owner = await sessionUser(event);
   const [tests, entries] = await Promise.all([store.listScheduled(false), store.listEntries()]);
-  return json(200, { tests: withParticipants(tests, participantCounts(entries)) });
+  const visible = tests.filter((t) => visibleToUser(t, owner?.id));
+  // Learners only learn whether a paper is theirs — never who else got it.
+  const shaped = visible.map((t) => ({
+    ...t,
+    assignedTo: undefined,
+    assignedToYou: (t.assignedTo ?? []).length > 0
+  }));
+  return json(200, { tests: withParticipants(shaped, participantCounts(entries)) });
 }
 
 async function handleStandings(event: HandlerEvent, params: Record<string, string | undefined>) {
@@ -321,6 +343,24 @@ async function handleLeaderboard(event: HandlerEvent, params: Record<string, str
   const [entries, owner] = await Promise.all([store.listEntries(), sessionUser(event)]);
   const rows = overallLeaderboard(entries, { window, accountId: owner?.id }).slice(0, 200);
   return json(200, { rows, window });
+}
+
+/**
+ * The contest rating board (the contest tab). It is a different metric from
+ * the leaderboard: Elo-style points earned in contests, not problems solved.
+ */
+async function handleContestRating(event: HandlerEvent, params: Record<string, string | undefined>) {
+  const store = await readyStore();
+  const [entries, papers, owner] = await Promise.all([
+    store.listEntries(),
+    store.listScheduled(false),
+    sessionUser(event)
+  ]);
+  const rows = contestRatings(entries, papers, {
+    accountId: owner?.id,
+    clientId: owner ? undefined : str(params.clientId) || undefined
+  }).slice(0, 200);
+  return json(200, { rows });
 }
 
 /* ------------------------------------------------------------------ */
@@ -450,17 +490,35 @@ function testFromBody(body: Record<string, unknown>): ScheduledTest | null {
   if (problemIds.length === 0) return null;
 
   const kind = str(raw.kind, "CUSTOM");
+  const assignedTo = Array.isArray(raw.assignedTo)
+    ? Array.from(new Set((raw.assignedTo as unknown[]).filter((v): v is string => typeof v === "string" && v.length > 0)))
+    : [];
   return {
     id,
-    kind: (kind === "WEEKLY" || kind === "MONTHLY" ? kind : "CUSTOM") as ScheduledTest["kind"],
+    kind: (kind === "WEEKLY" || kind === "MONTHLY" || kind === "CONTEST" ? kind : "CUSTOM") as ScheduledTest["kind"],
     title,
     description,
     startAt,
     endAt,
     durationMin: Math.max(1, Math.min(24 * 60, Math.round(num(raw.durationMin, 45)))),
     problemIds,
-    published: bool(raw.published, true)
+    published: bool(raw.published, true),
+    assignedTo
   };
+}
+
+/** The learners an admin can hand a contest to. */
+async function handleAdminListLearners(store: Store) {
+  const users = await store.listUsers();
+  return json(200, {
+    learners: users.map((u) => ({
+      id: u.id,
+      username: u.username,
+      displayName: u.displayName,
+      email: u.email ?? null,
+      phone: u.phone ?? null
+    }))
+  });
 }
 
 async function handleAdminSaveScheduled(store: Store, body: Record<string, unknown>) {
@@ -513,9 +571,10 @@ export const handler: Handler = async (event) => {
     if (path === "/tests" && method === "GET") return await handleListTests(params);
     if (path === "/tests" && method === "POST") return await handleSaveTest(event, bodyOf(event));
     if (path === "/tests" && method === "DELETE") return await handleDeleteTest(params);
-    if (path === "/scheduled-tests" && method === "GET") return await handleScheduledTests();
+    if (path === "/scheduled-tests" && method === "GET") return await handleScheduledTests(event);
     if (path === "/standings" && method === "GET") return await handleStandings(event, params);
     if (path === "/leaderboard" && method === "GET") return await handleLeaderboard(event, params);
+    if (path === "/contest-rating" && method === "GET") return await handleContestRating(event, params);
     if (path === "/health") return await handleHealth();
 
     /* -- learner accounts --------------------------------------------- */
@@ -536,6 +595,7 @@ export const handler: Handler = async (event) => {
       if (path === "/admin/overview" && method === "GET") return await handleAdminOverview(store);
       if (path === "/admin/submissions" && method === "GET") return await handleAdminSubmissions(store);
       if (path === "/admin/scheduled-tests" && method === "GET") return await handleAdminListScheduled(store);
+      if (path === "/admin/learners" && method === "GET") return await handleAdminListLearners(store);
       if (path === "/admin/scheduled-tests" && method === "POST")
         return await handleAdminSaveScheduled(store, bodyOf(event));
       if (path === "/admin/scheduled-tests" && method === "DELETE")

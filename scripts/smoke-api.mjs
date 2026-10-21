@@ -101,6 +101,21 @@ try {
   check("windows never grow going week → month → all", (lbWeek.data?.rows?.length ?? 0) <= (lbMonth.data?.rows?.length ?? 0) && (lbMonth.data?.rows?.length ?? 0) <= lbRows.length);
   check("window defaults to all-time", (await call("GET", "/leaderboard")).data?.window === "all");
 
+  /* ---------- contest rating board ---------- */
+  const rating = await call("GET", "/contest-rating");
+  const ratingRows = rating.data?.rows ?? [];
+  check("GET /contest-rating answers", rating.status === 200, rating.data?.error);
+  check("contest rating has rows", ratingRows.length >= 6, `${ratingRows.length} rated learners`);
+  check("contest rating ranks ascend from 1", ratingRows.every((r, i) => r.rank === i + 1));
+  check(
+    "contest rating sorts by points desc",
+    ratingRows.every((r, i) => i === 0 || ratingRows[i - 1].rating >= r.rating),
+    `${ratingRows[0]?.rating} → ${ratingRows.at(-1)?.rating}`
+  );
+  check("contest rating counts contests", ratingRows.every((r) => typeof r.contests === "number" && r.contests > 0));
+  check("contest rating stays positive", ratingRows.every((r) => r.rating >= 0));
+  check("contest rating is its own metric", ratingRows.every((r) => !("correct" in r)), "no problems-solved column");
+
   /* ---------- learner entry round-trip ---------- */
   // Boards only rank attempts tied to a signed-in account, so this entry is
   // posted with a learner bearer (the server derives the account from it).
@@ -388,6 +403,60 @@ try {
   const publicList = await call("GET", "/scheduled-tests");
   check("admin sees the unpublished paper", adminList.data.tests.some((t) => t.id === "smoke-custom-1"));
   check("public list hides the unpublished paper", !publicList.data.tests.some((t) => t.id === "smoke-custom-1"));
+
+  /* ---------- contests handed to specific learners ---------- */
+  const learners = await call("GET", "/admin/learners", { token });
+  check("GET /admin/learners answers", learners.status === 200 && Array.isArray(learners.data?.learners), learners.data?.error);
+  const learnerList = learners.data?.learners ?? [];
+  check("learner list carries ids and names", learnerList.every((l) => l.id && l.username), `${learnerList.length} learners`);
+  const learnerId = entryUser.data?.user?.id ?? entryUser.data?.accountId ?? learnerList[0]?.id;
+
+  const assignedPaper = {
+    test: {
+      id: "smoke-contest-assigned",
+      kind: "CONTEST",
+      title: { bn: "নির্দিষ্ট প্রতিযোগিতা", en: "Assigned contest" },
+      description: { bn: "নির্দিষ্ট", en: "Assigned" },
+      startAt: new Date(nowMs - 3_600_000).toISOString(),
+      endAt: new Date(nowMs + 3_600_000).toISOString(),
+      durationMin: 30,
+      problemIds: ["smoke-problem-1"],
+      published: true,
+      assignedTo: learnerId ? [learnerId] : []
+    }
+  };
+  const mkAssigned = await call("POST", "/admin/scheduled-tests", { body: assignedPaper, token });
+  check("POST /admin/scheduled-tests accepts a contest kind", mkAssigned.status === 200 && mkAssigned.data?.ok === true, mkAssigned.data?.error);
+
+  const assignedAdmin = await call("GET", "/admin/scheduled-tests", { token });
+  const assignedRow = (assignedAdmin.data?.tests ?? []).find((t) => t.id === "smoke-contest-assigned");
+  check("admin sees who the contest is given to", Array.isArray(assignedRow?.assignedTo) && assignedRow.assignedTo.length === (learnerId ? 1 : 0));
+
+  const assignedAnon = await call("GET", "/scheduled-tests");
+  check(
+    "an assigned contest is hidden from other visitors",
+    !(assignedAnon.data?.tests ?? []).some((t) => t.id === "smoke-contest-assigned"),
+    "not listed"
+  );
+  const assignedOwner = await call("GET", "/scheduled-tests", { token: entryToken });
+  check(
+    "the assigned learner sees their contest",
+    (assignedOwner.data?.tests ?? []).some((t) => t.id === "smoke-contest-assigned"),
+    "listed"
+  );
+  check(
+    "the learner's payload hides who else got it",
+    !(assignedOwner.data?.tests ?? []).some((t) => Array.isArray(t.assignedTo) && t.assignedTo.length > 0),
+    "no id list"
+  );
+  check(
+    "the learner's payload marks the contest as theirs",
+    (assignedOwner.data?.tests ?? []).find((t) => t.id === "smoke-contest-assigned")?.assignedToYou === true,
+    "assignedToYou"
+  );
+
+  const rmAssigned = await call("DELETE", "/admin/scheduled-tests?id=smoke-contest-assigned", { token });
+  check("DELETE /admin/scheduled-tests removes the assigned contest", rmAssigned.status === 200);
 
   const badPaper = await call("POST", "/admin/scheduled-tests", { body: { test: { id: "x", title: { bn: "x", en: "x" }, startAt: "2026-01-02T00:00:00Z", endAt: "2026-01-01T00:00:00Z", problemIds: ["p"] } }, token });
   check("inverted windows are a 400", badPaper.status === 400, badPaper.data?.error);

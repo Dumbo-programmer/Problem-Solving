@@ -4,6 +4,36 @@
 > results below were produced against the current working tree. Delete this file
 > when the project wraps up.
 
+## ⏱ Update — 2026-10-21 (contest tab + contest rating + assigned contests)
+
+**What changed**
+
+- The leaderboard is a **learner** board again: `/leaderboard` is behind the
+  sign-in gate, the “সবার জন্য উন্মুক্ত / open to everyone” chip and the
+  “Join the board” card are gone (with their `lb.public` / `lb.join.*` copy),
+  and the login page no longer advertises an open board.
+- The **contest tab** is back and lives at `/contests` (`/tests` now redirects
+  there). It lists the weekly/monthly papers *and* the contests an admin handed
+  to specific learners, and it carries the **contest rating** board — Elo-style
+  points, a separate metric from the problems-solved leaderboard.
+- **Admins create contests and give them to people**: new `CONTEST` paper kind,
+  an “Give this contest to…” learner picker in `/admin` (`GET /admin/learners`,
+  `assignedTo` on the paper), and server-side filtering so an assigned contest
+  is only listed for the learners it was given to.
+- Nav: `Home · Problems · Leaderboard · Contests` at `md`, `Past Tests` at `lg`.
+
+**Verification (all re-run after the change)**
+
+| Check | Command | Result |
+|---|---|---|
+| Typecheck | `npm.cmd run typecheck` | ✅ clean |
+| Unit tests | `npm.cmd run test` | ✅ 83/83 (incl. 9 new contest-rating tests) |
+| Production build | `npm.cmd run build` | ✅ `tsc -b` + `vite build` + bank merge → 144 problems |
+| Responsive layout | `npm.cmd run layout` | ✅ all pass (mobile/tablet/desktop × 8 routes incl. `/contests`) |
+| E2E smoke (offline fallback) | `npm.cmd run smoke` | ✅ 53/53, **zero console errors** |
+| E2E smoke (API attached) | `npm.cmd run smoke:cloud` | ✅ 67/67, **zero console errors** — signed-in contest tab + rating board |
+| API contract smoke | `npm.cmd run smoke:api` | ✅ 95/95 — adds `/contest-rating`, `/admin/learners`, assigned-contest visibility |
+
 **Last full verification: 2026-10-19, ~21:30 (local)**
 
 | Check | Command | Result |

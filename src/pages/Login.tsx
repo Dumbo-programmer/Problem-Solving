@@ -393,8 +393,8 @@ function AccountCard({ locale }: { locale: string }) {
       )}
 
       <div className="mt-8 flex flex-wrap gap-3 border-t border-slate-100 pt-6">
-        <Link to="/tests" className="btn-primary">
-          {t("nav.tests")}
+        <Link to="/contests" className="btn-primary">
+          {t("nav.contests")}
           <ArrowRight className="h-4 w-4" />
         </Link>
         <Link to="/leaderboard" className="btn-ghost">
@@ -499,12 +499,12 @@ function DashboardPanel() {
         </p>
       )}
 
-      {/* ---- live slice of the public board ---- */}
+      {/* ---- live slice of the leaderboard ---- */}
       <div className="relative mt-6">
         <div className="flex items-center justify-between gap-3">
           <h3 className="text-sm font-bold text-slate-900">{t("auth.dash.board")}</h3>
           <span className="chip border border-emerald-500/30 bg-emerald-500/10 text-emerald-700">
-            {t("lb.public")}
+            {t("lb.col.solved")}
           </span>
         </div>
 

@@ -1,4 +1,5 @@
 import type {
+  ContestRatingRow,
   LeaderboardWindow,
   PeriodRow,
   PracticeTest,
@@ -11,6 +12,7 @@ import type {
 import { PROBLEMS } from "../data";
 import { buildDemoEntries, buildScheduledSeeds } from "./scheduled";
 import { markYou, overallLeaderboard, standings } from "./leaderboard";
+import { contestRatings } from "./contestRating";
 import {
   clearAdminToken,
   clearSession,
@@ -245,13 +247,13 @@ function countParticipants(tests: ScheduledTest[], entries: PracticeTest[]): Sch
   }));
 }
 
-/** Published weekly/monthly papers (cloud first, seeds as offline fallback). */
+/** Published papers — the caller's assigned contests plus the open ones. */
 export async function fetchScheduledTests(): Promise<{
   tests: ScheduledTest[];
   source: "cloud" | "local";
 }> {
   try {
-    const data = await request<{ tests: ScheduledTest[] }>("/scheduled-tests");
+    const data = await request<{ tests: ScheduledTest[] }>("/scheduled-tests", withSession());
     const tests = Array.isArray(data.tests) ? data.tests : [];
     writeCachedScheduled(tests);
     return { tests, source: "cloud" };
@@ -301,6 +303,29 @@ export async function fetchLeaderboard(window: LeaderboardWindow): Promise<{
   } catch {
     const tests = localScheduled();
     const rows = overallLeaderboard(localEntries(tests), { window, clientId: getClientId(), accountId });
+    return { rows, source: "local" };
+  }
+}
+
+/** The contest rating board — Elo points earned in contests (contest tab). */
+export async function fetchContestRatings(): Promise<{
+  rows: ContestRatingRow[];
+  source: "cloud" | "local";
+}> {
+  const accountId = currentAccountId();
+  try {
+    const data = await request<{ rows: ContestRatingRow[] }>(
+      `/contest-rating?clientId=${encodeURIComponent(getClientId())}`,
+      withSession()
+    );
+    const rows = Array.isArray(data.rows) ? data.rows : [];
+    return { rows, source: "cloud" };
+  } catch {
+    const tests = localScheduled();
+    const rows = contestRatings(localEntries(tests), tests, {
+      clientId: getClientId(),
+      accountId
+    });
     return { rows, source: "local" };
   }
 }
@@ -459,11 +484,24 @@ export async function adminFetch<T>(path: string, init?: RequestInit): Promise<T
   }
 }
 
+/** A learner the admin can hand a contest to. */
+export interface AdminLearner {
+  id: string;
+  username: string;
+  displayName: string;
+  email?: string | null;
+  phone?: string | null;
+}
+
 export const adminOverview = () => adminFetch<AdminOverview>("/overview");
 
 export const adminSubmissions = () => adminFetch<{ submissions: AdminSubmission[] }>("/submissions");
 
 export const adminListTests = () => adminFetch<{ tests: ScheduledTest[] }>("/scheduled-tests");
+
+/** The learners an admin can hand a contest to. */
+export const adminListLearners = () =>
+  adminFetch<{ learners: AdminLearner[] }>("/learners");
 
 export const adminSaveProblem = (problem: Problem) =>
   adminFetch<{ ok: boolean }>("/problems", { method: "POST", body: JSON.stringify({ problem }) });

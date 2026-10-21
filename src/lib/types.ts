@@ -77,7 +77,7 @@ export interface PracticeTest {
 /* Scheduled (weekly / monthly) tests + leaderboard                    */
 /* ------------------------------------------------------------------ */
 
-export type ScheduledTestKind = "WEEKLY" | "MONTHLY" | "CUSTOM";
+export type ScheduledTestKind = "WEEKLY" | "MONTHLY" | "CONTEST" | "CUSTOM";
 export type TestPhase = "upcoming" | "live" | "ended";
 
 /** A test published on a schedule — weekly, monthly or ad-hoc. */
@@ -92,6 +92,17 @@ export interface ScheduledTest {
   durationMin: number;
   problemIds: string[];
   published: boolean;
+  /**
+   * The learner accounts this paper is given to (their ids). An empty list
+   * means the paper is open to everybody; a non-empty list means the admin
+   * handed it to specific people only.
+   *
+   * The learner-facing API never sends this list — it sends `assignedToYou`
+   * instead, so one learner cannot read the others' ids.
+   */
+  assignedTo?: string[];
+  /** True when this paper was handed to the signed-in learner. */
+  assignedToYou?: boolean;
   /** Participants who have submitted (filled in by the API when known). */
   participants?: number;
 }
@@ -128,6 +139,31 @@ export interface PeriodRow {
 }
 
 export type LeaderboardWindow = "week" | "month" | "all";
+
+/** One row of the contest rating board (the contest tab). */
+export interface ContestRatingRow {
+  rank: number;
+  name: string;
+  /** Stable identity: the account id, else the browser id. */
+  key: string;
+  clientId: string;
+  accountId?: string;
+  /** Current rating points (Elo-style, starting at 1000). */
+  rating: number;
+  /** Contests the learner took part in. */
+  contests: number;
+  /** Contests won outright. */
+  wins: number;
+  /** Contests drawn. */
+  draws: number;
+  /** Best finishing position in a contest (1 = champion, 0 = never placed). */
+  bestRank: number;
+  /** Problems solved correctly across contests. */
+  solved: number;
+  /** Rating change in the most recent contest (positive = climbed). */
+  lastDelta: number;
+  isYou: boolean;
+}
 
 /** A signed-in learner account — the server never sends the password hash. */
 export interface SessionUser {

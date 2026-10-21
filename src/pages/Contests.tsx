@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowRight, CalendarDays, Clock, Crown, FlaskConical, Loader2, Play, Timer, Trophy, UserRound, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock, Crown, FlaskConical, Loader2, Play, Swords, Timer, Trophy, UserRound, Users } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
 import PageDecor from "../components/PageDecor";
-import { fetchPastTests, fetchScheduledTests, fetchStandings } from "../lib/api";
+import { fetchContestRatings, fetchPastTests, fetchScheduledTests, fetchStandings } from "../lib/api";
 import { countdownParts, phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
 import {
@@ -16,12 +16,12 @@ import {
   writeDraft,
   writeDisplayName
 } from "../lib/storage";
-import type { PracticeTest, ScheduledTest, StandingsRow, TestPhase } from "../lib/types";
+import type { ContestRatingRow, PracticeTest, ScheduledTest, StandingsRow, TestPhase } from "../lib/types";
 
 /**
- * The scheduled-test page: this week's paper, this month's challenge and the
- * papers that have closed. Each contest carries its own standings board, the
- * phase countdown, and the one-attempt start flow (display name → clock).
+ * The contest tab: the papers a learner can sit (weekly, monthly and the
+ * contests an admin handed to them) plus the contest rating board — a
+ * separate metric from the problems-solved leaderboard.
  */
 
 /** A clock that ticks every second while the page is open. */
@@ -65,7 +65,7 @@ function reduceOwn(entries: PracticeTest[]): Map<string, PracticeTest> {
   return map;
 }
 
-export default function Tests() {
+export default function Contests() {
   const { t, L, lang } = useI18n();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -76,6 +76,7 @@ export default function Tests() {
   const [tests, setTests] = useState<ScheduledTest[] | null>(null);
   const [source, setSource] = useState<"cloud" | "local">("local");
   const [entries, setEntries] = useState<PracticeTest[]>([]);
+  const [rating, setRating] = useState<ContestRatingRow[] | null>(null);
   const [openStandings, setOpenStandings] = useState<string | null>(params.get("standings"));
   const [rows, setRows] = useState<StandingsRow[] | null>(null);
   const [rowsLoading, setRowsLoading] = useState(false);
@@ -85,10 +86,15 @@ export default function Tests() {
   const [winners, setWinners] = useState<{ test: ScheduledTest; rows: StandingsRow[] } | null>(null);
 
   const load = useCallback(async () => {
-    const [scheduled, past] = await Promise.all([fetchScheduledTests(), fetchPastTests()]);
+    const [scheduled, past, board] = await Promise.all([
+      fetchScheduledTests(),
+      fetchPastTests(),
+      fetchContestRatings()
+    ]);
     setTests(scheduled.tests);
     setSource(scheduled.source);
     setEntries(past.filter((x) => Boolean(x.scheduledTestId)));
+    setRating(board.rows);
   }, []);
 
   useEffect(() => {
@@ -273,6 +279,8 @@ export default function Tests() {
         )}
       </div>
 
+      <RatingBoard rows={rating} />
+
       {winners && winners.rows.length > 0 && (
         <WinnersBoard
           test={winners.test}
@@ -322,8 +330,15 @@ export default function Tests() {
                       ? t("kind.weekly")
                       : test.kind === "MONTHLY"
                         ? t("kind.monthly")
-                        : t("kind.custom")}
+                        : test.kind === "CONTEST"
+                          ? t("kind.contest")
+                          : t("kind.custom")}
                   </span>
+                  {test.assignedToYou && (
+                    <span className="chip border border-violet-500/40 bg-violet-500/10 text-violet-700">
+                      <Swords size={13} /> {t("tests.assigned")}
+                    </span>
+                  )}
                   <span className={`chip border ${PHASE_CHIP[phase]}`}>
                     {phase === "live" && (
                       <span className="mr-1.5 h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-500" />
@@ -535,6 +550,135 @@ export function StandingsTable({ rows, clientId, accountId }: { rows: StandingsR
 }
 
 /* ------------------------------------------------------------------ */
+/* Contest rating board — the contest tab's own ranking                */
+/* ------------------------------------------------------------------ */
+
+/**
+ * The contest rating: Elo-style points earned in contests. This is a
+ * different measure from the problems-solved leaderboard, so it lives here
+ * on the contest tab and nowhere else.
+ */
+export function RatingBoard({ rows }: { rows: ContestRatingRow[] | null }) {
+  const { t } = useI18n();
+  const top = rows?.slice(0, 3) ?? [];
+
+  return (
+    <section aria-labelledby="rating-title" className="card mt-6 p-5 sm:p-6">
+      <div className="flex flex-wrap items-end justify-between gap-3">
+        <div>
+          <p className="eyebrow inline-flex items-center gap-1.5">
+            <Swords size={13} /> {t("rating.eyebrow")}
+          </p>
+          <h2 id="rating-title" className="mt-1.5 text-xl font-bold tracking-tight text-ink-900">
+            {t("rating.title")}
+          </h2>
+          <p className="mt-1 text-sm text-slate-600">{t("rating.intro")}</p>
+        </div>
+        <Link to="/leaderboard" className="btn-ghost h-9 px-3.5 text-xs">
+          <Trophy size={14} /> {t("rating.leaderboardLink")}
+        </Link>
+      </div>
+
+      {rows === null ? (
+        <p className="mt-4 flex items-center gap-2 text-sm text-slate-500">
+          <Loader2 size={15} className="animate-spin" /> {t("misc.loading")}
+        </p>
+      ) : rows.length === 0 ? (
+        <p className="mt-4 text-sm text-slate-500">{t("rating.empty")}</p>
+      ) : (
+        <>
+          <ol className="mt-5 grid gap-3 sm:grid-cols-3">
+            {top.map((row) => (
+              <li
+                key={row.key}
+                className={`flex items-center gap-3 rounded-xl border p-3 ${
+                  row.isYou ? "border-accent-500/50 bg-accent-500/10" : "border-slate-200 bg-slate-50/60"
+                }`}
+              >
+                <span
+                  className={`grid h-9 w-9 shrink-0 place-items-center rounded-full font-mono text-sm font-bold ${
+                    row.rank === 1
+                      ? "bg-amber-400/25 text-amber-700"
+                      : row.rank === 2
+                        ? "bg-slate-300/40 text-slate-700"
+                        : row.rank === 3
+                          ? "bg-orange-300/30 text-orange-800"
+                          : "bg-slate-100 text-slate-600"
+                  }`}
+                >
+                  {row.rank}
+                </span>
+                <div className="min-w-0">
+                  <p className="truncate font-semibold text-ink-900">
+                    {row.name}
+                    {row.isYou && (
+                      <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
+                        {t("lb.you")}
+                      </span>
+                    )}
+                  </p>
+                  <p className="mt-0.5 font-mono text-xs text-slate-500">
+                    {row.rating} {t("rating.points")} · {row.wins} {t("rating.wins")}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-5 overflow-x-auto rounded-xl border border-slate-200">
+            <table className="w-full min-w-[34rem] text-left text-xs">
+              <thead className="bg-slate-50 text-slate-400">
+                <tr>
+                  <th className="px-3 py-2 font-semibold uppercase tracking-wider">{t("lb.col.rank")}</th>
+                  <th className="px-3 py-2 font-semibold uppercase tracking-wider">{t("lb.col.name")}</th>
+                  <th className="px-3 py-2 text-right font-semibold uppercase tracking-wider">{t("rating.col.rating")}</th>
+                  <th className="px-3 py-2 text-right font-semibold uppercase tracking-wider">{t("rating.col.contests")}</th>
+                  <th className="px-3 py-2 text-right font-semibold uppercase tracking-wider">{t("rating.col.wins")}</th>
+                  <th className="px-3 py-2 text-right font-semibold uppercase tracking-wider">{t("rating.col.best")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {rows.slice(0, 25).map((row) => (
+                  <tr key={row.key} className={`border-t border-slate-100 ${row.isYou ? "bg-accent-500/10" : ""}`}>
+                    <td className="px-3 py-2 font-mono font-bold text-ink-900">{row.rank}</td>
+                    <td className="max-w-[12rem] truncate px-3 py-2 font-medium text-ink-900">
+                      {row.name}
+                      {row.isYou && (
+                        <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
+                          {t("lb.you")}
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-right font-mono text-ink-900">
+                      {row.rating}
+                      {row.lastDelta !== 0 && (
+                        <span
+                          className={`ml-1.5 text-[10px] font-bold ${
+                            row.lastDelta > 0 ? "text-emerald-600" : "text-rose-500"
+                          }`}
+                        >
+                          {row.lastDelta > 0 ? `+${row.lastDelta}` : row.lastDelta}
+                        </span>
+                      )}
+                    </td>
+                    <td className="px-3 py-2 text-right font-mono text-slate-600">{row.contests}</td>
+                    <td className="px-3 py-2 text-right font-mono text-slate-600">{row.wins}</td>
+                    <td className="px-3 py-2 text-right font-mono text-slate-600">
+                      {row.bestRank > 0 ? `#${row.bestRank}` : "—"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p className="mt-3 text-[11px] text-slate-400">{t("rating.hint")}</p>
+        </>
+      )}
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /* Winners board — recent test leaders, above the papers               */
 /* ------------------------------------------------------------------ */
 
@@ -580,7 +724,14 @@ export function WinnersBoard({
           </h2>
           <p className="mt-1 text-sm text-slate-600">
             {L(test.title)} ·{" "}
-            {test.kind === "WEEKLY" ? t("kind.weekly") : t("kind.monthly")} ·{" "}
+            {test.kind === "WEEKLY"
+              ? t("kind.weekly")
+              : test.kind === "MONTHLY"
+                ? t("kind.monthly")
+                : test.kind === "CONTEST"
+                  ? t("kind.contest")
+                  : t("kind.custom")}{" "}
+            ·{" "}
             <span className={live ? "text-emerald-500" : "text-slate-400"}>
               {live ? t("tests.winners.live") : t("tests.winners.ended")}
             </span>
