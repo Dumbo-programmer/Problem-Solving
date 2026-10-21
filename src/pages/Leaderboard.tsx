@@ -17,8 +17,9 @@ import type { LeaderboardWindow, PeriodRow } from "../lib/types";
  * This is the *problems solved* board. Contest rating lives on the contest
  * tab — the two never mix.
  *
- * The board is for learners: an account is required, and only attempts sat
- * under an account are ever ranked.
+ * The board is open to every visitor; only attempts sat under an account are
+ * ever ranked, so a signed-out visitor reads the board without a row of
+ * their own.
  */
 
 const TABS: { key: LeaderboardWindow; label: string }[] = [
@@ -129,7 +130,14 @@ export default function Leaderboard() {
               <Trophy size={14} /> {t("nav.contests")}
             </Link>
           </div>
-        ) : null}
+        ) : (
+          <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
+            <p className="text-sm text-slate-600">{t("lb.signedOut")}</p>
+            <Link to="/login" className="btn-ghost h-9 px-3.5 text-xs">
+              {t("lb.signIn")}
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* ---- top-3 podium ---- */}

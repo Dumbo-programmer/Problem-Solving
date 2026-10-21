@@ -7,7 +7,7 @@ import {
   signup as apiSignup,
   updateDisplayName
 } from "./api";
-import { readSession } from "./storage";
+import { readSession, onSessionChange } from "./storage";
 import type { SessionUser } from "./types";
 
 /**
@@ -57,6 +57,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       cancelled = true;
     };
   }, []);
+
+  // A sign-in/out in another tab updates this one immediately.
+  useEffect(
+    () =>
+      onSessionChange(() => {
+        setUser(readSession()?.user ?? null);
+        setReady(true);
+      }),
+    []
+  );
 
   const signIn = useCallback(async (username: string, password: string) => {
     const next = await apiLogin({ username, password });

@@ -141,12 +141,11 @@ function candidates(): { label: string; url: string }[] {
   if (process.env.DATABASE_URL) list.push({ label: "env", url: process.env.DATABASE_URL });
 
   const enc = encodeURIComponent(DB_PASSWORD);
-  list.push({
-    label: "direct",
-    url: `postgresql://postgres:${enc}@db.${PROJECT_REF}.supabase.co:5432/postgres`
-  });
   // Supabase transaction pooler — designed for serverless/IPv4 environments.
-  for (const region of ["ap-southeast-1", "us-east-1", "eu-west-1"]) {
+  // The project lives in ap-northeast-1; the pooler only resolves the tenant
+  // from that region ("tenant/user … not found" everywhere else), so it goes
+  // first. `db.<ref>.supabase.co` is IPv6-only and unreachable from most runners.
+  for (const region of ["ap-northeast-1", "ap-southeast-1", "us-east-1", "eu-west-1"]) {
     list.push({
       label: `pooler-${region}`,
       url: `postgresql://postgres.${PROJECT_REF}:${enc}@aws-0-${region}.pooler.supabase.com:6543/postgres`

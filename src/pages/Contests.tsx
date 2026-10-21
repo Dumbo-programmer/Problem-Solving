@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { ArrowRight, CalendarDays, Clock, Crown, FlaskConical, Loader2, Play, Swords, Timer, Trophy, UserRound, Users } from "lucide-react";
+import { ArrowRight, CalendarDays, Clock, Crown, FlaskConical, Loader2, LogIn, Play, Swords, Timer, Trophy, UserRound, Users } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
 import PageDecor from "../components/PageDecor";
@@ -11,10 +11,8 @@ import {
   clearDraft,
   getClientId,
   newTestId,
-  readDisplayName,
   readDrafts,
-  writeDraft,
-  writeDisplayName
+  writeDraft
 } from "../lib/storage";
 import type { ContestRatingRow, PracticeTest, ScheduledTest, StandingsRow, TestPhase } from "../lib/types";
 
@@ -22,6 +20,10 @@ import type { ContestRatingRow, PracticeTest, ScheduledTest, StandingsRow, TestP
  * The contest tab: the papers a learner can sit (weekly, monthly and the
  * contests an admin handed to them) plus the contest rating board — a
  * separate metric from the problems-solved leaderboard.
+ *
+ * The page is open to everyone; only *sitting* a paper needs an account, so
+ * a signed-out visitor sees "You need an account to participate" instead of
+ * the start button.
  */
 
 /** A clock that ticks every second while the page is open. */
@@ -80,9 +82,6 @@ export default function Contests() {
   const [openStandings, setOpenStandings] = useState<string | null>(params.get("standings"));
   const [rows, setRows] = useState<StandingsRow[] | null>(null);
   const [rowsLoading, setRowsLoading] = useState(false);
-  const [askingName, setAskingName] = useState<ScheduledTest | null>(null);
-  const [nameValue, setNameValue] = useState("");
-  const [nameError, setNameError] = useState(false);
   const [winners, setWinners] = useState<{ test: ScheduledTest; rows: StandingsRow[] } | null>(null);
 
   const load = useCallback(async () => {
@@ -179,8 +178,9 @@ export default function Contests() {
     navigate(`/test/${draft.id}`);
   };
 
-  const beginAttempt = (test: ScheduledTest, name: string) => {
-    writeDisplayName(name);
+  const beginAttempt = (test: ScheduledTest) => {
+    // Signed-in learners compete under their account name.
+    const name = user?.displayName ?? "Learner";
     // Personal clock never runs past the paper's window.
     const windowLeftMin = Math.floor((Date.parse(test.endAt) - now) / 60_000);
     const durationMin = Math.max(1, Math.min(test.durationMin, windowLeftMin));
@@ -207,6 +207,12 @@ export default function Contests() {
   };
 
   const requestStart = (test: ScheduledTest) => {
+    // An account is what puts a name on the standings — so it is required
+    // before a paper (or an old on-device draft) can be opened.
+    if (!user) {
+      navigate("/login?next=/contests");
+      return;
+    }
     const entry = ownByTest.get(test.id);
     if (entry?.status === "SUBMITTED") {
       navigate(`/test/${entry.id}/results`);
@@ -221,29 +227,7 @@ export default function Contests() {
       resumeDraft(draft);
       return;
     }
-    // Signed-in learners compete under their account name — no name gate.
-    if (user) {
-      beginAttempt(test, user.displayName);
-      return;
-    }
-    const saved = readDisplayName();
-    if (saved) {
-      beginAttempt(test, saved);
-      return;
-    }
-    setNameValue("");
-    setNameError(false);
-    setAskingName(test);
-  };
-
-  const confirmName = () => {
-    const name = nameValue.trim();
-    if (!name) {
-      setNameError(true);
-      return;
-    }
-    if (askingName) beginAttempt(askingName, name);
-    setAskingName(null);
+    beginAttempt(test);
   };
 
   return (
@@ -279,8 +263,9 @@ export default function Contests() {
         )}
       </div>
 
-      <RatingBoard rows={rating} />
-
+      <div className="mt-6 grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_19rem]">
+        {/* ------------- left: the papers a learner can sit ------------- */}
+        <div className="min-w-0">
       {winners && winners.rows.length > 0 && (
         <WinnersBoard
           test={winners.test}
@@ -307,7 +292,7 @@ export default function Contests() {
           </Link>
         </div>
       ) : (
-        <div className="mt-6 grid gap-4 lg:grid-cols-2">
+        <div className="mt-6 grid gap-4 xl:grid-cols-2">
           {orderedTests.map((test) => {
             const phase = phaseOf(test, now);
             const entry = ownByTest.get(test.id);
@@ -398,6 +383,15 @@ export default function Contests() {
                       >
                         {t("tests.btn.result")} <ArrowRight size={14} />
                       </button>
+                    ) : !user ? (
+                      // Reading the paper is open; sitting it needs an account.
+                      <Link
+                        to="/login?next=/contests"
+                        className="btn-ghost h-9 px-3.5 text-xs"
+                        title={t("tests.needAccountHint")}
+                      >
+                        <LogIn size={14} /> {t("tests.needAccount")}
+                      </Link>
                     ) : draft ? (
                       <button
                         type="button"
@@ -463,41 +457,13 @@ export default function Contests() {
           })}
         </div>
       )}
-
-      {/* Display-name gate before the clock starts */}
-      {askingName && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-950/60 p-4 backdrop-blur-sm">
-          <div className="card w-full max-w-md p-6">
-            <h2 className="text-lg font-bold text-ink-900">{t("tests.name.title")}</h2>
-            <p className="mt-1.5 text-sm text-slate-600">{t("tests.name.hint")}</p>
-            <input
-              autoFocus
-              value={nameValue}
-              onChange={(e) => {
-                setNameValue(e.target.value);
-                setNameError(false);
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") confirmName();
-              }}
-              maxLength={40}
-              placeholder={t("tests.name.placeholder")}
-              className={`mt-4 w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition-colors focus:border-accent-500 ${
-                nameError ? "border-rose-500" : "border-slate-300"
-              }`}
-            />
-            {nameError && <p className="mt-1.5 text-xs text-rose-500">{t("tests.name.required")}</p>}
-            <div className="mt-5 flex justify-end gap-2">
-              <button type="button" onClick={() => setAskingName(null)} className="btn-quiet h-9 px-3.5 text-xs">
-                {t("admin.problems.cancel")}
-              </button>
-              <button type="button" onClick={confirmName} className="btn-primary h-9 px-4 text-xs">
-                {t("tests.name.submit")}
-              </button>
-            </div>
-          </div>
         </div>
-      )}
+
+        {/* ------------- right: the contest rating of this learner ------------- */}
+        <aside className="lg:sticky lg:top-24">
+          <ContestRatingPanel rows={rating} accountId={user?.id} />
+        </aside>
+      </div>
       </div>
     </div>
   );
@@ -557,121 +523,110 @@ export function StandingsTable({ rows, clientId, accountId }: { rows: StandingsR
  * The contest rating: Elo-style points earned in contests. This is a
  * different measure from the problems-solved leaderboard, so it lives here
  * on the contest tab and nowhere else.
+ *
+ * The panel leads with the signed-in learner's own rating — that is the
+ * number this tab exists for — and keeps the top of the field below it.
  */
-export function RatingBoard({ rows }: { rows: ContestRatingRow[] | null }) {
+export function ContestRatingPanel({
+  rows,
+  accountId
+}: {
+  rows: ContestRatingRow[] | null;
+  accountId?: string;
+}) {
   const { t } = useI18n();
-  const top = rows?.slice(0, 3) ?? [];
+  // Only a signed-in learner has a row of their own — without an account id
+  // `find` would otherwise match the first unowned (seeded) row.
+  const mine = accountId ? (rows?.find((row) => row.accountId === accountId) ?? null) : null;
+  const top = rows?.slice(0, 5) ?? [];
 
   return (
-    <section aria-labelledby="rating-title" className="card mt-6 p-5 sm:p-6">
-      <div className="flex flex-wrap items-end justify-between gap-3">
-        <div>
-          <p className="eyebrow inline-flex items-center gap-1.5">
-            <Swords size={13} /> {t("rating.eyebrow")}
-          </p>
-          <h2 id="rating-title" className="mt-1.5 text-xl font-bold tracking-tight text-ink-900">
-            {t("rating.title")}
-          </h2>
-          <p className="mt-1 text-sm text-slate-600">{t("rating.intro")}</p>
-        </div>
-        <Link to="/leaderboard" className="btn-ghost h-9 px-3.5 text-xs">
-          <Trophy size={14} /> {t("rating.leaderboardLink")}
-        </Link>
-      </div>
+    <section aria-labelledby="rating-title" className="card p-5">
+      <p className="eyebrow inline-flex items-center gap-1.5">
+        <Swords size={13} /> {t("rating.eyebrow")}
+      </p>
+      <h2 id="rating-title" className="mt-1.5 text-lg font-bold tracking-tight text-ink-900">
+        {t("rating.title")}
+      </h2>
+      <p className="mt-1.5 text-xs leading-relaxed text-slate-600">{t("rating.intro")}</p>
 
       {rows === null ? (
         <p className="mt-4 flex items-center gap-2 text-sm text-slate-500">
           <Loader2 size={15} className="animate-spin" /> {t("misc.loading")}
         </p>
-      ) : rows.length === 0 ? (
-        <p className="mt-4 text-sm text-slate-500">{t("rating.empty")}</p>
       ) : (
         <>
-          <ol className="mt-5 grid gap-3 sm:grid-cols-3">
-            {top.map((row) => (
-              <li
-                key={row.key}
-                className={`flex items-center gap-3 rounded-xl border p-3 ${
-                  row.isYou ? "border-accent-500/50 bg-accent-500/10" : "border-slate-200 bg-slate-50/60"
-                }`}
-              >
-                <span
-                  className={`grid h-9 w-9 shrink-0 place-items-center rounded-full font-mono text-sm font-bold ${
-                    row.rank === 1
-                      ? "bg-amber-400/25 text-amber-700"
-                      : row.rank === 2
-                        ? "bg-slate-300/40 text-slate-700"
-                        : row.rank === 3
-                          ? "bg-orange-300/30 text-orange-800"
-                          : "bg-slate-100 text-slate-600"
-                  }`}
-                >
-                  {row.rank}
-                </span>
-                <div className="min-w-0">
-                  <p className="truncate font-semibold text-ink-900">
-                    {row.name}
-                    {row.isYou && (
-                      <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
-                        {t("lb.you")}
-                      </span>
-                    )}
-                  </p>
-                  <p className="mt-0.5 font-mono text-xs text-slate-500">
-                    {row.rating} {t("rating.points")} · {row.wins} {t("rating.wins")}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          {mine ? (
+            <div className="mt-4 rounded-xl border border-accent-500/40 bg-accent-500/10 p-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-accent-700">
+                {t("rating.yourRating")}
+              </p>
+              <p className="mt-1 font-mono text-3xl font-bold leading-none text-ink-900">
+                {mine.rating}
+                {mine.lastDelta !== 0 && (
+                  <span
+                    className={`ml-2 align-middle text-xs font-bold ${
+                      mine.lastDelta > 0 ? "text-emerald-600" : "text-rose-500"
+                    }`}
+                  >
+                    {mine.lastDelta > 0 ? `+${mine.lastDelta}` : mine.lastDelta}
+                  </span>
+                )}
+              </p>
+              <p className="mt-2 text-xs text-slate-600">
+                {t("rating.yourStats", {
+                  contests: mine.contests,
+                  wins: mine.wins,
+                  rank: mine.rank
+                })}
+              </p>
+            </div>
+          ) : (
+            <div className="mt-4 rounded-xl border border-dashed border-slate-300 bg-slate-50/70 p-4">
+              <p className="text-sm font-semibold text-ink-900">{t("rating.noRatingTitle")}</p>
+              <p className="mt-1 text-xs leading-relaxed text-slate-600">{t("rating.noRatingHint")}</p>
+              {!accountId && (
+                <Link to="/login?next=/contests" className="btn-primary mt-3 h-9 px-3.5 text-xs">
+                  <LogIn size={14} /> {t("rating.signInToRate")}
+                </Link>
+              )}
+            </div>
+          )}
 
-          <div className="mt-5 overflow-x-auto rounded-xl border border-slate-200">
-            <table className="w-full min-w-[34rem] text-left text-xs">
-              <thead className="bg-slate-50 text-slate-400">
-                <tr>
-                  <th className="px-3 py-2 font-semibold uppercase tracking-wider">{t("lb.col.rank")}</th>
-                  <th className="px-3 py-2 font-semibold uppercase tracking-wider">{t("lb.col.name")}</th>
-                  <th className="px-3 py-2 text-right font-semibold uppercase tracking-wider">{t("rating.col.rating")}</th>
-                  <th className="px-3 py-2 text-right font-semibold uppercase tracking-wider">{t("rating.col.contests")}</th>
-                  <th className="px-3 py-2 text-right font-semibold uppercase tracking-wider">{t("rating.col.wins")}</th>
-                  <th className="px-3 py-2 text-right font-semibold uppercase tracking-wider">{t("rating.col.best")}</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.slice(0, 25).map((row) => (
-                  <tr key={row.key} className={`border-t border-slate-100 ${row.isYou ? "bg-accent-500/10" : ""}`}>
-                    <td className="px-3 py-2 font-mono font-bold text-ink-900">{row.rank}</td>
-                    <td className="max-w-[12rem] truncate px-3 py-2 font-medium text-ink-900">
+          {top.length > 0 && (
+            <>
+              <p className="mt-5 text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
+                {t("rating.topRated")}
+              </p>
+              <ol className="mt-2 space-y-1.5">
+                {top.map((row) => (
+                  <li
+                    key={row.key}
+                    className={`flex items-center gap-2.5 rounded-lg border px-2.5 py-2 ${
+                      Boolean(accountId) && row.accountId === accountId
+                        ? "border-accent-500/50 bg-accent-500/10"
+                        : "border-slate-200 bg-white"
+                    }`}
+                  >
+                    <span className="w-4 shrink-0 font-mono text-xs font-bold text-slate-400">
+                      {row.rank}
+                    </span>
+                    <span className="min-w-0 flex-1 truncate text-xs font-semibold text-ink-900">
                       {row.name}
-                      {row.isYou && (
-                        <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
-                          {t("lb.you")}
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-3 py-2 text-right font-mono text-ink-900">
+                    </span>
+                    <span className="shrink-0 font-mono text-xs font-bold text-ink-900">
                       {row.rating}
-                      {row.lastDelta !== 0 && (
-                        <span
-                          className={`ml-1.5 text-[10px] font-bold ${
-                            row.lastDelta > 0 ? "text-emerald-600" : "text-rose-500"
-                          }`}
-                        >
-                          {row.lastDelta > 0 ? `+${row.lastDelta}` : row.lastDelta}
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-3 py-2 text-right font-mono text-slate-600">{row.contests}</td>
-                    <td className="px-3 py-2 text-right font-mono text-slate-600">{row.wins}</td>
-                    <td className="px-3 py-2 text-right font-mono text-slate-600">
-                      {row.bestRank > 0 ? `#${row.bestRank}` : "—"}
-                    </td>
-                  </tr>
+                    </span>
+                  </li>
                 ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="mt-3 text-[11px] text-slate-400">{t("rating.hint")}</p>
+              </ol>
+            </>
+          )}
+
+          <Link to="/leaderboard" className="btn-ghost mt-5 h-9 w-full px-3 text-xs">
+            <Trophy size={14} /> {t("rating.leaderboardLink")}
+          </Link>
+          <p className="mt-3 text-[11px] leading-relaxed text-slate-400">{t("rating.hint")}</p>
         </>
       )}
     </section>

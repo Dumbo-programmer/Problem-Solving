@@ -12,7 +12,6 @@ const NS = "gonit-ishkul:";
 const CLIENT_KEY = `${NS}client-id`;
 const TESTS_KEY = `${NS}tests`;
 const LANG_KEY = `${NS}lang`;
-const NAME_KEY = `${NS}display-name`;
 const ADMIN_KEY = `${NS}admin-token`;
 const SCHEDULED_KEY = `${NS}scheduled`;
 const DRAFT_KEY = `${NS}drafts`;
@@ -88,19 +87,6 @@ export function newTestId(): string {
 }
 
 /* ------------------------------------------------------------------ */
-/* Leaderboard display name                                            */
-/* ------------------------------------------------------------------ */
-
-/** Display name used for scheduled-test attempts and leaderboard rows. */
-export function readDisplayName(): string {
-  return safeGet(NAME_KEY) ?? "";
-}
-
-export function writeDisplayName(name: string): void {
-  safeSet(NAME_KEY, name.slice(0, 40));
-}
-
-/* ------------------------------------------------------------------ */
 /* Admin session                                                       */
 /* ------------------------------------------------------------------ */
 
@@ -161,6 +147,19 @@ export function writeSession(session: Session): void {
 
 export function clearSession(): void {
   safeSet(SESSION_KEY, "");
+}
+
+/**
+ * Watch for a session written in another tab (sign-in or sign-out), so the
+ * navbar and account card follow along without a page reload.
+ */
+export function onSessionChange(fn: () => void): () => void {
+  const handler = (event: StorageEvent) => {
+    // `key === null` means another tab called localStorage.clear().
+    if (event.key === SESSION_KEY || event.key === null) fn();
+  };
+  window.addEventListener("storage", handler);
+  return () => window.removeEventListener("storage", handler);
 }
 
 /* ------------------------------------------------------------------ */

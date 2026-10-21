@@ -90,7 +90,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/past-tests" className={linkClass}>
+              <Link to="/practice#past-tests" className={linkClass}>
                 {t("nav.past")}
               </Link>
             </li>

@@ -8,6 +8,7 @@ import FilterPanel, { EMPTY_FACETS, facetsToFilters, type FacetState } from "../
 import MathText from "../components/MathText";
 import PageDecor from "../components/PageDecor";
 import { DifficultyBadge, TopicBadge } from "../components/Badges";
+import PastTestsPanel from "../components/PastTestsPanel";
 import { newTestId } from "../lib/storage";
 import type { PracticeTest, Problem } from "../lib/types";
 
@@ -290,6 +291,9 @@ export default function Practice() {
           </div>
         </aside>
       </div>
+      </div>
+      <div className="shell pb-10 lg:pb-14">
+        <PastTestsPanel />
       </div>
     </div>
   );

@@ -4,6 +4,60 @@
 > results below were produced against the current working tree. Delete this file
 > when the project wraps up.
 
+## ⏱ Update — 2026-10-21, later (open boards · account only to compete · past tests inside practice)
+
+**What changed**
+
+- **The boards are public again.** `/leaderboard` and `/contests` no longer sit behind
+  the sign-in gate — a signed-out visitor reads both. The `RequireAuth` wrapper and
+  `src/components/RequireAuth.tsx` are gone.
+- **An account is needed to *compete*, not to look.** On the contest tab a live paper
+  shows **“You need an account to participate”** (`tests.needAccount`) instead of the
+  start button for a signed-out visitor; the rating panel asks the same of them
+  (`rating.signInToRate`).
+- **Two boards, never mixed.**
+  - `/leaderboard` = the **problems-solved** board (week / month / all time). A
+    signed-out visitor gets the “Anyone can read this board…” note (`lb.signedOut`).
+  - `/contests` → right-hand aside = the **contest rating** board (Elo). It leads
+    with *your own* rating, contests played, wins and board rank (`rating.yourRating`,
+    `rating.yourStats`), with the top-rated field below it.
+- **Past tests have no tab of their own.** The archive moved onto the practice
+  builder as `src/components/PastTestsPanel.tsx` (reachable at `/practice#past-tests`);
+  `/past-tests` still redirects there. `src/pages/PastTests.tsx` is deleted.
+- Nav is now `Home · Problems · Leaderboard · Contests` + the **Practice** CTA. The
+  old “Past Tests” nav entry is gone; the footer keeps it as a link into the archive
+  section, and `ScrollToTop` learned to honour a `#section` link.
+
+**Also fixed**
+
+- **Encoding corruption.** A previous write pass had re-encoded nine files as
+  windows-1252 (`—` → `â€”`, Bengali → `à¦…`) and left a UTF-8 BOM on them. All nine
+  were repaired byte-exactly; a scan of the tree now finds zero mojibake and zero BOMs.
+- Dead code removed: `RequireAuth.tsx`, `PastTests.tsx`, and the
+  `readDisplayName` / `writeDisplayName` localStorage pair (the account name now
+  comes from the session).
+- Unused i18n keys pruned (`rating.points`, `rating.wins`, `rating.col.*`,
+  `rating.empty`); `rating.intro` is now shown in the rating panel again.
+- **Session persistence.** The stored bearer is now the source of truth for the
+  signed-in state: a failed `/auth/me` round-trip (offline, cold function, or a
+  backend whose store lost the row) no longer clears the local session, and a
+  sign-in/out in another tab syncs through the `storage` event. A signed-out
+  visitor also no longer inherits a seeded row as “your rating”.
+- `/auth/me` failures no longer nuke the session on a 401; local expiry
+  (`readSession`) is what ends a session.
+
+**Verification (all re-run after the change)**
+
+| Check | Command | Result |
+|---|---|---|
+| Typecheck | `npm.cmd run typecheck` | ✅ clean |
+| Unit tests | `npm.cmd run test` | ✅ 83/83 |
+| Production build | `npm.cmd run build` | ✅ `tsc -b` + `vite build` + bank merge → 144 problems |
+| Responsive layout | `npm.cmd run layout` | ✅ all pass (mobile/tablet/desktop × 7 routes) |
+| E2E smoke (offline fallback) | `npm.cmd run smoke` | ✅ 59/59, **zero console errors** — public boards + past-tests-on-practice assertions |
+| E2E smoke (API attached) | `npm.cmd run smoke:cloud` | ✅ 74/74, **zero console errors** — signed-in contest tab, rating panel, session survives a reload |
+| API contract smoke | `npm.cmd run smoke:api` | ✅ 97/97 — adds `/contest-rating`, `/admin/learners`, assigned-contest visibility |
+
 ## ⏱ Update — 2026-10-21 (contest tab + contest rating + assigned contests)
 
 **What changed**
@@ -201,7 +255,7 @@
   - Shared maths in `src/lib/leaderboard.ts`: `isRankedEntry`, `isDemoEntry`,
     `entryOwner`, `markYou(rows, clientId?, accountId?)`, `findYou`.
 - **Sign-in is mandatory for the competitive parts** (user decision): Home,
-  `/problems` and `/practice` stay open; `/tests`, `/leaderboard`, `/past-tests` are
+  `/problems` and `/practice` stay open; `/tests`, `/leaderboard`, `/practice` are
   wrapped in the new `RequireAuth`, which redirects to `/login?next=…` and returns you
   there after signing in. `/test/:id` deliberately stays **open** so anonymous practice
   still works — the scheduled papers enforce sign-in at their start flow (`/tests`).

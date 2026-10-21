@@ -348,14 +348,11 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     bn: "এখনো কোনো বিজয়ী নেই — এই পত্রের প্রথম স্থান এখনো খালি।"
   },
   "tests.winners.all": { en: "Full standings", bn: "সব স্ট্যান্ডিংস" },
-  "tests.name.title": { en: "Pick a display name", bn: "ডিসপ্লে নাম দিন" },
-  "tests.name.hint": {
-    en: "Shown on the standings and leaderboard. You can change it before your next attempt.",
-    bn: "স্ট্যান্ডিংস ও লিডারবোর্ডে দেখানো হবে। পরের চেষ্টার আগে এটি বদলানো যাবে।"
+  "tests.needAccount": { en: "You need an account to participate", bn: "অংশ নিতে অ্যাকাউন্ট লাগবে" },
+  "tests.needAccountHint": {
+    en: "Sign in or create a free account to sit this contest.",
+    bn: "এই প্রতিযোগিতায় অংশ নিতে সাইন ইন করুন বা নতুন অ্যাকাউন্ট খুলুন।"
   },
-  "tests.name.placeholder": { en: "e.g. Rafiq R.", bn: "যেমন: রফিক র." },
-  "tests.name.submit": { en: "Start the clock", bn: "ঘড়ি চালু করুন" },
-  "tests.name.required": { en: "Please enter a name.", bn: "অনুগ্রহ করে একটি নাম দিন।" },
   "tests.closed": {
     en: "This test is no longer accepting attempts.",
     bn: "এই টেস্টে আর চেষ্টা করা যাচ্ছে না।"
@@ -386,6 +383,11 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "You're not on the board yet — sit a contest to enter.",
     bn: "আপনি এখনো বোর্ডে নেই — একটি প্রতিযোগিতায় অংশ নিন।"
   },
+  "lb.signedOut": {
+    en: "Anyone can read this board. Sign in to see your own row and to join it.",
+    bn: "এই বোর্ড সবাই দেখতে পারেন। নিজের সারি দেখতে ও অংশ নিতে সাইন ইন করুন।"
+  },
+  "lb.signIn": { en: "Sign in", bn: "সাইন ইন" },
   "lb.empty": {
     en: "No submissions in this window yet — the first board is yours to take.",
     bn: "এই সময়ে এখনো কিছু জমা পড়েনি — প্রথম স্থানটি আপনার জন্যই রয়ে গেছে।"
@@ -402,26 +404,28 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
 
   /* ---- contest rating (contest tab) ---- */
   "rating.eyebrow": { en: "Contest rating", bn: "প্রতিযোগিতা রেটিং" },
-  "rating.title": { en: "Contest standings", bn: "প্রতিযোগিতার ফলাফল" },
+  "rating.title": { en: "Your contest rating", bn: "আপনার প্রতিযোগিতা রেটিং" },
   "rating.intro": {
     en: "Rating points earned in contests — a win against a stronger learner is worth more. Separate from the problems-solved leaderboard.",
     bn: "প্রতিযোগিতায় অর্জিত রেটিং পয়েন্ট — শক্তিশালী প্রতিপক্ষকে হারলে বেশি পয়েন্ট। সমাধান করা সমস্যার লিডারবোর্ড থেকে আলাদা।"
-  },
-  "rating.points": { en: "pts", bn: "পয়েন্ট" },
-  "rating.wins": { en: "wins", bn: "জয়" },
-  "rating.col.rating": { en: "Rating", bn: "রেটিং" },
-  "rating.col.contests": { en: "Contests", bn: "প্রতিযোগিতা" },
-  "rating.col.wins": { en: "Wins", bn: "জয়" },
-  "rating.col.best": { en: "Best place", bn: "সেরা স্থান" },
-  "rating.empty": {
-    en: "No contest results yet — the first rating is yours to take.",
-    bn: "এখনো কোনো প্রতিযোগিতার ফলাফল নেই — প্রথম রেটিং আপনার জন্যই।"
   },
   "rating.hint": {
     en: "Everyone starts on 1000 points. Beating a stronger learner earns more; a draw earns half.",
     bn: "সবাই ১০০০ পয়েন্ট থেকে শুরু করেন। শক্তিশালী প্রতিপক্ষকে হারলে বেশি পয়েন্ট; ড্র হলে অর্ধেক।"
   },
   "rating.leaderboardLink": { en: "Problems solved", bn: "সমাধান করা সমস্যা" },
+  "rating.yourRating": { en: "Your rating", bn: "আপনার রেটিং" },
+  "rating.yourStats": {
+    en: "{contests} contests · {wins} wins · #{rank} on the board",
+    bn: "{contests} প্রতিযোগিতা · {wins} জয় · বোর্ডে #{rank}"
+  },
+  "rating.noRatingTitle": { en: "No rating yet", bn: "এখনো রেটিং নেই" },
+  "rating.noRatingHint": {
+    en: "Sit a contest with your account and your rating appears here.",
+    bn: "আপনার অ্যাকাউন্ট দিয়ে একটি প্রতিযোগিতায় অংশ নিলে এখানে আপনার রেটিং দেখা যাবে।"
+  },
+  "rating.signInToRate": { en: "Sign in to take part", bn: "অংশ নিতে সাইন ইন করুন" },
+  "rating.topRated": { en: "Top rated", bn: "সর্বোচ্চ রেটিং" },
   "tests.assigned": { en: "Given to you", bn: "আপনাকে দেওয়া" },
 
   /* ---- admin dashboard ---- */

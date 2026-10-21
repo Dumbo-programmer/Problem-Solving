@@ -24,7 +24,6 @@ import {
   upsertLocalTest,
   writeAdminToken,
   writeCachedScheduled,
-  writeDisplayName,
   writeLocalTests,
   writeSession
 } from "./storage";
@@ -341,19 +340,14 @@ function withSession(): RequestInit | undefined {
 /* Learner accounts                                                    */
 /* ------------------------------------------------------------------ */
 
-/** Authenticated learner call (adds the stored bearer; clears it on 401). */
+/** Authenticated learner call (adds the stored bearer). */
 async function authedRequest<T>(path: string, init?: RequestInit): Promise<T> {
   const session = readSession();
   if (!session) throw new HttpError(401, "no_session", "no session");
-  try {
-    return await request<T>(path, {
-      ...init,
-      headers: { ...(init?.headers ?? {}), Authorization: `Bearer ${session.token}` }
-    });
-  } catch (err) {
-    if (err instanceof HttpError && err.status === 401) clearSession();
-    throw err;
-  }
+  return request<T>(path, {
+    ...init,
+    headers: { ...(init?.headers ?? {}), Authorization: `Bearer ${session.token}` }
+  });
 }
 
 /** Create an account; the session is stored and the display name adopted. */
@@ -369,7 +363,6 @@ export async function signup(input: {
     body: JSON.stringify(input)
   });
   writeSession({ token: data.token, expiresAt: data.expiresAt, user: data.user });
-  writeDisplayName(data.user.displayName);
   return data.user;
 }
 
@@ -380,14 +373,14 @@ export async function login(input: { username: string; password: string }): Prom
     body: JSON.stringify(input)
   });
   writeSession({ token: data.token, expiresAt: data.expiresAt, user: data.user });
-  writeDisplayName(data.user.displayName);
   return data.user;
 }
 
 /**
- * Refresh the cached profile. When the API is unreachable the cached session
- * is trusted (so signing in once survives going offline); only a 401 — an
- * expired or revoked token — actually ends the session.
+ * Refresh the cached profile. The stored bearer is the source of truth for the
+ * signed-in state: it is already checked against its local expiry on read, so a
+ * failed round-trip — offline, a cold function, or a server whose store lost the
+ * row — must never sign the learner out. Only an absent/expired session ends it.
  */
 export async function refreshSession(): Promise<SessionUser | null> {
   const session = readSession();
@@ -396,8 +389,7 @@ export async function refreshSession(): Promise<SessionUser | null> {
     const data = await authedRequest<{ user: SessionUser }>("/auth/me");
     writeSession({ ...session, user: data.user });
     return data.user;
-  } catch (err) {
-    if (err instanceof HttpError && (err.status === 401 || err.status === 404)) return null;
+  } catch {
     return session.user;
   }
 }
@@ -410,7 +402,6 @@ export async function updateDisplayName(displayName: string): Promise<SessionUse
   });
   const session = readSession();
   if (session) writeSession({ ...session, user: data.user });
-  writeDisplayName(data.user.displayName);
   return data.user;
 }
 

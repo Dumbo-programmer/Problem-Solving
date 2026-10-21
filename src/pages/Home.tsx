@@ -66,9 +66,9 @@ export default function Home() {
   ];
 
   const parts = [
-    { to: "/problems", icon: Layers, title: t("home.partsBankT"), body: t("home.partsBankD", { n: PROBLEMS.length }) },
-    { to: "/practice", icon: Timer, title: t("home.partsTestT"), body: t("home.partsTestD") },
-    { to: "/past-tests", icon: BookOpen, title: t("home.partsReviewT"), body: t("home.partsReviewD") }
+    { id: "bank", to: "/problems", icon: Layers, title: t("home.partsBankT"), body: t("home.partsBankD", { n: PROBLEMS.length }) },
+    { id: "test", to: "/practice", icon: Timer, title: t("home.partsTestT"), body: t("home.partsTestD") },
+    { id: "review", to: "/practice#past-tests", icon: BookOpen, title: t("home.partsReviewT"), body: t("home.partsReviewD") }
   ];
 
   const heroChips = [t("hero.chip1"), t("hero.chip2"), t("hero.chip3"), t("hero.chip4")];
@@ -288,7 +288,7 @@ export default function Home() {
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {parts.map((part, i) => (
-              <Reveal key={part.to} delay={i * 80}>
+              <Reveal key={part.id} delay={i * 80}>
                 <Link
                   to={part.to}
                   className="card group flex h-full flex-col p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"

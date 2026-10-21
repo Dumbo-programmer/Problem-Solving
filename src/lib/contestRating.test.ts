@@ -1,4 +1,4 @@
-﻿import { describe, expect, it } from "vitest";
+import { describe, expect, it } from "vitest";
 import { contestRatings, ratingOf, K_FACTOR, START_RATING } from "./contestRating";
 import { buildDemoEntries, buildScheduledSeeds } from "./scheduled";
 import { PROBLEMS } from "../data";
@@ -6,7 +6,7 @@ import type { PracticeTest, ScheduledTest } from "./types";
 
 
 /**
- * Contest rating maths â€” the board that lives on the contest tab.
+ * Contest rating maths — the board that lives on the contest tab.
  *
  * The rules under test: everybody starts on 1000, a win is worth more than a
  * draw, beating a stronger learner is worth more than beating a weaker one,
@@ -41,7 +41,7 @@ function entry(over: Partial<PracticeTest> & { clientId: string; scheduledTestId
 function paper(over: Partial<ScheduledTest> & { id: string }): ScheduledTest {
   return {
     kind: "CONTEST",
-    title: { bn: "à¦ªà§à¦°à¦¤à¦¿à¦¯à§‹à¦—à¦¿à¦¤à¦¾", en: "Contest" },
+    title: { bn: "প্রতিযোগিতা", en: "Contest" },
     description: { bn: "", en: "" },
     startAt: "2026-01-01T00:00:00.000Z",
     endAt: "2026-01-02T00:00:00.000Z",

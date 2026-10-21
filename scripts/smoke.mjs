@@ -101,7 +101,7 @@ async function trySignup() {
 }
 
 /* ---------- 1. every route renders ---------- */
-for (const path of ["/", "/problems", "/practice", "/past-tests", "/contests", "/login", "/leaderboard", "/admin"]) {
+for (const path of ["/", "/problems", "/practice", "/contests", "/login", "/leaderboard", "/admin"]) {
   await goto(path);
   const t = await text();
   check(`route ${path} renders`, t.length > 400, `${t.length} chars`);
@@ -276,28 +276,64 @@ const resultsText = await text();
 check("results show a score", /\d+\s*%/.test(resultsText), resultsText.match(/(\d+)\s*%/)?.[0] ?? "n/a");
 check("results show correct-answer boxes", /সঠিক উত্তর|Correct answer/i.test(resultsText));
 
-/* ---------- 7. the test was filed under Past Tests ---------- */
-await goto("/past-tests");
+/* ---------- 7. the finished attempt is filed under Past Tests ---------- */
+// Past tests are no longer a tab of their own: the archive sits at the bottom
+// of the practice builder, so the signed-out visitor finds it there.
+await goto("/practice");
 await new Promise((r) => setTimeout(r, 1500));
-// Past tests are a gated route: signed-out visitors bounce to the login gate.
-check("past tests gate signed-out visitors", gated(), page.url().replace(BASE, ""));
+const archiveText = await text();
+check("past tests live on the practice page", /Past practice tests|পূর্ববর্তী প্র্যাকটিস টেস্ট/i.test(archiveText));
+check("the finished attempt is filed in the archive", !/No tests yet|এখনো কোনো টেস্ট নেই/i.test(archiveText));
+// The retired address still lands on the practice builder.
+await goto("/past-tests");
+await new Promise((r) => setTimeout(r, 900));
+check("/past-tests redirects to /practice", /\/practice/.test(page.url()), page.url().replace(BASE, ""));
 
-/* ---------- 8. the contest tab gates signed-out visitors ---------- */
+// The archive has its own anchor, so a link can land straight on it.
+await goto("/practice#past-tests");
+await new Promise((r) => setTimeout(r, 1200));
+const atArchive = await page.evaluate(() => {
+  const el = document.getElementById("past-tests");
+  if (!el) return false;
+  const rect = el.getBoundingClientRect();
+  return rect.top < window.innerHeight && rect.bottom > 0;
+});
+check("/practice#past-tests lands on the archive", atArchive);
+
+/* ---------- 8. the contest tab is open to signed-out visitors ---------- */
 await goto("/contests");
 await new Promise((r) => setTimeout(r, 1200));
-check("contests gate signed-out visitors", gated(), page.url().replace(BASE, ""));
-const gateText = await text();
-check("login gate explains why sign-in is needed", /সাইন ইন করুন|Sign in to continue/i.test(gateText));
+check("contests are open to signed-out visitors", !gated(), page.url().replace(BASE, ""));
+const contestText = await text();
+check("contest tab lists the papers", /Weekly Sprint|সাপ্তাহিক স্প্রিন্ট/i.test(contestText));
+check("contest tab shows the contest rating panel", /Contest rating|প্রতিযোগিতা রেটিং/i.test(contestText));
+// Sitting a paper needs an account, so a signed-out visitor is told so.
+check(
+  "contest tab tells a signed-out visitor an account is needed",
+  /Sign in to take part|অংশ নিতে সাইন ইন করুন|You need an account to participate|অংশ নিতে অ্যাকাউন্ট লাগবে/i.test(contestText)
+);
+// No account means no personal rating row — a seeded row must never stand in
+// for the visitor's own standing.
+check(
+  "contest tab shows no personal rating when signed out",
+  !/Your rating\b|আপনার রেটিং\b/i.test(contestText) &&
+    /No rating yet|এখনো রেটিং নেই/i.test(contestText)
+);
 
 /* ---------- 8b. the old /tests address now lands on the contest tab ---------- */
 await goto("/tests");
 await new Promise((r) => setTimeout(r, 1200));
 check("/tests redirects to /contests", /contests/.test(page.url()), page.url().replace(BASE, ""));
 
-/* ---------- 9. the leaderboard is a learner board: sign-in required ---------- */
+/* ---------- 9. the leaderboard is open to signed-out visitors ---------- */
 await goto("/leaderboard");
 await new Promise((r) => setTimeout(r, 1200));
-check("leaderboard gates signed-out visitors", gated(), page.url().replace(BASE, ""));
+check("leaderboard is open to signed-out visitors", !gated(), page.url().replace(BASE, ""));
+const lbPublicText = await text();
+check(
+  "leaderboard tells a signed-out visitor it can be read",
+  /Anyone can read this board|এই বোর্ড সবাই দেখতে পারেন/i.test(lbPublicText)
+);
 
 /* ---------- 10. admin dashboard gates on a login form ---------- */
 await goto("/admin");
@@ -352,13 +388,28 @@ if (!signedUp) {
 }
 
 if (signedUp) {
-  /* ---------- 12. signed-in journeys through the gates ---------- */
+  /* ---------- 12. signed-in journeys through the boards ---------- */
 
-  // The past-test archive is reachable now.
-  await goto("/past-tests");
+  // A reload must keep the account signed in — the session lives in
+  // localStorage, not in the page's memory.
+  await page.reload({ waitUntil: "networkidle2" });
+  await new Promise((r) => setTimeout(r, 2000));
+  const reloadedText = await text();
+  check(
+    "signed-in: session survives a reload",
+    !gated() && /Smoke Tester/.test(reloadedText),
+    page.url().replace(BASE, "")
+  );
+
+  // The past-test archive is a section of the practice builder, not a tab.
+  await goto("/practice");
   await new Promise((r) => setTimeout(r, 1500));
   const pastText = await text();
-  check("signed-in: past tests list opens", !gated() && !/এখনো কোনো টেস্ট নেই|No tests yet/i.test(pastText));
+  check(
+    "signed-in: past tests list opens on the practice page",
+    !gated() && /Past practice tests|পূর্ববর্তী প্র্যাকটিস টেস্ট/i.test(pastText) &&
+      !/এখনো কোনো টেস্ট নেই|No tests yet/i.test(pastText)
+  );
 
   // The contest tab: papers, phases, the winners board and the rating board.
   await goto("/contests");
@@ -374,7 +425,10 @@ if (signedUp) {
   check("signed-in: winners board lists top solvers", /শীর্ষ সমাধানকারী|Top solvers/i.test(testsText));
   // The contest rating lives on the contest tab, not on the leaderboard.
   check("signed-in: contest rating board shows", /প্রতিযোগিতা রেটিং|Contest rating/i.test(testsText));
-  check("signed-in: contest rating lists points", /রেটিং|Rating/i.test(testsText));
+  check(
+    "signed-in: contest rating panel shows the learner's own standing",
+    /Your rating|আপনার রেটিং|No rating yet|এখনো রেটিং নেই/i.test(testsText)
+  );
 
   // The leaderboard: title, tabs, source, ranked rows and the top-3 podium.
   await goto("/leaderboard");

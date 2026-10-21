@@ -18,7 +18,7 @@ const VIEWPORTS = [
   { name: "desktop", width: 1360, height: 900 }
 ];
 
-const ROUTES = ["/", "/problems", "/practice", "/past-tests", "/contests", "/login", "/leaderboard", "/admin"];
+const ROUTES = ["/", "/problems", "/practice", "/contests", "/login", "/leaderboard", "/admin"];
 
 let failures = 0;
 const report = (ok, msg) => {

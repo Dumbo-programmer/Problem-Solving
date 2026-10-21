@@ -119,7 +119,7 @@ export default function Results() {
             <Link to="/practice" className="btn-primary">
               {t("result.newTest")} <ArrowRight size={16} />
             </Link>
-            <Link to="/past-tests" className="btn-ghost">
+            <Link to="/practice#past-tests" className="btn-ghost">
               {t("result.backToPast")}
             </Link>
             <Link to="/" className="btn-quiet">

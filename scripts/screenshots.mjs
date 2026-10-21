@@ -22,7 +22,9 @@ await page.setViewport({ width: 1360, height: 900, deviceScaleFactor: 1 });
 for (const [name, path] of [
   ["home", "/"],
   ["problems", "/problems"],
-  ["practice", "/practice"]
+  ["practice", "/practice"],
+  ["contests", "/contests"],
+  ["leaderboard", "/leaderboard"]
 ]) {
   await page.goto(`${BASE}${path}`, { waitUntil: "networkidle2", timeout: 30000 });
   await new Promise((r) => setTimeout(r, 1400));
@@ -35,7 +37,8 @@ await page.setViewport({ width: 390, height: 844, deviceScaleFactor: 2, isMobile
 for (const [name, path] of [
   ["home", "/"],
   ["practice", "/practice"],
-  ["problems", "/problems"]
+  ["problems", "/problems"],
+  ["contests", "/contests"]
 ]) {
   await page.goto(`${BASE}${path}`, { waitUntil: "networkidle2", timeout: 30000 });
   await new Promise((r) => setTimeout(r, 1400));

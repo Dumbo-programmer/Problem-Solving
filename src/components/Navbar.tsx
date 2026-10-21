@@ -8,24 +8,15 @@ import BrandLockup from "./BrandLockup";
 /**
  * Nav links, ordered by how much a visitor needs them.
  *
- * `tier` is the breakpoint from which a link appears in the desktop row, so
- * the bar never overflows on a tablet: the essentials land at `md`, the
- * archive at `lg`. "Practice" is deliberately absent — the primary CTA on the
- * right already leads there.
+ * "Practice" is deliberately absent — the primary CTA on the right already
+ * leads there, and the past-test archive lives on that same page.
  */
 const LINKS = [
-  { to: "/", key: "nav.home", end: true, tier: "md" },
-  { to: "/problems", key: "nav.problems", end: false, tier: "md" },
-  { to: "/leaderboard", key: "nav.leaderboard", end: false, tier: "md" },
-  { to: "/contests", key: "nav.contests", end: false, tier: "md" },
-  { to: "/past-tests", key: "nav.past", end: false, tier: "lg" }
+  { to: "/", key: "nav.home", end: true },
+  { to: "/problems", key: "nav.problems", end: false },
+  { to: "/leaderboard", key: "nav.leaderboard", end: false },
+  { to: "/contests", key: "nav.contests", end: false }
 ] as const;
-
-/** Hide a link below its tier (the mobile sheet always shows every link). */
-const TIER_CLASS: Record<(typeof LINKS)[number]["tier"], string> = {
-  md: "",
-  lg: "hidden lg:inline-flex"
-};
 
 export default function Navbar() {
   const { t, lang, toggle: toggleLang } = useI18n();
@@ -69,7 +60,7 @@ export default function Navbar() {
               to={link.to}
               end={link.end}
               className={({ isActive }) =>
-                `${TIER_CLASS[link.tier]} whitespace-nowrap rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors xl:px-3 xl:text-sm ${
+                `whitespace-nowrap rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors xl:px-3 xl:text-sm ${
                   isActive
                     ? "bg-accent-500/10 text-accent-700"
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
