@@ -1,7 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { I18nProvider } from "./lib/i18n";
-import { ThemeProvider } from "./lib/theme";
 import { AuthProvider } from "./lib/auth";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -29,50 +28,48 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <I18nProvider>
-        <AuthProvider>
-          <ScrollToTop />
-          <div className="flex min-h-screen flex-col">
-            <Navbar />
-            <main className="flex-1">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/problems" element={<Problems />} />
-                <Route path="/practice" element={<Practice />} />
-                <Route path="/login" element={<Login />} />
-                {/* Competitive routes require a signed-in learner. */}
-                <Route
-                  path="/tests"
-                  element={
-                    <RequireAuth>
-                      <Tests />
-                    </RequireAuth>
-                  }
-                />
-                {/* The leaderboard is public: anyone may read the standings,
+    <I18nProvider>
+      <AuthProvider>
+        <ScrollToTop />
+        <div className="flex min-h-screen flex-col">
+          <Navbar />
+          <main className="flex-1">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/problems" element={<Problems />} />
+              <Route path="/practice" element={<Practice />} />
+              <Route path="/login" element={<Login />} />
+              {/* Competitive routes require a signed-in learner. */}
+              <Route
+                path="/tests"
+                element={
+                  <RequireAuth>
+                    <Tests />
+                  </RequireAuth>
+                }
+              />
+              {/* The leaderboard is public: anyone may read the standings,
                     only joining (appearing on the board) needs an account. */}
-                <Route path="/leaderboard" element={<Leaderboard />} />
-                {/* The runner stays open so anonymous practice still works; the
-                    scheduled papers enforce sign-in at their start flow. */}
-                <Route path="/test/:id" element={<TestRunner />} />
-                <Route path="/test/:id/results" element={<Results />} />
-                <Route
-                  path="/past-tests"
-                  element={
-                    <RequireAuth>
-                      <PastTests />
-                    </RequireAuth>
-                  }
-                />
-                <Route path="/admin" element={<Admin />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </main>
-            <Footer />
-          </div>
-        </AuthProvider>
-      </I18nProvider>
-    </ThemeProvider>
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              {/* The runner stays open so anonymous practice still works; the
+                  scheduled papers enforce sign-in at their start flow. */}
+              <Route path="/test/:id" element={<TestRunner />} />
+              <Route path="/test/:id/results" element={<Results />} />
+              <Route
+                path="/past-tests"
+                element={
+                  <RequireAuth>
+                    <PastTests />
+                  </RequireAuth>
+                }
+              />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </AuthProvider>
+    </I18nProvider>
   );
 }

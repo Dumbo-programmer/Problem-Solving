@@ -152,6 +152,39 @@ check("home carries animated plot SVGs", (await page.evaluate(() => document.que
 check("home credits the Prothom Alo math school", /প্রথম আলো গণিত ইশকুল|Prothom Alo Math School/i.test(home));
 check("footer badges the Prothom Alo partnership", /প্রথম আলো · গণিত ইশকুল|Prothom Alo · Gonit Ishkul/i.test(home));
 
+// Single-theme guard: the site ships one light edition only — no `dark`
+// class on <html>, no dark-mode stylesheet, and a paper-white body.
+const themeState = await page.evaluate(() => {
+  const body = getComputedStyle(document.body);
+  const darkRules = [];
+  for (const sheet of Array.from(document.styleSheets)) {
+    let rules;
+    try {
+      rules = sheet.cssRules;
+    } catch {
+      continue;
+    }
+    for (const rule of Array.from(rules || [])) {
+      const text = rule.cssText || "";
+      if (text.includes("prefers-color-scheme: dark") || /\.dark[\s,{]/.test(text)) {
+        darkRules.push(text.slice(0, 80));
+      }
+    }
+  }
+  return {
+    htmlClass: document.documentElement.className,
+    bodyBg: body.backgroundColor,
+    darkRules,
+    toggleButtons: Array.from(document.querySelectorAll("header button")).filter((b) =>
+      /theme|থিম/i.test(b.getAttribute("aria-label") || b.getAttribute("title") || "")
+    ).length
+  };
+});
+check("html carries no dark class", !themeState.htmlClass.includes("dark"), `class="${themeState.htmlClass}"`);
+check("body paints the light paper edition", themeState.bodyBg === "rgb(253, 252, 250)", themeState.bodyBg);
+check("stylesheet ships no dark-mode rules", themeState.darkRules.length === 0, themeState.darkRules.join(" | "));
+check("no theme toggle button in the navbar", themeState.toggleButtons === 0, `${themeState.toggleButtons} found`);
+
 /* ---------- 3. archive lists problems ---------- */
 await goto("/problems");
 await page.waitForFunction(() => document.body.innerText.match(/(\d+)\s*(?:মিল|matching)/i) !== null, { timeout: 15000 }).catch(() => {});

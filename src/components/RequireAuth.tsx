@@ -20,7 +20,7 @@ export default function RequireAuth({ children }: { children: ReactNode }) {
   if (!ready) {
     return (
       <div className="shell flex min-h-[40vh] items-center justify-center py-20">
-        <span className="h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-accent-500 dark:border-ink-700 dark:border-t-accent-400" />
+        <span className="h-6 w-6 animate-spin rounded-full border-2 border-slate-300 border-t-accent-500" />
       </div>
     );
   }

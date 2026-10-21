@@ -56,7 +56,7 @@ export default function Results() {
   if (!test || !stats) {
     return (
       <div className="shell flex flex-col items-center gap-4 py-28 text-center">
-        <h1 className="text-xl font-bold text-ink-900 dark:text-white">{t("runner.notFound")}</h1>
+        <h1 className="text-xl font-bold text-ink-900">{t("runner.notFound")}</h1>
         <p className="max-w-sm text-sm text-neutral-500">{t("runner.notFoundHint")}</p>
         <Link to="/practice" className="btn-primary">
           {t("cta.takeTest")}
@@ -71,13 +71,13 @@ export default function Results() {
   return (
     <div className="shell max-w-3xl py-10 lg:py-14">
       {/* ---- scorecard ---- */}
-      <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-lift dark:border-ink-800 dark:bg-ink-900/60 sm:p-8">
-        <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent-400/20 blur-3xl dark:bg-accent-600/10" />
+      <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-lift sm:p-8">
+        <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent-400/20 blur-3xl" />
         <div className="relative">
           <p className="eyebrow">{t("result.title")}</p>
-          <h1 className="mt-2 text-2xl font-bold tracking-tight text-ink-900 dark:text-white">{test.title}</h1>
+          <h1 className="mt-2 text-2xl font-bold tracking-tight text-ink-900">{test.title}</h1>
           {showSaved && (
-            <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-400">
+            <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-emerald-600">
               <Check size={13} /> {t("result.saveNotice")}
             </p>
           )}
@@ -85,17 +85,17 @@ export default function Results() {
           <div className="mt-6 flex flex-wrap items-end gap-x-8 gap-y-5">
             <div>
               <div className="flex items-baseline gap-1.5">
-                <span className="font-mono text-5xl font-extrabold leading-none text-ink-900 dark:text-white">
+                <span className="font-mono text-5xl font-extrabold leading-none text-ink-900">
                   {stats.pct}
                 </span>
                 <span className="font-mono text-xl font-bold text-slate-400">%</span>
               </div>
-              <p className="mt-1 text-xs uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <p className="mt-1 text-xs uppercase tracking-wide text-slate-500">
                 {t("result.score")}
               </p>
             </div>
 
-            <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 dark:bg-ink-800 ${grade.className}`}>
+            <div className={`flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-100 ${grade.className}`}>
               <span className="font-mono text-xl font-extrabold">{grade.label}</span>
             </div>
 
@@ -110,7 +110,7 @@ export default function Results() {
           </div>
 
           {test.timedOut && (
-            <p className="mt-5 inline-flex items-center gap-2 rounded-lg bg-amber-500/12 px-3 py-2 text-xs font-semibold text-amber-700 dark:text-amber-300">
+            <p className="mt-5 inline-flex items-center gap-2 rounded-lg bg-amber-500/12 px-3 py-2 text-xs font-semibold text-amber-700">
               <Clock size={13} /> {t("runner.autoSubmitNotice")}
             </p>
           )}
@@ -133,7 +133,7 @@ export default function Results() {
       {test.scheduledTestId && <ScheduledRank testId={test.scheduledTestId} entryId={test.id} />}
 
       {/* ---- per-problem review ---- */}
-      <h2 className="mt-10 text-lg font-bold text-ink-900 dark:text-white">{t("result.review")}</h2>
+      <h2 className="mt-10 text-lg font-bold text-ink-900">{t("result.review")}</h2>
       <div className="mt-4 space-y-3">
         {problems.map((p, i) => {
           const answer = test.answers.find((a) => a.problemId === p.id);
@@ -147,7 +147,7 @@ export default function Results() {
                 correct
                   ? "border-l-emerald-500"
                   : skipped
-                    ? "border-l-slate-300 dark:border-l-ink-700"
+                    ? "border-l-slate-300"
                     : "border-l-rose-500"
               }`}
             >
@@ -168,7 +168,7 @@ export default function Results() {
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="min-w-0 flex-1">
-                  <span className="block text-[15px] font-semibold leading-snug text-ink-900 dark:text-white">
+                  <span className="block text-[15px] font-semibold leading-snug text-ink-900">
                     {L(p.title)}
                   </span>
                   <span className="mt-2 flex flex-wrap items-center gap-1.5">
@@ -177,10 +177,10 @@ export default function Results() {
                     <span
                       className={`chip border ${
                         correct
-                          ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
+                          ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700"
                           : skipped
-                            ? "border-slate-200 bg-slate-50 text-slate-500 dark:border-ink-700 dark:bg-ink-900 dark:text-slate-400"
-                            : "border-rose-500/40 bg-rose-500/10 text-rose-700 dark:text-rose-300"
+                            ? "border-slate-200 bg-slate-50 text-slate-500"
+                            : "border-rose-500/40 bg-rose-500/10 text-rose-700"
                       }`}
                     >
                       {correct ? t("result.correct") : skipped ? t("result.skipped") : t("result.incorrect")}
@@ -190,8 +190,8 @@ export default function Results() {
               </button>
 
               {open && (
-                <div className="animate-slideUp border-t border-slate-200/80 px-5 pb-5 pt-4 dark:border-ink-800">
-                  <div className="text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
+                <div className="animate-slideUp border-t border-slate-200/80 px-5 pb-5 pt-4">
+                  <div className="text-[15px] leading-relaxed text-slate-700">
                     <MathText block>{L(p.statement)}</MathText>
                   </div>
 
@@ -204,11 +204,11 @@ export default function Results() {
                     <AnswerBox label={t("result.correctAnswer")} value={p.answer} tone="ok" />
                   </div>
 
-                  <div className="mt-4 rounded-xl bg-slate-50 p-3.5 dark:bg-ink-900/70">
-                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                  <div className="mt-4 rounded-xl bg-slate-50 p-3.5">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                       {t("result.explanation")}
                     </p>
-                    <div className="mt-2 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                    <div className="mt-2 text-sm leading-relaxed text-slate-700">
                       <MathText block>{L(p.solution)}</MathText>
                     </div>
                   </div>
@@ -237,9 +237,9 @@ function Metric({
     <div>
       <div className="flex items-center gap-1.5">
         <Icon size={15} className={tone} />
-        <span className="font-mono text-lg font-bold text-ink-900 dark:text-white">{value}</span>
+        <span className="font-mono text-lg font-bold text-ink-900">{value}</span>
       </div>
-      <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{label}</p>
+      <p className="mt-0.5 text-xs text-slate-500">{label}</p>
     </div>
   );
 }
@@ -253,10 +253,10 @@ function AnswerBox({ label, value, tone }: { label: string; value: string; tone:
           : "border-rose-500/40 bg-rose-500/8"
       }`}
     >
-      <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+      <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
         {label}
       </p>
-      <p className="mt-0.5 font-mono text-base font-bold text-ink-900 dark:text-white">{value}</p>
+      <p className="mt-0.5 font-mono text-base font-bold text-ink-900">{value}</p>
     </div>
   );
 }
@@ -290,10 +290,10 @@ function ScheduledRank({ testId, entryId }: { testId: string; entryId: string })
           <Trophy size={19} />
         </span>
         <div>
-          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
             {t("results.rank")}
           </p>
-          <p className="font-mono text-xl font-extrabold text-ink-900 dark:text-white">
+          <p className="font-mono text-xl font-extrabold text-ink-900">
             {t("results.rankOf", { rank: row.rank, total: rows.length })}
           </p>
         </div>

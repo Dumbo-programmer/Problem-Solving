@@ -64,7 +64,7 @@ export default function Admin() {
             setSession(token);
           }}
         />
-        <p className="mt-6 max-w-md text-center text-xs leading-relaxed text-slate-400 dark:text-slate-500">
+        <p className="mt-6 max-w-md text-center text-xs leading-relaxed text-slate-400">
           {t("admin.login.hint")}
         </p>
       </div>
@@ -136,38 +136,38 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
         <ShieldCheck size={22} />
       </span>
       <p className="eyebrow mt-4">{t("admin.eyebrow")}</p>
-      <h1 className="mt-1 text-2xl font-bold tracking-tight text-ink-900 dark:text-white">{t("admin.title")}</h1>
+      <h1 className="mt-1 text-2xl font-bold tracking-tight text-ink-900">{t("admin.title")}</h1>
 
       {/* ---- which credentials to type ---- */}
       <div className="mt-5 rounded-xl border border-accent-500/25 bg-accent-500/5 p-3.5">
-        <p className="flex items-center gap-1.5 text-xs font-bold text-ink-900 dark:text-white">
+        <p className="flex items-center gap-1.5 text-xs font-bold text-ink-900">
           <KeyRound size={13} className="text-accent-500" />
           {t("admin.login.credentials")}
         </p>
         <dl className="mt-2.5 grid grid-cols-[auto_1fr] items-baseline gap-x-3 gap-y-1.5 text-xs">
-          <dt className="text-slate-500 dark:text-slate-400">{t("admin.cred.id")}</dt>
-          <dd className="font-mono font-semibold text-ink-900 dark:text-white">
+          <dt className="text-slate-500">{t("admin.cred.id")}</dt>
+          <dd className="font-mono font-semibold text-ink-900">
             {showsDefaultId ? (
               DEFAULT_ADMIN_ID
             ) : (
-              <span className="font-sans font-medium text-slate-500 dark:text-slate-400">{t("admin.cred.custom")}</span>
+              <span className="font-sans font-medium text-slate-500">{t("admin.cred.custom")}</span>
             )}
           </dd>
-          <dt className="text-slate-500 dark:text-slate-400">{t("admin.cred.password")}</dt>
-          <dd className="font-mono font-semibold text-ink-900 dark:text-white">
+          <dt className="text-slate-500">{t("admin.cred.password")}</dt>
+          <dd className="font-mono font-semibold text-ink-900">
             {showsDefaultPassword ? (
               DEFAULT_ADMIN_PASSWORD
             ) : (
-              <span className="font-sans font-medium text-slate-500 dark:text-slate-400">{t("admin.cred.custom")}</span>
+              <span className="font-sans font-medium text-slate-500">{t("admin.cred.custom")}</span>
             )}
           </dd>
         </dl>
-        <p className="mt-2.5 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
+        <p className="mt-2.5 text-[11px] leading-relaxed text-slate-500">
           {t("admin.login.credentialsHint")}
         </p>
       </div>
 
-      <label className="mt-5 block text-xs font-semibold text-slate-500 dark:text-slate-400" htmlFor="admin-id">
+      <label className="mt-5 block text-xs font-semibold text-slate-500" htmlFor="admin-id">
         {t("admin.login.id")}
       </label>
       <input
@@ -178,7 +178,7 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
         className="field mt-1.5"
       />
 
-      <label className="mt-4 block text-xs font-semibold text-slate-500 dark:text-slate-400" htmlFor="admin-pw">
+      <label className="mt-4 block text-xs font-semibold text-slate-500" htmlFor="admin-pw">
         {t("admin.login.password")}
       </label>
       <input
@@ -231,9 +231,9 @@ const KIND_LABEL: Record<ScheduledTestKind, string> = {
 };
 
 const KIND_CHIP: Record<ScheduledTestKind, string> = {
-  WEEKLY: "chip border border-sky-500/40 bg-sky-500/10 text-sky-700 dark:text-sky-300",
-  MONTHLY: "chip border border-violet-500/40 bg-violet-500/10 text-violet-700 dark:text-violet-300",
-  CUSTOM: "chip border border-slate-300/70 bg-slate-400/10 text-slate-600 dark:border-ink-700 dark:text-slate-300"
+  WEEKLY: "chip border border-sky-500/40 bg-sky-500/10 text-sky-700",
+  MONTHLY: "chip border border-violet-500/40 bg-violet-500/10 text-violet-700",
+  CUSTOM: "chip border border-slate-300/70 bg-slate-400/10 text-slate-600"
 };
 
 function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: () => void }) {
@@ -247,7 +247,7 @@ function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: (
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="eyebrow">{t("admin.eyebrow")}</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
             {t("admin.title")}
           </h1>
         </div>
@@ -256,7 +256,7 @@ function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: (
         </button>
       </header>
 
-      <div className="mt-6 flex flex-wrap gap-1.5 border-b border-slate-200 pb-3 dark:border-ink-800">
+      <div className="mt-6 flex flex-wrap gap-1.5 border-b border-slate-200 pb-3">
         {TABS.map((def) => (
           <button
             key={def.key}
@@ -264,8 +264,8 @@ function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: (
             onClick={() => setTab(def.key)}
             className={`rounded-lg px-3.5 py-2 text-sm font-medium transition-colors ${
               tab === def.key
-                ? "bg-accent-500/10 text-accent-700 dark:text-accent-300"
-                : "text-slate-500 hover:bg-slate-100 hover:text-slate-800 dark:text-slate-400 dark:hover:bg-ink-900 dark:hover:text-slate-200"
+                ? "bg-accent-500/10 text-accent-700"
+                : "text-slate-500 hover:bg-slate-100 hover:text-slate-800"
             }`}
           >
             {t(def.label)}
@@ -321,7 +321,7 @@ function OverviewPanel({ onExpired }: { onExpired: () => void }) {
 
   if (loading) {
     return (
-      <p className="mt-8 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mt-8 flex items-center gap-2 text-sm text-slate-500">
         <Loader2 size={16} className="animate-spin" /> {t("misc.loading")}
       </p>
     );
@@ -334,10 +334,10 @@ function OverviewPanel({ onExpired }: { onExpired: () => void }) {
       <Stat icon={Trophy} label={t("admin.stat.submissions")} value={data?.submissions ?? 0} />
       <Stat icon={Users} label={t("admin.stat.learners")} value={data?.learners ?? 0} />
       <Stat icon={UserRound} label={t("admin.stat.accounts")} value={data?.accounts ?? 0} />
-      <div className="col-span-2 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm dark:border-ink-800 dark:bg-ink-900/50 sm:col-span-3 lg:col-span-5">
+      <div className="col-span-2 flex items-center gap-2.5 rounded-xl border border-slate-200 bg-slate-50/70 px-4 py-3 text-sm sm:col-span-3 lg:col-span-5">
         <RefreshCw size={15} className="text-accent-500" />
-        <span className="font-medium text-slate-600 dark:text-slate-300">{t("admin.stat.source")}:</span>
-        <span className="font-mono font-semibold text-ink-900 dark:text-white">
+        <span className="font-medium text-slate-600">{t("admin.stat.source")}:</span>
+        <span className="font-mono font-semibold text-ink-900">
           {data?.source === "postgres" ? t("admin.source.postgres") : t("admin.source.file")}
         </span>
       </div>
@@ -349,8 +349,8 @@ function Stat({ icon: Icon, label, value }: { icon: typeof Users; label: string;
   return (
     <div className="card p-4">
       <Icon size={17} className="text-accent-500" />
-      <div className="mt-2 font-mono text-2xl font-bold text-ink-900 dark:text-white">{value}</div>
-      <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">{label}</div>
+      <div className="mt-2 font-mono text-2xl font-bold text-ink-900">{value}</div>
+      <div className="mt-0.5 text-xs text-slate-500">{label}</div>
     </div>
   );
 }
@@ -433,7 +433,7 @@ function ProblemsPanel({ onExpired }: { onExpired: () => void }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder={t("admin.problems.search")}
-          className="w-full max-w-xs rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-ink-900 outline-none focus:border-accent-500 dark:border-ink-700 dark:bg-ink-900 dark:text-white"
+          className="w-full max-w-xs rounded-xl border border-slate-300 bg-white px-3.5 py-2 text-sm text-ink-900 outline-none focus:border-accent-500"
         />
         <button type="button" onClick={() => setEditing({ ...EMPTY_PROBLEM })} className="btn-primary h-9 px-3.5 text-xs">
           <Plus size={14} /> {t("admin.problems.new")}
@@ -443,7 +443,7 @@ function ProblemsPanel({ onExpired }: { onExpired: () => void }) {
       {notice && (
         <p
           className={`mt-4 inline-flex items-center gap-1.5 text-xs font-medium ${
-            notice.kind === "ok" ? "text-emerald-600 dark:text-emerald-400" : "text-rose-500"
+            notice.kind === "ok" ? "text-emerald-600" : "text-rose-500"
           }`}
         >
           {notice.kind === "ok" ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />} {notice.text}
@@ -460,22 +460,22 @@ function ProblemsPanel({ onExpired }: { onExpired: () => void }) {
       )}
 
       {list === null ? (
-        <p className="mt-6 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+        <p className="mt-6 flex items-center gap-2 text-sm text-slate-500">
           <Loader2 size={16} className="animate-spin" /> {t("misc.loading")}
         </p>
       ) : (
         <>
-          <p className="mt-5 text-xs text-slate-500 dark:text-slate-400">
+          <p className="mt-5 text-xs text-slate-500">
             {t("admin.problems.count", { n: filtered.length })}
           </p>
           <div className="mt-3 space-y-2">
             {filtered.slice(0, 200).map((p) => (
               <article key={p.id} className="card flex flex-wrap items-center gap-3 px-4 py-3">
-                <span className="font-mono text-xs font-semibold text-accent-600 dark:text-accent-400">{p.id}</span>
-                <span className="min-w-0 flex-1 truncate text-sm font-medium text-ink-900 dark:text-white">
+                <span className="font-mono text-xs font-semibold text-accent-600">{p.id}</span>
+                <span className="min-w-0 flex-1 truncate text-sm font-medium text-ink-900">
                   {lang === "bn" ? p.title.bn : p.title.en}
                 </span>
-                <span className="chip border border-slate-300/70 text-slate-500 dark:border-ink-700 dark:text-slate-400">
+                <span className="chip border border-slate-300/70 text-slate-500">
                   {p.difficulty}
                 </span>
                 <button
@@ -520,9 +520,9 @@ function Field({
 }) {
   const { t } = useI18n();
   const base =
-    "mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition-colors focus:border-accent-500 dark:border-ink-700 dark:bg-ink-900 dark:text-white";
+    "mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition-colors focus:border-accent-500";
   return (
-    <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400">
+    <label className="block text-xs font-semibold text-slate-500">
       {label}
       {!required && <span className="ml-1 font-normal italic opacity-70">({t("admin.f.optional")})</span>}
       {multiline ? (
@@ -553,12 +553,12 @@ function Select<T extends string>({
 }) {
   const { lang } = useI18n();
   return (
-    <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400">
+    <label className="block text-xs font-semibold text-slate-500">
       {label}
       <select
         value={value}
         onChange={(e) => onChange(e.target.value as T)}
-        className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-500 dark:border-ink-700 dark:bg-ink-900 dark:text-white"
+        className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-500"
       >
         {options.map((o) => (
           <option key={o.key} value={o.key}>
@@ -610,7 +610,7 @@ function ProblemEditor({
 
   return (
     <div className="card mt-5 p-5">
-      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500">
+      <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
         {value.id ? t("admin.problems.edit") : t("admin.problems.newBadge")}
       </p>
       <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -782,7 +782,7 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
   return (
     <div className="mt-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-xs text-slate-500 dark:text-slate-400">{t("admin.tests.count", { n: list?.length ?? 0 })}</p>
+        <p className="text-xs text-slate-500">{t("admin.tests.count", { n: list?.length ?? 0 })}</p>
         <button
           type="button"
           onClick={() => openEditor({ ...EMPTY_TEST, id: `custom-${Date.now().toString(36)}` })}
@@ -795,7 +795,7 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
       {notice && (
         <p
           className={`mt-4 inline-flex items-center gap-1.5 text-xs font-medium ${
-            notice.kind === "ok" ? "text-emerald-600 dark:text-emerald-400" : "text-rose-500"
+            notice.kind === "ok" ? "text-emerald-600" : "text-rose-500"
           }`}
         >
           {notice.kind === "ok" ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />} {notice.text}
@@ -804,7 +804,7 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
 
       {editing && (
         <div className="card mt-5 p-5">
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
             {t("admin.tests.edit")}
           </p>
           <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -841,22 +841,22 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
               value={editing.description.en}
               onChange={(v) => setEditing({ ...editing, description: { ...editing.description, en: v } })}
             />
-            <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400">
+            <label className="block text-xs font-semibold text-slate-500">
               {t("admin.f.start")}
               <input
                 type="datetime-local"
                 value={toInput(editing.startAt)}
                 onChange={(e) => setEditing({ ...editing, startAt: inputToIso(e.target.value) })}
-                className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-500 dark:border-ink-700 dark:bg-ink-900 dark:text-white"
+                className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-500"
               />
             </label>
-            <label className="block text-xs font-semibold text-slate-500 dark:text-slate-400">
+            <label className="block text-xs font-semibold text-slate-500">
               {t("admin.f.end")}
               <input
                 type="datetime-local"
                 value={toInput(editing.endAt)}
                 onChange={(e) => setEditing({ ...editing, endAt: inputToIso(e.target.value) })}
-                className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-500 dark:border-ink-700 dark:bg-ink-900 dark:text-white"
+                className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-sm text-ink-900 outline-none focus:border-accent-500"
               />
             </label>
             <div className="sm:col-span-2">
@@ -869,7 +869,7 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
                 required
               />
             </div>
-            <label className="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-300">
+            <label className="flex items-center gap-2 text-sm font-medium text-slate-600">
               <input
                 type="checkbox"
                 checked={editing.published}
@@ -892,7 +892,7 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
       )}
 
       {list === null ? (
-        <p className="mt-6 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+        <p className="mt-6 flex items-center gap-2 text-sm text-slate-500">
           <Loader2 size={16} className="animate-spin" /> {t("misc.loading")}
         </p>
       ) : (
@@ -901,19 +901,19 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
             const phase = phaseOf(test);
             return (
               <article key={test.id} className="card flex flex-wrap items-center gap-3 px-4 py-3">
-                <span className="font-mono text-xs font-semibold text-accent-600 dark:text-accent-400">{test.id}</span>
-                <span className="min-w-0 flex-1 truncate text-sm font-medium text-ink-900 dark:text-white">
+                <span className="font-mono text-xs font-semibold text-accent-600">{test.id}</span>
+                <span className="min-w-0 flex-1 truncate text-sm font-medium text-ink-900">
                   {L(test.title)}
                 </span>
-                <span className="text-xs text-slate-500 dark:text-slate-400">
+                <span className="text-xs text-slate-500">
                   {fmtWhen(test.startAt)} → {fmtWhen(test.endAt)}
                 </span>
                 <span className={KIND_CHIP[test.kind]}>{t(KIND_LABEL[test.kind])}</span>
                 <span
                   className={`chip border ${
                     test.published
-                      ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
-                      : "border-slate-400/40 bg-slate-400/10 text-slate-500 dark:text-slate-300"
+                      ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-700"
+                      : "border-slate-400/40 bg-slate-400/10 text-slate-500"
                   }`}
                 >
                   {test.published ? t(`tests.phase.${phase}`) : t("admin.f.draft")}
@@ -959,21 +959,21 @@ function SubmissionsPanel({ onExpired }: { onExpired: () => void }) {
 
   if (rows === null) {
     return (
-      <p className="mt-8 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+      <p className="mt-8 flex items-center gap-2 text-sm text-slate-500">
         <Loader2 size={16} className="animate-spin" /> {t("misc.loading")}
       </p>
     );
   }
 
   if (rows.length === 0) {
-    return <p className="mt-8 text-sm text-slate-500 dark:text-slate-400">{t("admin.submissions.empty")}</p>;
+    return <p className="mt-8 text-sm text-slate-500">{t("admin.submissions.empty")}</p>;
   }
 
   return (
     <div className="card mt-6 overflow-x-auto p-0">
       <table className="w-full min-w-[40rem] text-left text-sm">
         <thead>
-          <tr className="border-b border-slate-200 text-slate-400 dark:border-ink-800 dark:text-slate-500">
+          <tr className="border-b border-slate-200 text-slate-400">
             <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider">{t("lb.col.name")}</th>
             <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider">{t("admin.tab.tests")}</th>
             <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">{t("lb.col.score")}</th>
@@ -985,16 +985,16 @@ function SubmissionsPanel({ onExpired }: { onExpired: () => void }) {
         </thead>
         <tbody>
           {rows.map((row) => (
-            <tr key={row.entryId} className="border-b border-slate-100 last:border-0 dark:border-ink-800/70">
-              <td className="max-w-[12rem] truncate px-4 py-3 font-medium text-ink-900 dark:text-white">{row.name}</td>
-              <td className="max-w-[16rem] truncate px-4 py-3 text-slate-600 dark:text-slate-300">{row.testTitle}</td>
-              <td className="px-4 py-3 text-right font-mono font-semibold text-ink-900 dark:text-white">
+            <tr key={row.entryId} className="border-b border-slate-100 last:border-0">
+              <td className="max-w-[12rem] truncate px-4 py-3 font-medium text-ink-900">{row.name}</td>
+              <td className="max-w-[16rem] truncate px-4 py-3 text-slate-600">{row.testTitle}</td>
+              <td className="px-4 py-3 text-right font-mono font-semibold text-ink-900">
                 {row.pct}% <span className="font-normal text-slate-400">({row.score}/{row.maxScore})</span>
               </td>
-              <td className="px-4 py-3 text-right font-mono text-slate-500 dark:text-slate-400">
+              <td className="px-4 py-3 text-right font-mono text-slate-500">
                 {formatDuration(row.timeTakenSec)}
               </td>
-              <td className="whitespace-nowrap px-4 py-3 text-right text-xs text-slate-500 dark:text-slate-400">
+              <td className="whitespace-nowrap px-4 py-3 text-right text-xs text-slate-500">
                 {new Date(row.submittedAt).toLocaleString(locale, {
                   day: "numeric",
                   month: "short",

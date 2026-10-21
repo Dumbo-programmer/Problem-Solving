@@ -59,7 +59,7 @@ for (const vp of VIEWPORTS) {
       const footer = document.querySelector("footer");
       // The co-brand lockup must actually paint: Prothom Alo above the Gonit
       // Ishkul logo, both with real box sizes (catches a missing/hidden asset).
-      // Each mark has a light + dark variant, so pick the one that is visible.
+      // The site ships a single light edition, so there is only one mark each.
       const visible = (el) => {
         if (!el) return null;
         const r = el.getBoundingClientRect();

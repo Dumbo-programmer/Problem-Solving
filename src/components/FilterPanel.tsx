@@ -47,14 +47,14 @@ function FacetRow<T extends string>({
   return (
     <div>
       <div className="mb-2 flex items-baseline justify-between gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500 dark:text-slate-400">
+        <span className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-500">
           {label}
         </span>
         {selected.length > 0 && (
           <button
             type="button"
             onClick={() => onChange([])}
-            className="text-[11px] font-medium text-accent-600 hover:underline dark:text-accent-400"
+            className="text-[11px] font-medium text-accent-600 hover:underline"
           >
             {t("filter.any")}
           </button>
@@ -110,7 +110,7 @@ export default function FilterPanel({ value, onChange, counts = {}, showSearch =
   return (
     <div className="card p-4 sm:p-5">
       <div className="flex items-center justify-between gap-3">
-        <h2 className="text-sm font-bold text-ink-900 dark:text-white">{t("filter.title")}</h2>
+        <h2 className="text-sm font-bold text-ink-900">{t("filter.title")}</h2>
         {isDirty && (
           <button
             type="button"

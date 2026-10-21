@@ -132,7 +132,7 @@ export function OrbitRing({ className = "", count = 12 }: { className?: string; 
         return (
           <span
             key={i}
-            className="math-symbol text-accent-500/70 dark:text-accent-400/80"
+            className="math-symbol text-accent-500/70"
             style={{
               left: "50%",
               top: "50%",
@@ -218,9 +218,9 @@ export function FloatingPlots({ count = 5, seed = 13, className = "" }: Floating
           }}
         >
           {p.kind === 0 ? (
-            <SinePlot className="text-slate-400 dark:text-accent-500/60" phase={p.phase} />
+            <SinePlot className="text-slate-400" phase={p.phase} />
           ) : p.kind === 1 ? (
-            <CurvePlot className="dark:opacity-90" />
+            <CurvePlot />
           ) : p.kind === 2 ? (
             <div className="relative" style={{ width: p.width, height: p.width }}>
               <OrbitRing count={9} />

@@ -23,7 +23,7 @@ you can revisit your mistakes later.
 | ✅ **Instant grading** | Forgiving answer parsing (`5,050`, `5050`, `2/4`, `0.5` all work), exact rational comparison, and a full solution for every problem. |
 | 🕘 **Past practice tests** | Every paper is saved with its answers, score, grade band and review — synced to the cloud when available. |
 | 🏆 **Public leaderboard** | The board is open to everyone — sign in to put your name, score and rank on it. |
-| 🌗 **Dark / light theme** | Remembered per browser — the day edition (warm paper, serif headlines) is the default. |
+| 🌗 **One clean edition** | A single light, printed-day edition — warm paper, serif headlines, Prothom Alo red. |
 | 🌏 **Bangla + English** | Every string, problem statement and solution exists in both languages. |
 | 📴 **Works offline** | The full bank ships with the site, so tests keep working with no network at all. |
 
@@ -39,7 +39,7 @@ you can revisit your mistakes later.
 ## Tech stack
 
 - **React 18 + Vite + TypeScript** — static-first SPA, deploys anywhere.
-- **Tailwind CSS** — design system with a light & dark theme, on Prothom Alo's brand red.
+- **Tailwind CSS** — design system with a single light edition, on Prothom Alo's brand red.
 - **KaTeX** — fast client-side maths rendering.
 - **Netlify Functions** — a single serverless API (`/.netlify/functions/api`).
 - **Supabase (PostgreSQL)** — stores the problem bank and your test history.
@@ -73,7 +73,6 @@ source of truth and the local copy acts as a cache — so nothing ever breaks.
 │   │   ├── filters.ts      # Facet filtering + balanced problem picking
 │   │   ├── i18n.tsx        # Bangla/English dictionary + provider
 │   │   ├── storage.ts      # localStorage mirror + anonymous client id
-│   │   └── theme.tsx       # Dark/light provider
 │   └── pages/              # Home, Problems, Practice, TestRunner, Results…
 └── netlify.toml
 ```

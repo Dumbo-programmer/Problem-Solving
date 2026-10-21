@@ -1,10 +1,11 @@
 /** Capture full-page screenshots of every route for visual review. */
 import puppeteer from "puppeteer-core";
 import { mkdirSync } from "node:fs";
+import { requireChrome } from "./chrome-path.mjs";
 
 const BASE = process.env.BASE_URL || "http://localhost:4173";
 const OUT = "screenshots";
-const CHROME = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+const CHROME = requireChrome();
 
 mkdirSync(OUT, { recursive: true });
 
@@ -16,22 +17,17 @@ const browser = await puppeteer.launch({
 
 const page = await browser.newPage();
 
-for (const theme of ["dark", "light"]) {
-  await page.setViewport({ width: 1360, height: 900, deviceScaleFactor: 1 });
-  await page.evaluateOnNewDocument((t) => {
-    window.localStorage.setItem("gonit-ishkul:theme", t);
-  }, theme);
+await page.setViewport({ width: 1360, height: 900, deviceScaleFactor: 1 });
 
-  for (const [name, path] of [
-    ["home", "/"],
-    ["problems", "/problems"],
-    ["practice", "/practice"]
-  ]) {
-    await page.goto(`${BASE}${path}`, { waitUntil: "networkidle2", timeout: 30000 });
-    await new Promise((r) => setTimeout(r, 1400));
-    await page.screenshot({ path: `${OUT}/${name}-${theme}.png`, fullPage: true });
-    console.log(`✓ ${name}-${theme}.png`);
-  }
+for (const [name, path] of [
+  ["home", "/"],
+  ["problems", "/problems"],
+  ["practice", "/practice"]
+]) {
+  await page.goto(`${BASE}${path}`, { waitUntil: "networkidle2", timeout: 30000 });
+  await new Promise((r) => setTimeout(r, 1400));
+  await page.screenshot({ path: `${OUT}/${name}.png`, fullPage: true });
+  console.log(`✓ ${name}.png`);
 }
 
 // Mobile viewport (the responsive check).

@@ -22,26 +22,26 @@ export default function Footer() {
   ];
 
   const linkClass =
-    "text-sm text-slate-600 transition-colors hover:text-accent-600 dark:text-slate-400 dark:hover:text-accent-400";
+    "text-sm text-slate-600 transition-colors hover:text-accent-600";
 
   return (
-    <footer className="mt-20 border-t border-slate-200 bg-slate-50/70 dark:border-ink-800 dark:bg-ink-900/40">
+    <footer className="mt-20 border-t border-slate-200 bg-slate-50/70">
       <div className="shell grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
         {/* ---- brand + stats ---- */}
         <div>
           <BrandLockup size="lg" linked={false} />
-          <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+          <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-600">
             {t("footer.tagline")}
           </p>
-          <p className="mt-3 max-w-sm text-xs font-medium text-slate-500 dark:text-slate-400">
+          <p className="mt-3 max-w-sm text-xs font-medium text-slate-500">
             {t("footer.partner")}
           </p>
 
           <dl className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <dt className="font-mono text-xl font-bold text-ink-900 dark:text-white">{stat.value}</dt>
-                <dd className="text-xs text-slate-500 dark:text-slate-400">{stat.label}</dd>
+                <dt className="font-mono text-xl font-bold text-ink-900">{stat.value}</dt>
+                <dd className="text-xs text-slate-500">{stat.label}</dd>
               </div>
             ))}
           </dl>
@@ -49,7 +49,7 @@ export default function Footer() {
 
         {/* ---- explore (topics) ---- */}
         <div>
-          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
+          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
             <BookOpen size={13} /> {t("footer.explore")}
           </h3>
           <ul className="mt-4 space-y-2.5">
@@ -65,7 +65,7 @@ export default function Footer() {
 
         {/* ---- compete ---- */}
         <div>
-          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
+          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
             <Trophy size={13} /> {t("footer.compete")}
           </h3>
           <ul className="mt-4 space-y-2.5">
@@ -99,7 +99,7 @@ export default function Footer() {
 
         {/* ---- account ---- */}
         <div>
-          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-500">
+          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
             <UserRound size={13} /> {t("footer.account")}
           </h3>
           <ul className="mt-4 space-y-2.5">
@@ -119,7 +119,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/admin" className="text-sm text-slate-400 transition-colors hover:text-accent-600 dark:text-slate-500 dark:hover:text-accent-400">
+              <Link to="/admin" className="text-sm text-slate-400 transition-colors hover:text-accent-600">
                 {t("admin.title")}
               </Link>
             </li>
@@ -127,8 +127,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-slate-200 py-5 dark:border-ink-800">
-        <div className="shell flex flex-col items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-500 sm:flex-row">
+      <div className="border-t border-slate-200 py-5">
+        <div className="shell flex flex-col items-center justify-between gap-3 text-xs text-slate-500 sm:flex-row">
           <p>{t("misc.copyright", { year })}</p>
           <a
             href="https://www.prothomalo.com/collection/math-school"
@@ -136,11 +136,10 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-full border border-palo/25 bg-palo/5 px-3 py-1.5 font-medium text-palo transition-colors hover:border-palo/50 hover:bg-palo/10"
           >
-            <img src="/prothom-alo.svg" alt="" className="h-3.5 w-auto dark:hidden" loading="lazy" decoding="async" />
-            <img src="/prothom-alo-dark.svg" alt="" aria-hidden className="hidden h-3.5 w-auto dark:block" loading="lazy" decoding="async" />
+            <img src="/prothom-alo.svg" alt="" className="h-3.5 w-auto" loading="lazy" decoding="async" />
             {t("footer.partnerShort")}
           </a>
-          <p className="text-slate-400 dark:text-slate-600">{t("footer.madeFor")}</p>
+          <p className="text-slate-400">{t("footer.madeFor")}</p>
         </div>
       </div>
     </footer>

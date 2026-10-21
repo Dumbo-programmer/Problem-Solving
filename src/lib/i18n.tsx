@@ -21,7 +21,6 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "nav.past": { en: "Past Tests", bn: "পূর্ববর্তী টেস্ট" },
   "nav.menu": { en: "Menu", bn: "মেনু" },
   "nav.close": { en: "Close", bn: "বন্ধ" },
-  "theme.toggle": { en: "Toggle theme", bn: "থিম বদলান" },
   "lang.toggle": { en: "English", bn: "বাংলা" },
 
   /* ---- hero ---- */

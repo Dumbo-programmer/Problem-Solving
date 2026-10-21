@@ -19,10 +19,10 @@ interface PageDecorProps {
 export default function PageDecor({ seed = 5, count = 6, plots = 2, className = "" }: PageDecorProps) {
   return (
     <div aria-hidden className={`pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 overflow-hidden ${className}`}>
-      <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-accent-300/15 blur-3xl dark:bg-accent-700/25" />
-      <div className="absolute -top-16 right-1/4 h-56 w-56 rounded-full bg-ink-300/25 blur-3xl dark:bg-ink-800/60" />
-      <FloatingPlots count={plots} seed={seed * 31 + 7} className="opacity-40 dark:opacity-55" />
-      <FloatingMath count={count} seed={seed} className="opacity-50 dark:opacity-70" />
+      <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-accent-300/15 blur-3xl" />
+      <div className="absolute -top-16 right-1/4 h-56 w-56 rounded-full bg-ink-300/25 blur-3xl" />
+      <FloatingPlots count={plots} seed={seed * 31 + 7} className="opacity-40" />
+      <FloatingMath count={count} seed={seed} className="opacity-50" />
       <div className="absolute inset-x-0 bottom-0 h-40">
         <div className="retro-horizon !h-40" />
       </div>

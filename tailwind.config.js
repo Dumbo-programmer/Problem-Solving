@@ -1,7 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ["./index.html", "./src/**/*.{ts,tsx}"],
-  darkMode: "class",
+  // One theme only: the site is the light, printed edition. There is no
+  // `dark:` variant anywhere in the components.
   theme: {
     extend: {
       // Non-default opacity steps used throughout the UI badges/tints

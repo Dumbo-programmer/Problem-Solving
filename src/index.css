@@ -26,15 +26,6 @@ h2 {
   @apply font-display;
 }
 
-/* A dark mode that reads like the night edition: warm charcoal ink, no
-   glow. */
-.dark body {
-  @apply bg-ink-950 text-slate-200;
-  background-image:
-    radial-gradient(ellipse 90% 50% at 50% -12%, rgba(238, 64, 35, 0.12), transparent 72%);
-  background-attachment: fixed;
-}
-
 /* MathJax-free KaTeX host: keep inline maths on the text baseline. */
 .katex-inline {
   @apply inline-block align-middle;
@@ -46,9 +37,6 @@ h2 {
 /* Nice selection colour everywhere. */
 ::selection {
   @apply bg-accent-500/20 text-ink-900;
-}
-.dark ::selection {
-  @apply bg-accent-500/35 text-white;
 }
 
 /* Slim, themed scrollbars. */
@@ -62,9 +50,6 @@ h2 {
 }
 *::-webkit-scrollbar-thumb {
   @apply rounded-full bg-slate-300/70;
-}
-.dark *::-webkit-scrollbar-thumb {
-  @apply bg-ink-700/80;
 }
 
 /*
@@ -93,15 +78,6 @@ h2 {
 .scroll-area:hover::-webkit-scrollbar-thumb {
   background-color: rgb(238 64 35 / 0.45);
 }
-.dark .scroll-area {
-  scrollbar-color: rgba(100, 116, 139, 0.6) transparent;
-}
-.dark .scroll-area::-webkit-scrollbar-thumb {
-  background-color: rgb(71 85 105 / 0.8);
-}
-.dark .scroll-area:hover::-webkit-scrollbar-thumb {
-  background-color: rgb(238 64 35 / 0.45);
-}
 
 /* ------------------------------------------------------------------ */
 /* Components                                                          */
@@ -117,50 +93,30 @@ h2 {
   .card {
     @apply rounded-xl border border-slate-200 bg-white shadow-soft;
   }
-  .dark .card {
-    @apply border-ink-800 bg-ink-900/70;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 18px 40px -32px rgba(0, 0, 0, 0.9);
-  }
 
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:focus-visible:ring-offset-ink-950;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
   }
   .btn-primary {
     @apply btn bg-accent-600 text-white shadow-soft hover:bg-accent-700 hover:shadow-lift active:scale-[0.99];
   }
-  .dark .btn-primary {
-    @apply bg-accent-600 hover:bg-accent-500;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 10px 26px -14px rgba(238, 64, 35, 0.7);
-  }
   .btn-ghost {
     @apply btn border border-slate-300 bg-white text-slate-800 hover:border-slate-400 hover:bg-slate-50;
   }
-  .dark .btn-ghost {
-    @apply border-ink-700 bg-ink-900/60 text-slate-200 hover:border-accent-500/50 hover:bg-ink-900;
-  }
   .btn-quiet {
     @apply btn text-slate-600 hover:bg-slate-100 hover:text-slate-900;
-  }
-  .dark .btn-quiet {
-    @apply text-slate-300 hover:bg-ink-900 hover:text-white;
   }
 
   .field {
     @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20;
   }
-  .dark .field {
-    @apply border-ink-700 bg-ink-900/70 text-slate-100 placeholder:text-slate-500;
-  }
-  .dark .field:focus {
-    @apply border-accent-500/70 ring-accent-500/25;
-  }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-700 dark:text-accent-400;
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-700;
   }
 
   /* ---- co-brand lockup -------------------------------------------- */
@@ -178,20 +134,12 @@ h2 {
   .retro-panel {
     @apply relative overflow-hidden rounded-2xl border border-slate-200 bg-white;
   }
-  .dark .retro-panel {
-    @apply border-ink-800 bg-ink-900/60;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 24px 60px -40px rgba(0, 0, 0, 0.9);
-  }
   /* The ruled band that sits at the foot of a hero. */
   .retro-horizon {
     @apply pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-retro-grid opacity-70;
     background-size: 46px 46px;
     -webkit-mask-image: linear-gradient(to top, black 0%, transparent 92%);
     mask-image: linear-gradient(to top, black 0%, transparent 92%);
-  }
-  /* Subtle scanline film for dark surfaces. */
-  .retro-scanlines {
-    @apply pointer-events-none absolute inset-0 opacity-0;
   }
 
   /* Toggle-style filter button used across the builder + archive. */
@@ -201,19 +149,13 @@ h2 {
   .toggle-chip-off {
     @apply border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-slate-900;
   }
-  .dark .toggle-chip-off {
-    @apply border-ink-700 bg-ink-900/50 text-slate-400 hover:border-ink-600 hover:text-slate-200;
-  }
   .toggle-chip-on {
     @apply border-accent-500/60 bg-accent-500/10 text-accent-700 shadow-[inset_0_0_0_1px_rgba(238,64,35,0.18)];
-  }
-  .dark .toggle-chip-on {
-    @apply border-accent-500/60 bg-accent-500/15 text-accent-300;
   }
 
   /* Brand-coloured headline text — used sparingly. */
   .neon-text {
-    @apply text-accent-600 dark:text-accent-400;
+    @apply text-accent-600;
   }
 }
 

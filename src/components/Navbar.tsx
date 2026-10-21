@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { LogOut, Menu, Moon, Sun, UserRound, X, Languages } from "lucide-react";
+import { LogOut, Menu, UserRound, X, Languages } from "lucide-react";
 import { useI18n } from "../lib/i18n";
-import { useTheme } from "../lib/theme";
 import { useAuth } from "../lib/auth";
 import BrandLockup from "./BrandLockup";
 
@@ -30,7 +29,6 @@ const TIER_CLASS: Record<(typeof LINKS)[number]["tier"], string> = {
 
 export default function Navbar() {
   const { t, lang, toggle: toggleLang } = useI18n();
-  const { theme, toggle: toggleTheme } = useTheme();
   const { user, signOut } = useAuth();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -57,7 +55,7 @@ export default function Navbar() {
     <header
       className={`sticky top-0 z-40 transition-colors duration-300 ${
         scrolled
-          ? "border-b border-slate-200/80 bg-white/85 backdrop-blur-md dark:border-ink-800 dark:bg-ink-950/85"
+          ? "border-b border-slate-200/80 bg-white/85 backdrop-blur-md"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -73,8 +71,8 @@ export default function Navbar() {
               className={({ isActive }) =>
                 `${TIER_CLASS[link.tier]} whitespace-nowrap rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors xl:px-3 xl:text-sm ${
                   isActive
-                    ? "bg-accent-500/10 text-accent-700 dark:text-accent-300"
-                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-ink-900 dark:hover:text-white"
+                    ? "bg-accent-500/10 text-accent-700"
+                    : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                 }`
               }
             >
@@ -93,16 +91,6 @@ export default function Navbar() {
           >
             <Languages size={16} />
             <span className="hidden lg:inline">{lang === "bn" ? "EN" : "বাংলা"}</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={toggleTheme}
-            className="btn-quiet h-9 w-9 px-0"
-            aria-label={t("theme.toggle")}
-            title={t("theme.toggle")}
-          >
-            {theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}
           </button>
 
           {user ? (
@@ -157,7 +145,7 @@ export default function Navbar() {
 
       {/* Mobile sheet */}
       <div
-        className={`fixed inset-0 top-24 z-30 bg-white transition-opacity duration-200 dark:bg-ink-950 md:hidden ${
+        className={`fixed inset-0 top-24 z-30 bg-white transition-opacity duration-200 md:hidden ${
           open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
@@ -173,8 +161,8 @@ export default function Navbar() {
                   open ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
                 } ${
                   isActive
-                    ? "bg-accent-500/10 text-accent-700 dark:text-accent-300"
-                    : "text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-ink-900"
+                    ? "bg-accent-500/10 text-accent-700"
+                    : "text-slate-700 hover:bg-slate-100"
                 }`
               }
             >
@@ -184,7 +172,7 @@ export default function Navbar() {
           {user ? (
             <div
               style={{ transitionDelay: `${LINKS.length * 30}ms` }}
-              className={`mt-1 flex items-center justify-between gap-2 rounded-xl bg-slate-50 px-4 py-3 transition-all dark:bg-ink-900 ${
+              className={`mt-1 flex items-center justify-between gap-2 rounded-xl bg-slate-50 px-4 py-3 transition-all ${
                 open ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
               }`}
             >
@@ -192,14 +180,14 @@ export default function Navbar() {
                 <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent-400 to-accent-600 text-[11px] font-bold text-white">
                   {user.displayName.slice(0, 2).toUpperCase()}
                 </span>
-                <span className="truncate text-sm font-semibold text-slate-800 dark:text-slate-100">
+                <span className="truncate text-sm font-semibold text-slate-800">
                   {user.displayName}
                 </span>
               </span>
               <button
                 type="button"
                 onClick={signOut}
-                className="btn-quiet shrink-0 text-xs text-rose-600 dark:text-rose-400"
+                className="btn-quiet shrink-0 text-xs text-rose-600"
               >
                 <LogOut size={14} />
                 {t("nav.signOut")}
@@ -211,7 +199,7 @@ export default function Navbar() {
               style={{ transitionDelay: `${LINKS.length * 30}ms` }}
               className={`rounded-xl px-4 py-3.5 text-base font-medium transition-all ${
                 open ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0"
-              } text-slate-700 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-ink-900`}
+              } text-slate-700 hover:bg-slate-100`}
             >
               {t("nav.signIn")}
             </Link>

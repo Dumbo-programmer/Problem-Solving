@@ -7,8 +7,8 @@ export default function NotFound() {
   return (
     <div className="shell flex flex-col items-center gap-4 py-28 text-center">
       <Compass size={34} className="text-accent-500" />
-      <h1 className="font-mono text-5xl font-extrabold text-ink-900 dark:text-white">404</h1>
-      <p className="max-w-sm text-slate-600 dark:text-slate-400">{t("notFound.body")}</p>
+      <h1 className="font-mono text-5xl font-extrabold text-ink-900">404</h1>
+      <p className="max-w-sm text-slate-600">{t("notFound.body")}</p>
       <Link to="/" className="btn-primary mt-2">
         {t("notFound.action")}
       </Link>

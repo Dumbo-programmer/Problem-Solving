@@ -155,8 +155,8 @@ export default function TestRunner() {
       <div className="shell flex flex-col items-center gap-4 py-28 text-center">
         <AlertTriangle size={30} className="text-amber-500" />
         <div>
-          <h1 className="text-xl font-bold text-ink-900 dark:text-white">{t("runner.notFound")}</h1>
-          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">{t("runner.notFoundHint")}</p>
+          <h1 className="text-xl font-bold text-ink-900">{t("runner.notFound")}</h1>
+          <p className="mt-2 text-sm text-slate-500">{t("runner.notFoundHint")}</p>
         </div>
         <Link to="/practice" className="btn-primary">
           {t("cta.takeTest")}
@@ -177,7 +177,7 @@ export default function TestRunner() {
     return (
       <div className="shell flex flex-col items-center gap-3 py-28 text-center">
         <Loader2 size={26} className="animate-spin text-accent-500" />
-        <p className="text-sm text-slate-500 dark:text-slate-400">{t("misc.loading")}</p>
+        <p className="text-sm text-slate-500">{t("misc.loading")}</p>
       </div>
     );
   }
@@ -202,11 +202,11 @@ export default function TestRunner() {
   return (
     <div className="shell max-w-3xl py-8 lg:py-10">
       {/* ---- sticky header: clock + progress ---- */}
-      <div className="sticky top-16 z-20 -mx-4 mb-6 border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur-md dark:border-ink-800 dark:bg-ink-950/90 sm:-mx-6 sm:px-6">
+      <div className="sticky top-16 z-20 -mx-4 mb-6 border-b border-slate-200 bg-white/90 px-4 py-3 backdrop-blur-md sm:-mx-6 sm:px-6">
         <div className="flex items-center justify-between gap-4">
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold text-ink-900 dark:text-white">{test.title}</p>
-            <p className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
+            <p className="truncate text-sm font-semibold text-ink-900">{test.title}</p>
+            <p className="mt-0.5 text-xs text-slate-500">
               {t("runner.question")} {current + 1} {t("runner.of")} {problems.length} · {answeredCount}{" "}
               {t("runner.answered")}
             </p>
@@ -214,8 +214,8 @@ export default function TestRunner() {
           <div
             className={`flex items-center gap-2 rounded-xl px-3 py-2 font-mono text-lg font-bold tabular-nums ${
               lowTime
-                ? "bg-rose-500/12 text-rose-600 dark:text-rose-400"
-                : "bg-slate-100 text-ink-900 dark:bg-ink-900 dark:text-white"
+                ? "bg-rose-500/12 text-rose-600"
+                : "bg-slate-100 text-ink-900"
             }`}
             role="timer"
             aria-live={lowTime ? "polite" : "off"}
@@ -223,7 +223,7 @@ export default function TestRunner() {
             {fmt(remaining)}
           </div>
         </div>
-        <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-100 dark:bg-ink-800">
+        <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
           <div
             className="h-full rounded-full bg-gradient-to-r from-accent-500 to-accent-400 transition-[width] duration-300"
             style={{ width: `${pct}%` }}
@@ -234,7 +234,7 @@ export default function TestRunner() {
       {/* ---- the problem ---- */}
       <article className="card p-5 sm:p-7">
         <div className="flex items-start justify-between gap-4">
-          <span className="font-mono text-sm font-bold text-slate-400 dark:text-slate-500">
+          <span className="font-mono text-sm font-bold text-slate-400">
             {String(current + 1).padStart(2, "0")}
           </span>
           <div className="flex flex-wrap justify-end gap-1.5">
@@ -243,16 +243,16 @@ export default function TestRunner() {
           </div>
         </div>
 
-        <h2 className="mt-3 text-lg font-bold text-ink-900 dark:text-white">{L(problem.title)}</h2>
+        <h2 className="mt-3 text-lg font-bold text-ink-900">{L(problem.title)}</h2>
 
-        <div className="mt-3 text-[16px] leading-relaxed text-slate-700 dark:text-slate-300">
+        <div className="mt-3 text-[16px] leading-relaxed text-slate-700">
           <MathText block>{L(problem.statement)}</MathText>
         </div>
 
-        <div className="mt-6 border-t border-dashed border-slate-200 pt-5 dark:border-ink-800">
+        <div className="mt-6 border-t border-dashed border-slate-200 pt-5">
           <label
             htmlFor={`ans-${problem.id}`}
-            className="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400"
+            className="mb-2 block text-xs font-semibold uppercase tracking-wide text-slate-500"
           >
             {t("result.yourAnswer")}
           </label>
@@ -268,7 +268,7 @@ export default function TestRunner() {
             autoComplete="off"
             spellCheck={false}
           />
-          <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
+          <p className="mt-2 text-xs text-slate-400">
             {problem.answer.includes("/") ? t("runner.answerKindFraction") : t("runner.answerKindNumber")} ·{" "}
             {problem.source}
           </p>
@@ -308,7 +308,7 @@ export default function TestRunner() {
 
       {/* ---- question grid ---- */}
       <div className="card mt-5 p-4">
-        <p className="mb-2.5 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+        <p className="mb-2.5 text-xs font-semibold uppercase tracking-wide text-slate-500">
           {t("runner.progress")}
         </p>
         <div className="flex flex-wrap gap-1.5">
@@ -324,8 +324,8 @@ export default function TestRunner() {
                   i === current
                     ? "bg-accent-500 text-white ring-2 ring-accent-300"
                     : filled
-                      ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300"
-                      : "bg-slate-100 text-slate-500 hover:bg-slate-200 dark:bg-ink-800 dark:text-slate-400 dark:hover:bg-ink-700"
+                      ? "bg-emerald-500/15 text-emerald-700"
+                      : "bg-slate-100 text-slate-500 hover:bg-slate-200"
                 }`}
               >
                 {i + 1}

@@ -40,10 +40,10 @@ export default function Problems() {
       <div className="shell py-10 lg:py-14">
       <header className="max-w-2xl">
         <p className="eyebrow">{t("nav.problems")}</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
           {t("archive.title")}
         </h1>
-        <p className="mt-3 text-slate-600 dark:text-slate-400">{t("archive.lede")}</p>
+        <p className="mt-3 text-slate-600">{t("archive.lede")}</p>
       </header>
 
       <div className="mt-8 grid items-start gap-6 lg:grid-cols-[19rem_1fr]">
@@ -53,8 +53,8 @@ export default function Problems() {
 
         <section>
           <div className="mb-4 flex items-baseline justify-between gap-3">
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              <span className="font-mono font-semibold text-ink-900 dark:text-white">{results.length}</span>{" "}
+            <p className="text-sm text-slate-500">
+              <span className="font-mono font-semibold text-ink-900">{results.length}</span>{" "}
               {t("filter.matching")}
             </p>
           </div>
@@ -62,14 +62,14 @@ export default function Problems() {
           {loading ? (
             <div className="space-y-3">
               {Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="card h-24 animate-pulse bg-slate-100/70 dark:bg-ink-900/50" />
+                <div key={i} className="card h-24 animate-pulse bg-slate-100/70" />
               ))}
             </div>
           ) : results.length === 0 ? (
             <div className="card flex flex-col items-center gap-2 px-6 py-16 text-center">
-              <Inbox size={26} className="text-slate-300 dark:text-slate-600" />
-              <p className="font-semibold text-ink-900 dark:text-white">{t("filter.none")}</p>
-              <p className="text-sm text-slate-500 dark:text-slate-400">{t("filter.noneHint")}</p>
+              <Inbox size={26} className="text-slate-300" />
+              <p className="font-semibold text-ink-900">{t("filter.none")}</p>
+              <p className="text-sm text-slate-500">{t("filter.noneHint")}</p>
             </div>
           ) : (
             <div className="space-y-3">

@@ -42,9 +42,9 @@ function fmtCountdown(ms: number, dayUnit: string): string {
 }
 
 const PHASE_CHIP: Record<TestPhase, string> = {
-  live: "border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300",
-  upcoming: "border-sky-500/40 bg-sky-500/10 text-sky-700 dark:text-sky-300",
-  ended: "border-slate-400/40 bg-slate-400/10 text-slate-600 dark:text-slate-300"
+  live: "border-emerald-500/40 bg-emerald-500/10 text-emerald-700",
+  upcoming: "border-sky-500/40 bg-sky-500/10 text-sky-700",
+  ended: "border-slate-400/40 bg-slate-400/10 text-slate-600"
 };
 
 /** One own attempt per paper: a submitted attempt always beats a draft. */
@@ -247,10 +247,10 @@ export default function Tests() {
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div className="max-w-2xl">
           <p className="eyebrow">{t("tests.eyebrow")}</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
+          <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
             {t("tests.title")}
           </h1>
-          <p className="mt-3 text-slate-600 dark:text-slate-400">{t("tests.intro")}</p>
+          <p className="mt-3 text-slate-600">{t("tests.intro")}</p>
         </div>
         <Link to="/leaderboard" className="btn-ghost">
           <Trophy size={16} /> {t("nav.leaderboard")}
@@ -258,14 +258,14 @@ export default function Tests() {
       </header>
 
       <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
-        <p className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <p className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
           <span className={`h-1.5 w-1.5 rounded-full ${source === "cloud" ? "bg-emerald-500" : "bg-amber-500"}`} />
           {source === "cloud" ? t("lb.source.cloud") : t("lb.source.local")}
         </p>
         {user && (
           <Link
             to="/login"
-            className="chip max-w-full border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300 dark:border-ink-700 dark:bg-ink-900/60 dark:text-slate-300"
+            className="chip max-w-full border-slate-200 bg-slate-50 text-slate-600 hover:border-slate-300"
           >
             <UserRound size={13} className="shrink-0" />
             <span className="truncate">{t("auth.signedInAs", { name: user.displayName })}</span>
@@ -286,14 +286,14 @@ export default function Tests() {
       )}
 
       {orderedTests === null ? (
-        <div className="mt-6 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+        <div className="mt-6 flex items-center gap-2 text-sm text-slate-500">
           <Loader2 size={16} className="animate-spin" /> {t("misc.loading")}
         </div>
       ) : orderedTests.length === 0 ? (
         <div className="card mt-6 flex flex-col items-center gap-3 px-6 py-20 text-center">
-          <CalendarDays size={28} className="text-slate-300 dark:text-slate-600" />
-          <p className="text-lg font-semibold text-ink-900 dark:text-white">{t("tests.title")}</p>
-          <p className="max-w-sm text-sm text-slate-500 dark:text-slate-400">{t("tests.empty")}</p>
+          <CalendarDays size={28} className="text-slate-300" />
+          <p className="text-lg font-semibold text-ink-900">{t("tests.title")}</p>
+          <p className="max-w-sm text-sm text-slate-500">{t("tests.empty")}</p>
           <Link to="/practice" className="btn-primary mt-2">
             {t("cta.takeTest")}
           </Link>
@@ -317,7 +317,7 @@ export default function Tests() {
             return (
               <article key={test.id} id={`test-${test.id}`} className="card flex flex-col scroll-mt-24 p-5">
                 <div className="flex flex-wrap items-center gap-2">
-                  <span className="chip border border-accent-500/40 bg-accent-500/10 text-accent-700 dark:text-accent-300">
+                  <span className="chip border border-accent-500/40 bg-accent-500/10 text-accent-700">
                     {test.kind === "WEEKLY"
                       ? t("kind.weekly")
                       : test.kind === "MONTHLY"
@@ -331,18 +331,18 @@ export default function Tests() {
                     {t(`tests.phase.${phase}`)}
                   </span>
                   {submitted && (
-                    <span className="chip border border-emerald-500/40 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+                    <span className="chip border border-emerald-500/40 bg-emerald-500/10 text-emerald-700">
                       {Math.round((submitted.correctCount / Math.max(1, submitted.maxScore)) * 100)}%
                     </span>
                   )}
                 </div>
 
-                <h2 className="mt-3 text-lg font-bold text-ink-900 dark:text-white">{L(test.title)}</h2>
-                <p className="mt-1 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
+                <h2 className="mt-3 text-lg font-bold text-ink-900">{L(test.title)}</h2>
+                <p className="mt-1 text-sm leading-relaxed text-slate-600">
                   {L(test.description)}
                 </p>
 
-                <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-500 dark:text-slate-400">
+                <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-500">
                   <span className="inline-flex items-center gap-1.5">
                     <FlaskConical size={13} /> {t("tests.problems", { n: test.problemIds.length })}
                   </span>
@@ -354,12 +354,12 @@ export default function Tests() {
                   </span>
                 </div>
 
-                <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-medium text-slate-500 dark:text-slate-400">
+                <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-medium text-slate-500">
                   <span className="inline-flex items-center gap-1.5">
                     <CalendarDays size={13} /> {fmtWhen(test.startAt)} → {fmtWhen(test.endAt)}
                   </span>
                   {phase !== "ended" && until > 0 && (
-                    <span className="inline-flex items-center gap-1.5 font-mono text-ink-900 dark:text-white">
+                    <span className="inline-flex items-center gap-1.5 font-mono text-ink-900">
                       <Clock size={13} className="text-accent-500" />
                       {phase === "upcoming" ? t("tests.startsIn") : t("tests.endsIn")}{" "}
                       {fmtCountdown(until, t("time.d"))}
@@ -415,7 +415,7 @@ export default function Tests() {
                     type="button"
                     onClick={() => setOpenStandings(isOpen ? null : test.id)}
                     className={`btn-quiet h-9 px-3 text-xs ${
-                      isOpen ? "bg-accent-500/10 text-accent-700 dark:text-accent-300" : ""
+                      isOpen ? "bg-accent-500/10 text-accent-700" : ""
                     }`}
                   >
                     <Trophy size={14} /> {isOpen ? t("tests.btn.hideStandings") : t("tests.btn.standings")}
@@ -423,22 +423,22 @@ export default function Tests() {
                 </div>
 
                 {isOpen && (
-                  <div className="mt-4 border-t border-slate-200 pt-4 dark:border-ink-800">
-                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400 dark:text-slate-500">
+                  <div className="mt-4 border-t border-slate-200 pt-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.16em] text-slate-400">
                       {t("tests.standings.title")}
                     </p>
                     {rowsLoading || rows === null ? (
-                      <p className="mt-3 flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+                      <p className="mt-3 flex items-center gap-2 text-xs text-slate-500">
                         <Loader2 size={13} className="animate-spin" /> {t("misc.loading")}
                       </p>
                     ) : rows.length === 0 ? (
-                      <p className="mt-3 text-sm text-slate-500 dark:text-slate-400">
+                      <p className="mt-3 text-sm text-slate-500">
                         {t("tests.standings.empty")}
                       </p>
                     ) : (
                       <StandingsTable rows={rows} clientId={getClientId()} accountId={user?.id} />
                     )}
-                    <p className="mt-3 text-[11px] text-slate-400 dark:text-slate-500">
+                    <p className="mt-3 text-[11px] text-slate-400">
                       {t("tests.standings.hint")}
                     </p>
                   </div>
@@ -453,8 +453,8 @@ export default function Tests() {
       {askingName && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-ink-950/60 p-4 backdrop-blur-sm">
           <div className="card w-full max-w-md p-6">
-            <h2 className="text-lg font-bold text-ink-900 dark:text-white">{t("tests.name.title")}</h2>
-            <p className="mt-1.5 text-sm text-slate-600 dark:text-slate-400">{t("tests.name.hint")}</p>
+            <h2 className="text-lg font-bold text-ink-900">{t("tests.name.title")}</h2>
+            <p className="mt-1.5 text-sm text-slate-600">{t("tests.name.hint")}</p>
             <input
               autoFocus
               value={nameValue}
@@ -467,8 +467,8 @@ export default function Tests() {
               }}
               maxLength={40}
               placeholder={t("tests.name.placeholder")}
-              className={`mt-4 w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition-colors focus:border-accent-500 dark:bg-ink-900 dark:text-white ${
-                nameError ? "border-rose-500" : "border-slate-300 dark:border-ink-700"
+              className={`mt-4 w-full rounded-xl border bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition-colors focus:border-accent-500 ${
+                nameError ? "border-rose-500" : "border-slate-300"
               }`}
             />
             {nameError && <p className="mt-1.5 text-xs text-rose-500">{t("tests.name.required")}</p>}
@@ -492,9 +492,9 @@ export default function Tests() {
 export function StandingsTable({ rows, clientId, accountId }: { rows: StandingsRow[]; clientId: string; accountId?: string }) {
   const { t } = useI18n();
   return (
-    <div className="mt-3 overflow-hidden rounded-xl border border-slate-200 dark:border-ink-800">
+    <div className="mt-3 overflow-hidden rounded-xl border border-slate-200">
       <table className="w-full text-left text-xs">
-        <thead className="bg-slate-50 text-slate-400 dark:bg-ink-900/60 dark:text-slate-500">
+        <thead className="bg-slate-50 text-slate-400">
           <tr>
             <th className="px-3 py-2 font-semibold uppercase tracking-wider">#</th>
             <th className="px-3 py-2 font-semibold uppercase tracking-wider">{t("lb.col.name")}</th>
@@ -508,21 +508,21 @@ export function StandingsTable({ rows, clientId, accountId }: { rows: StandingsR
             return (
               <tr
                 key={row.entryId}
-                className={`border-t border-slate-100 dark:border-ink-800 ${you ? "bg-accent-500/10" : ""}`}
+                className={`border-t border-slate-100 ${you ? "bg-accent-500/10" : ""}`}
               >
-                <td className="px-3 py-2 font-mono font-bold text-ink-900 dark:text-white">{row.rank}</td>
-                <td className="max-w-[10rem] truncate px-3 py-2 font-medium text-ink-900 dark:text-white">
+                <td className="px-3 py-2 font-mono font-bold text-ink-900">{row.rank}</td>
+                <td className="max-w-[10rem] truncate px-3 py-2 font-medium text-ink-900">
                   {row.name}
                   {you && (
-                    <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700 dark:text-accent-300">
+                    <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
                       {t("lb.you")}
                     </span>
                   )}
                 </td>
-                <td className="px-3 py-2 text-right font-mono text-ink-900 dark:text-white">
+                <td className="px-3 py-2 text-right font-mono text-ink-900">
                   {row.pct}% <span className="text-slate-400">({row.score}/{row.maxScore})</span>
                 </td>
-                <td className="px-3 py-2 text-right font-mono text-slate-500 dark:text-slate-400">
+                <td className="px-3 py-2 text-right font-mono text-slate-500">
                   {formatDuration(row.timeTakenSec)}
                 </td>
               </tr>
@@ -575,10 +575,10 @@ export function WinnersBoard({
           <p className="eyebrow inline-flex items-center gap-1.5">
             <Crown size={13} /> {t("tests.winners.eyebrow")}
           </p>
-          <h2 id="winners-title" className="mt-1.5 text-xl font-bold tracking-tight text-ink-900 dark:text-white">
+          <h2 id="winners-title" className="mt-1.5 text-xl font-bold tracking-tight text-ink-900">
             {t("tests.winners.title")}
           </h2>
-          <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+          <p className="mt-1 text-sm text-slate-600">
             {L(test.title)} ·{" "}
             {test.kind === "WEEKLY" ? t("kind.weekly") : t("kind.monthly")} ·{" "}
             <span className={live ? "text-emerald-500" : "text-slate-400"}>
@@ -592,7 +592,7 @@ export function WinnersBoard({
       </div>
 
       {rows.length === 0 ? (
-        <p className="relative mt-4 text-sm text-slate-500 dark:text-slate-400">{t("tests.winners.empty")}</p>
+        <p className="relative mt-4 text-sm text-slate-500">{t("tests.winners.empty")}</p>
       ) : (
         <ol className="relative mt-4 grid gap-3 sm:grid-cols-3">
           {rows.map((row, i) => (
@@ -601,22 +601,22 @@ export function WinnersBoard({
               className={`flex items-center gap-3 rounded-xl border p-3 ${
                 row.isYou
                   ? "border-accent-500/50 bg-accent-500/10"
-                  : "border-slate-200 bg-slate-50/60 dark:border-ink-800 dark:bg-ink-900/50"
+                  : "border-slate-200 bg-slate-50/60"
               }`}
             >
               <span className="text-2xl leading-none" aria-hidden>
                 {MEDALS[i] ?? row.rank}
               </span>
               <div className="min-w-0">
-                <p className="truncate font-semibold text-ink-900 dark:text-white">
+                <p className="truncate font-semibold text-ink-900">
                   {row.name}
                   {row.isYou && (
-                    <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700 dark:text-accent-300">
+                    <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
                       {t("lb.you")}
                     </span>
                   )}
                 </p>
-                <p className="mt-0.5 font-mono text-xs text-slate-500 dark:text-slate-400">
+                <p className="mt-0.5 font-mono text-xs text-slate-500">
                   {row.pct}% · {formatDuration(row.timeTakenSec)}
                 </p>
               </div>

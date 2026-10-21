@@ -260,6 +260,46 @@
   `#fdfcfa`, `.btn-primary` `#d92d12`, serif headline stack, the fonts actually
   downloaded) rather than by eye.
 
+## ⏱ Update — 2026-10-21, later (single-theme build: dark mode removed)
+
+The user reported the black/white switch as broken and asked for **one edition
+only — white**. The dark path is now gone from the codebase, not merely hidden:
+
+- **Every `dark:` variant is gone** from `src/**` (485 tokens across 21 files).
+  The Prothom Alo logo now has a single light asset: `public/prothom-alo-dark.svg`
+  was deleted and its `netlify.toml` cache rule removed, and the
+  `BrandLockup` / `Footer` / `Home` light+dark `<img>` pairs were collapsed to
+  one image (no orphan `hidden` / `dark:block` pairs left).
+- **Theme machinery deleted**: `src/lib/theme.tsx` (the provider) is removed,
+  `ThemeProvider` no longer wraps the app in `src/App.tsx`, the navbar's
+  theme-toggle button and the `theme.toggle` i18n key are gone, and
+  `src/lib/storage.ts` no longer has `THEME_KEY` / `readTheme()` / `writeTheme()`.
+- **`tailwind.config.js`** no longer sets `darkMode`, and `src/index.css` has no
+  `.dark`-scoped rules at all (the whole dark block — body, cards, buttons,
+  fields, scrollbars, chips — was deleted; only the light rules remain).
+- **`index.html`**: `color-scheme` is `light` (was `light dark`).
+- **Built CSS verified dark-free**: the production bundle contains **0**
+  `prefers-color-scheme: dark` blocks, **0** `.dark` selectors and **0** `dark:`
+  variants.
+- **Regression guards added to `scripts/smoke.mjs`** (4 new checks): `<html>`
+  carries no `dark` class, the body paints `rgb(253, 252, 250)`, the stylesheet
+  ships no dark-mode rules, and the navbar has no theme toggle.
+- **Docs/tooling**: `README.md` describes a single light edition; the
+  `theme.tsx` entry was dropped from the file tree; `scripts/screenshots.mjs`
+  no longer captures a dark pass and now resolves Chrome through
+  `scripts/chrome-path.mjs` instead of a hardcoded path.
+
+**Re-verified after the single-theme build:**
+
+| Check | Command | Result |
+|---|---|---|
+| Typecheck | `npm.cmd run typecheck` | ✅ clean |
+| Unit tests | `npm.cmd run test` | ✅ 74/74 |
+| Production build | `npm.cmd run build` | ✅ 144 problems, CSS dark-free |
+| Responsive layout | `npm.cmd run layout` | ✅ all pass (mobile/tablet/desktop × 8 routes) |
+| E2E smoke (offline) | `npm.cmd run smoke` | ✅ 53/53 (+4 single-theme checks), **zero console errors** |
+| API contract smoke | `npm.cmd run smoke:api` | ✅ 81/81 |
+
 ## Proofreading already applied (no action needed)
 
 - `src/data/problems-a.json`, `problems-b.json`, `problems-c.json` — all 144 answers math-verified; Bangla typos/mistranslations fixed (incl. `pr-h-02` title/statement/solution, সর্বশেষ, এংগেল, ক্যাটালান solution, compositions statement).

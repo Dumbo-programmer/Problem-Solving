@@ -12,7 +12,6 @@ const NS = "gonit-ishkul:";
 const CLIENT_KEY = `${NS}client-id`;
 const TESTS_KEY = `${NS}tests`;
 const LANG_KEY = `${NS}lang`;
-const THEME_KEY = `${NS}theme`;
 const NAME_KEY = `${NS}display-name`;
 const ADMIN_KEY = `${NS}admin-token`;
 const SCHEDULED_KEY = `${NS}scheduled`;
@@ -79,16 +78,6 @@ export function readLang(): "en" | "bn" {
 
 export function writeLang(lang: "en" | "bn"): void {
   safeSet(LANG_KEY, lang);
-}
-
-export function readTheme(): "dark" | "light" {
-  const v = safeGet(THEME_KEY);
-  // The day edition is the default; dark is opt-in.
-  return v === "dark" ? "dark" : "light";
-}
-
-export function writeTheme(theme: "dark" | "light"): void {
-  safeSet(THEME_KEY, theme);
 }
 
 /** Generate a collision-resistant id for a new practice test. */

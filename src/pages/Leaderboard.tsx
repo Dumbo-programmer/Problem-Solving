@@ -28,7 +28,7 @@ function rankMedal(rank: number) {
   if (rank === 1) return <Medal size={17} className="text-amber-500" />;
   if (rank === 2) return <Medal size={17} className="text-slate-400" />;
   if (rank === 3) return <Medal size={17} className="text-amber-700/70" />;
-  return <span className="font-mono font-bold text-ink-900 dark:text-white">{rank}</span>;
+  return <span className="font-mono font-bold text-ink-900">{rank}</span>;
 }
 
 export default function Leaderboard() {
@@ -74,18 +74,18 @@ export default function Leaderboard() {
       <div className="shell py-10 lg:py-14">
       <header className="max-w-3xl">
         <p className="eyebrow">{t("lb.eyebrow")}</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
           {t("lb.title")}
         </h1>
-        <p className="mt-3 text-slate-600 dark:text-slate-400">{t("lb.intro")}</p>
-        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
+        <p className="mt-3 text-slate-600">{t("lb.intro")}</p>
+        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-700">
           <Globe size={12} /> {t("lb.public")}
         </p>
       </header>
 
       {/* ---- window tabs + sync state ---- */}
       <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex rounded-xl border border-slate-200 bg-slate-50 p-1 dark:border-ink-800 dark:bg-ink-900/60">
+        <div className="inline-flex rounded-xl border border-slate-200 bg-slate-50 p-1">
           {TABS.map((tabDef) => (
             <button
               key={tabDef.key}
@@ -93,8 +93,8 @@ export default function Leaderboard() {
               onClick={() => setTab(tabDef.key)}
               className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
                 tab === tabDef.key
-                  ? "bg-white text-ink-900 shadow-soft dark:bg-ink-800 dark:text-white"
-                  : "text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
+                  ? "bg-white text-ink-900 shadow-soft"
+                  : "text-slate-500 hover:text-slate-800"
               }`}
             >
               {t(tabDef.label)}
@@ -102,7 +102,7 @@ export default function Leaderboard() {
           ))}
         </div>
 
-        <p className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">
+        <p className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
           <span className={`h-1.5 w-1.5 rounded-full ${source === "cloud" ? "bg-emerald-500" : "bg-amber-500"}`} />
           {source === "cloud" ? t("lb.source.cloud") : t("lb.source.local")}
         </p>
@@ -112,19 +112,19 @@ export default function Leaderboard() {
       <div className="mt-4">
         {rows === null ? null : you ? (
           <div className="card flex flex-wrap items-center gap-x-6 gap-y-2 border-accent-500/30 bg-accent-500/5 p-4">
-            <span className="inline-flex items-center gap-2 text-sm font-bold text-ink-900 dark:text-white">
+            <span className="inline-flex items-center gap-2 text-sm font-bold text-ink-900">
               <UserRound size={16} className="text-accent-500" /> {you.name}
             </span>
-            <span className="text-sm text-slate-600 dark:text-slate-300">
+            <span className="text-sm text-slate-600">
               {t("lb.yourRank", { rank: you.rank, solved: you.correct })}
             </span>
-            <span className="text-xs text-slate-500 dark:text-slate-400">
+            <span className="text-xs text-slate-500">
               {t("lb.col.tests")}: {you.tests} · {t("lb.col.best")}: {you.bestPct}%
             </span>
           </div>
         ) : user ? (
           <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
-            <p className="text-sm text-slate-600 dark:text-slate-400">{t("lb.notRanked")}</p>
+            <p className="text-sm text-slate-600">{t("lb.notRanked")}</p>
             <Link to="/tests" className="btn-primary h-9 px-3.5 text-xs">
               <Trophy size={14} /> {t("nav.tests")}
             </Link>
@@ -134,10 +134,10 @@ export default function Leaderboard() {
              needs an account. */
           <div className="card flex flex-wrap items-center justify-between gap-4 border-accent-500/30 bg-accent-500/5 p-4 sm:p-5">
             <div className="min-w-0">
-              <p className="inline-flex items-center gap-2 text-sm font-bold text-ink-900 dark:text-white">
+              <p className="inline-flex items-center gap-2 text-sm font-bold text-ink-900">
                 <Sparkles size={15} className="text-accent-500" /> {t("lb.join.title")}
               </p>
-              <p className="mt-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+              <p className="mt-1 text-xs leading-relaxed text-slate-600">
                 {t("lb.join.body")}
               </p>
             </div>
@@ -163,10 +163,10 @@ export default function Leaderboard() {
             const isYou = isMe(row);
             const tone =
               lane === 0
-                ? "border-amber-400/60 bg-gradient-to-br from-amber-50 to-white dark:from-amber-950/30 dark:to-ink-900"
+                ? "border-amber-400/60 bg-gradient-to-br from-amber-50 to-white"
                 : lane === 1
-                  ? "border-slate-300/70 bg-gradient-to-br from-slate-50 to-white dark:from-ink-800/60 dark:to-ink-900"
-                  : "border-orange-300/60 bg-gradient-to-br from-orange-50 to-white dark:from-orange-950/25 dark:to-ink-900";
+                  ? "border-slate-300/70 bg-gradient-to-br from-slate-50 to-white"
+                  : "border-orange-300/60 bg-gradient-to-br from-orange-50 to-white";
             return (
               <div
                 key={row.clientId}
@@ -185,17 +185,17 @@ export default function Leaderboard() {
                 >
                   {lane === 0 ? <Crown size={20} /> : <Medal size={20} />}
                 </span>
-                <span className="mt-3 max-w-full truncate text-sm font-bold text-ink-900 dark:text-white">
+                <span className="mt-3 max-w-full truncate text-sm font-bold text-ink-900">
                   {row.name}
                 </span>
-                <span className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                  {t("lb.col.solved")}: <span className="font-mono font-bold text-ink-900 dark:text-white">{row.correct}</span>
+                <span className="mt-1 text-xs text-slate-500">
+                  {t("lb.col.solved")}: <span className="font-mono font-bold text-ink-900">{row.correct}</span>
                 </span>
-                <span className="mt-3 rounded-full bg-white/70 px-3 py-1 font-mono text-xs font-bold text-accent-700 shadow-soft dark:bg-ink-900/70 dark:text-accent-300">
+                <span className="mt-3 rounded-full bg-white/70 px-3 py-1 font-mono text-xs font-bold text-accent-700 shadow-soft">
                   #{row.rank}
                 </span>
                 {isYou && (
-                  <span className="absolute right-3 top-3 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700 dark:text-accent-300">
+                  <span className="absolute right-3 top-3 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
                     {t("lb.you")}
                   </span>
                 )}
@@ -207,13 +207,13 @@ export default function Leaderboard() {
 
       {/* ---- board ---- */}
       {rows === null ? (
-        <div className="mt-6 flex items-center gap-2 text-sm text-slate-500 dark:text-slate-400">
+        <div className="mt-6 flex items-center gap-2 text-sm text-slate-500">
           <Loader2 size={16} className="animate-spin" /> {t("misc.loading")}
         </div>
       ) : rows.length === 0 ? (
         <div className="card mt-6 flex flex-col items-center gap-3 px-6 py-20 text-center">
-          <Trophy size={28} className="text-slate-300 dark:text-slate-600" />
-          <p className="max-w-sm text-sm text-slate-500 dark:text-slate-400">{t("lb.empty")}</p>
+          <Trophy size={28} className="text-slate-300" />
+          <p className="max-w-sm text-sm text-slate-500">{t("lb.empty")}</p>
           <Link to="/tests" className="btn-primary mt-2">
             {t("nav.tests")}
           </Link>
@@ -222,7 +222,7 @@ export default function Leaderboard() {
         <div className="card mt-6 overflow-x-auto p-0">
           <table className="w-full min-w-[36rem] text-left text-sm">
             <thead>
-              <tr className="border-b border-slate-200 text-slate-400 dark:border-ink-800 dark:text-slate-500">
+              <tr className="border-b border-slate-200 text-slate-400">
                 <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider">{t("lb.col.rank")}</th>
                 <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider">{t("lb.col.name")}</th>
                 <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">
@@ -245,31 +245,31 @@ export default function Leaderboard() {
                 return (
                   <tr
                     key={row.clientId}
-                    className={`border-b border-slate-100 transition-colors last:border-0 dark:border-ink-800/70 ${
-                      isYou ? "bg-accent-500/10" : "hover:bg-slate-50 dark:hover:bg-ink-900/50"
+                    className={`border-b border-slate-100 transition-colors last:border-0 ${
+                      isYou ? "bg-accent-500/10" : "hover:bg-slate-50"
                     }`}
                   >
                     <td className="px-4 py-3">
                       <span className="inline-flex items-center gap-1.5">{rankMedal(row.rank)}</span>
                     </td>
-                    <td className="max-w-[14rem] truncate px-4 py-3 font-semibold text-ink-900 dark:text-white">
+                    <td className="max-w-[14rem] truncate px-4 py-3 font-semibold text-ink-900">
                       {row.name}
                       {isYou && (
-                        <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700 dark:text-accent-300">
+                        <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
                           {t("lb.you")}
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-3 text-right font-mono text-base font-bold text-ink-900 dark:text-white">
+                    <td className="px-4 py-3 text-right font-mono text-base font-bold text-ink-900">
                       {row.correct}
                     </td>
-                    <td className="px-4 py-3 text-right font-mono text-slate-600 dark:text-slate-300">
+                    <td className="px-4 py-3 text-right font-mono text-slate-600">
                       {row.tests}
                     </td>
-                    <td className="hidden px-4 py-3 text-right font-mono text-slate-600 dark:text-slate-300 sm:table-cell">
+                    <td className="hidden px-4 py-3 text-right font-mono text-slate-600 sm:table-cell">
                       {row.bestPct}%
                     </td>
-                    <td className="hidden px-4 py-3 text-right font-mono text-slate-500 dark:text-slate-400 sm:table-cell">
+                    <td className="hidden px-4 py-3 text-right font-mono text-slate-500 sm:table-cell">
                       {formatDuration(row.timeTakenSec)}
                     </td>
                   </tr>
@@ -280,11 +280,11 @@ export default function Leaderboard() {
         </div>
       )}
 
-      <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-500 dark:text-slate-400">
+      <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-slate-500">
         <span className="inline-flex items-center gap-1.5">
           <Award size={14} className="text-accent-500" /> {t("lb.hint")}
         </span>
-        <Link to="/tests" className="font-medium text-accent-600 hover:text-accent-500 dark:text-accent-400">
+        <Link to="/tests" className="font-medium text-accent-600 hover:text-accent-500">
           {t("nav.tests")} →
         </Link>
       </div>

@@ -33,21 +33,12 @@ export default function BrandLockup({ size = "sm", linked = true, className = ""
   const inner = (
     <span className={`brand-lockup ${className}`}>
       {/* Prothom Alo — the publisher mark, on top. The wordmark is near-black
-          in the source SVG, so dark mode swaps in a light-ink variant to keep
-          the brand legible on the dark header. */}
+          in the source SVG, so it sits on the light theme as-is. */}
       <span className={`inline-flex items-center ${dims.gap}`}>
         <img
           src="/prothom-alo.svg"
           alt="প্রথম আলো · Prothom Alo"
-          className={`${dims.palo} w-auto dark:hidden`}
-          loading="eager"
-          decoding="async"
-        />
-        <img
-          src="/prothom-alo-dark.svg"
-          alt=""
-          aria-hidden
-          className={`${dims.palo} hidden w-auto dark:block`}
+          className={`${dims.palo} w-auto`}
           loading="eager"
           decoding="async"
         />

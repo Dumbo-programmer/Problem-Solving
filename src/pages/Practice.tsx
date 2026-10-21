@@ -84,17 +84,17 @@ export default function Practice() {
       <div className="shell py-10 lg:py-14">
       <header className="max-w-2xl">
         <p className="eyebrow">{t("nav.practice")}</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 dark:text-white sm:text-4xl">
+        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
           {t("builder.title")}
         </h1>
-        <p className="mt-3 text-slate-600 dark:text-slate-400">{t("builder.lede")}</p>
+        <p className="mt-3 text-slate-600">{t("builder.lede")}</p>
       </header>
 
       <div className="mt-8 grid items-start gap-6 lg:grid-cols-[1fr_20rem]">
         {/* ------------- left: configuration ------------- */}
         <div className="space-y-6">
           <section className="card p-5">
-            <h2 className="text-sm font-bold text-ink-900 dark:text-white">{t("builder.step1")}</h2>
+            <h2 className="text-sm font-bold text-ink-900">{t("builder.step1")}</h2>
             <div className="mt-4">
               <FilterPanel value={facets} onChange={setFacets} counts={counts} />
             </div>
@@ -102,8 +102,8 @@ export default function Practice() {
 
           <section className="card p-5">
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="text-sm font-bold text-ink-900 dark:text-white">{t("builder.step2")}</h2>
-              <div className="flex rounded-lg border border-slate-200 p-0.5 dark:border-ink-700">
+              <h2 className="text-sm font-bold text-ink-900">{t("builder.step2")}</h2>
+              <div className="flex rounded-lg border border-slate-200 p-0.5">
                 {(["auto", "manual"] as const).map((m) => (
                   <button
                     key={m}
@@ -112,7 +112,7 @@ export default function Practice() {
                     className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-colors ${
                       mode === m
                         ? "bg-accent-500 text-white"
-                        : "text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200"
+                        : "text-slate-500 hover:text-slate-800"
                     }`}
                   >
                     {m === "auto" ? t("builder.autoPick") : t("builder.manualPick")}
@@ -125,7 +125,7 @@ export default function Practice() {
               <>
                 <div className="mt-4 flex flex-wrap items-center gap-3">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+                    <span className="text-xs font-semibold uppercase tracking-wide text-slate-500">
                       {t("builder.count")}
                     </span>
                     <div className="flex flex-wrap gap-1.5">
@@ -137,7 +137,7 @@ export default function Practice() {
                           className={`h-8 w-8 rounded-lg font-mono text-xs font-semibold transition-colors ${
                             count === c
                               ? "bg-accent-500 text-white"
-                              : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-ink-800 dark:text-slate-300 dark:hover:bg-ink-700"
+                              : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                           }`}
                         >
                           {c}
@@ -154,19 +154,19 @@ export default function Practice() {
                     <Shuffle size={14} /> {t("builder.randomSeed")}
                   </button>
                 </div>
-                <p className="mt-2 text-xs text-slate-500 dark:text-slate-400">
+                <p className="mt-2 text-xs text-slate-500">
                   {t("builder.pool")}: <span className="font-mono">{pool.length}</span> ·{" "}
                   {t("builder.selected")}: <span className="font-mono">{autoPick.length}</span>
                 </p>
               </>
             ) : (
               <>
-                <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+                <p className="mt-3 text-xs text-slate-500">
                   {t("builder.selected")}: <span className="font-mono">{chosen.length}</span>
                 </p>
                 <div className="mt-3 max-h-[26rem] space-y-2 overflow-y-auto pr-1">
                   {pool.length === 0 && !loading && (
-                    <p className="text-sm text-slate-500 dark:text-slate-400">{t("filter.none")}</p>
+                    <p className="text-sm text-slate-500">{t("filter.none")}</p>
                   )}
                   {pool.map((p) => {
                     const on = manualIds.includes(p.id);
@@ -178,7 +178,7 @@ export default function Practice() {
                         className={`flex w-full items-start gap-3 rounded-xl border p-3 text-left transition-colors ${
                           on
                             ? "border-accent-500/60 bg-accent-500/8"
-                            : "border-slate-200 hover:border-slate-300 dark:border-ink-700 dark:hover:border-ink-600"
+                            : "border-slate-200 hover:border-slate-300"
                         }`}
                         aria-pressed={on}
                       >
@@ -186,13 +186,13 @@ export default function Practice() {
                           className={`mt-0.5 flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded border ${
                             on
                               ? "border-accent-500 bg-accent-500 text-white"
-                              : "border-slate-300 dark:border-ink-600"
+                              : "border-slate-300"
                           }`}
                         >
                           {on && <Check size={12} strokeWidth={3} />}
                         </span>
                         <span className="min-w-0 flex-1">
-                          <span className="block truncate text-sm font-medium text-ink-900 dark:text-white">
+                          <span className="block truncate text-sm font-medium text-ink-900">
                             {L(p.title)}
                           </span>
                           <span className="mt-1 flex flex-wrap gap-1">
@@ -209,7 +209,7 @@ export default function Practice() {
           </section>
 
           <section className="card p-5">
-            <h2 className="text-sm font-bold text-ink-900 dark:text-white">{t("builder.step3")}</h2>
+            <h2 className="text-sm font-bold text-ink-900">{t("builder.step3")}</h2>
             <div className="mt-4 flex flex-wrap items-center gap-2">
               {DURATION_PRESETS.map((d) => (
                 <button
@@ -231,11 +231,11 @@ export default function Practice() {
                   className="field no-spin w-20 px-2.5 py-1.5 text-center text-sm"
                   aria-label={t("builder.duration")}
                 />
-                <span className="text-xs text-slate-500 dark:text-slate-400">{t("builder.minutes")}</span>
+                <span className="text-xs text-slate-500">{t("builder.minutes")}</span>
               </div>
             </div>
             {chosen.length > 0 && (
-              <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+              <p className="mt-3 text-xs text-slate-500">
                 {t("builder.perProblem", { n: perProblem })}
               </p>
             )}
@@ -245,7 +245,7 @@ export default function Practice() {
         {/* ------------- right: live summary ------------- */}
         <aside className="lg:sticky lg:top-20">
           <div className="card p-5">
-            <h2 className="text-sm font-bold text-ink-900 dark:text-white">{t("builder.ready")}</h2>
+            <h2 className="text-sm font-bold text-ink-900">{t("builder.ready")}</h2>
 
             <div className="mt-4 grid grid-cols-2 gap-3">
               <Stat label={t("past.questions")} value={chosen.length} />
@@ -254,16 +254,16 @@ export default function Practice() {
 
             <div className="mt-4 max-h-[18rem] space-y-1.5 overflow-y-auto pr-1">
               {chosen.length === 0 ? (
-                <p className="text-sm text-slate-500 dark:text-slate-400">{t("builder.needProblems")}</p>
+                <p className="text-sm text-slate-500">{t("builder.needProblems")}</p>
               ) : (
                 chosen.map((p, i) => (
                   <div
                     key={p.id}
-                    className="flex items-start gap-2 rounded-lg bg-slate-50 px-2.5 py-2 text-xs dark:bg-ink-900/70"
+                    className="flex items-start gap-2 rounded-lg bg-slate-50 px-2.5 py-2 text-xs"
                   >
                     <span className="font-mono font-semibold text-slate-400">{i + 1}</span>
                     <span className="min-w-0 flex-1">
-                      <MathText className="line-clamp-2 text-slate-700 dark:text-slate-300">
+                      <MathText className="line-clamp-2 text-slate-700">
                         {L(p.statement)}
                       </MathText>
                     </span>
@@ -284,7 +284,7 @@ export default function Practice() {
 
           <div className="card mt-4 flex items-start gap-3 p-4">
             <Dices size={18} className="mt-0.5 shrink-0 text-accent-500" />
-            <p className="text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+            <p className="text-xs leading-relaxed text-slate-600">
               {t("home.how2d")}
             </p>
           </div>
@@ -297,9 +297,9 @@ export default function Practice() {
 
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-xl bg-slate-50 px-3 py-2.5 dark:bg-ink-900/70">
-      <div className="text-[11px] uppercase tracking-wide text-slate-500 dark:text-slate-400">{label}</div>
-      <div className="mt-0.5 font-mono text-lg font-bold text-ink-900 dark:text-white">{value}</div>
+    <div className="rounded-xl bg-slate-50 px-3 py-2.5">
+      <div className="text-[11px] uppercase tracking-wide text-slate-500">{label}</div>
+      <div className="mt-0.5 font-mono text-lg font-bold text-ink-900">{value}</div>
     </div>
   );
 }

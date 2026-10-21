@@ -7,10 +7,10 @@ import { CATEGORY_LABELS, DIFFICULTY_LABELS, TOPIC_LABELS, TYPE_LABELS, useI18n 
  */
 
 const DIFFICULTY_STYLES: Record<ProblemDifficulty, string> = {
-  EASY: "border-emerald-500/40 bg-emerald-500/12 text-emerald-700 dark:text-emerald-300",
-  MEDIUM: "border-sky-500/40 bg-sky-500/12 text-sky-700 dark:text-sky-300",
-  HARD: "border-violet-500/40 bg-violet-500/12 text-violet-700 dark:text-violet-300",
-  OLYMPIAD: "border-accent-500/50 bg-accent-500/14 text-accent-700 dark:text-accent-300"
+  EASY: "border-emerald-500/40 bg-emerald-500/12 text-emerald-700",
+  MEDIUM: "border-sky-500/40 bg-sky-500/12 text-sky-700",
+  HARD: "border-violet-500/40 bg-violet-500/12 text-violet-700",
+  OLYMPIAD: "border-accent-500/50 bg-accent-500/14 text-accent-700"
 };
 
 const TOPIC_DOT: Record<ProblemTopic, string> = {
@@ -37,7 +37,7 @@ export function TopicBadge({ value, size = "sm" }: { value: ProblemTopic; size?:
   const { L } = useI18n();
   return (
     <span
-      className={`chip border border-slate-200 bg-white text-slate-700 dark:border-ink-700 dark:bg-ink-900 dark:text-slate-300 ${
+      className={`chip border border-slate-200 bg-white text-slate-700 ${
         size === "md" ? "px-3 py-1.5 text-sm" : ""
       }`}
     >
@@ -50,7 +50,7 @@ export function TopicBadge({ value, size = "sm" }: { value: ProblemTopic; size?:
 export function CategoryBadge({ value }: { value: ProblemCategory }) {
   const { L } = useI18n();
   return (
-    <span className="chip border border-slate-200 bg-slate-50 text-slate-600 dark:border-ink-700 dark:bg-ink-900/60 dark:text-slate-400">
+    <span className="chip border border-slate-200 bg-slate-50 text-slate-600">
       {L(CATEGORY_LABELS[value])}
     </span>
   );
@@ -63,8 +63,8 @@ export function TypeBadge({ value }: { value: ProblemType }) {
     <span
       className={`chip border ${
         olympiad
-          ? "border-accent-500/50 bg-accent-500/10 text-accent-700 dark:text-accent-300"
-          : "border-slate-200 bg-white text-slate-600 dark:border-ink-700 dark:bg-ink-900 dark:text-slate-400"
+          ? "border-accent-500/50 bg-accent-500/10 text-accent-700"
+          : "border-slate-200 bg-white text-slate-600"
       }`}
     >
       {L(TYPE_LABELS[value])}

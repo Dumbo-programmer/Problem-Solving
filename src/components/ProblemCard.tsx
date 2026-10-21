@@ -40,12 +40,12 @@ export default function ProblemCard({
         aria-expanded={open}
       >
         {typeof index === "number" && (
-          <span className="mt-0.5 font-mono text-xs font-semibold text-slate-400 dark:text-slate-500">
+          <span className="mt-0.5 font-mono text-xs font-semibold text-slate-400">
             {String(index).padStart(2, "0")}
           </span>
         )}
         <div className="min-w-0 flex-1">
-          <h3 className="text-[15px] font-semibold leading-snug text-ink-900 dark:text-white">
+          <h3 className="text-[15px] font-semibold leading-snug text-ink-900">
             {L(problem.title)}
           </h3>
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
@@ -62,18 +62,18 @@ export default function ProblemCard({
       </button>
 
       {open && (
-        <div className="animate-slideUp border-t border-slate-200/80 px-4 pb-5 pt-4 dark:border-ink-800 sm:px-5">
-          <div className="text-[15px] leading-relaxed text-slate-700 dark:text-slate-300">
+        <div className="animate-slideUp border-t border-slate-200/80 px-4 pb-5 pt-4 sm:px-5">
+          <div className="text-[15px] leading-relaxed text-slate-700">
             <MathText>{L(problem.statement)}</MathText>
           </div>
 
-          <div className="mt-3 text-[11px] text-slate-400 dark:text-slate-500">
+          <div className="mt-3 text-[11px] text-slate-400">
             {t("archive.from")}: {problem.source}
           </div>
 
           {/* Instant-check box */}
-          <div className="mt-4 rounded-xl border border-dashed border-slate-300 p-3 dark:border-ink-700">
-            <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+          <div className="mt-4 rounded-xl border border-dashed border-slate-300 p-3">
+            <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500">
               {t("action.check")}
             </label>
             <div className="flex flex-wrap items-center gap-2">
@@ -92,23 +92,23 @@ export default function ProblemCard({
                 {t("action.check")}
               </button>
               {verdict === "correct" && (
-                <span className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500/12 px-2.5 py-1.5 text-xs font-semibold text-emerald-700 dark:text-emerald-300">
+                <span className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-500/12 px-2.5 py-1.5 text-xs font-semibold text-emerald-700">
                   <Check size={14} /> {t("archive.correct")}
                 </span>
               )}
               {verdict === "wrong" && (
-                <span className="inline-flex items-center gap-1.5 rounded-lg bg-rose-500/12 px-2.5 py-1.5 text-xs font-semibold text-rose-700 dark:text-rose-300">
+                <span className="inline-flex items-center gap-1.5 rounded-lg bg-rose-500/12 px-2.5 py-1.5 text-xs font-semibold text-rose-700">
                   <X size={14} /> {t("archive.wrong")}
                 </span>
               )}
             </div>
 
             {(verdict === "correct" || showSolution) && (
-              <div className="mt-3 rounded-lg bg-slate-50 p-3 dark:bg-ink-900/70">
-                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <div className="mt-3 rounded-lg bg-slate-50 p-3">
+                <div className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wide text-slate-500">
                   <Lightbulb size={13} /> {t("result.explanation")}
                 </div>
-                <div className="mt-1.5 text-sm leading-relaxed text-slate-700 dark:text-slate-300">
+                <div className="mt-1.5 text-sm leading-relaxed text-slate-700">
                   <MathText block>{L(problem.solution)}</MathText>
                 </div>
               </div>
@@ -118,7 +118,7 @@ export default function ProblemCard({
               <button
                 type="button"
                 onClick={() => setShowSolution(true)}
-                className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-accent-600 hover:underline dark:text-accent-400"
+                className="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-accent-600 hover:underline"
               >
                 <Lightbulb size={13} /> {t("action.seeSolution")}
               </button>
