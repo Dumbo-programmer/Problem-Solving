@@ -1,4 +1,5 @@
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
+import { DEFAULT_ADMIN_ID, DEFAULT_ADMIN_PASSWORD } from "../../../src/lib/adminCredentials";
 
 /**
  * Credentials + session tokens.
@@ -13,10 +14,13 @@ import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypt
  * a learner session can never open an admin route and vice versa.
  */
 
-const DEFAULT_ID = "admin";
-const DEFAULT_PASSWORD = "gonit-ishkul";
+const DEFAULT_ID = DEFAULT_ADMIN_ID;
+const DEFAULT_PASSWORD = DEFAULT_ADMIN_PASSWORD;
 export const TOKEN_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours (admin)
 export const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days (learners)
+
+/** The documented zero-config credentials (never the configured ones). */
+export { DEFAULT_ADMIN_ID, DEFAULT_ADMIN_PASSWORD };
 
 /* ------------------------------------------------------------------ */
 /* Learner account rules                                               */
@@ -130,6 +134,20 @@ export function checkCredentials(id: string, password: string): boolean {
   const okId = safeEqual(id, env("ADMIN_ID", DEFAULT_ID));
   const okPassword = safeEqual(password, env("ADMIN_PASSWORD", DEFAULT_PASSWORD));
   return okId && okPassword;
+}
+
+/**
+ * Whether the deployment still runs on the documented default credentials.
+ *
+ * The admin sign-in screen uses this to show the defaults when they apply and
+ * to hide them when the operator has replaced them. It never leaks a
+ * configured value — only which of the two slots is still the default.
+ */
+export function adminUsesDefaults(): { id: boolean; password: boolean } {
+  return {
+    id: env("ADMIN_ID", DEFAULT_ID) === DEFAULT_ID,
+    password: env("ADMIN_PASSWORD", DEFAULT_PASSWORD) === DEFAULT_PASSWORD
+  };
 }
 
 type Kind = "admin" | "learner";

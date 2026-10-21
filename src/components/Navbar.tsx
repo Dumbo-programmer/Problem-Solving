@@ -6,14 +6,27 @@ import { useTheme } from "../lib/theme";
 import { useAuth } from "../lib/auth";
 import BrandLockup from "./BrandLockup";
 
+/**
+ * Nav links, ordered by how much a visitor needs them.
+ *
+ * `tier` is the breakpoint from which a link appears in the desktop row, so
+ * the bar never overflows on a tablet: the essentials land at `md`, the
+ * archive at `lg`. "Practice" is deliberately absent — the primary CTA on the
+ * right already leads there.
+ */
 const LINKS = [
-  { to: "/", key: "nav.home", end: true, compact: false },
-  { to: "/problems", key: "nav.problems", end: false, compact: false },
-  { to: "/practice", key: "nav.practice", end: false, compact: false },
-  { to: "/tests", key: "nav.tests", end: false, compact: true },
-  { to: "/leaderboard", key: "nav.leaderboard", end: false, compact: true },
-  { to: "/past-tests", key: "nav.past", end: false, compact: false }
-];
+  { to: "/", key: "nav.home", end: true, tier: "md" },
+  { to: "/problems", key: "nav.problems", end: false, tier: "md" },
+  { to: "/leaderboard", key: "nav.leaderboard", end: false, tier: "md" },
+  { to: "/past-tests", key: "nav.past", end: false, tier: "lg" },
+  { to: "/tests", key: "nav.tests", end: false, tier: "lg" }
+] as const;
+
+/** Hide a link below its tier (the mobile sheet always shows every link). */
+const TIER_CLASS: Record<(typeof LINKS)[number]["tier"], string> = {
+  md: "",
+  lg: "hidden lg:inline-flex"
+};
 
 export default function Navbar() {
   const { t, lang, toggle: toggleLang } = useI18n();
@@ -58,7 +71,7 @@ export default function Navbar() {
               to={link.to}
               end={link.end}
               className={({ isActive }) =>
-                `${link.compact ? "hidden lg:inline-flex" : ""} rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors xl:px-3 xl:text-sm ${
+                `${TIER_CLASS[link.tier]} whitespace-nowrap rounded-lg px-2.5 py-2 text-[13px] font-medium transition-colors xl:px-3 xl:text-sm ${
                   isActive
                     ? "bg-accent-500/10 text-accent-700 dark:text-accent-300"
                     : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-300 dark:hover:bg-ink-900 dark:hover:text-white"
@@ -70,7 +83,7 @@ export default function Navbar() {
           ))}
         </div>
 
-        <div className="flex items-center gap-1.5">
+        <div className="flex shrink-0 items-center gap-1.5">
           <button
             type="button"
             onClick={toggleLang}
@@ -79,7 +92,7 @@ export default function Navbar() {
             title={t("lang.toggle")}
           >
             <Languages size={16} />
-            <span className="hidden sm:inline">{lang === "bn" ? "EN" : "বাংলা"}</span>
+            <span className="hidden lg:inline">{lang === "bn" ? "EN" : "বাংলা"}</span>
           </button>
 
           <button
@@ -99,7 +112,7 @@ export default function Navbar() {
                 className="btn-quiet hidden h-9 max-w-[11rem] px-2 text-xs md:inline-flex"
                 title={t("auth.signedInAs", { name: user.displayName })}
               >
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-gradient-to-br from-accent-400 to-accent-600 text-[10px] font-bold text-white">
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-accent-600 text-[10px] font-bold text-white">
                   {user.displayName.slice(0, 2).toUpperCase()}
                 </span>
                 <span className="truncate">{user.displayName}</span>
@@ -115,13 +128,18 @@ export default function Navbar() {
               </button>
             </>
           ) : (
-            <Link to="/login" className="btn-quiet hidden h-9 px-3 text-xs sm:inline-flex">
+            <Link to="/login" className="btn-quiet hidden h-9 whitespace-nowrap px-3 text-xs sm:inline-flex">
               <UserRound size={16} />
               {t("nav.signIn")}
             </Link>
           )}
 
-          <Link to="/practice" className="btn-primary hidden h-9 px-3.5 text-xs sm:inline-flex">
+          <Link
+            to="/practice"
+            className={`btn-primary hidden h-9 whitespace-nowrap px-3.5 text-xs sm:inline-flex ${
+              location.pathname === "/practice" ? "ring-2 ring-accent-300" : ""
+            }`}
+          >
             {t("nav.practice")}
           </Link>
 

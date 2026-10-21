@@ -4,6 +4,7 @@ import {
   CalendarDays,
   CheckCircle2,
   FlaskConical,
+  KeyRound,
   Loader2,
   LogOut,
   Pencil,
@@ -19,6 +20,7 @@ import { useI18n } from "../lib/i18n";
 import { CATEGORIES, DIFFICULTIES, TOPICS, TYPES } from "../data/types";
 import {
   HttpError,
+  adminCredentialStatus,
   adminDeleteProblem,
   adminDeleteTest,
   adminListTests,
@@ -34,6 +36,7 @@ import { readAdminToken } from "../lib/storage";
 import PageDecor from "../components/PageDecor";
 import { phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
+import { DEFAULT_ADMIN_ID, DEFAULT_ADMIN_PASSWORD } from "../lib/adminCredentials";
 import type { AdminOverview, AdminSubmission } from "../lib/api";
 import type { Problem, ProblemCategory, ProblemDifficulty, ProblemTopic, ProblemType, ScheduledTest, ScheduledTestKind } from "../lib/types";
 
@@ -93,6 +96,23 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
+  // null = unknown (offline), otherwise: is each slot still the documented
+  // default? A deployment that replaced them must not display the defaults.
+  const [defaults, setDefaults] = useState<{ id: boolean; password: boolean } | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    void adminCredentialStatus()
+      .then((res) => {
+        if (!cancelled) setDefaults(res);
+      })
+      .catch(() => {
+        /* offline — keep the documented defaults on screen */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const submit = async () => {
     setBusy(true);
@@ -107,6 +127,9 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
     }
   };
 
+  const showsDefaultId = defaults === null || defaults.id;
+  const showsDefaultPassword = defaults === null || defaults.password;
+
   return (
     <div className="card w-full max-w-sm p-7">
       <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-500/10 text-accent-500">
@@ -114,6 +137,35 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
       </span>
       <p className="eyebrow mt-4">{t("admin.eyebrow")}</p>
       <h1 className="mt-1 text-2xl font-bold tracking-tight text-ink-900 dark:text-white">{t("admin.title")}</h1>
+
+      {/* ---- which credentials to type ---- */}
+      <div className="mt-5 rounded-xl border border-accent-500/25 bg-accent-500/5 p-3.5">
+        <p className="flex items-center gap-1.5 text-xs font-bold text-ink-900 dark:text-white">
+          <KeyRound size={13} className="text-accent-500" />
+          {t("admin.login.credentials")}
+        </p>
+        <dl className="mt-2.5 grid grid-cols-[auto_1fr] items-baseline gap-x-3 gap-y-1.5 text-xs">
+          <dt className="text-slate-500 dark:text-slate-400">{t("admin.cred.id")}</dt>
+          <dd className="font-mono font-semibold text-ink-900 dark:text-white">
+            {showsDefaultId ? (
+              DEFAULT_ADMIN_ID
+            ) : (
+              <span className="font-sans font-medium text-slate-500 dark:text-slate-400">{t("admin.cred.custom")}</span>
+            )}
+          </dd>
+          <dt className="text-slate-500 dark:text-slate-400">{t("admin.cred.password")}</dt>
+          <dd className="font-mono font-semibold text-ink-900 dark:text-white">
+            {showsDefaultPassword ? (
+              DEFAULT_ADMIN_PASSWORD
+            ) : (
+              <span className="font-sans font-medium text-slate-500 dark:text-slate-400">{t("admin.cred.custom")}</span>
+            )}
+          </dd>
+        </dl>
+        <p className="mt-2.5 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
+          {t("admin.login.credentialsHint")}
+        </p>
+      </div>
 
       <label className="mt-5 block text-xs font-semibold text-slate-500 dark:text-slate-400" htmlFor="admin-id">
         {t("admin.login.id")}
@@ -123,7 +175,7 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
         autoComplete="username"
         value={id}
         onChange={(e) => setId(e.target.value)}
-        className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition-colors focus:border-accent-500 dark:border-ink-700 dark:bg-ink-900 dark:text-white"
+        className="field mt-1.5"
       />
 
       <label className="mt-4 block text-xs font-semibold text-slate-500 dark:text-slate-400" htmlFor="admin-pw">
@@ -138,7 +190,7 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
         onKeyDown={(e) => {
           if (e.key === "Enter") void submit();
         }}
-        className="mt-1.5 w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-ink-900 outline-none transition-colors focus:border-accent-500 dark:border-ink-700 dark:bg-ink-900 dark:text-white"
+        className="field mt-1.5"
       />
 
       {(error || expired) && (
@@ -170,6 +222,19 @@ const TABS: { key: Tab; label: string }[] = [
   { key: "tests", label: "admin.tab.tests" },
   { key: "submissions", label: "admin.tab.submissions" }
 ];
+
+/** Weekly / monthly / custom badge for a scheduled paper. */
+const KIND_LABEL: Record<ScheduledTestKind, string> = {
+  WEEKLY: "kind.weekly",
+  MONTHLY: "kind.monthly",
+  CUSTOM: "kind.custom"
+};
+
+const KIND_CHIP: Record<ScheduledTestKind, string> = {
+  WEEKLY: "chip border border-sky-500/40 bg-sky-500/10 text-sky-700 dark:text-sky-300",
+  MONTHLY: "chip border border-violet-500/40 bg-violet-500/10 text-violet-700 dark:text-violet-300",
+  CUSTOM: "chip border border-slate-300/70 bg-slate-400/10 text-slate-600 dark:border-ink-700 dark:text-slate-300"
+};
 
 function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: () => void }) {
   const { t } = useI18n();
@@ -843,6 +908,7 @@ function TestsPanel({ onExpired }: { onExpired: () => void }) {
                 <span className="text-xs text-slate-500 dark:text-slate-400">
                   {fmtWhen(test.startAt)} → {fmtWhen(test.endAt)}
                 </span>
+                <span className={KIND_CHIP[test.kind]}>{t(KIND_LABEL[test.kind])}</span>
                 <span
                   className={`chip border ${
                     test.published

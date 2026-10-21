@@ -16,6 +16,7 @@
  *   PUT    /auth/profile                      { displayName }  (auth)
  *
  *   POST   /admin/login                     { id, password } → bearer token
+ *   GET    /admin/credentials               default-credential flags
  *   GET    /admin/overview                  counts + data source        (auth)
  *   GET    /admin/submissions               contest submissions         (auth)
  *   GET    /admin/scheduled-tests           incl. unpublished           (auth)
@@ -36,6 +37,7 @@ import type { PracticeTest, Problem, ScheduledTest } from "../../src/lib/types";
 import { overallLeaderboard, pctOf, standings, timeTakenSec, nameOf } from "../../src/lib/leaderboard";
 import { phaseOf } from "../../src/lib/scheduled";
 import {
+  adminUsesDefaults,
   bearer,
   checkCredentials,
   hashPassword,
@@ -341,6 +343,15 @@ async function handleAdminLogin(body: Record<string, unknown>) {
   return json(200, { token, expiresAt });
 }
 
+/**
+ * Tells the admin sign-in screen whether the deployment still uses the
+ * documented default credentials. It reports booleans only — never a
+ * configured id or password.
+ */
+function handleAdminCredentialStatus() {
+  return json(200, { ...adminUsesDefaults() });
+}
+
 async function handleAdminOverview(store: Store) {
   const [counts, tests] = await Promise.all([store.overview(), store.listScheduled(true)]);
   return json(200, {
@@ -515,6 +526,8 @@ export const handler: Handler = async (event) => {
 
     /* -- admin routes ------------------------------------------------- */
     if (path === "/admin/login" && method === "POST") return await handleAdminLogin(bodyOf(event));
+    // Public: tells the sign-in card whether the defaults still apply.
+    if (path === "/admin/credentials" && method === "GET") return handleAdminCredentialStatus();
 
     if (path.startsWith("/admin/")) {
       const store = await adminGate(event);

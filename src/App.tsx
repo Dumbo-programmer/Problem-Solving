@@ -50,14 +50,9 @@ export default function App() {
                     </RequireAuth>
                   }
                 />
-                <Route
-                  path="/leaderboard"
-                  element={
-                    <RequireAuth>
-                      <Leaderboard />
-                    </RequireAuth>
-                  }
-                />
+                {/* The leaderboard is public: anyone may read the standings,
+                    only joining (appearing on the board) needs an account. */}
+                <Route path="/leaderboard" element={<Leaderboard />} />
                 {/* The runner stays open so anonymous practice still works; the
                     scheduled papers enforce sign-in at their start flow. */}
                 <Route path="/test/:id" element={<TestRunner />} />

@@ -5,10 +5,10 @@ import { useAuth } from "../lib/auth";
 /**
  * Route guard for the competitive parts of the app.
  *
- * Weekly/monthly tests, their standings, the leaderboard and the past-test
- * archive all need an account, so anonymous visitors are sent to `/login`
- * carrying a `next=` back to where they were headed. Home, the problem archive
- * and the practice builder stay open to everyone.
+ * Weekly/monthly tests, their standings and the past-test archive need an
+ * account, so anonymous visitors are sent to `/login` carrying a `next=` back
+ * to where they were headed. Home, the problem archive, the practice builder
+ * and the leaderboard (read-only for visitors) stay open to everyone.
  *
  * While the session is still being validated on first load we show a small
  * placeholder instead of bouncing a signed-in learner to the login page.

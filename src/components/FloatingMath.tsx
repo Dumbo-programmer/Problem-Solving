@@ -55,7 +55,7 @@ export default function FloatingMath({ count = 14, seed = 7, className = "" }: F
       {glyphs.map((g) => (
         <span
           key={g.key}
-          className="math-symbol text-neon-purple dark:text-neon-cyan"
+          className="math-symbol text-ink-500 dark:text-accent-400/80"
           style={{
             left: g.left,
             top: g.top,

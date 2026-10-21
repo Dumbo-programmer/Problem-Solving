@@ -288,6 +288,23 @@ try {
   check("renames survive a fresh login", relogin.data?.user?.displayName === "Smoke Renamed", relogin.data?.user?.displayName);
 
   /* ---------- admin: auth ---------- */
+  // The credential-status probe is public on purpose: the login card needs to
+  // know whether the site still runs on the stock admin login.
+  const credStatus = await call("GET", "/admin/credentials");
+  check(
+    "GET /admin/credentials is public",
+    credStatus.status === 200 && typeof credStatus.data?.id === "boolean" && typeof credStatus.data?.password === "boolean",
+    `id=${credStatus.data?.id} password=${credStatus.data?.password}`
+  );
+  check(
+    "credential status never leaks the values",
+    !JSON.stringify(credStatus.data ?? {}).includes("gonit-ishkul")
+  );
+  check(
+    "default admin credentials are reported as default",
+    credStatus.data?.id === true && credStatus.data?.password === true
+  );
+
   const wrongLogin = await call("POST", "/admin/login", { body: { id: "admin", password: "nope" } });
   check("bad admin credentials are a 401", wrongLogin.status === 401, wrongLogin.data?.error);
 

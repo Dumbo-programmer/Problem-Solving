@@ -12,42 +12,47 @@ export default {
         14: "0.14"
       },
       colors: {
+        // Warm newsprint charcoal — the "ink" the site is set in.
         ink: {
-          50: "#f4f5fb",
-          100: "#e8eaf6",
-          200: "#cdd2ec",
-          300: "#a5addd",
-          400: "#7880c9",
-          500: "#585fb2",
-          600: "#444896",
-          700: "#3a3d7a",
-          800: "#333565",
-          900: "#2e2f54",
-          950: "#1b1b30"
+          50: "#f8f6f4",
+          100: "#efece8",
+          200: "#ddd8d2",
+          300: "#c3bcb3",
+          400: "#a09990",
+          500: "#7e776e",
+          600: "#5f5952",
+          700: "#45403a",
+          800: "#2d2926",
+          900: "#1e1b19",
+          950: "#141211"
         },
+        // Prothom Alo's brand red. Everything that used to be an orange or a
+        // neon accent now resolves to this ramp, so the whole site reads as
+        // one brand without touching every component.
         accent: {
-          50: "#fff8eb",
-          100: "#ffefc6",
-          200: "#ffdc88",
-          300: "#ffc44a",
-          400: "#ffab1f",
-          500: "#f98c07",
-          600: "#dd6702",
-          700: "#b74706",
-          800: "#94370c",
-          900: "#7a2f0d"
+          50: "#fef5f3",
+          100: "#fde7e2",
+          200: "#fccdc3",
+          300: "#f8a996",
+          400: "#f3755d",
+          500: "#ee4023",
+          600: "#d92d12",
+          700: "#b4210d",
+          800: "#921c11",
+          900: "#791c12"
         },
-        // Retrowave ramp — magenta → violet → cyan. Ships the "infinity mirror"
-        // glow and grid tints without pulling in a second palette library.
+        // The historical "neon" ramp. The names survive so the old class
+        // names keep working, but every stop is now an editorial red / ink
+        // tone — the neon glow is gone from the design.
         neon: {
-          pink: "#ff2d95",
-          magenta: "#e6189c",
-          purple: "#a855f7",
-          violet: "#7c3aed",
-          indigo: "#4f46e5",
-          cyan: "#22d3ee",
-          teal: "#2dd4bf",
-          yellow: "#facc15"
+          pink: "#d92d12",
+          magenta: "#b4210d",
+          purple: "#8f1d10",
+          violet: "#a8240f",
+          indigo: "#45403a",
+          cyan: "#ee4023",
+          teal: "#1f6f5c",
+          yellow: "#c08a12"
         },
         // Prothom Alo's brand red, used for the co-brand lockup.
         palo: "#ee4023"
@@ -55,27 +60,33 @@ export default {
       fontFamily: {
         sans: ["Outfit", "Noto Sans Bengali", "ui-sans-serif", "system-ui", "sans-serif"],
         bengali: ["Noto Sans Bengali", "Outfit", "ui-sans-serif", "sans-serif"],
+        // Editorial headlines — the newspaper voice of the site.
+        // Family names with a digit ("Source Serif 4") must carry their own
+        // quotes, otherwise the whole font-family declaration is invalid.
+        display: ['"Source Serif 4"', '"Noto Serif Bengali"', "Georgia", "Cambria", "serif"],
         mono: ["JetBrains Mono", "ui-monospace", "SFMono-Regular", "monospace"]
       },
       boxShadow: {
-        soft: "0 1px 2px rgba(16,18,40,0.04), 0 8px 24px -8px rgba(16,18,40,0.10)",
-        lift: "0 2px 4px rgba(16,18,40,0.05), 0 18px 40px -12px rgba(16,18,40,0.20)",
-        // Neon glows for the retrowave surfaces.
-        "neon-pink": "0 0 0 1px rgba(255,45,149,0.35), 0 8px 30px -6px rgba(255,45,149,0.55)",
-        "neon-cyan": "0 0 0 1px rgba(34,211,238,0.35), 0 8px 30px -6px rgba(34,211,238,0.5)",
-        "neon-violet": "0 0 0 1px rgba(168,85,247,0.35), 0 10px 40px -8px rgba(124,58,237,0.55)",
-        glow: "0 0 24px -2px rgba(124,58,237,0.45), 0 0 60px -18px rgba(34,211,238,0.35)"
+        soft: "0 1px 2px rgba(30,27,25,0.05), 0 6px 16px -10px rgba(30,27,25,0.18)",
+        lift: "0 2px 4px rgba(30,27,25,0.06), 0 14px 32px -14px rgba(30,27,25,0.24)",
+        // Kept under their old names; now a quiet brand-tinted shadow.
+        "neon-pink": "0 0 0 1px rgba(238,64,35,0.16), 0 8px 24px -12px rgba(238,64,35,0.28)",
+        "neon-cyan": "0 0 0 1px rgba(238,64,35,0.14), 0 8px 24px -12px rgba(238,64,35,0.24)",
+        "neon-violet": "0 0 0 1px rgba(238,64,35,0.16), 0 10px 28px -14px rgba(238,64,35,0.26)",
+        glow: "0 0 0 1px rgba(238,64,35,0.14), 0 18px 40px -22px rgba(238,64,35,0.30)"
       },
       backgroundImage: {
+        // Faint dot screen, like newsprint texture.
         "grid-fade":
-          "radial-gradient(circle at 1px 1px, rgba(120,128,201,0.16) 1px, transparent 0)",
-        // Infinite perspective floor: horizontal + vertical neon lines.
+          "radial-gradient(circle at 1px 1px, rgba(30,27,25,0.10) 1px, transparent 1px)",
+        // Thin ruling, used behind the masthead and section breaks.
         "retro-grid":
-          "linear-gradient(to right, rgba(168,85,247,0.35) 1px, transparent 1px), linear-gradient(to bottom, rgba(34,211,238,0.28) 1px, transparent 1px)",
+          "linear-gradient(to right, rgba(30,27,25,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(30,27,25,0.08) 1px, transparent 1px)",
+        // Warm paper wash.
         "retro-sky":
-          "linear-gradient(to bottom, #12002b 0%, #2b0a4d 38%, #6d1b6e 62%, #ff2d95 82%, #ff6b3d 100%)",
+          "linear-gradient(to bottom, #ffffff 0%, #fdfcfa 55%, #fbf7f4 100%)",
         "neon-sheen":
-          "linear-gradient(110deg, rgba(255,45,149,0.14) 0%, rgba(124,58,237,0.16) 40%, rgba(34,211,238,0.14) 100%)"
+          "linear-gradient(110deg, rgba(238,64,35,0.06) 0%, rgba(238,64,35,0.02) 45%, rgba(238,64,35,0.05) 100%)"
       },
       backgroundSize: {
         "retro-grid": "46px 46px"
@@ -96,13 +107,13 @@ export default {
           "0%": { transform: "translateY(12px)", opacity: "0" },
           "100%": { transform: "translateY(0)", opacity: "1" }
         },
-        /* ---- retrowave motion ---- */
-        // The horizon grid rolls toward the viewer, forever.
+        /* ---- motion ---- */
+        // The rule line rolls slowly toward the viewer.
         gridflow: {
           "0%": { backgroundPosition: "0 0, 0 0" },
           "100%": { backgroundPosition: "0 46px, 0 46px" }
         },
-        // Slow drift for the infinity-mirror backdrops.
+        // Slow drift for the background washes.
         drift: {
           "0%,100%": { transform: "translate3d(0,0,0) scale(1)" },
           "50%": { transform: "translate3d(0,-14px,0) scale(1.04)" }

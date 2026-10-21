@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Award, Crown, Loader2, Medal, Trophy, UserRound } from "lucide-react";
+import { Award, Crown, Globe, Loader2, Medal, Sparkles, Trophy, UserRound } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
 import { fetchLeaderboard } from "../lib/api";
@@ -13,7 +13,9 @@ import type { LeaderboardWindow, PeriodRow } from "../lib/types";
  * The overall leaderboard: how many problems has each learner solved across
  * every scheduled test? Tabs roll the window (week / month / all time) without
  * changing the metric; the signed-in learner's own row is always highlighted.
- * Anonymous attempts never rank — an account is required to appear here.
+ *
+ * The board is public — anyone may read it. Anonymous attempts never rank, so
+ * an account is only needed to appear on the board.
  */
 
 const TABS: { key: LeaderboardWindow; label: string }[] = [
@@ -76,6 +78,9 @@ export default function Leaderboard() {
           {t("lb.title")}
         </h1>
         <p className="mt-3 text-slate-600 dark:text-slate-400">{t("lb.intro")}</p>
+        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-semibold text-emerald-700 dark:text-emerald-300">
+          <Globe size={12} /> {t("lb.public")}
+        </p>
       </header>
 
       {/* ---- window tabs + sync state ---- */}
@@ -117,12 +122,33 @@ export default function Leaderboard() {
               {t("lb.col.tests")}: {you.tests} · {t("lb.col.best")}: {you.bestPct}%
             </span>
           </div>
-        ) : (
+        ) : user ? (
           <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
             <p className="text-sm text-slate-600 dark:text-slate-400">{t("lb.notRanked")}</p>
             <Link to="/tests" className="btn-primary h-9 px-3.5 text-xs">
               <Trophy size={14} /> {t("nav.tests")}
             </Link>
+          </div>
+        ) : (
+          /* Signed-out visitors may read the whole board; only joining it
+             needs an account. */
+          <div className="card flex flex-wrap items-center justify-between gap-4 border-accent-500/30 bg-accent-500/5 p-4 sm:p-5">
+            <div className="min-w-0">
+              <p className="inline-flex items-center gap-2 text-sm font-bold text-ink-900 dark:text-white">
+                <Sparkles size={15} className="text-accent-500" /> {t("lb.join.title")}
+              </p>
+              <p className="mt-1 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+                {t("lb.join.body")}
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-wrap items-center gap-2">
+              <Link to="/login?mode=signup" className="btn-primary h-9 px-3.5 text-xs">
+                {t("lb.join.cta")}
+              </Link>
+              <Link to="/login" className="btn-ghost h-9 px-3.5 text-xs">
+                {t("nav.signIn")}
+              </Link>
+            </div>
           </div>
         )}
       </div>

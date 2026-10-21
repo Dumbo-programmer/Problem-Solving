@@ -205,6 +205,61 @@
   are exercised through the file store, not the real database.
 - ⚠️ npm advisories remain dev-toolchain only (vitest/vite/tailwind majors deferred).
 
+## ⏱ Update — 2026-10-21 (Prothom Alo official theme + public board + admin access)
+
+- **The site is now an official Prothom Alo property, visually.** The retrowave/neon
+  look is gone: `tailwind.config.js` retokens `accent` to the brand red ramp
+  (`500: #ee4023`), `ink` to a warm newsprint charcoal, and re-maps the old `neon`
+  ramp to editorial red/neutral stops (the class names survive, so every usage
+  follows). `palo` stays a flat `#ee4023` so `border-palo/25` keeps working.
+- **Typography**: headlines are now serif (`Source Serif 4` + `Noto Serif Bengali`,
+  loaded from Google Fonts and applied to `h1`/`h2` via a base rule). Family names
+  with a digit **must** be quoted in the Tailwind stack (`'"Source Serif 4"'`) —
+  unquoted, the whole `font-family` declaration is invalid and silently dropped.
+  Body copy stays Outfit / Noto Sans Bengali.
+- **Light is the default** (`readTheme()` now returns `light` unless dark was
+  chosen); `index.html` no longer hardcodes `class="dark"`, and the theme-colour
+  meta is the brand red.
+- **Copy**: "Free · Olympiad-flavoured · No sign-up" is gone. The hero now says the
+  site is the official problem-solving platform of Prothom Alo's Gonit Ishkul; the
+  footer credits Prothom Alo and the copyright line names the initiative.
+- **Decorations formalised**: the hero's ping badge, neon sky glows and rolling
+  perspective floor are replaced by a paper wash, one brand-red glow and a ruled
+  band; `PageDecor`, `FloatingMath`, `MathPlots`, `Login`'s side panel and the
+  podium are all de-neoned and de-gridded.
+- **`/leaderboard` is public** — anyone can read the board; signed-out visitors get
+  a "Join the board" card (sign-up / sign-in). It is no longer wrapped in
+  `RequireAuth`.
+- **`/login` shows a real dashboard panel** (live tests sat / solved / average /
+  best, your rank, and a top-5 slice of the public board) instead of the old
+  "why an account?" perks panel.
+- **Admin access is self-documenting**: `src/lib/adminCredentials.ts` is the single
+  source of the default ID/password, imported by both the function and the UI;
+  `GET /admin/credentials` is public and returns booleans only (still default?),
+  and the admin login card shows the credentials (or "custom — ask the site
+  owner").
+- **Past tests** carry weekly / monthly / built-by-you badges, filter chips with
+  counts, locale-aware dates and an "in progress" state.
+- **Navbar**: links are tiered (`md` for Home/Problems/Leaderboard, `lg` for the
+  archive) so the bar never overflows on a tablet; the redundant `/practice` nav
+  entry was dropped in favour of the primary CTA.
+
+**Re-verified after these changes:**
+
+| Check | Command | Result |
+|---|---|---|
+| Typecheck | `npm.cmd run typecheck` | ✅ clean |
+| Unit tests | `npm.cmd run test` | ✅ 74/74 |
+| Production build | `npm.cmd run build` | ✅ 144 problems |
+| Responsive layout | `npm.cmd run layout` | ✅ all pass (mobile/tablet/desktop × 8 routes) |
+| E2E smoke (offline) | `npm.cmd run smoke` | ✅ 49/49, **zero console errors** |
+| API contract smoke | `npm.cmd run smoke:api` | ✅ 81/81 (+3 for the public credentials probe) |
+
+- ⚠️ Visual QA stays programmatic (the model cannot view images); the theme was
+  verified by reading computed styles out of the browser (body background
+  `#fdfcfa`, `.btn-primary` `#d92d12`, serif headline stack, the fonts actually
+  downloaded) rather than by eye.
+
 ## Proofreading already applied (no action needed)
 
 - `src/data/problems-a.json`, `problems-b.json`, `problems-c.json` — all 144 answers math-verified; Bangla typos/mistranslations fixed (incl. `pr-h-02` title/statement/solution, সর্বশেষ, এংগেল, ক্যাটালান solution, compositions statement).

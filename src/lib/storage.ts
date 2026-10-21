@@ -83,7 +83,8 @@ export function writeLang(lang: "en" | "bn"): void {
 
 export function readTheme(): "dark" | "light" {
   const v = safeGet(THEME_KEY);
-  return v === "light" ? "light" : "dark";
+  // The day edition is the default; dark is opt-in.
+  return v === "dark" ? "dark" : "light";
 }
 
 export function writeTheme(theme: "dark" | "light"): void {

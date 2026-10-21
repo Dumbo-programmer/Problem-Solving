@@ -82,50 +82,43 @@ export default function Home() {
   const podiumOrder = PREVIEW ? [1, 0, 2].filter((i) => PREVIEW.top[i]).map((i) => PREVIEW.top[i]) : [];
   const podiumHeights = ["h-24", "h-32", "h-20"];
   const podiumTone = [
-    "from-slate-300 to-slate-400 dark:from-slate-600 dark:to-slate-700",
-    "from-amber-300 to-amber-500 dark:from-amber-500 dark:to-amber-700",
-    "from-orange-300 to-orange-500 dark:from-orange-500 dark:to-orange-700"
+    "bg-slate-300 dark:bg-slate-600",
+    "bg-amber-400 dark:bg-amber-600",
+    "bg-orange-300 dark:bg-orange-700"
   ];
 
   return (
     <>
       {/* ---------------- Hero ---------------- */}
-      <section className="relative overflow-hidden">
-        {/* decorative background — the retrowave horizon */}
+      <section className="relative overflow-hidden border-b border-slate-200 bg-retro-sky dark:border-ink-800 dark:bg-ink-950">
+        {/* decorative background — a printed page, not a light show */}
         <div className="pointer-events-none absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-grid-fade [background-size:26px_26px] opacity-60 dark:opacity-[0.25]" />
-          {/* neon sky glows */}
-          <div className="absolute -top-32 right-[-10%] h-[28rem] w-[28rem] rounded-full bg-accent-400/20 blur-3xl dark:bg-neon-pink/20" />
-          <div className="absolute -left-24 top-24 h-[22rem] w-[22rem] rounded-full bg-ink-400/20 blur-3xl dark:bg-neon-violet/25" />
-          <div className="absolute left-1/2 top-0 h-[30rem] w-[36rem] -translate-x-1/2 rounded-full bg-neon-cyan/10 blur-[80px] dark:bg-neon-cyan/15" />
+          <div className="absolute inset-0 bg-grid-fade [background-size:26px_26px] opacity-50 dark:opacity-[0.18]" />
+          {/* one brand-red wash, warm and quiet */}
+          <div className="absolute -top-40 right-[-8%] h-[26rem] w-[26rem] rounded-full bg-accent-300/20 blur-3xl dark:bg-accent-700/25" />
+          <div className="absolute -left-32 top-32 h-[20rem] w-[20rem] rounded-full bg-ink-300/25 blur-3xl dark:bg-ink-800/60" />
           {/* drifting maths glyphs + live plots */}
-          <FloatingMath count={18} seed={3} className="opacity-80 dark:opacity-100" />
-          <FloatingPlots count={6} seed={21} className="opacity-60 dark:opacity-80" />
-          {/* the rolling perspective floor */}
-          <div className="absolute inset-x-0 bottom-0 h-64 overflow-hidden dark:block">
+          <FloatingMath count={8} seed={3} className="opacity-60 dark:opacity-70" />
+          <FloatingPlots count={3} seed={21} className="opacity-40 dark:opacity-55" />
+          {/* the ruled band at the foot of the page */}
+          <div className="absolute inset-x-0 bottom-0 h-40 overflow-hidden">
             <div className="retro-horizon" />
           </div>
-          <div className="retro-scanlines" />
         </div>
 
         <div className="shell grid items-center gap-10 pb-16 pt-12 lg:grid-cols-[1.15fr_0.85fr] lg:pb-24 lg:pt-20">
           <div>
             <Reveal>
-              <span className="chip inline-flex border border-neon-pink/40 bg-neon-pink/10 text-neon-magenta dark:border-neon-pink/50 dark:bg-neon-pink/12 dark:text-neon-pink">
-                <span className="relative flex h-1.5 w-1.5">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-neon-pink opacity-75" />
-                  <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-neon-pink" />
-                </span>
+              <span className="chip inline-flex border border-accent-200 bg-accent-50 text-accent-800 dark:border-accent-700/50 dark:bg-accent-900/25 dark:text-accent-200">
+                <span className="h-1.5 w-1.5 rounded-full bg-accent-600 dark:bg-accent-400" />
                 {t("hero.badge")}
               </span>
             </Reveal>
 
             <Reveal delay={80}>
-              <h1 className="mt-5 text-balance text-4xl font-extrabold leading-[1.08] tracking-tight text-ink-900 dark:text-white sm:text-5xl lg:text-6xl">
+              <h1 className="mt-5 text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-ink-900 dark:text-white sm:text-5xl lg:text-6xl">
                 {t("hero.title1")}{" "}
-                <span className="bg-gradient-to-r from-accent-500 via-accent-400 to-accent-600 bg-clip-text text-transparent dark:from-neon-pink dark:via-neon-purple dark:to-neon-cyan">
-                  {t("hero.title2")}
-                </span>
+                <span className="text-accent-700 dark:text-accent-400">{t("hero.title2")}</span>
               </h1>
             </Reveal>
 
@@ -244,15 +237,15 @@ export default function Home() {
 
               {/* floating live-plot card — the maths literally moving */}
               <div
-                className="absolute -right-6 -top-8 hidden animate-floaty rounded-2xl border border-slate-200 bg-white/85 px-3 py-2 shadow-soft backdrop-blur xl:block dark:border-neon-cyan/30 dark:bg-ink-900/80"
+                className="absolute -right-6 -top-8 hidden animate-floaty rounded-xl border border-slate-200 bg-white/85 px-3 py-2 shadow-soft backdrop-blur xl:block dark:border-ink-700 dark:bg-ink-900/80"
                 style={{ animationDelay: "0.8s" }}
               >
                 <SinePlot className="h-16 w-40 text-slate-400" phase={0.6} />
               </div>
 
-              {/* glowing orbit mirror behind the card */}
+              {/* a quiet brand-tinted halo behind the card */}
               <div className="pointer-events-none absolute inset-0 -z-10 flex items-center justify-center">
-                <div className="h-72 w-72 rounded-full bg-gradient-to-br from-neon-pink/25 via-neon-violet/20 to-neon-cyan/25 blur-3xl dark:from-neon-pink/30 dark:via-neon-violet/25 dark:to-neon-cyan/30" />
+                <div className="h-72 w-72 rounded-full bg-accent-200/25 blur-3xl dark:bg-accent-800/25" />
               </div>
             </div>
           </Reveal>
@@ -348,8 +341,8 @@ export default function Home() {
 
           {/* live podium preview */}
           <Reveal delay={140}>
-            <div className="relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-white via-slate-50 to-accent-50/60 p-6 shadow-soft dark:border-ink-800 dark:from-ink-900 dark:via-ink-950 dark:to-ink-900">
-              <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent-400/15 blur-3xl" />
+            <div className="relative h-full overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-soft dark:border-ink-800 dark:bg-ink-900/60">
+              <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent-200/25 blur-3xl dark:bg-accent-800/25" />
               <div className="relative flex flex-wrap items-center justify-between gap-2">
                 <h3 className="text-sm font-bold text-ink-900 dark:text-white">{t("home.competeStandings")}</h3>
                 {PREVIEW && (
@@ -360,7 +353,7 @@ export default function Home() {
                 )}
               </div>
               <p className="relative mt-1 truncate text-xs text-slate-500 dark:text-slate-400">
-                {PREVIEW ? t("kind.weekly") : ""}
+                {PREVIEW ? t(`kind.${PREVIEW.test.kind.toLowerCase()}`) : ""}
               </p>
 
               {PREVIEW ? (
@@ -371,7 +364,7 @@ export default function Home() {
                       const lane = PREVIEW.top.indexOf(row);
                       return (
                         <div key={row.clientId} className="flex w-1/3 flex-col items-center">
-                          <span className="mb-2 grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-accent-400 to-accent-600 text-[11px] font-bold text-white shadow-soft">
+                          <span className="mb-2 grid h-9 w-9 place-items-center rounded-full bg-accent-600 text-[11px] font-bold text-white shadow-soft">
                             {lane === 0 ? <Crown size={16} /> : <Medal size={16} />}
                           </span>
                           <span className="w-full truncate text-center text-xs font-semibold text-ink-900 dark:text-white">
@@ -381,9 +374,9 @@ export default function Home() {
                             {row.score}/{row.maxScore} · {row.pct}%
                           </span>
                           <div
-                            className={`mt-2 w-full rounded-t-lg bg-gradient-to-b ${podiumHeights[lane]} ${podiumTone[lane]}`}
+                            className={`mt-2 w-full rounded-t-lg ${podiumHeights[lane]} ${podiumTone[lane]}`}
                           >
-                            <span className="block pt-2 text-center font-mono text-lg font-bold text-white/90">
+                            <span className="block pt-2 text-center font-mono text-lg font-bold text-ink-900/80 dark:text-white/90">
                               {lane + 1}
                             </span>
                           </div>
@@ -470,14 +463,13 @@ export default function Home() {
         </div>
 
         <Reveal delay={120}>
-          <div className="relative mt-14 overflow-hidden rounded-3xl bg-gradient-to-br from-ink-800 via-ink-900 to-ink-950 p-8 text-center shadow-lift sm:p-14">
-            <div className="pointer-events-none absolute inset-0 bg-grid-fade [background-size:22px_22px] opacity-30" />
-            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-neon-pink/30 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-neon-cyan/25 blur-3xl" />
+          <div className="relative mt-14 overflow-hidden rounded-2xl bg-ink-900 p-8 text-center shadow-lift sm:p-14">
+            <div className="pointer-events-none absolute inset-0 bg-grid-fade [background-size:22px_22px] opacity-20" />
+            <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-accent-700/35 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -left-16 h-64 w-64 rounded-full bg-accent-900/30 blur-3xl" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 overflow-hidden">
-              <div className="retro-horizon !h-40" />
+              <div className="retro-horizon !h-40 opacity-40" />
             </div>
-            <div className="retro-scanlines" />
             <div className="relative">
               <h2 className="text-balance text-3xl font-bold tracking-tight text-white sm:text-4xl">
                 {t("home.practiceCtaTitle")}

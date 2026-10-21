@@ -7,7 +7,7 @@
 /* ------------------------------------------------------------------ */
 
 :root {
-  --ring: 222 47% 58%;
+  --ring: 12 78% 53%;
 }
 
 html {
@@ -16,21 +16,22 @@ html {
 }
 
 body {
-  @apply bg-white text-slate-800 antialiased;
+  @apply bg-[#fdfcfa] text-slate-800 antialiased;
   font-feature-settings: "ss01" on, "cv01" on;
 }
 
+/* Editorial headlines: the newspaper voice of the site. */
+h1,
+h2 {
+  @apply font-display;
+}
+
+/* A dark mode that reads like the night edition: warm charcoal ink, no
+   glow. */
 .dark body {
   @apply bg-ink-950 text-slate-200;
-  /* A fixed "infinity mirror" backdrop: two offset neon grids receding into
-     the dark, plus the pulsing violet/cyan glows that sit behind every page. */
   background-image:
-    radial-gradient(ellipse 80% 55% at 50% -10%, rgba(124, 58, 237, 0.28), transparent 70%),
-    radial-gradient(ellipse 60% 45% at 12% 8%, rgba(255, 45, 149, 0.16), transparent 65%),
-    radial-gradient(ellipse 60% 45% at 88% 4%, rgba(34, 211, 238, 0.14), transparent 65%),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.028) 1px, transparent 1px),
-    linear-gradient(to right, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 100% 100%, 100% 34px, 34px 100%;
+    radial-gradient(ellipse 90% 50% at 50% -12%, rgba(238, 64, 35, 0.12), transparent 72%);
   background-attachment: fixed;
 }
 
@@ -44,16 +45,16 @@ body {
 
 /* Nice selection colour everywhere. */
 ::selection {
-  @apply bg-accent-300/60 text-ink-900;
+  @apply bg-accent-500/20 text-ink-900;
 }
 .dark ::selection {
-  @apply bg-accent-500/40 text-accent-50;
+  @apply bg-accent-500/35 text-white;
 }
 
 /* Slim, themed scrollbars. */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(120, 128, 201, 0.4) transparent;
+  scrollbar-color: rgba(95, 89, 82, 0.35) transparent;
 }
 *::-webkit-scrollbar {
   width: 10px;
@@ -75,7 +76,7 @@ body {
   overscroll-behavior: contain;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
-  scrollbar-color: rgba(120, 128, 201, 0.45) transparent;
+  scrollbar-color: rgba(95, 89, 82, 0.35) transparent;
 }
 .scroll-area::-webkit-scrollbar {
   width: 8px;
@@ -90,7 +91,7 @@ body {
   background-color: rgb(148 163 184 / 0.5);
 }
 .scroll-area:hover::-webkit-scrollbar-thumb {
-  background-color: rgb(249 140 7 / 0.55);
+  background-color: rgb(238 64 35 / 0.45);
 }
 .dark .scroll-area {
   scrollbar-color: rgba(100, 116, 139, 0.6) transparent;
@@ -99,7 +100,7 @@ body {
   background-color: rgb(71 85 105 / 0.8);
 }
 .dark .scroll-area:hover::-webkit-scrollbar-thumb {
-  background-color: rgb(249 140 7 / 0.55);
+  background-color: rgb(238 64 35 / 0.45);
 }
 
 /* ------------------------------------------------------------------ */
@@ -111,101 +112,86 @@ body {
     @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
   }
 
+  /* A card is a printed panel: a hairline border, a flat white page, and a
+     shadow so faint it reads as paper on paper. */
   .card {
-    @apply rounded-2xl border border-slate-200 bg-white shadow-soft;
+    @apply rounded-xl border border-slate-200 bg-white shadow-soft;
   }
   .dark .card {
-    @apply border-neon-violet/25 bg-ink-900/60;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 45px -30px rgba(124, 58, 237, 0.75);
+    @apply border-ink-800 bg-ink-900/70;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 18px 40px -32px rgba(0, 0, 0, 0.9);
   }
 
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-medium transition-colors;
+    @apply inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors;
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:focus-visible:ring-offset-ink-950;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2.5 text-sm font-semibold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:focus-visible:ring-offset-ink-950;
   }
   .btn-primary {
-    @apply btn bg-gradient-to-r from-accent-500 to-accent-600 text-white shadow-soft hover:from-accent-400 hover:to-accent-600 hover:shadow-lift active:scale-[0.99];
+    @apply btn bg-accent-600 text-white shadow-soft hover:bg-accent-700 hover:shadow-lift active:scale-[0.99];
   }
   .dark .btn-primary {
-    @apply from-neon-pink to-neon-violet text-white;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08) inset, 0 10px 34px -10px rgba(255, 45, 149, 0.7);
-  }
-  .dark .btn-primary:hover {
-    @apply from-neon-pink to-neon-purple;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12) inset, 0 14px 40px -8px rgba(168, 85, 247, 0.8);
+    @apply bg-accent-600 hover:bg-accent-500;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 10px 26px -14px rgba(238, 64, 35, 0.7);
   }
   .btn-ghost {
-    @apply btn border border-slate-200 bg-white/70 text-slate-700 hover:border-slate-300 hover:bg-white;
+    @apply btn border border-slate-300 bg-white text-slate-800 hover:border-slate-400 hover:bg-slate-50;
   }
   .dark .btn-ghost {
-    @apply border-neon-violet/30 bg-ink-900/60 text-slate-200 hover:border-neon-cyan/50 hover:bg-ink-900;
+    @apply border-ink-700 bg-ink-900/60 text-slate-200 hover:border-accent-500/50 hover:bg-ink-900;
   }
   .btn-quiet {
-    @apply btn text-slate-600 hover:bg-slate-100;
+    @apply btn text-slate-600 hover:bg-slate-100 hover:text-slate-900;
   }
   .dark .btn-quiet {
-    @apply text-slate-300 hover:bg-ink-900;
+    @apply text-slate-300 hover:bg-ink-900 hover:text-white;
   }
 
   .field {
-    @apply w-full rounded-xl border border-slate-200 bg-white px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-accent-400 focus:outline-none focus:ring-2 focus:ring-accent-400/40;
+    @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-800 placeholder:text-slate-400 focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20;
   }
   .dark .field {
     @apply border-ink-700 bg-ink-900/70 text-slate-100 placeholder:text-slate-500;
   }
   .dark .field:focus {
-    @apply border-neon-cyan/60 ring-neon-cyan/30;
+    @apply border-accent-500/70 ring-accent-500/25;
   }
 
   .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-600 dark:text-neon-cyan;
+    @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-700 dark:text-accent-400;
   }
 
-  /* ---- retrowave brand lockup ------------------------------------- */
+  /* ---- co-brand lockup -------------------------------------------- */
   /* Gonit Ishkul logo with the Prothom Alo mark stacked above it, sharing a
      hairline separator. The logos spell the name, so no wordmark is needed. */
   .brand-lockup {
     @apply flex flex-col items-start gap-0.5;
   }
   .brand-lockup-divider {
-    @apply h-px w-full bg-gradient-to-r from-slate-300/70 via-slate-300 to-slate-300/70 dark:from-neon-violet/20 dark:via-neon-violet/60 dark:to-neon-violet/20;
+    @apply h-px w-full bg-gradient-to-r from-palo/50 via-palo to-palo/50;
   }
 
-  /* ---- retrowave surface helpers ---------------------------------- */
-  /* A panel that floats on the grid: clipped, glowing, with a grid floor. */
+  /* ---- surfaces --------------------------------------------------- */
+  /* A panel that sits on the page like a printed block. */
   .retro-panel {
-    @apply relative overflow-hidden rounded-3xl border border-slate-200 bg-white/80 backdrop-blur;
+    @apply relative overflow-hidden rounded-2xl border border-slate-200 bg-white;
   }
   .dark .retro-panel {
-    @apply border-neon-violet/30 bg-ink-900/50;
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.03) inset, 0 30px 80px -40px rgba(124, 58, 237, 0.9);
+    @apply border-ink-800 bg-ink-900/60;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 24px 60px -40px rgba(0, 0, 0, 0.9);
   }
-  /* The animated "horizon" strip: neon grid inside a mask that fades upward. */
+  /* The ruled band that sits at the foot of a hero. */
   .retro-horizon {
-    @apply pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-retro-grid;
+    @apply pointer-events-none absolute inset-x-0 bottom-0 h-56 bg-retro-grid opacity-70;
     background-size: 46px 46px;
-    transform: perspective(320px) rotateX(62deg) scale(1.6);
-    transform-origin: bottom center;
-    -webkit-mask-image: linear-gradient(to top, black 0%, transparent 82%);
-    mask-image: linear-gradient(to top, black 0%, transparent 82%);
-    animation: gridflow 2.6s linear infinite;
+    -webkit-mask-image: linear-gradient(to top, black 0%, transparent 92%);
+    mask-image: linear-gradient(to top, black 0%, transparent 92%);
   }
   /* Subtle scanline film for dark surfaces. */
   .retro-scanlines {
     @apply pointer-events-none absolute inset-0 opacity-0;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.05) 0px,
-      rgba(255, 255, 255, 0.05) 1px,
-      transparent 1px,
-      transparent 4px
-    );
-  }
-  .dark .retro-scanlines {
-    @apply opacity-40;
   }
 
   /* Toggle-style filter button used across the builder + archive. */
@@ -219,15 +205,15 @@ body {
     @apply border-ink-700 bg-ink-900/50 text-slate-400 hover:border-ink-600 hover:text-slate-200;
   }
   .toggle-chip-on {
-    @apply border-accent-500/60 bg-accent-500/12 text-accent-700 shadow-[inset_0_0_0_1px_rgba(249,140,7,0.25)];
+    @apply border-accent-500/60 bg-accent-500/10 text-accent-700 shadow-[inset_0_0_0_1px_rgba(238,64,35,0.18)];
   }
   .dark .toggle-chip-on {
-    @apply border-neon-pink/60 bg-neon-pink/15 text-neon-pink;
+    @apply border-accent-500/60 bg-accent-500/15 text-accent-300;
   }
 
-  /* Neon text — used sparingly for headings on dark surfaces. */
+  /* Brand-coloured headline text — used sparingly. */
   .neon-text {
-    @apply bg-gradient-to-r from-neon-pink via-neon-purple to-neon-cyan bg-clip-text text-transparent;
+    @apply text-accent-600 dark:text-accent-400;
   }
 }
 

@@ -7,9 +7,10 @@
  *   • content hidden behind the sticky header
  */
 import puppeteer from "puppeteer-core";
+import { requireChrome } from "./chrome-path.mjs";
 
 const BASE = process.env.BASE_URL || "http://localhost:4173";
-const CHROME = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+const CHROME = requireChrome();
 
 const VIEWPORTS = [
   { name: "mobile", width: 360, height: 780 },

@@ -25,12 +25,15 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "lang.toggle": { en: "English", bn: "বাংলা" },
 
   /* ---- hero ---- */
-  "hero.badge": { en: "Free · Olympiad-flavoured · No sign-up", bn: "বিনামূল্যে · অলিম্পিয়াড ধাঁচের · রেজিস্ট্রেশন লাগে না" },
+  "hero.badge": {
+    en: "The official problem-solving platform of Prothom Alo's Gonit Ishkul",
+    bn: "প্রথম আলোর গণিত ইশকুলের অফিসিয়াল সমস্যা-সমাধান প্ল্যাটফর্ম"
+  },
   "hero.title1": { en: "Problem solving,", bn: "সমস্যা সমাধান," },
   "hero.title2": { en: "one problem at a time.", bn: "একটি একটি করে।" },
   "hero.lede": {
-    en: "A free, bilingual home for maths learners in Bangladesh — {n} olympiad and academic problems across six topics and four levels. Explore the bank and solve at your own pace, check answers instantly with a full solution, or sit a timed practice test whenever you're ready.",
-    bn: "বাংলাদেশের গণিত শিক্ষার্থীদের জন্য একটি বিনামূল্যের দ্বিভাষিক ঠিকানা — ছয়টি টপিক ও চারটি স্তরে ছড়ানো {n}টি অলিম্পিয়াড ও একাডেমিক সমস্যা। নিজের গতিতে সমস্যা বেছে নিন ও সমাধান করুন, সাথে সাথে সঠিক উত্তর ও পুরো সমাধান দেখুন, কিংবা প্রস্তুত হলে সময় ধরে একটি প্র্যাকটিস টেস্ট দিন।"
+    en: "The official home of Prothom Alo's Gonit Ishkul — {n} olympiad and academic problems across six topics and four levels, in Bangla and English. Explore the bank and solve at your own pace, check answers instantly with a full solution, or sit a timed practice test whenever you're ready.",
+    bn: "প্রথম আলোর গণিত ইশকুলের অফিসিয়াল ঠিকানা — ছয়টি টপিক ও চারটি স্তরে ছড়ানো {n}টি অলিম্পিয়াড ও একাডেমিক সমস্যা, বাংলা ও ইংরেজি দুই ভাষায়। নিজের গতিতে সমস্যা বেছে নিন ও সমাধান করুন, সাথে সাথে সঠিক উত্তর ও পুরো সমাধান দেখুন, কিংবা প্রস্তুত হলে সময় ধরে একটি প্র্যাকটিস টেস্ট দিন।"
   },
   "cta.browseProblems": { en: "Browse the problem bank", bn: "সমস্যার মজুদ দেখুন" },
   "cta.takeTest": { en: "Take a practice test", bn: "প্র্যাকটিস টেস্ট দিন" },
@@ -38,10 +41,10 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "hero.statTopics": { en: "Topics covered", bn: "টপিক" },
   "hero.statLevels": { en: "Levels, Primary → HSC", bn: "স্তর, প্রাথমিক → উচ্চ মাধ্যমিক" },
   "hero.statLangs": { en: "Languages", bn: "ভাষা" },
-  "hero.chip1": { en: "No sign-up needed", bn: "সাইন-আপ ছাড়াই" },
+  "hero.chip1": { en: "Bilingual: Bangla & English", bn: "দ্বিভাষিক: বাংলা ও ইংরেজি" },
   "hero.chip2": { en: "Instant answer + solution", bn: "সাথে সাথে উত্তর ও সমাধান" },
-  "hero.chip3": { en: "Weekly & monthly contests", bn: "সাপ্তাহিক ও মাসিক কনটেস্ট" },
-  "hero.chip4": { en: "Runs offline", bn: "অফলাইনেও চলে" },
+  "hero.chip3": { en: "Weekly & monthly contests", bn: "সাপ্তাহিক ও মাসিক প্রতিযোগিতা" },
+  "hero.chip4": { en: "Works offline", bn: "অফলাইনেও চলে" },
 
   /* ---- generic actions ---- */
   "action.start": { en: "Start test", bn: "টেস্ট শুরু করুন" },
@@ -66,13 +69,16 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "footer.compete": { en: "Compete", bn: "প্রতিযোগিতা" },
   "footer.account": { en: "Account", bn: "অ্যাকাউন্ট" },
   "footer.tagline": {
-    en: "A free, bilingual maths problem-solving school for Bangladesh — read, solve, compete.",
-    bn: "বাংলাদেশের জন্য একটি বিনামূল্যের দ্বিভাষিক গণিত সমস্যা সমাধানের ইশকুল — পড়ুন, সমাধান করুন, প্রতিযোগিতা করুন।"
+    en: "Prothom Alo's Gonit Ishkul — the official bilingual problem-solving platform for maths learners in Bangladesh.",
+    bn: "প্রথম আলোর গণিত ইশকুল — বাংলাদেশের গণিত শিক্ষার্থীদের জন্য অফিসিয়াল দ্বিভাষিক সমস্যা-সমাধান প্ল্যাটফর্ম।"
   },
   "footer.statProblems": { en: "problems", bn: "টি সমস্যা" },
   "footer.statTopics": { en: "topics", bn: "টপিক" },
   "footer.statLevels": { en: "levels", bn: "স্তর" },
-  "footer.madeFor": { en: "Made for young problem solvers", bn: "তরুণ সমস্যা-সমাধানকারীদের জন্য" },
+  "footer.madeFor": {
+    en: "An initiative for young problem solvers",
+    bn: "তরুণ সমস্যা-সমাধানকারীদের জন্য একটি উদ্যোগ"
+  },
   "footer.partner": {
     en: "In partnership with Prothom Alo's Gonit Ishkul",
     bn: "প্রথম আলোর গণিত ইশকুলের সঙ্গে যৌথ উদ্যোগ"
@@ -171,6 +177,15 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "past.cloudSync": { en: "Synced", bn: "সিঙ্ক হয়েছে" },
   "past.localOnly": { en: "On this device", bn: "এই ডিভাইসে" },
   "past.statusSubmitted": { en: "Submitted", bn: "জমা হয়েছে" },
+  "past.statusInProgress": { en: "In progress", bn: "চলছে" },
+  "past.source.practice": { en: "Built by you", bn: "আপনার তৈরি" },
+  "past.source.scheduled": { en: "Scheduled paper", bn: "নির্ধারিত পত্র" },
+  "past.filter.all": { en: "All", bn: "সব" },
+  "past.filter.practice": { en: "Built by you", bn: "আপনার তৈরি" },
+  "past.filterEmpty": {
+    en: "Nothing in this slice of the archive yet.",
+    bn: "এই অংশে এখনো কিছু নেই।"
+  },
 
   /* ---- problems archive ---- */
   "archive.title": { en: "Problem archive", bn: "সমস্যার সংগ্রহ" },
@@ -245,7 +260,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "Open the bank and solve one in seconds — or gather a handful into a timed paper when you want a challenge.",
     bn: "মজুদ খুলে কয়েক সেকেন্ডেই একটি সমস্যা সমাধান করুন — কিংবা চ্যালেঞ্জ চাইলে কয়েকটি নিয়ে একটি সময়বদ্ধ কাগজ করুন।"
   },
-  "home.featuredBdmo": { en: "Olympiad-flavoured", bn: "অলিম্পিয়াড ধাঁচের" },
+  "home.featuredBdmo": { en: "Curated for competitions", bn: "প্রতিযোগিতার জন্য সাজানো" },
   "home.featuredBdmoD": {
     en: "A large share of the bank is modelled on BdMO Regional and National rounds.",
     bn: "মজুদের বড় অংশ বিডিএমও রিজিওনাল ও ন্যাশনাল রাউন্ডের আদলে তৈরি।"
@@ -273,7 +288,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.competeBoardT": { en: "Live leaderboard", bn: "লাইভ লিডারবোর্ড" },
   "home.competeBoardD": { en: "Problems solved across every paper you sit", bn: "যত কাগজ দিয়েছেন, তার সব মিলিয়ে সমাধান করা সমস্যা" },
   "home.competeLive": { en: "Now live", bn: "এখন চলছে" },
-  "home.competeStandings": { en: "This week's top solvers", bn: "এই সপ্তাহের শীর্ষ সমাধানকারী" },
+  "home.competeStandings": { en: "Top solvers", bn: "শীর্ষ সমাধানকারী" },
   "home.competeOpen": { en: "See the papers & standings", bn: "কাগজ ও স্ট্যান্ডিংস দেখুন" },
   "home.competeBoard": { en: "Full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড" },
   "home.competeSolved": { en: "solved", bn: "সমাধান" },
@@ -377,6 +392,13 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   },
   "lb.source.local": { en: "Offline — standings from this device.", bn: "অফলাইন — এই ডিভাইসের স্ট্যান্ডিংস দেখানো হচ্ছে।" },
   "lb.source.cloud": { en: "Live from the cloud.", bn: "ক্লাউড থেকে লাইভ।" },
+  "lb.public": { en: "Open to everyone — no account needed to read the board", bn: "সবার জন্য উন্মুক্ত — বোর্ড দেখতে অ্যাকাউন্ট লাগে না" },
+  "lb.join.title": { en: "Join the board", bn: "বোর্ডে যোগ দিন" },
+  "lb.join.body": {
+    en: "Anyone can read this board. Sign in and your name, score and rank stay on it.",
+    bn: "এই বোর্ড সবাই দেখতে পারেন। সাইন ইন করলে আপনার নাম, স্কোর ও র‍্যাঙ্ক বোর্ডে থেকে যাবে।"
+  },
+  "lb.join.cta": { en: "Create an account", bn: "অ্যাকাউন্ট খুলুন" },
   "lb.hint": {
     en: "Solved count sets the rank; ties break on best score, then time.",
     bn: "র‍্যাঙ্ক নির্ধারণ করে সমাধান করা সমস্যার সংখ্যা; সমতায় আগে সেরা স্কোর, তারপর সময়।"
@@ -392,6 +414,14 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "admin.login.password": { en: "Password", bn: "পাসওয়ার্ড" },
   "admin.login.submit": { en: "Sign in", bn: "সাইন ইন" },
   "admin.login.error": { en: "Wrong ID or password.", bn: "আইডি বা পাসওয়ার্ড ভুল।" },
+  "admin.login.credentials": { en: "Which ID and password?", bn: "কোন আইডি ও পাসওয়ার্ড?" },
+  "admin.login.credentialsHint": {
+    en: "Defaults are listed below. Set ADMIN_ID and ADMIN_PASSWORD in the deployment environment to replace them.",
+    bn: "নিচে ডিফল্টগুলো দেওয়া আছে। বদলাতে ডিপ্লয়মেন্ট এনভায়রনমেন্টে ADMIN_ID ও ADMIN_PASSWORD সেট করুন।"
+  },
+  "admin.cred.id": { en: "ID", bn: "আইডি" },
+  "admin.cred.password": { en: "Password", bn: "পাসওয়ার্ড" },
+  "admin.cred.custom": { en: "custom — ask the site owner", bn: "নিজস্ব — সাইটের মালিককে জিজ্ঞাসা করুন" },
   "admin.login.hint": {
     en: "Credentials come from the ADMIN_ID / ADMIN_PASSWORD environment variables (defaults: admin · gonit-ishkul).",
     bn: "পরিচয়পত্র ADMIN_ID / ADMIN_PASSWORD এনভায়রনমেন্ট ভেরিয়েবল থেকে আসে (ডিফল্ট: admin · gonit-ishkul)।"
@@ -532,35 +562,44 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "auth.signedInAs": { en: "Signed in as {name}", bn: "সাইন ইন করেছেন {name}" },
   "auth.gate.title": { en: "Sign in to continue", bn: "চালিয়ে যেতে সাইন ইন করুন" },
   "auth.gate.body": {
-    en: "Weekly and monthly tests, their standings, the leaderboard and your past papers all live behind a learner account. Sign in (or create one) and we'll take you straight back.",
-    bn: "সাপ্তাহিক ও মাসিক টেস্ট, স্ট্যান্ডিংস, লিডারবোর্ড এবং আপনার পুরোনো পত্রগুলো দেখতে শিক্ষার্থী অ্যাকাউন্ট লাগবে। সাইন ইন করুন (বা নতুন অ্যাকাউন্ট খুলুন) — আমরা আপনাকে সরাসরি ফিরিয়ে নিয়ে যাব।"
+    en: "Weekly and monthly tests, their standings and your past papers all live behind a learner account. Sign in (or create one) and we'll take you straight back.",
+    bn: "সাপ্তাহিক ও মাসিক টেস্ট, স্ট্যান্ডিংস এবং আপনার পুরোনো পত্রগুলো দেখতে শিক্ষার্থী অ্যাকাউন্ট লাগবে। সাইন ইন করুন (বা নতুন অ্যাকাউন্ট খুলুন) — আমরা আপনাকে সরাসরি ফিরিয়ে নিয়ে যাব।"
   },
   "auth.memberSince": { en: "Member since {when}", bn: "সদস্য {when} থেকে" },
   "auth.nameSaved": { en: "Display name updated.", bn: "ডিসপ্লে নাম আপডেট হয়েছে।" },
   "auth.save": { en: "Save name", bn: "নাম সংরক্ষণ" },
-  "auth.how.title": { en: "Why an account?", bn: "অ্যাকাউন্ট কেন?" },
-  "auth.how.point1": {
-    en: "Your name appears on contest standings and the leaderboard.",
-    bn: "কনটেস্টের স্ট্যান্ডিংস ও লিডারবোর্ডে আপনার নাম দেখা যাবে।"
+
+  /* ---- sign-in side panel: the live dashboard ---- */
+  "auth.dash.eyebrow": { en: "Dashboard", bn: "ড্যাশবোর্ড" },
+  "auth.dash.title": { en: "Your progress, at a glance", bn: "এক নজরে আপনার অগ্রগতি" },
+  "auth.dash.tests": { en: "Tests sat", bn: "দেওয়া টেস্ট" },
+  "auth.dash.solved": { en: "Solved", bn: "সমাধান" },
+  "auth.dash.avg": { en: "Average", bn: "গড়" },
+  "auth.dash.best": { en: "Best", bn: "সেরা" },
+  "auth.dash.rank": { en: "Your rank: #{rank} · {solved} solved", bn: "আপনার র‍্যাঙ্ক: #{rank} · {solved} সমাধান" },
+  "auth.dash.notRanked": {
+    en: "You're not on the board yet — sit a scheduled test to enter.",
+    bn: "আপনি এখনো বোর্ডে নেই — নির্ধারিত টেস্ট দিয়ে অংশ নিন।"
   },
-  "auth.how.point2": {
-    en: "One attempt per paper stays fair — account names stay unique.",
-    bn: "প্রতি পত্রে এক চেষ্টা ন্যায্য থাকে — অ্যাকাউন্টের নাম অদ্বিতীয় থাকে।"
+  "auth.dash.join": {
+    en: "Sign in to put your name on the board.",
+    bn: "বোর্ডে নিজের নাম দেখাতে সাইন ইন করুন।"
   },
-  "auth.how.point3": {
-    en: "Practice works signed out too — an account only adds your name.",
-    bn: "সাইন আউট থাকলেও অনুশীলন চলে — অ্যাকাউন্ট শুধু আপনার নাম যোগ করে।"
+  "auth.dash.board": { en: "Top solvers", bn: "শীর্ষ সমাধানকারী" },
+  "auth.dash.empty": {
+    en: "No results yet — the first spot on the board is yours to take.",
+    bn: "এখনো কোনো ফলাফল নেই — বোর্ডের প্রথম জায়গাটি আপনার।"
   },
+  "auth.dash.fullBoard": { en: "See the full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড দেখুন" },
 
   /* ---- misc ---- */
   "misc.loading": { en: "Loading…", bn: "লোড হচ্ছে…" },
   "misc.online": { en: "Cloud synced", bn: "ক্লাউড সিঙ্ক" },
   "misc.offline": { en: "Offline mode", bn: "অফলাইন মোড" },
-  "misc.footerNote": {
-    en: "A free, bilingual home for problem solving — olympiad and academic problems, full solutions and practice tests for every level.",
-    bn: "সমস্যা সমাধানের একটি বিনামূল্যের দ্বিভাষিক ঠিকানা — সব স্তরের জন্য অলিম্পিয়াড ও একাডেমিক সমস্যা, পূর্ণ সমাধান ও প্র্যাকটিস টেস্ট।"
-  },
-  "misc.copyright": { en: "© {year} Gonit Ishkul Problem Solving. All rights reserved.", bn: "© {year} গণিত ইশকুল প্রবলেম সলভিং। সর্বস্বত্ব সংরক্ষিত।" }
+  "misc.copyright": {
+    en: "© {year} Gonit Ishkul Problem Solving — an initiative of Prothom Alo. All rights reserved.",
+    bn: "© {year} গণিত ইশকুল প্রবলেম সলভিং — প্রথম আলোর উদ্যোগ। সর্বস্বত্ব সংরক্ষিত।"
+  }
 };
 
 export const TOPIC_LABELS: Record<ProblemTopic, Localized> = {

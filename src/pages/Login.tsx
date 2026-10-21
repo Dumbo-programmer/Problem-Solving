@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import type { ReactNode } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import {
@@ -17,12 +17,13 @@ import {
   Sparkles,
   Trophy,
   UserPlus,
-  WifiOff
+  UserRound
 } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
 import PageDecor from "../components/PageDecor";
-import { HttpError } from "../lib/api";
+import { fetchLeaderboard, fetchPastTests, HttpError } from "../lib/api";
+import type { PeriodRow, PracticeTest } from "../lib/types";
 
 const USERNAME_RE = /^[a-z0-9_]{3,20}$/i;
 const MIN_PASSWORD = 6;
@@ -34,7 +35,8 @@ type Mode = "signin" | "signup";
 /**
  * One page for both entry points — signing in / creating an account — plus
  * the signed-in "my account" view (rename display name, sign out). Anonymous
- * practice keeps working without an account; the side panel says so.
+ * practice keeps working without an account; the side panel shows the live
+ * dashboard and the public leaderboard instead of a wall of marketing copy.
  */
 export default function Login() {
   const { t, lang } = useI18n();
@@ -60,7 +62,7 @@ export default function Login() {
       )}
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-12">
         {user ? <AccountCard locale={locale} /> : <AuthCard mode={mode} />}
-        <PerksPanel t={t} />
+        <DashboardPanel />
       </div>
       </div>
     </div>
@@ -405,61 +407,137 @@ function AccountCard({ locale }: { locale: string }) {
 }
 
 /* ------------------------------------------------------------------ */
-/* Side panel — why an account                                         */
+/* Side panel — a live dashboard preview                                */
 /* ------------------------------------------------------------------ */
 
-function PerksPanel({ t }: { t: (key: string) => string }) {
-  const points = [
-    { icon: Trophy, text: t("auth.how.point1") },
-    { icon: ShieldCheck, text: t("auth.how.point2") },
-    { icon: WifiOff, text: t("auth.how.point3") }
+/**
+ * The panel beside the sign-in form used to explain why an account exists.
+ * It now shows the product instead: the learner's own numbers and a live
+ * slice of the public leaderboard, so the value of an account is visible
+ * before signing up.
+ */
+function DashboardPanel() {
+  const { t } = useI18n();
+  const { user } = useAuth();
+  const [board, setBoard] = useState<PeriodRow[] | null>(null);
+  const [tests, setTests] = useState<PracticeTest[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    void Promise.all([fetchLeaderboard("all"), fetchPastTests()]).then(([lb, past]) => {
+      if (cancelled) return;
+      setBoard(lb.rows);
+      setTests(past);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const stats = useMemo(() => {
+    const done = tests.filter((x) => x.status === "SUBMITTED" && x.maxScore > 0);
+    const pcts = done.map((x) => Math.round((x.correctCount / x.maxScore) * 100));
+    return {
+      count: done.length,
+      solved: done.reduce((sum, x) => sum + x.correctCount, 0),
+      avg: pcts.length ? Math.round(pcts.reduce((a, b) => a + b, 0) / pcts.length) : 0,
+      best: pcts.length ? Math.max(...pcts) : 0
+    };
+  }, [tests]);
+
+  const top = board?.slice(0, 5) ?? [];
+  const you = board?.find((r) => r.isYou);
+
+  const tiles = [
+    { label: t("auth.dash.tests"), value: String(stats.count), icon: CalendarDays },
+    { label: t("auth.dash.solved"), value: String(stats.solved), icon: Check },
+    { label: t("auth.dash.avg"), value: `${stats.avg}%`, icon: Sparkles },
+    { label: t("auth.dash.best"), value: `${stats.best}%`, icon: Trophy }
   ];
+
   return (
-    <aside className="relative overflow-hidden rounded-3xl border border-neon-pink/25 bg-gradient-to-br from-accent-50 via-white to-sky-50 p-6 pt-16 sm:p-8 sm:pt-20 dark:border-neon-violet/40 dark:from-ink-900 dark:via-ink-950 dark:to-ink-900">
-      {/* neon glow + rolling floor on dark */}
+    <aside className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 pt-16 shadow-soft sm:p-8 sm:pt-20 dark:border-ink-800 dark:bg-ink-900/60">
+      {/* a single quiet brand glow */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-neon-pink/15 blur-3xl dark:bg-neon-pink/25" />
-        <div className="absolute -bottom-16 -left-16 h-56 w-56 rounded-full bg-neon-cyan/15 blur-3xl dark:bg-neon-cyan/20" />
+        <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent-200/30 blur-3xl dark:bg-accent-800/25" />
         <div className="absolute inset-x-0 bottom-0 h-32 overflow-hidden">
-          <div className="retro-horizon !h-32 opacity-0 dark:opacity-100" />
+          <div className="retro-horizon !h-32 opacity-60" />
         </div>
       </div>
-      {/* Floating maths chips */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 select-none">
-        <span className="absolute right-6 top-6 rotate-6 rounded-xl border border-accent-200/70 bg-white/80 px-2.5 py-1 font-mono text-xs font-semibold text-accent-700 shadow-soft dark:border-ink-700 dark:bg-ink-900/80 dark:text-accent-300">
-          a² + b² = c²
-        </span>
-        <span className="absolute right-16 top-24 -rotate-6 rounded-xl border border-sky-200/70 bg-white/80 px-2.5 py-1 font-mono text-xs font-semibold text-sky-700 shadow-soft dark:border-ink-700 dark:bg-ink-900/80 dark:text-sky-300">
-          Σ 1/n²
-        </span>
-        <span className="absolute bottom-10 right-10 rotate-3 rounded-xl border border-amber-200/70 bg-white/80 px-2.5 py-1 font-mono text-xs font-semibold text-amber-700 shadow-soft dark:border-ink-700 dark:bg-ink-900/80 dark:text-amber-300">
-          √2 ∉ ℚ
-        </span>
-      </div>
 
-      <p className="eyebrow relative">{t("auth.eyebrow")}</p>
-      <h2 className="relative mt-2 max-w-[16ch] text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
-        {t("auth.how.title")}
+      <p className="eyebrow relative">{t("auth.dash.eyebrow")}</p>
+      <h2 className="relative mt-2 text-xl font-bold tracking-tight text-slate-900 dark:text-slate-50">
+        {t("auth.dash.title")}
       </h2>
 
-      <ul className="relative mt-6 space-y-3">
-        {points.map(({ icon: Icon, text }) => (
-          <li
-            key={text}
-            className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/70 p-3 shadow-soft backdrop-blur dark:border-ink-800/60 dark:bg-ink-900/60"
+      {/* ---- your numbers ---- */}
+      <div className="relative mt-5 grid grid-cols-2 gap-2.5 sm:grid-cols-4 lg:grid-cols-2">
+        {tiles.map(({ label, value, icon: Icon }) => (
+          <div
+            key={label}
+            className="rounded-xl border border-slate-200 bg-slate-50/70 p-3 dark:border-ink-800/70 dark:bg-ink-900/60"
           >
-            <span className="mt-0.5 grid h-8 w-8 shrink-0 place-items-center rounded-xl bg-accent-100 text-accent-700 dark:bg-accent-900/50 dark:text-accent-300">
-              <Icon className="h-4 w-4" />
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
+              <Icon size={12} className="text-accent-500" />
+              {label}
             </span>
-            <span className="text-sm leading-relaxed text-slate-700 dark:text-slate-200">{text}</span>
-          </li>
+            <p className="mt-1 font-mono text-xl font-bold text-ink-900 dark:text-white">{value}</p>
+          </div>
         ))}
-      </ul>
+      </div>
 
-      <p className="relative mt-6 flex items-center gap-1.5 text-xs font-medium text-slate-500 dark:text-slate-400">
-        <Sparkles className="h-3.5 w-3.5 text-accent-500" />
-        {t("misc.footerNote")}
-      </p>
+      {/* ---- your place on the board ---- */}
+      {you ? (
+        <p className="relative mt-3 inline-flex items-center gap-2 rounded-full border border-accent-500/30 bg-accent-500/10 px-3 py-1.5 text-xs font-semibold text-accent-700 dark:text-accent-300">
+          <UserRound size={13} />
+          {t("auth.dash.rank", { rank: you.rank, solved: you.correct })}
+        </p>
+      ) : (
+        <p className="relative mt-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50/70 px-3 py-1.5 text-xs font-medium text-slate-600 dark:border-ink-800/70 dark:bg-ink-900/60 dark:text-slate-300">
+          <ShieldCheck size={13} className="text-accent-500" />
+          {user ? t("auth.dash.notRanked") : t("auth.dash.join")}
+        </p>
+      )}
+
+      {/* ---- live slice of the public board ---- */}
+      <div className="relative mt-6">
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-slate-50">{t("auth.dash.board")}</h3>
+          <span className="chip border border-emerald-500/30 bg-emerald-500/10 text-emerald-700 dark:text-emerald-300">
+            {t("lb.public")}
+          </span>
+        </div>
+
+        {top.length === 0 ? (
+          <p className="mt-3 rounded-xl border border-slate-200 bg-slate-50/70 p-3 text-xs leading-relaxed text-slate-600 dark:border-ink-800/70 dark:bg-ink-900/60 dark:text-slate-400">
+            {t("auth.dash.empty")}
+          </p>
+        ) : (
+          <ol className="mt-3 space-y-1.5">
+            {top.map((row) => (
+              <li
+                key={`${row.rank}-${row.clientId}`}
+                className="flex items-center gap-3 rounded-lg border border-slate-200 bg-slate-50/70 px-3 py-2 dark:border-ink-800/70 dark:bg-ink-900/60"
+              >
+                <span className="w-5 shrink-0 font-mono text-xs font-bold text-slate-400 dark:text-slate-500">
+                  {row.rank}
+                </span>
+                <span className="min-w-0 flex-1 truncate text-sm font-medium text-slate-700 dark:text-slate-200">
+                  {row.name}
+                </span>
+                <span className="shrink-0 font-mono text-xs font-semibold text-accent-600 dark:text-accent-400">
+                  {row.correct}
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
+
+      <Link to="/leaderboard" className="btn-primary relative mt-6 w-full">
+        <Trophy size={15} />
+        {t("auth.dash.fullBoard")}
+      </Link>
     </aside>
   );
 }

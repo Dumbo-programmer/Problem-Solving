@@ -7,9 +7,10 @@
  * Fails loudly on any console error or blank render.
  */
 import puppeteer from "puppeteer-core";
+import { requireChrome } from "./chrome-path.mjs";
 
 const BASE = process.env.BASE_URL || "http://localhost:4173";
-const CHROME = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
+const CHROME = requireChrome();
 
 const errors = [];
 const results = [];
@@ -122,7 +123,11 @@ check("home frames practice tests as one part", /এর একটি অংশ �
 // The design pass added a contests + live-standings section and hero chips.
 check("home shows the contests section", /সাপ্তাহিক স্প্রিন্ট|weekly sprint/i.test(home) && /মাসিক চ্যালেঞ্জ|monthly challenge/i.test(home));
 check("home previews the live standings", /শীর্ষ সমাধানকারী|top solvers/i.test(home));
-check("home carries the hero feature chips", /সাইন-আপ ছাড়াই|no sign-up needed/i.test(home) && /সাথে সাথে উত্তর|instant answer/i.test(home));
+check(
+  "home carries the hero feature chips",
+  /দ্বিভাষিক: বাংলা ও ইংরেজি|Bilingual: Bangla & English/i.test(home) &&
+    /সাথে সাথে উত্তর|instant answer/i.test(home)
+);
 const homePodium = await page.evaluate(() => document.querySelectorAll("span,h3").length);
 check("home renders a rich element set", homePodium > 40, `${homePodium} text nodes`);
 // Theme pass: co-branded lockup (Prothom Alo above Gonit Ishkul) and the
@@ -251,10 +256,16 @@ check("scheduled tests gate signed-out visitors", gated(), page.url().replace(BA
 const gateText = await text();
 check("login gate explains why sign-in is needed", /সাইন ইন করুন|Sign in to continue/i.test(gateText));
 
-/* ---------- 9. leaderboard is gated for signed-out visitors ---------- */
+/* ---------- 9. leaderboard is public: anyone may read the board ---------- */
 await goto("/leaderboard");
 await new Promise((r) => setTimeout(r, 1200));
-check("leaderboard gates signed-out visitors", gated(), page.url().replace(BASE, ""));
+check("leaderboard is open to everyone", !gated(), page.url().replace(BASE, ""));
+const publicBoardText = await text();
+check(
+  "leaderboard invites signed-out visitors to join",
+  /বোর্ডে যোগ দিন|Join the board/i.test(publicBoardText),
+  publicBoardText.slice(0, 60)
+);
 
 /* ---------- 10. admin dashboard gates on a login form ---------- */
 await goto("/admin");
@@ -263,13 +274,22 @@ const adminText = await text();
 check("admin route shows the login gate", /অ্যাডমিন আইডি|Admin ID/i.test(adminText) && /পাসওয়ার্ড|Password/i.test(adminText));
 const hasPasswordField = await page.evaluate(() => Boolean(document.querySelector('input[type="password"]')));
 check("admin login has a password field", hasPasswordField);
+// The login card must tell the owner which credentials to use.
+check(
+  "admin login shows the default credentials",
+  /ডিফল্ট|Default/i.test(adminText) && /gonit-ishkul/.test(adminText) && /\badmin\b/.test(adminText)
+);
 
 /* ---------- 11. learner accounts: /login renders + account journey ---------- */
 await goto("/login");
 const loginText = await text();
 check("login page shows the sign-in form", /ইউজারনেম|Username/i.test(loginText) && /পাসওয়ার্ড|Password/i.test(loginText));
 check("login page offers account creation", /নতুন অ্যাকাউন্ট|Create account/i.test(loginText));
-check("login page explains what an account adds", /অ্যাকাউন্ট কেন|Why an account/i.test(loginText));
+check(
+  "login page previews a learner dashboard",
+  /ড্যাশবোর্ড|Dashboard/i.test(loginText) && /এক নজরে আপনার অগ্রগতি|Your progress, at a glance/i.test(loginText)
+);
+check("login page shows the public board", /সবার জন্য উন্মুক্ত|Open to everyone/i.test(loginText));
 
 await goto("/login?mode=signup");
 const signupText = await text();

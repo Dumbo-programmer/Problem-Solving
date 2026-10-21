@@ -34,7 +34,7 @@ export default function BrandLockup({ size = "sm", linked = true, className = ""
     <span className={`brand-lockup ${className}`}>
       {/* Prothom Alo — the publisher mark, on top. The wordmark is near-black
           in the source SVG, so dark mode swaps in a light-ink variant to keep
-          the brand legible on the retrowave backdrop. */}
+          the brand legible on the dark header. */}
       <span className={`inline-flex items-center ${dims.gap}`}>
         <img
           src="/prothom-alo.svg"
@@ -57,7 +57,7 @@ export default function BrandLockup({ size = "sm", linked = true, className = ""
       <img
         src="/logo-landscape.png"
         alt={t("brand.name")}
-        className={`${dims.gonit} w-auto object-contain drop-shadow-[0_2px_10px_rgba(124,58,237,0.35)]`}
+        className={`${dims.gonit} w-auto object-contain drop-shadow-[0_2px_8px_rgba(30,27,25,0.18)]`}
         loading="eager"
         decoding="async"
       />

@@ -71,7 +71,7 @@ export default function Results() {
   return (
     <div className="shell max-w-3xl py-10 lg:py-14">
       {/* ---- scorecard ---- */}
-      <div className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-lift dark:border-ink-800 dark:bg-ink-900/60 sm:p-8">
+      <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-lift dark:border-ink-800 dark:bg-ink-900/60 sm:p-8">
         <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent-400/20 blur-3xl dark:bg-accent-600/10" />
         <div className="relative">
           <p className="eyebrow">{t("result.title")}</p>

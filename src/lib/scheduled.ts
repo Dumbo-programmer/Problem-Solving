@@ -270,6 +270,46 @@ export function seedIds(bank: SeedProblem[], now = Date.now()): string[] {
 }
 
 /* ------------------------------------------------------------------ */
+/* What kind of attempt is this?                                        */
+/* ------------------------------------------------------------------ */
+
+/**
+ * How a stored attempt relates to the scheduled programme.
+ *
+ *   • `practice`  — the learner built the paper themselves (no scheduled id)
+ *   • `weekly`    — an attempt at the weekly sprint
+ *   • `monthly`   — an attempt at the monthly challenge
+ *   • `scheduled` — an attempt at some other published paper
+ */
+export type AttemptKind = "practice" | "weekly" | "monthly" | "scheduled";
+
+/**
+ * Classifies a past attempt.
+ *
+ * The scheduled-paper list is the source of truth; when a paper is missing
+ * from it (an old week, or a database that has moved on) the id scheme still
+ * gives the answer, because every seeded paper is `wk-YYYY-WW` or `mo-YYYY-MM`.
+ */
+export function attemptKind(
+  attempt: { scheduledTestId?: string },
+  papers: Pick<ScheduledTest, "id" | "kind">[] = []
+): AttemptKind {
+  const id = attempt.scheduledTestId;
+  if (!id) return "practice";
+
+  const paper = papers.find((p) => p.id === id);
+  if (paper) {
+    if (paper.kind === "WEEKLY") return "weekly";
+    if (paper.kind === "MONTHLY") return "monthly";
+    return "scheduled";
+  }
+
+  if (id.startsWith("wk-")) return "weekly";
+  if (id.startsWith("mo-")) return "monthly";
+  return "scheduled";
+}
+
+/* ------------------------------------------------------------------ */
 /* Demo (dummy) leaderboard entries                                    */
 /* ------------------------------------------------------------------ */
 

@@ -1,8 +1,8 @@
 # গণিত ইশকুল প্রবলেম সলভিং · Gonit Ishkul Problem Solving
 
-A free, bilingual (বাংলা / English) **problem solving** platform for Bangladeshi
-school and olympiad students — modelled on the maths-education tradition of
-*Prothom Alo Gonit Ishkul*.
+The **official** bilingual (বাংলা / English) problem-solving platform of
+*Prothom Alo's Gonit Ishkul* — built for Bangladeshi school and olympiad
+students.
 
 The site is problem-solving themed first: explore the **problem bank**, solve
 problems and check them instantly, and read a full worked solution in Bangla or
@@ -22,7 +22,8 @@ you can revisit your mistakes later.
 | ⏱️ **Timed runner** | Live countdown, question grid, per-question navigation, and automatic submission when time runs out. |
 | ✅ **Instant grading** | Forgiving answer parsing (`5,050`, `5050`, `2/4`, `0.5` all work), exact rational comparison, and a full solution for every problem. |
 | 🕘 **Past practice tests** | Every paper is saved with its answers, score, grade band and review — synced to the cloud when available. |
-| 🌗 **Dark / light theme** | Remembered per browser. |
+| 🏆 **Public leaderboard** | The board is open to everyone — sign in to put your name, score and rank on it. |
+| 🌗 **Dark / light theme** | Remembered per browser — the day edition (warm paper, serif headlines) is the default. |
 | 🌏 **Bangla + English** | Every string, problem statement and solution exists in both languages. |
 | 📴 **Works offline** | The full bank ships with the site, so tests keep working with no network at all. |
 
@@ -38,7 +39,7 @@ you can revisit your mistakes later.
 ## Tech stack
 
 - **React 18 + Vite + TypeScript** — static-first SPA, deploys anywhere.
-- **Tailwind CSS** — design system with a light & dark theme.
+- **Tailwind CSS** — design system with a light & dark theme, on Prothom Alo's brand red.
 - **KaTeX** — fast client-side maths rendering.
 - **Netlify Functions** — a single serverless API (`/.netlify/functions/api`).
 - **Supabase (PostgreSQL)** — stores the problem bank and your test history.
@@ -149,6 +150,28 @@ If you prefer the connection pooler (recommended for serverless), use the
 
 **Without any configuration the site still works completely** — problems come
 from the bundled bank and tests are stored in the browser.
+
+---
+
+## Staff access (the admin dashboard)
+
+The staff dashboard lives at **`/admin`** and opens with an **ID + password**
+pair — not a learner account.
+
+| | Default value | Environment variable |
+| --- | --- | --- |
+| Admin ID | `admin` | `ADMIN_ID` |
+| Admin password | `gonit-ishkul` | `ADMIN_PASSWORD` |
+| Session signing secret | derived from the password | `ADMIN_SECRET` (optional) |
+
+The defaults keep a zero-config deployment usable, so the sign-in screen shows
+them in a box of their own (see `.env.example`). Set `ADMIN_ID` and
+`ADMIN_PASSWORD` in Netlify before going live — once they are overridden the
+screen stops displaying the defaults and asks for the custom ones instead.
+
+`ADMIN_SECRET` signs the 12-hour staff session token. Leave it unset and the
+signature is derived from `ADMIN_PASSWORD`, so changing the password also
+invalidates any staff session that is already open.
 
 ---
 

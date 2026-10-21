@@ -434,6 +434,16 @@ export function logoutAdmin(): void {
   clearAdminToken();
 }
 
+/**
+ * Whether the deployment still runs on the documented default admin
+ * credentials. Booleans only — a configured secret is never sent to the
+ * browser.
+ */
+export async function adminCredentialStatus(): Promise<{ id: boolean; password: boolean }> {
+  const data = await request<{ id: boolean; password: boolean }>("/admin/credentials");
+  return { id: data.id !== false, password: data.password !== false };
+}
+
 /** Authenticated call to an /admin/* route (clears the session on 401). */
 export async function adminFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const token = readAdminToken();
