@@ -27,6 +27,7 @@ export default function ProblemCard({
   const [showSolution, setShowSolution] = useState(false);
 
   const check = () => {
+    if (!problem.answer) return;
     const res = gradeAnswer(given, problem.answer);
     setVerdict(res.correct ? "correct" : "wrong");
   };
@@ -71,7 +72,7 @@ export default function ProblemCard({
             {t("archive.from")}: {problem.source}
           </div>
 
-          {/* Instant-check box */}
+          {problem.answer && problem.solution ? (
           <div className="mt-4 rounded-xl border border-dashed border-slate-300 p-3">
             <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wide text-slate-500">
               {t("action.check")}
@@ -124,6 +125,11 @@ export default function ProblemCard({
               </button>
             )}
           </div>
+          ) : (
+            <p className="mt-4 rounded-xl border border-dashed border-slate-300 px-3 py-2 text-xs text-slate-500">
+              {t("archive.answerPending")}
+            </p>
+          )}
 
           {action && <div className="mt-4">{action}</div>}
         </div>

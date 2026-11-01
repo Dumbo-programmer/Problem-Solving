@@ -1,8 +1,8 @@
 /**
  * Problem bank — the heart of Gonit Ishkul Problem Solving.
  *
- * Every problem is auto-gradable (numeric answer), so a practice test can be
- * scored the instant it is submitted. Each entry is bilingual (Bangla + English).
+ * The core bank is auto-gradable (numeric answer), while archive-only
+ * questions can be browsed before their answer keys are available. Each entry is bilingual (Bangla + English).
  *
  * Taxonomy:
  *   Type       : OLYMPIAD | ACADEMICS
@@ -37,9 +37,11 @@ export interface Problem {
   difficulty: ProblemDifficulty;
   title: Localized;
   statement: Localized;
-  /** Canonical answer. Numeric (integers, decimals or fractions such as "3/4"). */
+  /** Canonical answer. Empty for archive-only questions without an answer key. */
   answer: string;
   solution: Localized;
+  /** True when a question is browsable but not yet suitable for grading. */
+  archiveOnly?: boolean;
   source: string;
 }
 

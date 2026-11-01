@@ -48,10 +48,16 @@ for (const file of files) {
   for (const [i, p] of parsed.entries()) {
     const where = `${file}[${i}]`;
     const need = ["id", "slug", "type", "topic", "category", "difficulty", "answer", "source"];
-    for (const key of need) if (!p?.[key]) errors.push(`${where}: missing "${key}"`);
-    for (const key of ["title", "statement", "solution"]) {
+    for (const key of need) {
+      if (p?.archiveOnly && key === "answer") continue;
+      if (!p?.[key]) errors.push(`${where}: missing "${key}"`);
+    }
+    for (const key of ["title", "statement", ...(p?.archiveOnly ? [] : ["solution"])]) {
       if (!p?.[key] || typeof p[key].en !== "string" || !p[key].en.trim()) errors.push(`${where}: ${key}.en missing`);
       if (!p?.[key] || typeof p[key].bn !== "string" || !p[key].bn.trim()) errors.push(`${where}: ${key}.bn missing`);
+    }
+    if (!p?.archiveOnly && (!p.solution || typeof p.solution.en !== "string" || typeof p.solution.bn !== "string")) {
+      errors.push(`${where}: solution is required when answer is present`);
     }
     if (p?.type && !TYPES.has(p.type)) errors.push(`${where}: bad type "${p.type}"`);
     if (p?.topic && !TOPICS.has(p.topic)) errors.push(`${where}: bad topic "${p.topic}"`);

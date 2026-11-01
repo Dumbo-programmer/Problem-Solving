@@ -14,6 +14,9 @@ export interface SeedProblem {
   id: string;
   difficulty: string;
   topic: string;
+  answer?: string;
+  solution?: Localized;
+  archiveOnly?: boolean;
 }
 
 const BN_DIGITS = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
@@ -212,8 +215,9 @@ export function buildScheduledSeeds(
   opts: { exclude?: Iterable<string> } = {}
 ): ScheduledTest[] {
   // Weekly papers stay approachable (no OLYMPIAD); monthly pulls the full bank.
-  const weeklyPool = bank.filter((p) => p.difficulty !== "OLYMPIAD");
-  const monthlyPool = bank;
+  const gradable = bank.filter((p) => !p.archiveOnly);
+  const weeklyPool = gradable.filter((p) => p.difficulty !== "OLYMPIAD");
+  const monthlyPool = gradable;
   // Problems already claimed (by earlier seeds in this pass, and — when the
   // caller passes them — by papers sitting in the database from past weeks).
   const used = new Set<string>(opts.exclude ?? []);

@@ -13,7 +13,7 @@ import { buildDemoEntries, buildScheduledSeeds } from "../../../src/lib/schedule
  *                 so the API — and therefore the site — keeps working anywhere,
  *                 including local `npm run dev:api` and smoke runs).
  *
- * Both are seeded from the same bundled sources (the 144-problem bank, the
+ * Both are seeded from the same bundled sources (the graded problem bank, the
  * calendar-derived weekly/monthly papers and the demo leaderboard entries), so
  * the two paths serve near-identical data.
  */
@@ -320,7 +320,7 @@ export class PgStore implements Store {
     // 1. Problem bank: insert only ids we don't have (never clobbers edits).
     const have = await this.client.query("select id from problems");
     const known = new Set(have.rows.map((r) => String(r.id)));
-    const missing = PROBLEMS.filter((p) => !known.has(p.id));
+    const missing = PROBLEMS.filter((p) => !p.archiveOnly && !known.has(p.id));
     for (const p of missing) await this.insertProblem(p);
 
     // 2. Calendar papers: insert any week/month not present yet. Problems

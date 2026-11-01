@@ -35,7 +35,8 @@ export default function Practice() {
 
   const { problems: filtered, loading, counts } = useProblemBank(facetsToFilters(facets));
   const pool = useMemo(
-    () => filterProblems(filtered, { ...facetsToFilters(facets), search: facets.search }),
+    () =>
+      filterProblems(filtered, { ...facetsToFilters(facets), search: facets.search }).filter((p) => !p.archiveOnly),
     [filtered, facets]
   );
 

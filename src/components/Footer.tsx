@@ -13,7 +13,12 @@ import type { ProblemTopic } from "../lib/types";
 export default function Footer() {
   const { t, L } = useI18n();
   const year = new Date().getFullYear();
-  const topics: ProblemTopic[] = ["NUMBER_THEORY", "ALGEBRA", "GEOMETRY", "COMBINATORICS", "INEQUALITY", "PROBABILITY"];
+  const topics: { topic: ProblemTopic; href: string }[] = [
+    { topic: "NUMBER_THEORY", href: "https://www.prothomalo.com/collection/number-theory-math-school" },
+    { topic: "GEOMETRY", href: "https://www.prothomalo.com/collection/number-theory-math-school" },
+    { topic: "ALGEBRA", href: "https://www.prothomalo.com/collection/algebra-math-school" },
+    { topic: "COMBINATORICS", href: "https://www.prothomalo.com/collection/combinatorics-math-school" }
+  ];
 
   const stats = [
     { value: PROBLEMS.length, label: t("footer.statProblems") },
@@ -53,11 +58,11 @@ export default function Footer() {
             <BookOpen size={13} /> {t("footer.explore")}
           </h3>
           <ul className="mt-4 space-y-2.5">
-            {topics.map((topic) => (
+            {topics.map(({ topic, href }) => (
               <li key={topic}>
-                <Link to={`/problems?topic=${topic}`} className={linkClass}>
+                <a href={href} target="_blank" rel="noopener noreferrer" className={linkClass}>
                   {L(TOPIC_LABELS[topic])}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

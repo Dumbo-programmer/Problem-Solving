@@ -135,7 +135,12 @@ export async function fetchProblems(filters: Partial<TestFilters> = {}): Promise
   try {
     const data = await request<{ problems: Problem[] }>(`/problems${qs(filters)}`);
     if (Array.isArray(data.problems) && data.problems.length > 0) {
-      return { problems: data.problems, source: "cloud" };
+      // The database intentionally stores only graded problems; supplement it
+      // with archive-only questions bundled in the client.
+      const merged = new Map<string, Problem>();
+      for (const problem of filterLocal(filters)) merged.set(problem.id, problem);
+      for (const problem of data.problems) merged.set(problem.id, problem);
+      return { problems: [...merged.values()], source: "cloud" };
     }
     // An empty cloud result is legitimate but suspicious — prefer the bundle.
     return { problems: filterLocal(filters), source: "local" };

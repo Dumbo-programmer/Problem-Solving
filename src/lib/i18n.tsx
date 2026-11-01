@@ -199,6 +199,10 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "archive.correct": { en: "Correct!", bn: "সঠিক!" },
   "archive.wrong": { en: "Not quite — try again.", bn: "একটু ভুল — আবার চেষ্টা করুন।" },
   "archive.from": { en: "Source", bn: "উৎস" },
+  "archive.answerPending": {
+    en: "Answer key and worked solution are not available for this archive question yet.",
+    bn: "এই আর্কাইভ প্রশ্নের উত্তর ও পূর্ণ সমাধান এখনও যোগ করা হয়নি।"
+  },
 
   /* ---- home sections ---- */
   "home.howEyebrow": { en: "Problem solving", bn: "সমস্যা সমাধান" },

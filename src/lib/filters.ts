@@ -72,8 +72,9 @@ export function seededShuffle<T>(items: T[], seed: number): T[] {
  * `count`, trying to keep an even spread across difficulties when possible.
  */
 export function pickProblems(pool: Problem[], count: number, seed = Date.now()): Problem[] {
-  if (pool.length <= count) return seededShuffle(pool, seed);
-  const shuffled = seededShuffle(pool, seed);
+  const gradable = pool.filter((p) => !p.archiveOnly);
+  if (gradable.length <= count) return seededShuffle(gradable, seed);
+  const shuffled = seededShuffle(gradable, seed);
   const byDiff = new Map<ProblemDifficulty, Problem[]>();
   for (const p of shuffled) {
     const list = byDiff.get(p.difficulty) ?? [];
