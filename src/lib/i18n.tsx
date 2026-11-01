@@ -34,8 +34,8 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "Every maths problem is a new adventure. Across four levels, from primary to higher secondary, selected olympiad and academic problems are arranged in four topics, in both Bangla and English. Choose problems your way, solve them, then check your work instantly with a full step-by-step solution. Want to test your preparation? Sit down for a timed practice test.",
     bn: "গণিতের প্রতিটি সমস্যাই একটি নতুন অ্যাডভেঞ্চার। প্রাথমিক থেকে উচ্চমাধ্যমিক পর্যন্ত চারটি স্তরে, চারটি বিষয়ে সাজানো আছে বাছাই করা অলিম্পিয়াড ও একাডেমিক সমস্যা, বাংলা ও ইংরেজি দুই ভাষাতেই। নিজের পছন্দ অনুযায়ী সমস্যা বেছে নেও, সমাধান কর, তারপর সঙ্গে সঙ্গে মিলিয়ে নেও ধাপে ধাপে পূর্ণ সমাধান। প্রস্তুতি যাচাই করতে চাইলে সময় বেঁধে বসে পড় একটি প্র্যাকটিস টেস্টে।"
   },
-  "cta.browseProblems": { en: "Browse the problem bank", bn: "সমস্যার মজুদ দেখুন" },
-  "cta.takeTest": { en: "Take a practice test", bn: "প্র্যাকটিস টেস্ট দিন" },
+  "cta.browseProblems": { en: "Browse the problem bank", bn: "সমস্যার মজুদ দেখো" },
+  "cta.takeTest": { en: "Take a practice test", bn: "প্র্যাকটিস টেস্ট দাও" },
   "hero.statProblems": { en: "Problems in the bank", bn: "সমস্যার মজুদ" },
   "hero.statTopics": { en: "Topics covered", bn: "টপিক" },
   "hero.statLevels": { en: "Levels, Primary → HSC", bn: "স্তর, প্রাথমিক → উচ্চ মাধ্যমিক" },
@@ -46,25 +46,25 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "hero.chip4": { en: "Works offline", bn: "অফলাইনেও চলে" },
 
   /* ---- generic actions ---- */
-  "action.start": { en: "Start test", bn: "টেস্ট শুরু করুন" },
+  "action.start": { en: "Start test", bn: "টেস্ট শুরু করো" },
   "action.next": { en: "Next", bn: "পরবর্তী" },
   "action.prev": { en: "Previous", bn: "পূর্ববর্তী" },
-  "action.submit": { en: "Submit test", bn: "টেস্ট জমা দিন" },
-  "action.retry": { en: "Try again", bn: "আবার চেষ্টা করুন" },
-  "action.viewResults": { en: "View results", bn: "ফলাফল দেখুন" },
+  "action.submit": { en: "Submit test", bn: "টেস্ট জমা দাও" },
+  "action.retry": { en: "Try again", bn: "আবার চেষ্টা করো" },
+  "action.viewResults": { en: "View results", bn: "ফলাফল দেখো" },
   "action.back": { en: "Go back", bn: "ফিরে যান" },
   "action.clearAll": { en: "Reset", bn: "রিসেট" },
   "action.select": { en: "Select", bn: "নির্বাচন" },
   "action.selectAll": { en: "Select all", bn: "সব নির্বাচন" },
   "action.deselectAll": { en: "Clear selection", bn: "নির্বাচন মুছুন" },
-  "action.seeSolution": { en: "See solution", bn: "সমাধান দেখুন" },
+  "action.seeSolution": { en: "See solution", bn: "সমাধান দেখো" },
   "action.hideSolution": { en: "Hide solution", bn: "সমাধান লুকান" },
-  "action.check": { en: "Check answer", bn: "উত্তর যাচাই করুন" },
+  "action.check": { en: "Check answer", bn: "উত্তর যাচাই করো" },
 
   /* ---- filters ---- */
-  "filter.title": { en: "Filter problems", bn: "সমস্যা ফিল্টার করুন" },
+  "filter.title": { en: "Filter problems", bn: "সমস্যা ফিল্টার করো" },
   "footer.quickLinks": { en: "Quick links", bn: "দ্রুত লিংক" },
-  "footer.explore": { en: "Explore", bn: "দেখুন" },
+  "footer.explore": { en: "Explore", bn: "দেখো" },
   "footer.compete": { en: "Compete", bn: "প্রতিযোগিতা" },
   "footer.account": { en: "Account", bn: "অ্যাকাউন্ট" },
   "footer.tagline": {
@@ -93,17 +93,17 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "filter.any": { en: "Any", bn: "যেকোনো" },
   "filter.matching": { en: "matching problems", bn: "মিল থাকা সমস্যা" },
   "filter.none": { en: "No problems match these filters.", bn: "এই ফিল্টারে কোনো সমস্যা মেলে নি।" },
-  "filter.noneHint": { en: "Try widening the topic or difficulty selection.", bn: "টপিক বা কঠিনতার নির্বাচন একটু বাড়িয়ে দেখুন।" },
+  "filter.noneHint": { en: "Try widening the topic or difficulty selection.", bn: "টপিক বা কঠিনতার নির্বাচন একটু বাড়িয়ে দেখো।" },
 
   /* ---- builder ---- */
   "builder.title": { en: "Practice test builder", bn: "প্র্যাকটিস টেস্ট বিল্ডার" },
   "builder.lede": {
     en: "Pick what you want to be tested on, choose how many questions and how long you get — then start.",
-    bn: "কী নিয়ে পরীক্ষা হবে বেছে নিন, কটি প্রশ্ন ও কতক্ষণ সময় লাগবে ঠিক করুন — তারপর শুরু করুন।"
+    bn: "কী নিয়ে পরীক্ষা হবে বেছে নাও, কটি প্রশ্ন ও কতক্ষণ সময় লাগবে ঠিক করো — তারপর শুরু করো।"
   },
-  "builder.step1": { en: "1 · Choose the syllabus", bn: "১ · সিলেবাস বেছে নিন" },
-  "builder.step2": { en: "2 · Pick your problems", bn: "২ · সমস্যা বেছে নিন" },
-  "builder.step3": { en: "3 · Set the timer", bn: "৩ · টাইমার সেট করুন" },
+  "builder.step1": { en: "1 · Choose the syllabus", bn: "১ · সিলেবাস বেছে নাও" },
+  "builder.step2": { en: "2 · Pick your problems", bn: "২ · সমস্যা বেছে নাও" },
+  "builder.step3": { en: "3 · Set the timer", bn: "৩ · টাইমার সেট করো" },
   "builder.count": { en: "Number of questions", bn: "প্রশ্নের সংখ্যা" },
   "builder.duration": { en: "Time limit", bn: "সময়সীমা" },
   "builder.minutes": { en: "minutes", bn: "মিনিট" },
@@ -111,64 +111,64 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "builder.perProblem": { en: "≈ {n} min per problem", bn: "≈ প্রতি সমস্যা {n} মিনিট" },
   "builder.pool": { en: "Available pool", bn: "মজুদ" },
   "builder.selected": { en: "selected", bn: "নির্বাচিত" },
-  "builder.autoPick": { en: "Auto-pick for me", bn: "নিজে থেকে বেছে দিন" },
+  "builder.autoPick": { en: "Auto-pick for me", bn: "নিজে থেকে বেছে নাও" },
   "builder.manualPick": { en: "I'll choose", bn: "আমি নিজে বাছব" },
-  "builder.randomSeed": { en: "Shuffle", bn: "এলোমেলো করুন" },
+  "builder.randomSeed": { en: "Shuffle", bn: "এলোমেলো করো" },
   "builder.ready": { en: "Ready to start", bn: "শুরু করতে প্রস্তুত" },
-  "builder.needProblems": { en: "Select at least one problem to begin.", bn: "শুরু করতে অন্তত একটি সমস্যা নির্বাচন করুন।" },
-  "builder.needTime": { en: "Set a time limit first.", bn: "আগে একটি সময়সীমা দিন।" },
-  "builder.confirm": { en: "Start the test", bn: "টেস্ট শুরু করুন" },
+  "builder.needProblems": { en: "Select at least one problem to begin.", bn: "শুরু করতে অন্তত একটি সমস্যা নির্বাচন করো।" },
+  "builder.needTime": { en: "Set a time limit first.", bn: "আগে একটি সময়সীমা দাও।" },
+  "builder.confirm": { en: "Start the test", bn: "টেস্ট শুরু করো" },
 
   /* ---- runner ---- */
   "runner.question": { en: "Question", bn: "প্রশ্ন" },
   "runner.of": { en: "of", bn: "এর মধ্যে" },
   "runner.remaining": { en: "Remaining", bn: "বাকি" },
   "runner.timeUp": { en: "Time's up!", bn: "সময় শেষ!" },
-  "runner.answerPlaceholder": { en: "Type your answer…", bn: "উত্তর লিখুন…" },
+  "runner.answerPlaceholder": { en: "Type your answer…", bn: "উত্তর লেখো…" },
   "runner.answered": { en: "answered", bn: "উত্তর দেওয়া হয়েছে" },
   "runner.unanswered": { en: "left blank", bn: "খালি" },
   "runner.progress": { en: "Progress", bn: "অগ্রগতি" },
-  "runner.confirmSubmit": { en: "Submit the test now? You can't change answers afterwards.", bn: "এখনই টেস্ট জমা দেবেন? এরপর উত্তর বদলানো যাবে না।" },
-  "runner.autoSubmitNotice": { en: "Time ran out — your paper was submitted automatically.", bn: "সময় শেষ হয়ে গেছে — আপনার কাগজ স্বয়ংক্রিয়ভাবে জমা হয়ে গেছে।" },
+  "runner.confirmSubmit": { en: "Submit the test now? You can't change answers afterwards.", bn: "এখনই টেস্ট জমা দেবে? এরপর উত্তর বদলানো যাবে না।" },
+  "runner.autoSubmitNotice": { en: "Time ran out — your paper was submitted automatically.", bn: "সময় শেষ হয়ে গেছে — তোমার কাগজ স্বয়ংক্রিয়ভাবে জমা হয়ে গেছে।" },
   "runner.notFound": { en: "We couldn't find this test.", bn: "এই টেস্টটি খুঁজে পাওয়া যায়নি।" },
   "runner.notFoundHint": {
     en: "It may have been deleted or opened in a different browser. Build a new one to get started.",
-    bn: "সম্ভবত এটি মুছে ফেলা হয়েছে বা অন্য ব্রাউজারে খোলা হয়েছে। নতুন একটি টেস্ট তৈরি করে শুরু করুন।"
+    bn: "সম্ভবত এটি মুছে ফেলা হয়েছে বা অন্য ব্রাউজারে খোলা হয়েছে। নতুন একটি টেস্ট তৈরি করে শুরু করো।"
   },
   "runner.answerKindNumber": { en: "number", bn: "সংখ্যা" },
   "runner.answerKindFraction": { en: "fraction (a/b)", bn: "ভগ্নাংশ (a/b)" },
 
   /* ---- results ---- */
-  "result.title": { en: "Your result", bn: "আপনার ফলাফল" },
+  "result.title": { en: "Your result", bn: "তোমার ফলাফল" },
   "result.score": { en: "Score", bn: "স্কোর" },
   "result.correct": { en: "Correct", bn: "সঠিক" },
   "result.incorrect": { en: "Incorrect", bn: "ভুল" },
   "result.skipped": { en: "Skipped", bn: "বাদ পড়েছে" },
   "result.timeTaken": { en: "Time taken", bn: "ব্যয়িত সময়" },
   "result.grade": { en: "Grade", bn: "গ্রেড" },
-  "result.review": { en: "Review every problem", bn: "প্রতিটি সমস্যা দেখুন" },
-  "result.yourAnswer": { en: "Your answer", bn: "আপনার উত্তর" },
+  "result.review": { en: "Review every problem", bn: "প্রতিটি সমস্যা দেখো" },
+  "result.yourAnswer": { en: "Your answer", bn: "তোমার উত্তর" },
   "result.correctAnswer": { en: "Correct answer", bn: "সঠিক উত্তর" },
   "result.explanation": { en: "Solution", bn: "সমাধান" },
-  "result.saveNotice": { en: "Saved to your Past Practice Tests.", bn: "আপনার পূর্ববর্তী প্র্যাকটিস টেস্টে সংরক্ষিত হয়েছে।" },
-  "result.newTest": { en: "Build another test", bn: "আরেকটি টেস্ট তৈরি করুন" },
-  "result.backToPast": { en: "See past tests", bn: "পূর্ববর্তী টেস্ট দেখুন" },
+  "result.saveNotice": { en: "Saved to your Past Practice Tests.", bn: "তোমার পূর্ববর্তী প্র্যাকটিস টেস্টে সংরক্ষিত হয়েছে।" },
+  "result.newTest": { en: "Build another test", bn: "আরেকটি টেস্ট তৈরি করো" },
+  "result.backToPast": { en: "See past tests", bn: "পূর্ববর্তী টেস্ট দেখো" },
 
   /* ---- past tests ---- */
   "past.title": { en: "Past practice tests", bn: "পূর্ববর্তী প্র্যাকটিস টেস্ট" },
   "past.lede": {
     en: "Every test you've sat in this browser — with the full answer review kept safe.",
-    bn: "এই ব্রাউজারে আপনি যেসব টেস্ট দিয়েছেন তার সবই এখানে — পুরো উত্তর রিভিউ সহ।"
+    bn: "এই ব্রাউজারে তুমি যেসব টেস্ট দিয়েছ তার সবই এখানে — পুরো উত্তর রিভিউ সহ।"
   },
   "past.empty": { en: "No tests yet.", bn: "এখনো কোনো টেস্ট নেই।" },
-  "past.emptyHint": { en: "Build your first practice test and it will appear here automatically.", bn: "আপনার প্রথম প্র্যাকটিস টেস্ট তৈরি করুন — এখানে নিজে থেকেই দেখা যাবে।" },
-  "past.create": { en: "Create your first test", bn: "প্রথম টেস্ট তৈরি করুন" },
-  "past.taken": { en: "Taken on", bn: "যখন দিয়েছেন" },
+  "past.emptyHint": { en: "Build your first practice test and it will appear here automatically.", bn: "তোমার প্রথম প্র্যাকটিস টেস্ট তৈরি করো — এখানে নিজে থেকেই দেখা যাবে।" },
+  "past.create": { en: "Create your first test", bn: "প্রথম টেস্ট তৈরি করো" },
+  "past.taken": { en: "Taken on", bn: "যখন দিয়েছ" },
   "past.duration": { en: "Duration", bn: "সময়কাল" },
   "past.questions": { en: "Questions", bn: "প্রশ্ন" },
-  "past.delete": { en: "Delete", bn: "মুছুন" },
-  "past.deleteConfirm": { en: "Delete this test permanently?", bn: "এই টেস্ট স্থায়ীভাবে মুছে ফেলবেন?" },
-  "past.summary": { en: "Your summary", bn: "আপনার সারসংক্ষেপ" },
+  "past.delete": { en: "Delete", bn: "মোছো" },
+  "past.deleteConfirm": { en: "Delete this test permanently?", bn: "এই টেস্ট স্থায়ীভাবে মুছে ফেলবে?" },
+  "past.summary": { en: "Your summary", bn: "তোমার সারসংক্ষেপ" },
   "past.totalTests": { en: "Tests taken", bn: "দেওয়া টেস্ট" },
   "past.avgScore": { en: "Average score", bn: "গড় স্কোর" },
   "past.bestScore": { en: "Best score", bn: "সর্বোচ্চ স্কোর" },
@@ -177,10 +177,10 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "past.localOnly": { en: "On this device", bn: "এই ডিভাইসে" },
   "past.statusSubmitted": { en: "Submitted", bn: "জমা হয়েছে" },
   "past.statusInProgress": { en: "In progress", bn: "চলছে" },
-  "past.source.practice": { en: "Built by you", bn: "আপনার তৈরি" },
+  "past.source.practice": { en: "Built by you", bn: "তোমার তৈরি" },
   "past.source.scheduled": { en: "Scheduled paper", bn: "নির্ধারিত পত্র" },
   "past.filter.all": { en: "All", bn: "সব" },
-  "past.filter.practice": { en: "Built by you", bn: "আপনার তৈরি" },
+  "past.filter.practice": { en: "Built by you", bn: "তোমার তৈরি" },
   "past.filterEmpty": {
     en: "Nothing in this slice of the archive yet.",
     bn: "এই অংশে এখনো কিছু নেই।"
@@ -190,14 +190,14 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "archive.title": { en: "Problem archive", bn: "সমস্যার সংগ্রহ" },
   "archive.lede": {
     en: "Every problem in the bank, filterable by type, topic, category and difficulty.",
-    bn: "মজুদের প্রতিটি সমস্যা — টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা অনুযায়ী ফিল্টার করুন।"
+    bn: "মজুদের প্রতিটি সমস্যা — টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা অনুযায়ী ফিল্টার করো।"
   },
-  "archive.addToTest": { en: "Add to a test", bn: "টেস্টে যোগ করুন" },
-  "archive.showStatement": { en: "Show statement", bn: "প্রশ্ন দেখুন" },
-  "archive.hideStatement": { en: "Hide statement", bn: "প্রশ্ন লুকান" },
-  "archive.tryIt": { en: "Try it now", bn: "এখনই চেষ্টা করুন" },
+  "archive.addToTest": { en: "Add to a test", bn: "টেস্টে যোগ করো" },
+  "archive.showStatement": { en: "Show statement", bn: "প্রশ্ন দেখো" },
+  "archive.hideStatement": { en: "Hide statement", bn: "প্রশ্ন লুকাও" },
+  "archive.tryIt": { en: "Try it now", bn: "এখনই চেষ্টা করো" },
   "archive.correct": { en: "Correct!", bn: "সঠিক!" },
-  "archive.wrong": { en: "Not quite — try again.", bn: "একটু ভুল — আবার চেষ্টা করুন।" },
+  "archive.wrong": { en: "Not quite — try again.", bn: "একটু ভুল — আবার চেষ্টা করো।" },
   "archive.from": { en: "Source", bn: "উৎস" },
   "archive.answerPending": {
     en: "Answer key and worked solution are not available for this archive question yet.",
@@ -207,25 +207,25 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   /* ---- home sections ---- */
   "home.howEyebrow": { en: "Problem solving", bn: "সমস্যা সমাধান" },
   "home.howTitle": { en: "How it works", bn: "কীভাবে কাজ করে" },
-  "home.how1t": { en: "Choose your level & topics", bn: "স্তর ও টপিক বেছে নিন" },
+  "home.how1t": { en: "Choose your level & topics", bn: "স্তর ও টপিক বেছে নাও" },
   "home.how1d": {
     en: "Narrow 140+ problems down by type, topic, category and difficulty until you have exactly what you want to solve.",
-    bn: "১৪০+ সমস্যার মধ্যে টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা দিয়ে ফিল্টার করে ঠিক যা সমাধান করতে চান তা বেছে নিন।"
+    bn: "১৪০+ সমস্যার মধ্যে টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা দিয়ে ফিল্টার করে ঠিক যা সমাধান করতে চাও তা বেছে নাও।"
   },
   "home.how2t": { en: "Solve and check instantly", bn: "সমাধান করে সাথে সাথে যাচাই" },
   "home.how2d": {
     en: "Every problem is auto-gradable, so you know the moment your answer is right — then read the full solution in Bangla or English.",
-    bn: "প্রতিটি সমস্যা স্বয়ংক্রিয়ভাবে যাচাই হয়, তাই উত্তর ঠিক হয়েছে কি না জানা যায় সঙ্গে সঙ্গে — এরপর বাংলা বা ইংরেজিতে পুরো সমাধানটি পড়ুন।"
+    bn: "প্রতিটি সমস্যা স্বয়ংক্রিয়ভাবে যাচাই হয়, তাই উত্তর ঠিক হয়েছে কি না জানা যায় সঙ্গে সঙ্গে — এরপর বাংলা বা ইংরেজিতে পুরো সমাধানটি পড়ো।"
   },
-  "home.how3t": { en: "Sit a timed practice test", bn: "সময় ধরে প্র্যাকটিস টেস্ট দিন" },
+  "home.how3t": { en: "Sit a timed practice test", bn: "সময় ধরে প্র্যাকটিস টেস্ট দাও" },
   "home.how3d": {
     en: "When you're ready, gather your selection into a full paper — pick a question count, run the clock, and get graded the second you submit.",
-    bn: "প্রস্তুত হলে নির্বাচিত সমস্যা দিয়ে পুরো একটি কাগজ করুন — প্রশ্নের সংখ্যা ঠিক করুন, ঘড়ি চালু করুন, আর জমা দেওয়ার সাথে সাথেই গ্রেড পান।"
+    bn: "প্রস্তুত হলে নির্বাচিত সমস্যা দিয়ে পুরো একটি কাগজ করো — প্রশ্নের সংখ্যা ঠিক করো, ঘড়ি চালু করো, আর জমা দেওয়ার সাথে সাথেই গ্রেড পাও।"
   },
-  "home.how4t": { en: "Track your progress", bn: "অগ্রগতি দেখে নিন" },
+  "home.how4t": { en: "Track your progress", bn: "অগ্রগতি দেখে নাও" },
   "home.how4d": {
     en: "Each test is filed in your Past Practice Tests with every answer and solution, so you can revisit your mistakes whenever you like.",
-    bn: "প্রতিটি টেস্ট সব উত্তর ও সমাধান সহ পূর্ববর্তী প্র্যাকটিস টেস্টে জমা থাকে, তাই ভুলগুলো যেকোনো সময় দেখে নিতে পারবেন।"
+    bn: "প্রতিটি টেস্ট সব উত্তর ও সমাধান সহ পূর্ববর্তী প্র্যাকটিস টেস্টে জমা থাকে, তাই ভুলগুলো যেকোনো সময় দেখে নিতে পারবে।"
   },
 
   /* ---- platform parts (problem solving is the theme; tests are one part) ---- */
@@ -243,16 +243,16 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.partsTestT": { en: "Build a timed test", bn: "সময়বদ্ধ টেস্ট তৈরি কর" },
   "home.partsTestD": {
     en: "Turn any selection of problems into a full paper with a countdown, auto-submit and instant grading.",
-    bn: "যেকোনো সমস্যা নিয়ে ঘড়ি, স্বয়ংক্রিয় জমা ও সাথে সাথে গ্রেডিং সহ পুরো একটি কাগজ তৈরি করুন।"
+    bn: "যেকোনো সমস্যা নিয়ে ঘড়ি, স্বয়ংক্রিয় জমা ও সাথে সাথে গ্রেডিং সহ পুরো একটি কাগজ তৈরি করো।"
   },
   "home.partsReviewT": { en: "Learn from solutions", bn: "সমাধান থেকে শিখ" },
   "home.partsReviewD": {
     en: "Compare your answer with the correct one and work through a written solution — in the language you think in.",
-    bn: "নিজের উত্তর সঠিক উত্তরের সঙ্গে মেলান আর লিখিত সমাধানটি বুঝে নিন — আপনি যে ভাষায় ভাবেন সেই ভাষায়।"
+    bn: "নিজের উত্তর সঠিক উত্তরের সঙ্গে মেলাও আর লিখিত সমাধানটি বুঝে নাও — তুমি যে ভাষায় ভাবো সেই ভাষায়।"
   },
-  "home.partsOpen": { en: "Open", bn: "খুলুন" },
+  "home.partsOpen": { en: "Open", bn: "খোলো" },
 
-  "home.topicsTitle": { en: "Explore by topic", bn: "টপিক অনুযায়ী দেখুন" },
+  "home.topicsTitle": { en: "Explore by topic", bn: "টপিক অনুযায়ী দেখো" },
   "home.topicsLede": {
     en: "Four pillars of competition mathematics, from primary level up to national olympiad standard.",
     bn: "প্রাথমিক থেকে জাতীয় অলিম্পিয়াড পর্যন্ত প্রতিযোগিতামূলক গণিতের চারটি স্তম্ভ।"
@@ -265,7 +265,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.practiceCtaTitle": { en: "Ready to solve your first problem?", bn: "প্রথম সমস্যাটি সমাধান করতে প্রস্তুত?" },
   "home.practiceCtaLede": {
     en: "Open the bank and solve one in seconds — or gather a handful into a timed paper when you want a challenge.",
-    bn: "মজুদ খুলে কয়েক সেকেন্ডেই একটি সমস্যা সমাধান করুন — কিংবা চ্যালেঞ্জ চাইলে কয়েকটি নিয়ে একটি সময়বদ্ধ কাগজ করুন।"
+    bn: "মজুদ খুলে কয়েক সেকেন্ডেই একটি সমস্যা সমাধান করো — কিংবা চ্যালেঞ্জ চাইলে কয়েকটি নিয়ে একটি সময়বদ্ধ কাগজ করো।"
   },
   "home.featuredBdmo": { en: "Curated for competitions", bn: "প্রতিযোগিতার জন্য সাজানো" },
   "home.featuredBdmoD": {
@@ -275,7 +275,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.featuredBn": { en: "Bangla + English", bn: "বাংলা + ইংরেজি" },
   "home.featuredBnD": {
     en: "Read every statement and solution in the language you think in.",
-    bn: "যে ভাষায় ভাবেন সেই ভাষায় প্রতিটি প্রশ্ন ও সমাধান পড়ুন।"
+    bn: "যে ভাষায় ভাবো সেই ভাষায় প্রতিটি প্রশ্ন ও সমাধান পড়ো।"
   },
   "home.featuredOffline": { en: "Works offline", bn: "অফলাইনেও কাজ করে" },
   "home.featuredOfflineD": {
@@ -296,14 +296,14 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.competeBoardD": { en: "Problems solved across every paper you sit", bn: "যত কাগজ দিয়েছেন, তার সব মিলিয়ে সমাধান করা সমস্যা" },
   "home.competeLive": { en: "Now live", bn: "এখন চলছে" },
   "home.competeStandings": { en: "Top solvers", bn: "শীর্ষ সমাধানকারী" },
-  "home.competeOpen": { en: "See the papers & standings", bn: "কাগজ ও স্ট্যান্ডিংস দেখুন" },
+  "home.competeOpen": { en: "See the papers & standings", bn: "কাগজ ও স্ট্যান্ডিংস দেখো" },
   "home.competeBoard": { en: "Full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড" },
   "home.competeSolved": { en: "solved", bn: "সমাধান" },
 
   /* ---- 404 ---- */
   "notFound.body": {
     en: "The page you're looking for doesn't exist or has moved.",
-    bn: "আপনি যে পাতাটি খুঁজছেন সেটি পাওয়া যায়নি।"
+    bn: "তুমি যে পাতাটি খুঁজছ সেটি পাওয়া যায়নি।"
   },
   "notFound.action": { en: "Back to home", bn: "হোমে ফিরে যান" },
 
@@ -333,9 +333,9 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "tests.minutes": { en: "{n} min", bn: "{n} মিনিট" },
   "tests.problems": { en: "{n} problems", bn: "{n}টি সমস্যা" },
   "tests.participants": { en: "{n} joined", bn: "{n} জন অংশ নিয়েছেন" },
-  "tests.btn.start": { en: "Start test", bn: "টেস্ট শুরু করুন" },
+  "tests.btn.start": { en: "Start test", bn: "টেস্ট শুরু করো" },
   "tests.btn.resume": { en: "Resume attempt", bn: "চেষ্টা চালিয়ে যান" },
-  "tests.btn.result": { en: "View result", bn: "ফলাফল দেখুন" },
+  "tests.btn.result": { en: "View result", bn: "ফলাফল দেখো" },
   "tests.btn.standings": { en: "Standings", bn: "স্ট্যান্ডিংস" },
   "tests.btn.hideStandings": { en: "Hide standings", bn: "স্ট্যান্ডিংস লুকান" },
   "tests.standings.title": { en: "Standings", bn: "স্ট্যান্ডিংস" },
@@ -359,7 +359,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "tests.needAccount": { en: "You need an account to participate", bn: "অংশ নিতে অ্যাকাউন্ট লাগবে" },
   "tests.needAccountHint": {
     en: "Sign in or create a free account to sit this contest.",
-    bn: "এই প্রতিযোগিতায় অংশ নিতে সাইন ইন করুন বা নতুন অ্যাকাউন্ট খুলুন।"
+    bn: "এই প্রতিযোগিতায় অংশ নিতে সাইন ইন করো বা নতুন অ্যাকাউন্ট খোলো।"
   },
   "tests.closed": {
     en: "This test is no longer accepting attempts.",
@@ -385,20 +385,20 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "lb.col.best": { en: "Best score", bn: "সেরা স্কোর" },
   "lb.col.score": { en: "Score", bn: "স্কোর" },
   "lb.col.time": { en: "Time", bn: "সময়" },
-  "lb.you": { en: "You", bn: "আপনি" },
-  "lb.yourRank": { en: "You: #{rank} · {solved} solved", bn: "আপনি: #{rank} · {solved} সমাধান" },
+  "lb.you": { en: "You", bn: "তুমি" },
+  "lb.yourRank": { en: "You: #{rank} · {solved} solved", bn: "তুমি: #{rank} · {solved} সমাধান" },
   "lb.notRanked": {
     en: "You're not on the board yet — sit a contest to enter.",
-    bn: "আপনি এখনো বোর্ডে নেই — একটি প্রতিযোগিতায় অংশ নিন।"
+    bn: "তুমি এখনো বোর্ডে নেই — একটি প্রতিযোগিতায় অংশ নাও।"
   },
   "lb.signedOut": {
     en: "Anyone can read this board. Sign in to see your own row and to join it.",
-    bn: "এই বোর্ড সবাই দেখতে পারেন। নিজের সারি দেখতে ও অংশ নিতে সাইন ইন করুন।"
+    bn: "এই বোর্ড সবাই দেখতে পারে। নিজের সারি দেখতে ও অংশ নিতে সাইন ইন করো।"
   },
   "lb.signIn": { en: "Sign in", bn: "সাইন ইন" },
   "lb.empty": {
     en: "No submissions in this window yet — the first board is yours to take.",
-    bn: "এই সময়ে এখনো কিছু জমা পড়েনি — প্রথম স্থানটি আপনার জন্যই রয়ে গেছে।"
+    bn: "এই সময়ে এখনো কিছু জমা পড়েনি — প্রথম স্থানটি তোমার জন্যই রয়ে গেছে।"
   },
   "lb.source.local": { en: "Offline — standings from this device.", bn: "অফলাইন — এই ডিভাইসের স্ট্যান্ডিংস দেখানো হচ্ছে।" },
   "lb.source.cloud": { en: "Live from the cloud.", bn: "ক্লাউড থেকে লাইভ।" },
@@ -406,13 +406,13 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "Solved count sets the rank; ties break on best score, then time.",
     bn: "র‍্যাঙ্ক নির্ধারণ করে সমাধান করা সমস্যার সংখ্যা; সমতায় আগে সেরা স্কোর, তারপর সময়।"
   },
-  "results.standings": { en: "See the standings", bn: "স্ট্যান্ডিংস দেখুন" },
-  "results.rank": { en: "Your rank", bn: "আপনার র‍্যাঙ্ক" },
+  "results.standings": { en: "See the standings", bn: "স্ট্যান্ডিংস দেখো" },
+  "results.rank": { en: "Your rank", bn: "তোমার র‍্যাঙ্ক" },
   "results.rankOf": { en: "#{rank} of {total}", bn: "{total} জনের মধ্যে #{rank}" },
 
   /* ---- contest rating (contest tab) ---- */
   "rating.eyebrow": { en: "Contest rating", bn: "প্রতিযোগিতা রেটিং" },
-  "rating.title": { en: "Your contest rating", bn: "আপনার প্রতিযোগিতা রেটিং" },
+  "rating.title": { en: "Your contest rating", bn: "তোমার প্রতিযোগিতা রেটিং" },
   "rating.intro": {
     en: "Rating points earned in contests — a win against a stronger learner is worth more. Separate from the problems-solved leaderboard.",
     bn: "প্রতিযোগিতায় অর্জিত রেটিং পয়েন্ট — শক্তিশালী প্রতিপক্ষকে হারলে বেশি পয়েন্ট। সমাধান করা সমস্যার লিডারবোর্ড থেকে আলাদা।"
@@ -422,7 +422,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     bn: "সবাই ১০০০ পয়েন্ট থেকে শুরু করেন। শক্তিশালী প্রতিপক্ষকে হারলে বেশি পয়েন্ট; ড্র হলে অর্ধেক।"
   },
   "rating.leaderboardLink": { en: "Problems solved", bn: "সমাধান করা সমস্যা" },
-  "rating.yourRating": { en: "Your rating", bn: "আপনার রেটিং" },
+  "rating.yourRating": { en: "Your rating", bn: "তোমার রেটিং" },
   "rating.yourStats": {
     en: "{contests} contests · {wins} wins · #{rank} on the board",
     bn: "{contests} প্রতিযোগিতা · {wins} জয় · বোর্ডে #{rank}"
@@ -430,11 +430,11 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "rating.noRatingTitle": { en: "No rating yet", bn: "এখনো রেটিং নেই" },
   "rating.noRatingHint": {
     en: "Sit a contest with your account and your rating appears here.",
-    bn: "আপনার অ্যাকাউন্ট দিয়ে একটি প্রতিযোগিতায় অংশ নিলে এখানে আপনার রেটিং দেখা যাবে।"
+    bn: "তোমার অ্যাকাউন্ট দিয়ে একটি প্রতিযোগিতায় অংশ নিলে এখানে তোমার রেটিং দেখা যাবে।"
   },
-  "rating.signInToRate": { en: "Sign in to take part", bn: "অংশ নিতে সাইন ইন করুন" },
   "rating.topRated": { en: "Top rated", bn: "সর্বোচ্চ রেটিং" },
-  "tests.assigned": { en: "Given to you", bn: "আপনাকে দেওয়া" },
+  "rating.signInToRate": { en: "Sign in to take part", bn: "অংশ নিতে সাইন ইন করো" },
+  "tests.assigned": { en: "Given to you", bn: "তোমাকে দেওয়া" },
 
   /* ---- admin dashboard ---- */
   "admin.title": { en: "Admin dashboard", bn: "অ্যাডমিন ড্যাশবোর্ড" },
@@ -457,8 +457,8 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     bn: "পরিচয়পত্র ADMIN_ID / ADMIN_PASSWORD এনভায়রনমেন্ট ভেরিয়েবল থেকে আসে।"
   },
   "admin.logout": { en: "Sign out", bn: "সাইন আউট" },
-  "admin.expired": { en: "Session expired — please sign in again.", bn: "সেশনের মেয়াদ শেষ — আবার সাইন ইন করুন।" },
-  "admin.error": { en: "Request failed. Try again.", bn: "অনুরোধ ব্যর্থ হয়েছে। আবার চেষ্টা করুন।" },
+  "admin.expired": { en: "Session expired — please sign in again.", bn: "সেশনের মেয়াদ শেষ — আবার সাইন ইন করো।" },
+  "admin.error": { en: "Request failed. Try again.", bn: "অনুরোধ ব্যর্থ হয়েছে। আবার চেষ্টা করো।" },
   "admin.tab.overview": { en: "Overview", bn: "ওভারভিউ" },
   "admin.tab.problems": { en: "Problems", bn: "সমস্যা" },
   "admin.tab.tests": { en: "Scheduled tests", bn: "নির্ধারিত টেস্ট" },
@@ -521,7 +521,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "admin.f.assignTo": { en: "Give this contest to", bn: "এই প্রতিযোগিতা যাদের দেওয়া হবে" },
   "admin.f.assignToHint": {
     en: "Pick the learners this contest is for. Leave everyone unchecked to open it to all.",
-    bn: "যাদের জন্য এই প্রতিযোগিতা, তাদের বেছে নিন। কাউকে বাছাই না করলে সবার জন্য খোলা থাকবে।"
+    bn: "যাদের জন্য এই প্রতিযোগিতা, তাদের বেছে নাও। কাউকে বাছাই না করলে সবার জন্য খোলা থাকবে।"
   },
   "admin.f.assignedCount": { en: "{n} learners", bn: "{n} জন শিক্ষার্থী" },
   "admin.f.noLearners": { en: "No learners have signed up yet.", bn: "এখনো কোনো শিক্ষার্থী সাইন আপ করেননি।" },
@@ -539,18 +539,18 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "auth.signin.title": { en: "Welcome back", bn: "ফিরে আসায় স্বাগতম" },
   "auth.signin.sub": {
     en: "Sign in to carry your name onto every contest and leaderboard.",
-    bn: "কনটেস্ট ও লিডারবোর্ডে নিজের নাম দেখাতে সাইন ইন করুন।"
+    bn: "কনটেস্ট ও লিডারবোর্ডে নিজের নাম দেখাতে সাইন ইন করো।"
   },
-  "auth.signup.title": { en: "Create your account", bn: "অ্যাকাউন্ট খুলুন" },
+  "auth.signup.title": { en: "Create your account", bn: "অ্যাকাউন্ট খোলো" },
   "auth.signup.sub": {
     en: "About a minute: pick a username, a password, and the name you will compete under.",
-    bn: "এক মিনিটেই হবে: ইউজারনেম, পাসওয়ার্ড আর ডিসপ্লে নাম দিন।"
+    bn: "এক মিনিটেই হবে: ইউজারনেম, পাসওয়ার্ড আর ডিসপ্লে নাম দাও।"
   },
   "auth.username": { en: "Username", bn: "ইউজারনেম" },
   "auth.username.ph": { en: "e.g. rafi2026", bn: "যেমন: rafi2026" },
   "auth.username.hint": {
     en: "3–20 letters, digits or underscores — you sign in with it.",
-    bn: "৩–২০ অক্ষর, সংখ্যা বা আন্ডারস্কোর — এটি দিয়েই সাইন ইন করবেন।"
+    bn: "৩–২০ অক্ষর, সংখ্যা বা আন্ডারস্কোর — এটি দিয়েই সাইন ইন করবে।"
   },
   "auth.password": { en: "Password", bn: "পাসওয়ার্ড" },
   "auth.password.hint": { en: "At least 6 characters.", bn: "অন্তত ৬ অক্ষর।" },
@@ -573,34 +573,34 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     bn: "শুধু সংখ্যা (শুরুতে + চলবে) — কখনো প্রকাশ্যে দেখানো হবে না।"
   },
   "auth.submit.signin": { en: "Sign in", bn: "সাইন ইন" },
-  "auth.submit.signup": { en: "Create account", bn: "অ্যাকাউন্ট খুলুন" },
-  "auth.err.username": { en: "Use 3–20 letters, digits or underscores.", bn: "৩–২০ অক্ষর, সংখ্যা বা আন্ডারস্কোর ব্যবহার করুন।" },
+  "auth.submit.signup": { en: "Create account", bn: "অ্যাকাউন্ট খোলো" },
+  "auth.err.username": { en: "Use 3–20 letters, digits or underscores.", bn: "৩–২০ অক্ষর, সংখ্যা বা আন্ডারস্কোর ব্যবহার করো।" },
   "auth.err.password": { en: "Password must be at least 6 characters.", bn: "পাসওয়ার্ড অন্তত ৬ অক্ষরের হতে হবে।" },
-  "auth.err.name": { en: "Please enter your display name.", bn: "অনুগ্রহ করে ডিসপ্লে নাম দিন।" },
+  "auth.err.name": { en: "Please enter your display name.", bn: "অনুগ্রহ করে ডিসপ্লে নাম দাও।" },
   "auth.err.taken": {
     en: "That username is already taken — try another.",
-    bn: "এই ইউজারনেমটি ইতিমধ্যে নেওয়া — অন্য একটি চেষ্টা করুন।"
+    bn: "এই ইউজারনেমটি ইতিমধ্যে নেওয়া — অন্য একটি চেষ্টা করো।"
   },
   "auth.err.bad": { en: "Wrong username or password.", bn: "ইউজারনেম বা পাসওয়ার্ড ভুল।" },
-  "auth.err.email": { en: "Please enter a valid email address.", bn: "অনুগ্রহ করে একটি সঠিক ইমেইল ঠিকানা দিন।" },
+  "auth.err.email": { en: "Please enter a valid email address.", bn: "অনুগ্রহ করে একটি সঠিক ইমেইল ঠিকানা দাও।" },
   "auth.err.phone": {
     en: "Please enter a valid phone number (8–18 digits).",
-    bn: "অনুগ্রহ করে একটি সঠিক মোবাইল নম্বর দিন (৮–১৮ সংখ্যা)।"
+    bn: "অনুগ্রহ করে একটি সঠিক মোবাইল নম্বর দাও (৮–১৮ সংখ্যা)।"
   },
   "auth.err.emailTaken": {
     en: "That email is already registered — try signing in.",
-    bn: "এই ইমেইলটি ইতিমধ্যে নিবন্ধিত — সাইন ইন করার চেষ্টা করুন।"
+    bn: "এই ইমেইলটি ইতিমধ্যে নিবন্ধিত — সাইন ইন করার চেষ্টা করো।"
   },
   "auth.err.offline": {
     en: "Accounts need a connection — anonymous practice keeps working offline.",
     bn: "অ্যাকাউন্টের জন্য ইন্টারনেট লাগবে — অফলাইনেও বিনানামে অনুশীলন চলতে থাকবে।"
   },
-  "auth.err.generic": { en: "Something went wrong — please try again.", bn: "কিছু একটা সমস্যা হয়েছে — আবার চেষ্টা করুন।" },
-  "auth.signedInAs": { en: "Signed in as {name}", bn: "সাইন ইন করেছেন {name}" },
-  "auth.gate.title": { en: "Sign in to continue", bn: "চালিয়ে যেতে সাইন ইন করুন" },
+  "auth.err.generic": { en: "Something went wrong — please try again.", bn: "কিছু একটা সমস্যা হয়েছে — আবার চেষ্টা করো।" },
+  "auth.signedInAs": { en: "Signed in as {name}", bn: "সাইন ইন করেছ {name}" },
+  "auth.gate.title": { en: "Sign in to continue", bn: "চালিয়ে যেতে সাইন ইন করো" },
   "auth.gate.body": {
     en: "Weekly and monthly tests, their standings and your past papers all live behind a learner account. Sign in (or create one) and we'll take you straight back.",
-    bn: "সাপ্তাহিক ও মাসিক টেস্ট, স্ট্যান্ডিংস এবং আপনার পুরোনো পত্রগুলো দেখতে শিক্ষার্থী অ্যাকাউন্ট লাগবে। সাইন ইন করুন (বা নতুন অ্যাকাউন্ট খুলুন) — আমরা আপনাকে সরাসরি ফিরিয়ে নিয়ে যাব।"
+    bn: "সাপ্তাহিক ও মাসিক টেস্ট, স্ট্যান্ডিংস এবং তোমার পুরোনো পত্রগুলো দেখতে শিক্ষার্থী অ্যাকাউন্ট লাগবে। সাইন ইন করো (বা নতুন অ্যাকাউন্ট খোলো) — আমরা তোমাকে সরাসরি ফিরিয়ে নিয়ে যাব।"
   },
   "auth.memberSince": { en: "Member since {when}", bn: "সদস্য {when} থেকে" },
   "auth.nameSaved": { en: "Display name updated.", bn: "ডিসপ্লে নাম আপডেট হয়েছে।" },
@@ -608,26 +608,26 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
 
   /* ---- sign-in side panel: the live dashboard ---- */
   "auth.dash.eyebrow": { en: "Dashboard", bn: "ড্যাশবোর্ড" },
-  "auth.dash.title": { en: "Your progress, at a glance", bn: "এক নজরে আপনার অগ্রগতি" },
+  "auth.dash.title": { en: "Your progress, at a glance", bn: "এক নজরে তোমার অগ্রগতি" },
   "auth.dash.tests": { en: "Tests sat", bn: "দেওয়া টেস্ট" },
   "auth.dash.solved": { en: "Solved", bn: "সমাধান" },
   "auth.dash.avg": { en: "Average", bn: "গড়" },
   "auth.dash.best": { en: "Best", bn: "সেরা" },
-  "auth.dash.rank": { en: "Your rank: #{rank} · {solved} solved", bn: "আপনার র‍্যাঙ্ক: #{rank} · {solved} সমাধান" },
+  "auth.dash.rank": { en: "Your rank: #{rank} · {solved} solved", bn: "তোমার র‍্যাঙ্ক: #{rank} · {solved} সমাধান" },
   "auth.dash.notRanked": {
     en: "You're not on the board yet — sit a scheduled test to enter.",
-    bn: "আপনি এখনো বোর্ডে নেই — নির্ধারিত টেস্ট দিয়ে অংশ নিন।"
+    bn: "তুমি এখনো বোর্ডে নেই — নির্ধারিত টেস্ট দিয়ে অংশ নাও।"
   },
   "auth.dash.join": {
     en: "Sign in to put your name on the board.",
-    bn: "বোর্ডে নিজের নাম দেখাতে সাইন ইন করুন।"
+    bn: "বোর্ডে নিজের নাম দেখাতে সাইন ইন করো।"
   },
   "auth.dash.board": { en: "Top solvers", bn: "শীর্ষ সমাধানকারী" },
   "auth.dash.empty": {
     en: "No results yet — the first spot on the board is yours to take.",
-    bn: "এখনো কোনো ফলাফল নেই — বোর্ডের প্রথম জায়গাটি আপনার।"
+    bn: "এখনো কোনো ফলাফল নেই — বোর্ডের প্রথম জায়গাটি তোমার।"
   },
-  "auth.dash.fullBoard": { en: "See the full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড দেখুন" },
+  "auth.dash.fullBoard": { en: "See the full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড দেখো" },
 
   /* ---- misc ---- */
   "misc.loading": { en: "Loading…", bn: "লোড হচ্ছে…" },
