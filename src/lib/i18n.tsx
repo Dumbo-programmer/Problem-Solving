@@ -259,7 +259,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   },
   "home.problemsIn": { en: "problems", bn: "টি সমস্যা" },
   "home.linkWebsite": { en: "Gonit Ishkul website", bn: "গণিত ইশকুল ওয়েবসাইট" },
-  "home.linkUnknown": { en: "Link label to be confirmed", bn: "লিংক (লেবেল নিশ্চিত নয়)" },
+  "home.linkUnknown": { en: "Theory Repository", bn: "থিওরি ভান্ডার" },
   "home.linkFacebook": { en: "Facebook", bn: "ফেসবুক" },
   "home.linkLetter": { en: "A letter to Gonit Bhaiya", bn: "গণিত ভাইয়ার কাছে চিঠি" },
   "home.practiceCtaTitle": { en: "Ready to solve your first problem?", bn: "প্রথম সমস্যাটি সমাধান করতে প্রস্তুত?" },
