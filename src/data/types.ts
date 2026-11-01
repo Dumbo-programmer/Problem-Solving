@@ -6,7 +6,7 @@
  *
  * Taxonomy:
  *   Type       : OLYMPIAD | ACADEMICS
- *   Topic      : NUMBER_THEORY | ALGEBRA | GEOMETRY | COMBINATORICS | INEQUALITY | PROBABILITY
+ *   Topic      : NUMBER_THEORY | ALGEBRA | GEOMETRY | PROBABILITY
  *   Category   : PRIMARY | JUNIOR | SECONDARY | HIGHER_SECONDARY
  *   Difficulty : EASY | MEDIUM | HARD | OLYMPIAD
  */
@@ -16,8 +16,6 @@ export type ProblemTopic =
   | "NUMBER_THEORY"
   | "ALGEBRA"
   | "GEOMETRY"
-  | "COMBINATORICS"
-  | "INEQUALITY"
   | "PROBABILITY";
 export type ProblemCategory = "PRIMARY" | "JUNIOR" | "SECONDARY" | "HIGHER_SECONDARY";
 export type ProblemDifficulty = "EASY" | "MEDIUM" | "HARD" | "OLYMPIAD";
@@ -72,24 +70,6 @@ export const TOPICS: { key: ProblemTopic; en: string; bn: string; blurb: { en: s
     blurb: {
       en: "Triangles, circles, areas and beautiful configurations.",
       bn: "ত্রিভুজ, বৃত্ত, ক্ষেত্রফল ও সুন্দর কনফিগারেশন।"
-    }
-  },
-  {
-    key: "COMBINATORICS",
-    en: "Combinatorics",
-    bn: "যোজনবিদ্যা",
-    blurb: {
-      en: "Counting, arrangements, subsets and the pigeonhole idea.",
-      bn: "গণনা, বিন্যাস, উপসমষ্টি ও কবুতরবাসির নীতি।"
-    }
-  },
-  {
-    key: "INEQUALITY",
-    en: "Inequality",
-    bn: "অসমতা",
-    blurb: {
-      en: "Bounds, AM–GM, Cauchy and extremal arguments.",
-      bn: "সীমাবদ্ধতা, AM–GM, কসি ও চরম মানের যুক্তি।"
     }
   },
   {

@@ -117,8 +117,13 @@ export default function Home() {
 
             <Reveal delay={80}>
               <h1 className="mt-5 text-balance text-4xl font-extrabold leading-[1.1] tracking-tight text-ink-900 sm:text-5xl lg:text-6xl">
-                {t("hero.title1")}{" "}
-                <span className="text-accent-700">{t("hero.title2")}</span>
+                {t("hero.title1")}
+                {t("hero.title2") && (
+                  <>
+                    {" "}
+                    <span className="text-accent-700">{t("hero.title2")}</span>
+                  </>
+                )}
               </h1>
             </Reveal>
 
@@ -412,7 +417,7 @@ export default function Home() {
             <p className="mt-3 text-slate-600">{t("home.topicsLede")}</p>
           </Reveal>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2">
             {topicCounts.map((topic, i) => (
               <Reveal key={topic.key} delay={i * 60}>
                 <Link
@@ -435,6 +440,30 @@ export default function Home() {
                     {t("cta.browseProblems")} <ArrowRight size={13} />
                   </span>
                 </Link>
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            {[
+              { label: t("home.linkWebsite"), href: "#", icon: Globe },
+              { label: t("home.linkUnknown"), href: "#", icon: Globe },
+              { label: t("home.linkFacebook"), href: "https://www.facebook.com/PA.GonitIshkul", icon: Globe },
+              { label: t("home.linkLetter"), href: "#", icon: Globe }
+            ].map((link, i) => (
+              <Reveal key={link.label} delay={i * 60}>
+                <a
+                  href={link.href}
+                  target={link.href === "#" ? undefined : "_blank"}
+                  rel={link.href === "#" ? undefined : "noopener noreferrer"}
+                  className="card group flex items-center gap-3 p-4 transition-all duration-200 hover:-translate-y-1 hover:shadow-lift"
+                >
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-500/10 text-accent-600">
+                    <link.icon size={18} />
+                  </span>
+                  <span className="text-sm font-bold text-ink-900">{link.label}</span>
+                  <ArrowRight size={15} className="ml-auto text-accent-600 transition-transform group-hover:translate-x-0.5" />
+                </a>
               </Reveal>
             ))}
           </div>

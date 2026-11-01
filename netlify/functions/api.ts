@@ -80,7 +80,7 @@ function json(statusCode: number, body: unknown) {
 
 const ALLOWED = {
   type: new Set(["OLYMPIAD", "ACADEMICS"]),
-  topic: new Set(["NUMBER_THEORY", "ALGEBRA", "GEOMETRY", "COMBINATORICS", "INEQUALITY", "PROBABILITY"]),
+  topic: new Set(["NUMBER_THEORY", "ALGEBRA", "GEOMETRY", "PROBABILITY"]),
   category: new Set(["PRIMARY", "JUNIOR", "SECONDARY", "HIGHER_SECONDARY"]),
   difficulty: new Set(["EASY", "MEDIUM", "HARD", "OLYMPIAD"])
 };

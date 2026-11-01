@@ -17,8 +17,6 @@ const TOPIC_DOT: Record<ProblemTopic, string> = {
   NUMBER_THEORY: "bg-emerald-500",
   ALGEBRA: "bg-sky-500",
   GEOMETRY: "bg-violet-500",
-  COMBINATORICS: "bg-accent-500",
-  INEQUALITY: "bg-rose-500",
   PROBABILITY: "bg-teal-500"
 };
 

@@ -15,7 +15,7 @@ import type { PracticeTest, ScheduledTest } from "./types";
 
 /** A small stand-in bank: 4 topics × 3 difficulties × 2 problems = 24. */
 const BANK = (() => {
-  const topics = ["NUMBER_THEORY", "ALGEBRA", "GEOMETRY", "COMBINATORICS"];
+  const topics = ["NUMBER_THEORY", "ALGEBRA", "GEOMETRY", "PROBABILITY"];
   const difficulties = ["EASY", "MEDIUM", "HARD"] as const;
   const out: { id: string; difficulty: string; topic: string }[] = [];
   let n = 0;

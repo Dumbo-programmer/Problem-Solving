@@ -17,7 +17,7 @@ export default function Footer() {
     { topic: "NUMBER_THEORY", href: "https://www.prothomalo.com/collection/number-theory-math-school" },
     { topic: "GEOMETRY", href: "https://www.prothomalo.com/collection/number-theory-math-school" },
     { topic: "ALGEBRA", href: "https://www.prothomalo.com/collection/algebra-math-school" },
-    { topic: "COMBINATORICS", href: "https://www.prothomalo.com/collection/combinatorics-math-school" }
+    { topic: "PROBABILITY", href: "https://www.prothomalo.com/collection/probability-math-school" }
   ];
 
   const stats = [

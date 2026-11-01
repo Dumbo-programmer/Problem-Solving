@@ -199,7 +199,7 @@ const geomCount = await page.evaluate(() => {
   const m = document.body.innerText.match(/(\d+)\s*(?:মিল|matching)/i);
   return m ? Number(m[1]) : 0;
 });
-check("topic deep-link filters the archive", geomCount > 0 && geomCount < 144, `${geomCount} geometry problems`);
+check("topic deep-link filters the archive", geomCount > 0 && geomCount < 96, `${geomCount} geometry problems`);
 
 /* ---------- 5. build + sit a test ---------- */
 await goto("/practice");

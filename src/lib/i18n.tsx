@@ -28,11 +28,11 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     en: "The official problem-solving platform of Prothom Alo's Gonit Ishkul",
     bn: "প্রথম আলোর গণিত ইশকুলের অফিসিয়াল সমস্যা-সমাধান প্ল্যাটফর্ম"
   },
-  "hero.title1": { en: "Problem solving,", bn: "সমস্যা সমাধান," },
-  "hero.title2": { en: "one problem at a time.", bn: "একটি একটি করে।" },
+  "hero.title1": { en: "Problem solving", bn: "সমস্যা সমাধান" },
+  "hero.title2": { en: "", bn: "" },
   "hero.lede": {
-    en: "The official home of Prothom Alo's Gonit Ishkul — {n} olympiad and academic problems across six topics and four levels, in Bangla and English. Explore the bank and solve at your own pace, check answers instantly with a full solution, or sit a timed practice test whenever you're ready.",
-    bn: "প্রথম আলোর গণিত ইশকুলের অফিসিয়াল ঠিকানা — ছয়টি টপিক ও চারটি স্তরে ছড়ানো {n}টি অলিম্পিয়াড ও একাডেমিক সমস্যা, বাংলা ও ইংরেজি দুই ভাষায়। নিজের গতিতে সমস্যা বেছে নিন ও সমাধান করুন, সাথে সাথে সঠিক উত্তর ও পুরো সমাধান দেখুন, কিংবা প্রস্তুত হলে সময় ধরে একটি প্র্যাকটিস টেস্ট দিন।"
+    en: "Every maths problem is a new adventure. Across four levels, from primary to higher secondary, selected olympiad and academic problems are arranged in four topics, in both Bangla and English. Choose problems your way, solve them, then check your work instantly with a full step-by-step solution. Want to test your preparation? Sit down for a timed practice test.",
+    bn: "গণিতের প্রতিটি সমস্যাই একটি নতুন অ্যাডভেঞ্চার। প্রাথমিক থেকে উচ্চমাধ্যমিক পর্যন্ত চারটি স্তরে, চারটি বিষয়ে সাজানো আছে বাছাই করা অলিম্পিয়াড ও একাডেমিক সমস্যা, বাংলা ও ইংরেজি দুই ভাষাতেই। নিজের পছন্দ অনুযায়ী সমস্যা বেছে নেও, সমাধান কর, তারপর সঙ্গে সঙ্গে মিলিয়ে নেও ধাপে ধাপে পূর্ণ সমাধান। প্রস্তুতি যাচাই করতে চাইলে সময় বেঁধে বসে পড় একটি প্র্যাকটিস টেস্টে।"
   },
   "cta.browseProblems": { en: "Browse the problem bank", bn: "সমস্যার মজুদ দেখুন" },
   "cta.takeTest": { en: "Take a practice test", bn: "প্র্যাকটিস টেস্ট দিন" },
@@ -233,19 +233,19 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.partsTitle": { en: "Practice tests are just one part of it", bn: "প্র্যাকটিস টেস্ট এর একটি অংশ মাত্র" },
   "home.partsLede": {
     en: "It starts with the problems themselves — solve, learn, and use tests when you want to measure yourself.",
-    bn: "শুরুটা সমস্যাগুলো দিয়েই — সমাধান করুন, শিখুন, আর নিজেকে যাচাই করতে চাইলে টেস্ট ব্যবহার করুন।"
+    bn: "শুরুটা সমস্যাগুলো দিয়েই — সমাধান কর, শিখ, আর নিজেকে যাচাই করতে চাইলে প্র্যাকটিস টেস্ট দেও।"
   },
-  "home.partsBankT": { en: "Explore the problem bank", bn: "সমস্যার মজুদ ঘুরে দেখুন" },
+  "home.partsBankT": { en: "Explore the problem bank", bn: "সমস্যার মজুদ ঘুরে দেখ" },
   "home.partsBankD": {
     en: "{n} problems filterable by type, topic, category and difficulty — each with its own full bilingual solution.",
     bn: "{n}টি সমস্যা — টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা অনুযায়ী ফিল্টারযোগ্য; প্রতিটিরই পূর্ণ দ্বিভাষিক সমাধান আছে।"
   },
-  "home.partsTestT": { en: "Build a timed test", bn: "সময়বদ্ধ টেস্ট তৈরি করুন" },
+  "home.partsTestT": { en: "Build a timed test", bn: "সময়বদ্ধ টেস্ট তৈরি কর" },
   "home.partsTestD": {
     en: "Turn any selection of problems into a full paper with a countdown, auto-submit and instant grading.",
     bn: "যেকোনো সমস্যা নিয়ে ঘড়ি, স্বয়ংক্রিয় জমা ও সাথে সাথে গ্রেডিং সহ পুরো একটি কাগজ তৈরি করুন।"
   },
-  "home.partsReviewT": { en: "Learn from solutions", bn: "সমাধান থেকে শিখুন" },
+  "home.partsReviewT": { en: "Learn from solutions", bn: "সমাধান থেকে শিখ" },
   "home.partsReviewD": {
     en: "Compare your answer with the correct one and work through a written solution — in the language you think in.",
     bn: "নিজের উত্তর সঠিক উত্তরের সঙ্গে মেলান আর লিখিত সমাধানটি বুঝে নিন — আপনি যে ভাষায় ভাবেন সেই ভাষায়।"
@@ -254,10 +254,14 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
 
   "home.topicsTitle": { en: "Explore by topic", bn: "টপিক অনুযায়ী দেখুন" },
   "home.topicsLede": {
-    en: "Six pillars of competition mathematics, from primary level up to national olympiad standard.",
-    bn: "প্রাথমিক থেকে জাতীয় অলিম্পিয়াড পর্যন্ত প্রতিযোগিতামূলক গণিতের ছয়টি স্তম্ভ।"
+    en: "Four pillars of competition mathematics, from primary level up to national olympiad standard.",
+    bn: "প্রাথমিক থেকে জাতীয় অলিম্পিয়াড পর্যন্ত প্রতিযোগিতামূলক গণিতের চারটি স্তম্ভ।"
   },
   "home.problemsIn": { en: "problems", bn: "টি সমস্যা" },
+  "home.linkWebsite": { en: "Gonit Ishkul website", bn: "গণিত ইশকুল ওয়েবসাইট" },
+  "home.linkUnknown": { en: "Link label to be confirmed", bn: "লিংক (লেবেল নিশ্চিত নয়)" },
+  "home.linkFacebook": { en: "Facebook", bn: "ফেসবুক" },
+  "home.linkLetter": { en: "A letter to Gonit Bhaiya", bn: "গণিত ভাইয়ার কাছে চিঠি" },
   "home.practiceCtaTitle": { en: "Ready to solve your first problem?", bn: "প্রথম সমস্যাটি সমাধান করতে প্রস্তুত?" },
   "home.practiceCtaLede": {
     en: "Open the bank and solve one in seconds — or gather a handful into a timed paper when you want a challenge.",
@@ -279,7 +283,7 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
     bn: "পুরো সমস্যার মজুদ সাইটের সাথেই থাকে, তাই ইন্টারনেট ছাড়াও টেস্ট দেওয়া যায়।"
   },
   "home.competeEyebrow": { en: "Compete", bn: "প্রতিযোগিতা" },
-  "home.competeTitle": { en: "Weekly sprints, monthly challenges", bn: "সাপ্তাহিক স্প্রিন্ট, মাসিক চ্যালেঞ্জ" },
+  "home.competeTitle": { en: "Gonit Bhaiya's Challenge", bn: "গণিত ভাইয়ার চ্যালেঞ্জ" },
   "home.competeLede": {
     en: "A fresh paper opens every week and a bigger one every month. One attempt each, timed, and ranked live — solve more problems to climb the board.",
     bn: "প্রতি সপ্তাহে নতুন একটি কাগজ, প্রতি মাসে আরও বড় একটি। প্রতিটিতে একবারই, সময় ধরে, লাইভ র‍্যাঙ্কিং — যত বেশি সমস্যা সমাধান, তত উপরে।"
@@ -639,8 +643,6 @@ export const TOPIC_LABELS: Record<ProblemTopic, Localized> = {
   NUMBER_THEORY: { en: "Number Theory", bn: "সংখ্যাতত্ত্ব" },
   ALGEBRA: { en: "Algebra", bn: "বীজগণিত" },
   GEOMETRY: { en: "Geometry", bn: "জ্যামিতি" },
-  COMBINATORICS: { en: "Combinatorics", bn: "যোজনবিদ্যা" },
-  INEQUALITY: { en: "Inequality", bn: "অসমতা" },
   PROBABILITY: { en: "Probability", bn: "সম্ভাব্যতা" }
 };
 

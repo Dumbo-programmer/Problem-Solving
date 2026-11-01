@@ -13,7 +13,7 @@ import { fileURLToPath } from "node:url";
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const dataDir = join(root, "src", "data");
 
-const TOPICS = new Set(["NUMBER_THEORY", "ALGEBRA", "GEOMETRY", "COMBINATORICS", "INEQUALITY", "PROBABILITY"]);
+const TOPICS = new Set(["NUMBER_THEORY", "ALGEBRA", "GEOMETRY", "PROBABILITY"]);
 const TYPES = new Set(["OLYMPIAD", "ACADEMICS"]);
 const CATEGORIES = new Set(["PRIMARY", "JUNIOR", "SECONDARY", "HIGHER_SECONDARY"]);
 const DIFFICULTIES = new Set(["EASY", "MEDIUM", "HARD", "OLYMPIAD"]);
