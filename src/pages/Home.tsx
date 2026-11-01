@@ -59,7 +59,7 @@ export default function Home() {
   }));
 
   const steps = [
-    { icon: Sparkles, title: t("home.how1t"), body: t("home.how1d") },
+    { icon: Sparkles, title: t("home.how1t"), body: t("home.how1d", { n: PROBLEMS.length }) },
     { icon: CheckCircle2, title: t("home.how2t"), body: t("home.how2d") },
     { icon: Timer, title: t("home.how3t"), body: t("home.how3d") },
     { icon: BookOpen, title: t("home.how4t"), body: t("home.how4d") }

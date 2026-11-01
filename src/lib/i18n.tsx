@@ -209,8 +209,8 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.howTitle": { en: "How it works", bn: "কীভাবে কাজ করে" },
   "home.how1t": { en: "Choose your level & topics", bn: "স্তর ও টপিক বেছে নাও" },
   "home.how1d": {
-    en: "Narrow 140+ problems down by type, topic, category and difficulty until you have exactly what you want to solve.",
-    bn: "১৪০+ সমস্যার মধ্যে টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা দিয়ে ফিল্টার করে ঠিক যা সমাধান করতে চাও তা বেছে নাও।"
+    en: "Narrow {n}+ problems down by type, topic, category and difficulty until you have exactly what you want to solve.",
+    bn: "{n}+ সমস্যার মধ্যে টাইপ, টপিক, ক্যাটাগরি ও কঠিনতা দিয়ে ফিল্টার করে ঠিক যা সমাধান করতে চাও তা বেছে নাও।"
   },
   "home.how2t": { en: "Solve and check instantly", bn: "সমাধান করে সাথে সাথে যাচাই" },
   "home.how2d": {

@@ -169,7 +169,7 @@ export default function Results() {
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-[15px] font-semibold leading-snug text-ink-900">
-                    {L(p.title)}
+                    <MathText>{L(p.title)}</MathText>
                   </span>
                   <span className="mt-2 flex flex-wrap items-center gap-1.5">
                     <TopicBadge value={p.topic} />

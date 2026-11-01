@@ -195,7 +195,7 @@ export default function Practice() {
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="block truncate text-sm font-medium text-ink-900">
-                            {L(p.title)}
+                            <MathText>{L(p.title)}</MathText>
                           </span>
                           <span className="mt-1 flex flex-wrap gap-1">
                             <TopicBadge value={p.topic} />

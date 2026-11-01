@@ -243,7 +243,9 @@ export default function TestRunner() {
           </div>
         </div>
 
-        <h2 className="mt-3 text-lg font-bold text-ink-900">{L(problem.title)}</h2>
+        <h2 className="mt-3 text-lg font-bold text-ink-900">
+          <MathText>{L(problem.title)}</MathText>
+        </h2>
 
         <div className="mt-3 text-[16px] leading-relaxed text-slate-700">
           <MathText block>{L(problem.statement)}</MathText>

@@ -47,7 +47,7 @@ export default function ProblemCard({
         )}
         <div className="min-w-0 flex-1">
           <h3 className="text-[15px] font-semibold leading-snug text-ink-900">
-            {L(problem.title)}
+            <MathText>{L(problem.title)}</MathText>
           </h3>
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
             <TopicBadge value={problem.topic} />
