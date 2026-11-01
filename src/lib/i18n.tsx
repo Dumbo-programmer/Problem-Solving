@@ -441,15 +441,16 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "admin.login.error": { en: "Wrong ID or password.", bn: "আইডি বা পাসওয়ার্ড ভুল।" },
   "admin.login.credentials": { en: "Which ID and password?", bn: "কোন আইডি ও পাসওয়ার্ড?" },
   "admin.login.credentialsHint": {
-    en: "Defaults are listed below. Set ADMIN_ID and ADMIN_PASSWORD in the deployment environment to replace them.",
-    bn: "নিচে ডিফল্টগুলো দেওয়া আছে। বদলাতে ডিপ্লয়মেন্ট এনভায়রনমেন্টে ADMIN_ID ও ADMIN_PASSWORD সেট করুন।"
+    en: "Credentials are configured only in the deployment environment.",
+    bn: "পরিচয়পত্র শুধু ডিপ্লয়মেন্ট এনভায়রনমেন্টে সেট করা থাকে।"
   },
   "admin.cred.id": { en: "ID", bn: "আইডি" },
   "admin.cred.password": { en: "Password", bn: "পাসওয়ার্ড" },
-  "admin.cred.custom": { en: "custom — ask the site owner", bn: "নিজস্ব — সাইটের মালিককে জিজ্ঞাসা করুন" },
+  "admin.cred.configured": { en: "configured in deployment", bn: "ডিপ্লয়মেন্টে সেট করা আছে" },
+  "admin.cred.notConfigured": { en: "not configured", bn: "সেট করা হয়নি" },
   "admin.login.hint": {
-    en: "Credentials come from the ADMIN_ID / ADMIN_PASSWORD environment variables (defaults: admin · gonit-ishkul).",
-    bn: "পরিচয়পত্র ADMIN_ID / ADMIN_PASSWORD এনভায়রনমেন্ট ভেরিয়েবল থেকে আসে (ডিফল্ট: admin · gonit-ishkul)।"
+    en: "Credentials come from the ADMIN_ID / ADMIN_PASSWORD environment variables.",
+    bn: "পরিচয়পত্র ADMIN_ID / ADMIN_PASSWORD এনভায়রনমেন্ট ভেরিয়েবল থেকে আসে।"
   },
   "admin.logout": { en: "Sign out", bn: "সাইন আউট" },
   "admin.expired": { en: "Session expired — please sign in again.", bn: "সেশনের মেয়াদ শেষ — আবার সাইন ইন করুন।" },

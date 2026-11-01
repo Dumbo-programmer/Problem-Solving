@@ -127,9 +127,6 @@ function seedEntries(papers: ScheduledTest[], now = Date.now()): PracticeTest[] 
 /* Postgres                                                            */
 /* ------------------------------------------------------------------ */
 
-const PROJECT_REF = "umyivdvsrimrbsxopgei";
-const DB_PASSWORD = "XphPQ2@J4jZAj2C";
-
 type PgClient = {
   query: (text: string, params?: unknown[]) => Promise<{ rows: Record<string, unknown>[]; rowCount: number | null }>;
   end: () => Promise<void>;
@@ -140,7 +137,10 @@ function candidates(): { label: string; url: string }[] {
   const list: { label: string; url: string }[] = [];
   if (process.env.DATABASE_URL) list.push({ label: "env", url: process.env.DATABASE_URL });
 
-  const enc = encodeURIComponent(DB_PASSWORD);
+  const projectRef = process.env.SUPABASE_PROJECT_REF;
+  const dbPassword = process.env.SUPABASE_DB_PASSWORD;
+  if (!projectRef || !dbPassword) return list;
+  const enc = encodeURIComponent(dbPassword);
   // Supabase transaction pooler — designed for serverless/IPv4 environments.
   // The project lives in ap-northeast-1; the pooler only resolves the tenant
   // from that region ("tenant/user … not found" everywhere else), so it goes
@@ -148,7 +148,7 @@ function candidates(): { label: string; url: string }[] {
   for (const region of ["ap-northeast-1", "ap-southeast-1", "us-east-1", "eu-west-1"]) {
     list.push({
       label: `pooler-${region}`,
-      url: `postgresql://postgres.${PROJECT_REF}:${enc}@aws-0-${region}.pooler.supabase.com:6543/postgres`
+      url: `postgresql://postgres.${projectRef}:${enc}@aws-0-${region}.pooler.supabase.com:6543/postgres`
     });
   }
   return list;

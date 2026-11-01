@@ -40,7 +40,7 @@ import { overallLeaderboard, pctOf, standings, timeTakenSec, nameOf } from "../.
 import { contestRatings } from "../../src/lib/contestRating";
 import { phaseOf } from "../../src/lib/scheduled";
 import {
-  adminUsesDefaults,
+  adminCredentialStatus,
   bearer,
   checkCredentials,
   hashPassword,
@@ -226,7 +226,7 @@ async function sessionUser(event: HandlerEvent): Promise<StoredUser | null> {
 /** Burns the same CPU as a real verify so unknown usernames don't reply faster. */
 let timingPad: string | null = null;
 function dummyVerify(password: string): void {
-  if (timingPad === null) timingPad = hashPassword("gonit-ishkul-timing-pad");
+  if (timingPad === null) timingPad = hashPassword(process.env.ADMIN_PASSWORD || "timing-pad");
   verifyPassword(password, timingPad);
 }
 
@@ -385,11 +385,11 @@ async function handleAdminLogin(body: Record<string, unknown>) {
 
 /**
  * Tells the admin sign-in screen whether the deployment still uses the
- * documented default credentials. It reports booleans only — never a
+ * configured credential slots. It reports booleans only — never a
  * configured id or password.
  */
 function handleAdminCredentialStatus() {
-  return json(200, { ...adminUsesDefaults() });
+  return json(200, { ...adminCredentialStatus() });
 }
 
 async function handleAdminOverview(store: Store) {

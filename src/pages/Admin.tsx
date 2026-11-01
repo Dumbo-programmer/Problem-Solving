@@ -37,7 +37,6 @@ import { readAdminToken } from "../lib/storage";
 import PageDecor from "../components/PageDecor";
 import { phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
-import { DEFAULT_ADMIN_ID, DEFAULT_ADMIN_PASSWORD } from "../lib/adminCredentials";
 import type { AdminLearner, AdminOverview, AdminSubmission } from "../lib/api";
 import type { Problem, ProblemCategory, ProblemDifficulty, ProblemTopic, ProblemType, ScheduledTest, ScheduledTestKind } from "../lib/types";
 
@@ -97,8 +96,7 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState(false);
-  // null = unknown (offline), otherwise: is each slot still the documented
-  // default? A deployment that replaced them must not display the defaults.
+  // null = unknown (offline), otherwise: whether each required slot is set.
   const [defaults, setDefaults] = useState<{ id: boolean; password: boolean } | null>(null);
 
   useEffect(() => {
@@ -108,7 +106,7 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
         if (!cancelled) setDefaults(res);
       })
       .catch(() => {
-        /* offline — keep the documented defaults on screen */
+        /* offline — keep the configuration status unknown */
       });
     return () => {
       cancelled = true;
@@ -128,9 +126,6 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
     }
   };
 
-  const showsDefaultId = defaults === null || defaults.id;
-  const showsDefaultPassword = defaults === null || defaults.password;
-
   return (
     <div className="card w-full max-w-sm p-7">
       <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-accent-500/10 text-accent-500">
@@ -148,18 +143,18 @@ function LoginCard({ expired, onLogin }: { expired: boolean; onLogin: (token: st
         <dl className="mt-2.5 grid grid-cols-[auto_1fr] items-baseline gap-x-3 gap-y-1.5 text-xs">
           <dt className="text-slate-500">{t("admin.cred.id")}</dt>
           <dd className="font-mono font-semibold text-ink-900">
-            {showsDefaultId ? (
-              DEFAULT_ADMIN_ID
+            {defaults?.id ? (
+              <span className="font-sans font-medium text-slate-500">{t("admin.cred.configured")}</span>
             ) : (
-              <span className="font-sans font-medium text-slate-500">{t("admin.cred.custom")}</span>
+              <span className="font-sans font-medium text-slate-500">{t("admin.cred.notConfigured")}</span>
             )}
           </dd>
           <dt className="text-slate-500">{t("admin.cred.password")}</dt>
           <dd className="font-mono font-semibold text-ink-900">
-            {showsDefaultPassword ? (
-              DEFAULT_ADMIN_PASSWORD
+            {defaults?.password ? (
+              <span className="font-sans font-medium text-slate-500">{t("admin.cred.configured")}</span>
             ) : (
-              <span className="font-sans font-medium text-slate-500">{t("admin.cred.custom")}</span>
+              <span className="font-sans font-medium text-slate-500">{t("admin.cred.notConfigured")}</span>
             )}
           </dd>
         </dl>

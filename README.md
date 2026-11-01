@@ -159,16 +159,14 @@ from the bundled bank and tests are stored in the browser.
 The staff dashboard lives at **`/admin`** and opens with an **ID + password**
 pair — not a learner account.
 
-| | Default value | Environment variable |
-| --- | --- | --- |
-| Admin ID | `admin` | `ADMIN_ID` |
-| Admin password | `gonit-ishkul` | `ADMIN_PASSWORD` |
-| Session signing secret | derived from the password | `ADMIN_SECRET` (optional) |
+| Setting | Environment variable |
+| --- | --- |
+| Admin ID | `ADMIN_ID` |
+| Admin password | `ADMIN_PASSWORD` |
+| Session signing secret | `ADMIN_SECRET` (optional) |
 
-The defaults keep a zero-config deployment usable, so the sign-in screen shows
-them in a box of their own (see `.env.example`). Set `ADMIN_ID` and
-`ADMIN_PASSWORD` in Netlify before going live — once they are overridden the
-screen stops displaying the defaults and asks for the custom ones instead.
+Set `ADMIN_ID` and `ADMIN_PASSWORD` in Netlify before going live. The sign-in
+screen never displays credential values.
 
 `ADMIN_SECRET` signs the 12-hour staff session token. Leave it unset and the
 signature is derived from `ADMIN_PASSWORD`, so changing the password also

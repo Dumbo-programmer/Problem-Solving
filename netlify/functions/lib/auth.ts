@@ -1,11 +1,10 @@
 import { createHmac, randomBytes, scryptSync, timingSafeEqual } from "node:crypto";
-import { DEFAULT_ADMIN_ID, DEFAULT_ADMIN_PASSWORD } from "../../../src/lib/adminCredentials";
 
 /**
  * Credentials + session tokens.
  *
- *   • Staff login  — ADMIN_ID / ADMIN_PASSWORD environment variables (the
- *     documented defaults keep zero-config deployments usable); a12-hour
+ *   • Staff login  — ADMIN_ID / ADMIN_PASSWORD environment variables; a
+ *     12-hour
  *     HMAC-signed bearer, so the dashboard needs no sessions table.
  *   • Learner accounts — username + password, scrypt-hashed in the `users`
  *     table, with a 30-day HMAC-signed bearer.
@@ -14,13 +13,8 @@ import { DEFAULT_ADMIN_ID, DEFAULT_ADMIN_PASSWORD } from "../../../src/lib/admin
  * a learner session can never open an admin route and vice versa.
  */
 
-const DEFAULT_ID = DEFAULT_ADMIN_ID;
-const DEFAULT_PASSWORD = DEFAULT_ADMIN_PASSWORD;
 export const TOKEN_TTL_MS = 12 * 60 * 60 * 1000; // 12 hours (admin)
 export const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days (learners)
-
-/** The documented zero-config credentials (never the configured ones). */
-export { DEFAULT_ADMIN_ID, DEFAULT_ADMIN_PASSWORD };
 
 /* ------------------------------------------------------------------ */
 /* Learner account rules                                               */
@@ -105,15 +99,15 @@ export function verifyPassword(password: string, stored: string): boolean {
 /* Signing                                                             */
 /* ------------------------------------------------------------------ */
 
-function env(name: string, fallback: string): string {
+function env(name: string): string {
   const value = process.env[name];
-  return value && value.length > 0 ? value : fallback;
+  return value && value.length > 0 ? value : "";
 }
 
 /** Signing key: ADMIN_SECRET when set, otherwise derived from the password. */
 function secret(): string {
   if (process.env.ADMIN_SECRET) return process.env.ADMIN_SECRET;
-  return createHmac("sha256", env("ADMIN_PASSWORD", DEFAULT_PASSWORD))
+  return createHmac("sha256", env("ADMIN_PASSWORD"))
     .update("gonit-ishkul-admin")
     .digest("hex");
 }
@@ -131,22 +125,21 @@ function safeEqual(a: string, b: string): boolean {
 
 /** Verifies the submitted admin id + password pair in constant time. */
 export function checkCredentials(id: string, password: string): boolean {
-  const okId = safeEqual(id, env("ADMIN_ID", DEFAULT_ID));
-  const okPassword = safeEqual(password, env("ADMIN_PASSWORD", DEFAULT_PASSWORD));
+  const configuredId = env("ADMIN_ID");
+  const configuredPassword = env("ADMIN_PASSWORD");
+  if (!configuredId || !configuredPassword) return false;
+  const okId = safeEqual(id, configuredId);
+  const okPassword = safeEqual(password, configuredPassword);
   return okId && okPassword;
 }
 
 /**
- * Whether the deployment still runs on the documented default credentials.
- *
- * The admin sign-in screen uses this to show the defaults when they apply and
- * to hide them when the operator has replaced them. It never leaks a
- * configured value — only which of the two slots is still the default.
+ * Whether the deployment has configured the two required credential slots.
  */
-export function adminUsesDefaults(): { id: boolean; password: boolean } {
+export function adminCredentialStatus(): { id: boolean; password: boolean } {
   return {
-    id: env("ADMIN_ID", DEFAULT_ID) === DEFAULT_ID,
-    password: env("ADMIN_PASSWORD", DEFAULT_PASSWORD) === DEFAULT_PASSWORD
+    id: Boolean(env("ADMIN_ID")),
+    password: Boolean(env("ADMIN_PASSWORD"))
   };
 }
 

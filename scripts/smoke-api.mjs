@@ -13,6 +13,11 @@ import { startApi } from "./api-server.mjs";
 const STORE_FILE = path.join(process.cwd(), ".data", "smoke-store.json");
 rmSync(STORE_FILE, { force: true }); // fresh seed for a deterministic run
 process.env.STORE = "file";
+const adminId = process.env.ADMIN_ID;
+const adminPassword = process.env.ADMIN_PASSWORD;
+if (!adminId || !adminPassword) {
+  throw new Error("ADMIN_ID and ADMIN_PASSWORD must be set for smoke-api");
+}
 
 const results = [];
 function check(name, ok, detail = "") {
@@ -282,7 +287,7 @@ try {
   check("GET /auth/me rejects forged tokens", meBadTok.status === 401, meBadTok.data?.error);
 
   // The documented admin pair (see the admin section below for its own use).
-  const adminForKind = await call("POST", "/admin/login", { body: { id: "admin", password: "gonit-ishkul" } });
+  const adminForKind = await call("POST", "/admin/login", { body: { id: adminId, password: adminPassword } });
   const meAdminTok = await call("GET", "/auth/me", { token: adminForKind.data?.token });
   check("an admin token is not a learner session", meAdminTok.status === 401, meAdminTok.data?.error);
 
@@ -313,7 +318,7 @@ try {
   );
   check(
     "credential status never leaks the values",
-    !JSON.stringify(credStatus.data ?? {}).includes("gonit-ishkul")
+    !JSON.stringify(credStatus.data ?? {}).includes(adminPassword)
   );
   check(
     "default admin credentials are reported as default",
@@ -323,7 +328,7 @@ try {
   const wrongLogin = await call("POST", "/admin/login", { body: { id: "admin", password: "nope" } });
   check("bad admin credentials are a 401", wrongLogin.status === 401, wrongLogin.data?.error);
 
-  const login = await call("POST", "/admin/login", { body: { id: "admin", password: "gonit-ishkul" } });
+  const login = await call("POST", "/admin/login", { body: { id: adminId, password: adminPassword } });
   const token = login.data?.token;
   check("default admin credentials sign in", login.status === 200 && typeof token === "string", token ? "token issued" : JSON.stringify(login.data));
   check("token carries a future expiry", Number(login.data?.expiresAt) > Date.now(), new Date(login.data?.expiresAt ?? 0).toISOString());

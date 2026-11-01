@@ -456,13 +456,12 @@ export function logoutAdmin(): void {
 }
 
 /**
- * Whether the deployment still runs on the documented default admin
- * credentials. Booleans only — a configured secret is never sent to the
- * browser.
+ * Whether the deployment has configured the required admin credentials.
+ * Booleans only — a configured secret is never sent to the browser.
  */
 export async function adminCredentialStatus(): Promise<{ id: boolean; password: boolean }> {
   const data = await request<{ id: boolean; password: boolean }>("/admin/credentials");
-  return { id: data.id !== false, password: data.password !== false };
+  return { id: data.id === true, password: data.password === true };
 }
 
 /** Authenticated call to an /admin/* route (clears the session on 401). */

@@ -8,21 +8,23 @@ import {
   TOKEN_TTL_MS
 } from "../../netlify/functions/lib/auth";
 
-// These tests exercise the documented defaults (ADMIN_ID/ADMIN_PASSWORD are
-// not set in the test environment).
-const DEFAULT_ID = "admin";
-const DEFAULT_PASSWORD = "gonit-ishkul";
+const CONFIGURED_ID = "test-admin";
+const CONFIGURED_PASSWORD = "test-admin-password";
 
 describe("admin credentials", () => {
-  it("accepts the documented default pair", () => {
-    expect(checkCredentials(DEFAULT_ID, DEFAULT_PASSWORD)).toBe(true);
+  it("accepts credentials supplied by the environment", () => {
+    process.env.ADMIN_ID = CONFIGURED_ID;
+    process.env.ADMIN_PASSWORD = CONFIGURED_PASSWORD;
+    expect(checkCredentials(CONFIGURED_ID, CONFIGURED_PASSWORD)).toBe(true);
   });
 
   it("rejects wrong id, wrong password, and empty input", () => {
-    expect(checkCredentials("admin", "wrong")).toBe(false);
-    expect(checkCredentials("root", DEFAULT_PASSWORD)).toBe(false);
+    process.env.ADMIN_ID = CONFIGURED_ID;
+    process.env.ADMIN_PASSWORD = CONFIGURED_PASSWORD;
+    expect(checkCredentials(CONFIGURED_ID, "wrong")).toBe(false);
+    expect(checkCredentials("root", CONFIGURED_PASSWORD)).toBe(false);
     expect(checkCredentials("", "")).toBe(false);
-    expect(checkCredentials(DEFAULT_ID, "")).toBe(false);
+    expect(checkCredentials(CONFIGURED_ID, "")).toBe(false);
   });
 });
 

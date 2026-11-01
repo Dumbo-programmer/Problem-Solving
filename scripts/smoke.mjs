@@ -344,8 +344,8 @@ const hasPasswordField = await page.evaluate(() => Boolean(document.querySelecto
 check("admin login has a password field", hasPasswordField);
 // The login card must tell the owner which credentials to use.
 check(
-  "admin login shows the default credentials",
-  /ডিফল্ট|Default/i.test(adminText) && /gonit-ishkul/.test(adminText) && /\badmin\b/.test(adminText)
+  "admin login does not expose credential values",
+  !/Default credentials/i.test(adminText)
 );
 
 /* ---------- 11. learner accounts: /login renders + account journey ---------- */
