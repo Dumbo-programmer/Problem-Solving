@@ -3,13 +3,14 @@ import partA from "./problems-a.json";
 import partB from "./problems-b.json";
 import partC from "./problems-c.json";
 import partD from "./problems-d.json";
+import partE from "./problems-e.json";
 
 /**
  * The bundled problem bank. The JSON shards are authored separately
  * (by topic and archive) and merged here so the app stays fully functional even when the
  * Supabase-backed API is unreachable — the archive simply falls back to this.
  */
-export const PROBLEMS: Problem[] = [...partA, ...partB, ...partC, ...partD] as Problem[];
+export const PROBLEMS: Problem[] = [...partA, ...partB, ...partC, ...partD, ...partE] as Problem[];
 
 const byId = new Map<string, Problem>();
 for (const p of PROBLEMS) byId.set(p.id, p);

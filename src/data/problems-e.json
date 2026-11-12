@@ -1,0 +1,3314 @@
+[
+  {
+    "id": "gonit-utsob-2024-jr-bogura-1",
+    "slug": "gonit-utsob-2024-jr-bogura-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Bogura Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Bogura প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "Majed has two magic stones in his hand. If they are rubbed once, a stone will come out from each stone. How many times the stones had to be rubbed to make the stone number 100?",
+      "bn": "মাজেদের হাতে দুইটি জাদুর পাথর আছে। এদেরকে একবার ঘষা দিলে প্রত্যেকটি পাথর থেকে একটি করে পাথর বের হয়। পাথর সংখ্যা 100 হওয়ার জন্য কতবার পাথর ঘষতে হয়েছিল?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Bogura",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-bogura-2",
+    "slug": "gonit-utsob-2024-jr-bogura-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Bogura Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Bogura প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "61 has to be made by only using the number 16. Addition, subtraction, multiplication, division and square root can be used as helpers. Minimum how many 16^{'}s will be needed for this? (Avoid negative numbers)",
+      "bn": "শুধুমাত্র 16 সংখ্যাটি ব্যবহার করে 61 বানাতে হবে। সহায়ক হিসেবে যোগ, বিয়োগ, গুণ, ভাগ এবং বর্গমূল ব্যবহার করা যাবে। এটা করতে সর্বনিম্ন কয়টি 16 প্রয়োজন হবে? (ঋণাত্মক সংখ্যা উপেক্ষা করো)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Bogura",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-bogura-3",
+    "slug": "gonit-utsob-2024-jr-bogura-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Bogura Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Bogura প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "How many qubic factors does the number 2^{20} × 3^{10}× 5^{8} have?",
+      "bn": "2^{20} × 3^{10}× 5^{8} সংখ্যাটির কতগুলো পূর্ণ ঘন উৎপাদক আছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Bogura",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-bogura-4",
+    "slug": "gonit-utsob-2024-jr-bogura-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Bogura Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Bogura প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "OA= 2 and in the square OBDF, OD= 8. The area of the shadowed region can be written as a−π/b. Find the value of a+ b. ![figure](/images/bogura_q04.png)",
+      "bn": "OA= 2 এবং OBDF বর্গে OD= 8. কালো অংশটির ক্ষেত্রফলকে a−π/b আকারে লেখা যায়। a+ b এর মান নির্ণয় করো। ![figure](/images/bogura_q04.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Bogura",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-bogura-5",
+    "slug": "gonit-utsob-2024-jr-bogura-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Bogura Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Bogura প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "Emon is trapped inside a glass sphere. He stood against the surface of the sphere and held a laser beam so that it makes a particular angle with the inner surface of the sphere. If α= 60°, then the light reflects 2 times on the surface of the sphere and returns to Emon. If α= 20°, then minimum how many number of turns will the light take to return to Emon?",
+      "bn": "ইমন একটি কাঁচের গোলকের ভিতর বন্দি। সে গোলকের পৃষ্ঠের সাথে দাঁড়িয়ে একটি লেজার লাইট এমনভাবে ধরলো যেন তা গোলকের ভিতরের পৃষ্ঠে একটি নির্দিষ্ট কোণে বাঁক হয়। যদি α= 60° হয়, তাহলে লাইটটি গোলকের পৃষ্ঠে 2 বার বাঁক নিয়ে ইমনের কাছে ফিরে আসে। α= 20° হলে, লাইটটি সর্বনিম্ন কতবার বাঁক নিয়ে ইমনের কাছে ফিরে আসবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Bogura",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-bogura-6",
+    "slug": "gonit-utsob-2024-jr-bogura-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Bogura Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Bogura প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "The three circles in the figure externally touches each other. The radius of the circles are 8. The area of the shaded region can be represented by a√b−cπ. Find the value of a+ b+ c. ![figure](/images/bogura_q06.png)",
+      "bn": "চিত্রের তিনটি সমান বৃত্তই একে অপরকে বহিঃস্পর্শ করে। বৃত্তগুলোর ব্যাসার্ধ 8। গাঢ়কৃত অংশের ক্ষেত্রফলকে a√b− cπ আকারে প্রকাশ করা যায়। a+ b+ c এর মান নির্ণয় করো। ![figure](/images/bogura_q06.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Bogura",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-bogura-7",
+    "slug": "gonit-utsob-2024-jr-bogura-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Bogura Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Bogura প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "A wooden cube, n unit on a side, is painted red on all faces and then cut into n^{3} unit cubes. Exactly one-eighth portions of the total number of faces of unit cubes are red. How many sides of the smaller cubes need to be newly painted red, so that exactly one-fourth portion of the total number of faces of the unit cubes are red?",
+      "bn": "একটি কাঠের কিউব, যার এক বাহু n একক, তার সবগুলো তলে লাল রঙ করা হলো এবং n^{3} টি একক কিউব করে কাটা হলো একক কিউবগুলোর তলের মোট ক্ষেত্রফলের ঠিক এক-অষ্টমাংশ লাল। একক কিউবগুলোর কত পাশে নতুন করে লাল রঙ করতে হবে, যেন সেগুলোর মোট পাশের এক-চতুর্থাংশ লাল হয়?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Bogura",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-bogura-8",
+    "slug": "gonit-utsob-2024-jr-bogura-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Bogura Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Bogura প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "Niloy drew a pattern similar to that shown in the figure, the horizontal distance between the points M and N is ‘a’ and the vertical distance between the points M and N is ‘b’. This pattern is drawn from 1 to 2024 and the value of a, b is extracted. Find the value of b/a in the latter case. ![figure](/images/bogura_q08.png)",
+      "bn": "নিলয় চিত্রের মতো প্যাটার্ন আঁকলে M বিন্দু এবং N বিন্দুর মাঝে পাশাপাশি দূরত্ব a এবং উপরে নিচে দূরত্ব b পায়। এই প্যাটার্নে 1 থেকে 2024 পর্যন্ত আঁকা হলো এবং a, b এর মান বের করা হলো। পরবর্তী ক্ষেত্রে b/a এর মান নির্ণয় করো। ![figure](/images/bogura_q08.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Bogura",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-barishal-1",
+    "slug": "gonit-utsob-2024-jr-barishal-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Barishal Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Barishal প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "Maximum how many pieces can be made by straightly cutting a cake 2 times?",
+      "bn": "একটি কেক-কে সরলরৈখিকভাবে 2 বার কেটে সর্বোচ্চ কত ভাগে ভাগ করা যাবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Barishal",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-barishal-2",
+    "slug": "gonit-utsob-2024-jr-barishal-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Barishal Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Barishal প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "If the sum of 3 consecutive integers is 216, then find the largest number.",
+      "bn": "3 টি ক্রমিক পূর্ণসংখ্যার যোগফল 216 হলে, সবচেয়ে বড় সংখ্যাটি কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Barishal",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-barishal-3",
+    "slug": "gonit-utsob-2024-jr-barishal-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Barishal Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Barishal প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "If the largest angle in a triangle is 80° , then find the least possible value of the smallest angle.",
+      "bn": "একটি ত্রিভুজের বৃহত্তম কোণ 80° হলে, ক্ষুদ্রতম কোণের সর্বনিম্ন সম্ভাব্য মান নির্ণয় কর।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Barishal",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-barishal-4",
+    "slug": "gonit-utsob-2024-jr-barishal-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Barishal Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Barishal প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "A dragon burns 5 trees in every 10^{th} minute. Two warriors- Majed and Emon are standing with guns in their hands. Majed fires at every 6 minutes and Emon fires at every 14 minutes. The problem is, the dragon gets hurt only when both of them fire at the same time. If the dragon flies away after getting hurt 3 times, how many trees have the dragon burnt?",
+      "bn": "একটি ড্রাগন প্রতি 10 তম মিনিটে 5 টা গাছ পুড়িয়ে দেয়। মাজেদ এবং ইমন- দুজন যোদ্ধা বন্দুক হাতে দাঁড়িয়ে আছে। মাজেদ প্রতি 6 মিনিটে এবং ইমন প্রতি 14 মিনিটে গুলি করতে পারে। সমস্যা হচ্ছে, দুজন একই সাথে গুলি না করলে ড্রাগন টি আঘাত প্রাপ্ত হয় না। যদি 3 বার আঘাত প্রাপ্ত হয়ে ড্রাগনটি উড়ে যায়, তাহলে ড্রাগনটি মোট কতগুলো গাছ পুড়িয়ে ফেলেছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Barishal",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-barishal-5",
+    "slug": "gonit-utsob-2024-jr-barishal-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Barishal Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Barishal প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "Niloy’s birthday was on Tuesday, 21 July, 2020. In which nearest upcoming year will his birthday be on Saturday?",
+      "bn": "2020 সালের, 21 জুলাই, মঙ্গলবার নিলয়ের জন্মদিন ছিল। পরের নিকটতম কোন বছরে তার জন্মদিন শনিবারে হবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Barishal",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-barishal-6",
+    "slug": "gonit-utsob-2024-jr-barishal-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Barishal Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Barishal প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "Moma has 32 apples. In how many ways can she share them with Sadia and Metheela, so that each of the three people gets at least 5 apples?",
+      "bn": "মোমার কাছে 32 টা আপেল আছে। আপেলগুলো সে কতভাবে সাদিয়া ও মিথিলার সাথে ভাগাভাগি করতে পারে যেন তিনজনের প্রত্যেকেই কমপক্ষে 5 টি করে আপেল পায়?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Barishal",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-barishal-7",
+    "slug": "gonit-utsob-2024-jr-barishal-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Barishal Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Barishal প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "Here, there is an equilateral triangle inside the regular hexagon as shown in this figure. If the area of dark region is 9√3 , then find the perimeter of the equilateral triangle. ![figure](/images/barishal_q07.png)",
+      "bn": "এখানে একটি নিয়মিত সুষম ষড়ভুজ এর মধ্যে চিত্রের মত করে একটি সমবাহু ত্রিভুজ আছে। গাঢ় অংশের ক্ষেত্রফল 9√3 হলে,সমবাহু ত্রিভুজটির পরিসীমা নির্ণয় কর। ![figure](/images/barishal_q07.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Barishal",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-barishal-8",
+    "slug": "gonit-utsob-2024-jr-barishal-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Barishal Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Barishal প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "n = 3! + 5! + 7!+. . . +2023!, what is the remainder when n is divided by 11? Here, k! means the products of all integers from 1 to k; In other words, k! = 1× 2× 3× … × (k−1) × k",
+      "bn": "n = 3! + 5! + 7!+. . . +2023!, n কে 11 দিয়ে ভাগ করলে ভাগশেষ কত হবে? এখানে, k! হ্লো 1 থেকে k পর্যন্ত সকল পূর্ণসংখ্যার গুণফল; অর্থাৎ, k! = 1× 2× 3× … × (k−1) × k"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Barishal",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-chattogram-1",
+    "slug": "gonit-utsob-2024-jr-chattogram-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Chattogram Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Chattogram প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "Zihan went to the store to buy paper and pen. The price of paper is 9 taka and the price of pen is 4 taka. If Zihan had 97 taka, what is the maximum number of papers he could buy so that he had 12 taka left?",
+      "bn": "জিহান কাগজ ও কলম কিনতে দোকানে গেলো। কাগজের দাম 9 টাকা এবং কলমের দাম 4 টাকা । জিহানের কাছে 97 টাকা থাকলে সে সর্বোচ্চ কতটি কাগজ কিনতে পারবে যেন তার কাছে 12 টাকা বাকি থাকে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Chattogram",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-chattogram-2",
+    "slug": "gonit-utsob-2024-jr-chattogram-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Chattogram Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Chattogram প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "A is 70% of B, B is 50% of C, C is 40% of D. Then what percentage of D is A?",
+      "bn": "A হ্লো B এর 70% , B হ্লো C এর 50% , C হ্লো D এর 40% । তাহলে A, D এর কত শতাংশ?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Chattogram",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-chattogram-3",
+    "slug": "gonit-utsob-2024-jr-chattogram-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Chattogram Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Chattogram প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "n! (n factorial) is the product of all integers from 1 to n. Arif added 3 to the factorial of a number and found it to be a perfect cube number. What is the maximum number that Arif can choose?",
+      "bn": "n! (n ফ্যাক্টরিয়াল) হলো 1 থেকে n পর্যন্ত সকল পূর্ণসংখ্যার গুণফল । আরিফ একটি সংখ্যার ফ্যাক্টরিয়ালের সাথে 3 যোগ করে দেখলো সেটি একটি পূর্ণ ঘনসংখ্যা হয়। আরিফের বাছাই করা সংখ্যাটি সর্বোচ্চ কত হতে পারে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Chattogram",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-chattogram-4",
+    "slug": "gonit-utsob-2024-jr-chattogram-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Chattogram Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Chattogram প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "Emon has a huge solid cylinder with a radius of 512 units. He wants to cut the cylinder from the outer side in a way such that in the end, there remains one solid cylinder and some pipes whose external radii are being half sequentially. If the radii of the cylinder and the pipes are integers, then maximum how many pipes are possible to get?",
+      "bn": "ইমনের কাছে 512 একক ব্যাসার্ধের একটি বিশাল নিরেট সিলিন্ডার আছে। সে সিলিন্ডারকে বাইরে থেকে এমনভাবে কাটতে চায় যেন শেষে একটিমাত্র নিরেট সিলিন্ডার থাকে, এবং কাটার পর যে কয়েকটি পাইপ পাওয়া যায় তাদের বহিঃব্যাসার্ধ ক্রমান্বয়ে অর্ধেক হতে থাকে। যদি পাইপ এবং সিলিন্ডারের ব্যাসার্ধ পূর্ণসংখ্যা হয়, তাহলে সর্বোচ্চ কয়টি পাইপ পাওয়া সম্ভব?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Chattogram",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-chattogram-5",
+    "slug": "gonit-utsob-2024-jr-chattogram-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Chattogram Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Chattogram প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "ABCD is a cyclic trapezoid where AB||CD, AB= 4, CD= 6 and the perpendicular distance between AB and CD is 5. If the radius of the circle, where the ABCD trapezoid inscribed in, is √x, then find the value of x.",
+      "bn": "ABCD একটি বৃত্তস্থ ট্রাপিজিয়াম, যেখানে AB||CD, AB= 4, CD= 6 এবং AB ও CD এর লম্ব দূরত্ব 5। ABCD ট্রাপিজিয়ামের পরিবৃত্তের ব্যাসার্ধ √x হলে, x এর মান কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Chattogram",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-chattogram-6",
+    "slug": "gonit-utsob-2024-jr-chattogram-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Chattogram Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Chattogram প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "How many pairs of different prime numbers within 100 exist such that the difference of their squares is a perfect square number? (Here, consider (a,b) and (b,a) as the same pair.)",
+      "bn": "100 এর চেয়ে ছোট ভিন্ন ভিন্ন মৌলিক সংখ্যার এমন কতগুলো জোড়া আছে যাদের বর্গের বিয়োগফল একটি বর্গসংখ্যা? (এখানে, (a,b) এবং (b,a) দুটি একই জোড়া হিসেবে বিবেচনা কর।)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Chattogram",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-chattogram-7",
+    "slug": "gonit-utsob-2024-jr-chattogram-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Chattogram Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Chattogram প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "Payel and Pratyya are playing a number game. At each move, Payel takes a positive integer of his choice and writes the last digit of its square in a secret diary. What is the minimum number of moves after which Pratyya will be able to say with certainty that at least one digit has been written more than once in Payel's secret diary?",
+      "bn": "পায়েল ও প্রত্যয় একটি সংখ্যার গেম খেলছে। প্রতি চালে পায়েল নিজের ইচ্ছামত একটি ধনাত্মক পূর্ণসংখ্যা নেয়, এবং সেটির বর্গের শেষ অঙ্কটি একটি গোপন খাতায় লিখে রাখে। সর্বনিম্ন কত চাল পর প্রত্যয় নিশ্চিতভাবে বলতে পারবে পায়েলের গোপন খাতায় অন্তত একটি অংক একাধিকবার লেখা হয়েছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Chattogram",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-chattogram-8",
+    "slug": "gonit-utsob-2024-jr-chattogram-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Chattogram Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Chattogram প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "f(x+ 1, y) − f(x, y) = x, f(x, y) −f(x, y+ 1) = y, f(0, 0) = 0। If f(a, b) = 101, then find the minimum value of a+ b.",
+      "bn": "f(a, b) = 101 হলে, a+ b এর সর্বনিম্ন মান বের করো। f(x+ 1, y) − f(x, y) = x, f(x, y) −f(x, y+ 1) = y, f(0, 0) = 0."
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Chattogram",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-cumilla-1",
+    "slug": "gonit-utsob-2024-jr-cumilla-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Cumilla Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Cumilla প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "The values of the sides of two squares are 5 and 9 respectively. Find the difference of the perimeter of larger square and smaller square.",
+      "bn": "দুইটি বর্গের বাহুগুলোর দৈর্ঘ্য যথাক্রমে 5 এবং 9। বৃহত্তম বর্গক্ষেত্র এবং ক্ষুদ্রতম বর্গক্ষেত্র দুইটির পরিসীমার পার্থক্য কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Cumilla",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-cumilla-2",
+    "slug": "gonit-utsob-2024-jr-cumilla-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Cumilla Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Cumilla প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "n is a positive integer. The LCM of n and 80 is 1200, and the GCD of n and 80 is 20. Find the value of n.",
+      "bn": "n একটি ধনাত্নক পূর্ণসংখ্যা। n ও 80 এর ল.সা.গু 1200 এবং n ও 80 এর গ.সা.গু 20। n এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Cumilla",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-cumilla-3",
+    "slug": "gonit-utsob-2024-jr-cumilla-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Cumilla Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Cumilla প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "Tahmid went to a strange country where 3-digit password are used. If the person is a girl, the first digit of the password will be 2 and if the person is a boy, the first digit of the password will be 1. And 0, 1, 2 cannot be used for the remaining digits. Then how many passwords can be used in that strange country?",
+      "bn": "তাহমিদ একটা আজব দেশে গিয়েছে, যেখানে সবাই 3 অংকের পাসওয়ার্ড নম্বর ব্যবহার করা হয়। পাসওয়ার্ড ব্যবহারকারী মেয়ে হলে প্রথম অংক হবে 2 এবং ছেলে হলে প্রথম অংকটি হবে 1। বাকি ডিজিট গুলিতে 0, 1, 2 ব্যবহার করা যাবে না। তাহলে সেই দেশে মোট কতগুলি পাসওয়ার্ড ব্যবহার করা সম্ভব?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Cumilla",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-cumilla-4",
+    "slug": "gonit-utsob-2024-jr-cumilla-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Cumilla Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Cumilla প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "Find the value of (2^{2024}−2^{2020})/(2^{2020}−2^{2016}) .",
+      "bn": "(2^{2024} − 2^{2020})/(2^{2020} − 2^{2016}) এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Cumilla",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-cumilla-5",
+    "slug": "gonit-utsob-2024-jr-cumilla-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Cumilla Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Cumilla প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "How many positive integers are there that are factors of at least one of 12^{12}, 14^{12} and 18^{9}?",
+      "bn": "এমন কতগুলো ধনাত্মক পূর্ণসংখ্যা আছে যারা 12^{12}, 14^{12} এবং 18^{9} এর অন্তত যেকোনো একটি সংখ্যার উৎপাদক?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Cumilla",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-cumilla-6",
+    "slug": "gonit-utsob-2024-jr-cumilla-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Cumilla Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Cumilla প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "In this figure, there are some circular shapes with hollow and without hollow. The outer perimeter of a hollow shape is twice the outer perimeter of its previous hollow shape. The ratio of the inner radius and the outer radius of the hollow shapes is 1:2. The perimeter of any solid shape is the average of the outer perimeter of the hollow shape on its two sides. If you take any three figures in such a way that two hollow shapes are on both sides, then the ratio of the area of the black part of the second and first shapes is a and the ratio of the area of the black part of the third and second shapes is b. Determine the value of a× b. ![figure](/images/cumilla_q06.png)",
+      "bn": "চিত্রে কিছু ফাঁপা আর কিছু নিরেট বৃত্তাকার আকৃতি দেখানো হয়েছে। একটি ফাঁপা আকৃতির বহিঃস্থ পরিসীমা তার আগের ফাঁপা আকৃতির বহিঃস্থ পরিসীমার দ্বিগুণ। ফাঁপা আকৃতিগুলোর অন্তঃব্যাসার্ধ ও বহিঃব্যাসার্ধের অনুপাত 1:2। যেকোনো নিরেট আকৃতির পরিসীমা তার দুইপাশের ফাঁপা আকৃতির বহিঃস্থ পরিসীমা এর গড়ের মানের সমান। যদি পাশাপাশি তিনটি চিত্র এমনভাবে নেওয়া হয় যেনো দুইপাশে দুইটি ফাঁপা আকৃতি থাকে, তাহলে দ্বিতীয় ও প্রথম আকৃতির কালো অংশের ক্ষেত্রফলের অনুপাত a এবং তৃতীয় ও দ্বিতীয় আকৃতির কালো অংশের ক্ষেত্রফলের অনুপাত b হয়। a× b এর মান নির্ণয় করো। ![figure](/images/cumilla_q06.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Cumilla",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-cumilla-7",
+    "slug": "gonit-utsob-2024-jr-cumilla-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Cumilla Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Cumilla প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "Triangle AEF is an equilateral triangle inscribed in square ABCD. If the ratio of the areas of triangle AEF and square ABCD can be written as q√p−p, find the value of p+ q. ![figure](/images/cumilla_q07.png)",
+      "bn": "AEF ত্রিভুজটি ABCD বর্গক্ষেত্রে অন্তর্লিখিত একটি সমবাহু ত্রিভুজ। ত্রিভুজ AEF ও বর্গ ABCD এর ক্ষেত্রফলের অনুপাতকে q√p−p আকারে লিখা গেলে p+ q এর মান নির্ণয় করো। ![figure](/images/cumilla_q07.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Cumilla",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-cumilla-8",
+    "slug": "gonit-utsob-2024-jr-cumilla-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Cumilla Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Cumilla প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "1^{3}+ 2^{3}+ 3^{3}+. . . +n^{3} is divisible by n+ 3, find the maximum value of n.",
+      "bn": "1^{3}+ 2^{3}+ 3^{3}+. . . +n^{3} যদি n+ 3 দ্বারা নিঃশেষে বিভাজ্য হয়। n এর সর্বোচ্চ মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Cumilla",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dhaka-1",
+    "slug": "gonit-utsob-2024-jr-dhaka-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dhaka Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dhaka প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "In a class, 3/7 of total students like number theory and 4/5 of total students like geometry. What is the minimum number of students who like both?",
+      "bn": "কোনো শ্রেণির 3/7 অংশ শিক্ষার্থী সংখ্যাতত্ত্ব এবং 4/5 অংশ শিক্ষার্থী জ্যামিতি পছন্দ করে। উভয়ই পছন্দ করে এমন শিক্ষার্থীর সর্বনিম্ন সংখ্যা কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dhaka",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dhaka-2",
+    "slug": "gonit-utsob-2024-jr-dhaka-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dhaka Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dhaka প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "How many positive integers less than 2024 can be written as 2^{x}−2^{y}, where x and y are non-negative integers? (Example: 2^{4}−2^{1}= 14; so 14 is such a number)",
+      "bn": "2024 এর চেয়ে ছোট কতগুলো ধনাত্মক পূর্ণসংখ্যাকে 2^{x}−2^{y} আকারে লেখা যায়, যেখানে x ও y অঋণাত্মক পূর্ণসংখ্যা? (যেমনঃ 2^{4}−2^{1}= 14; তাই 14 হলো এমন একটি সংখ্যা)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dhaka",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dhaka-3",
+    "slug": "gonit-utsob-2024-jr-dhaka-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dhaka Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dhaka প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "a, b and c are three different integers from 1 to 2024 such that a^{b}+ b^{c}+ c^{a} is an even number. Find the maximum possible value of a+ b+ c.",
+      "bn": "a, b ও c হ্লো 1 থেকে 2024 পর্যন্ত সংখ্যাগুলোর মধ্যে তিনটি ভিন্ন পূর্ণসংখ্যা যেন a^{b}+ b^{c}+ c^{a} একটি জোড় সংখ্যা হয়। a+ b+ c এর সম্ভাব্য সর্বোচ্চ মান নির্ণয় করো ।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dhaka",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dhaka-4",
+    "slug": "gonit-utsob-2024-jr-dhaka-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dhaka Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dhaka প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "How many integers from 1 to 2024 can be written simultaneously as 4a+ 19 and 6b+ 21, where a, b are integers?",
+      "bn": "1 থেকে 2024 পর্যন্ত সংখ্যাগুলোর মধ্যে এমন কয়টি পূর্ণসংখ্যা পাওয়া যাবে, যাদেরকে একই সাথে 4a+ 19 এবং 6b+ 21 আকারে লেখা যায়, যেখানে a, b পূর্ণসংখ্যা?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dhaka",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dhaka-5",
+    "slug": "gonit-utsob-2024-jr-dhaka-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dhaka Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dhaka প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "If the area of the shaded region is 10√3 , then the length of each side of the regular hexagons can be written as a√b. Find the value of a+ b. ![figure](/images/dhaka_q05.png)",
+      "bn": "ছায়াকৃত অংশের ক্ষেত্রফল 10√3 হলে, সুষম ষড়ভুজের বাহুর দৈর্ঘ্যকে a√b আকারে লেখা যায়। a+ b এর মান নির্ণয় করো। ![figure](/images/dhaka_q05.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dhaka",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dhaka-6",
+    "slug": "gonit-utsob-2024-jr-dhaka-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dhaka Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dhaka প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "If a, b, c, d are integers in the equation √(a+ b) + √(c+ d) = √6250, then find the minimum value of a+ b+ c+ d.",
+      "bn": "√(a+ b) + √(c+ d) = √6250 সমীকরণটিতে a, b, c, d পূর্ণসংখ্যা হলে, a+ b+ c+ d এর সর্বনিম্ন মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dhaka",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dhaka-7",
+    "slug": "gonit-utsob-2024-jr-dhaka-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dhaka Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dhaka প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "Samin and Swargo use only 0 and 1 for counting. They do not know of any other digits. Samin has a number that has 2024 digits and all of its digits are 1. Samin squared that number and gave it to Swargo. Then Swargo subtracted 1 from that and gave it to you. How many 1’s are there in the number you have?",
+      "bn": "সামিন ও স্বর্গ গণনার করার জন্য শুধু 0 আর 1 ব্যবহার করে। অন্য কোনো অঙ্ক তারা চিনে না। সামিনের কাছে 2024 অঙ্কের একটি সংখ্যা আছে, যার সবগুলো অন্কই 1। সামিন সে সংখ্যাটিকে বর্গ করে স্বর্গকে দিল এবং স্বর্গ তা থেকে 1 বিয়োগ করে তোমাকে দিল। তোমার কাছে থাকা সংখ্যাটিতে কয়টি 1 আছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dhaka",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dhaka-8",
+    "slug": "gonit-utsob-2024-jr-dhaka-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dhaka Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dhaka প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "∆ABC is a right-angled triangle where ∠B = 90°; ∠EAF = 2∠BAE = 2∠CAF and EF = CF. Find the value of ∠EAF. ![figure](/images/dhaka_q08.png)",
+      "bn": "∆ABC একটি সমকোণী ত্রিভুজ যার ∠B = 90°; ∠EAF = 2∠BAE = 2∠CAF এবং EF = CF। ∠EAF এর মান নির্ণয় করো। ![figure](/images/dhaka_q08.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dhaka",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dinajpur-1",
+    "slug": "gonit-utsob-2024-jr-dinajpur-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dinajpur Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dinajpur প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "In a 20 over cricket match, Bangladesh scored 160 runs. Find the average run per over in that match.",
+      "bn": "একটি 20 ওভারের ক্রিকেট ম্যাচে বাংলাদেশের মোট রান 160। সেই ম্যাচে প্রতি ওভারে গড়ে কত রান করা হয়েছিল?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dinajpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dinajpur-2",
+    "slug": "gonit-utsob-2024-jr-dinajpur-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dinajpur Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dinajpur প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "Shithil likes juice a lot. He has three separate glasses with Mango juice, Orange juice and Lychee juice. He takes 600 ml Mango juice, 320 ml Orange juice and 300 ml Lychee juice and mixes them. He wants to make a mixture with Mango juice, Orange juice and Lychee juice with the ratio of 12:7:6. Then how much more Orange juice needs to be added to get the desired ratio?",
+      "bn": "শিথিল জুস খুব পছন্দ করে। সে তিনটি গ্লাসে আলাদাভাবে আমের জুস, কমলার জুস এবং লিচুর জুস নিয়ে বসেছে। সে 600 মিলি আমের জুস, 320 মিলি কমলার জুস, 300 মিলি লিচুর জুস নিয়ে একটি মিশ্রণ তৈরি করলো। এখানে মিশ্রণে আমের জুস, কমলার জুস ও লিচুর জুসের অনুপাত 12:7:6 করতে চাইলে কত মিলি অতিরিক্ত কমলার জুস যোগ করতে হবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dinajpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dinajpur-3",
+    "slug": "gonit-utsob-2024-jr-dinajpur-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dinajpur Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dinajpur প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "In this figure, AB||CD and ∠DAB=∠ABC. If AD=5 then, find the value of the side BC. ![figure](/images/dinajpur_q03.png)",
+      "bn": "নিচের চিত্রে, AB||CD এবং ∠DAB=∠ABC. AD=5 হলে, BC বাহুর মান নির্ণয় করো। ![figure](/images/dinajpur_q03.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dinajpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dinajpur-4",
+    "slug": "gonit-utsob-2024-jr-dinajpur-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dinajpur Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dinajpur প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "x, y, z are three odd numbers such that x! × y! × z! = 10! . Find the value of x+y+z. f(x+1) = f(x) + x^{2 }+ x + 1;",
+      "bn": "x, y, z এমন তিনটি বিজোড় সংখ্যা যেন x! × y! × z! = 10! হয়। x+y+z এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dinajpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dinajpur-5",
+    "slug": "gonit-utsob-2024-jr-dinajpur-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dinajpur Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dinajpur প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "f(1) = 1; f(55) = ?",
+      "bn": "f(1) = 1; f(55) = ?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dinajpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dinajpur-6",
+    "slug": "gonit-utsob-2024-jr-dinajpur-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dinajpur Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dinajpur প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "ABC is a triangle where P and Q are two points on AB and AC respectively. Here, AP=3/7× AB and AQ=4/9× AC. Sides BQ and CP intersects each other at point O. When AO is extended, it intersects BC at point R. If BR/BC can be expressed as x/y where x, y are coprime, then find the value of x+ y.",
+      "bn": "ABC ত্রিভুজের বাহু AB ও AC এর উপর যথাক্রমে P ও Q বিন্দু দুইটি এমনভাবে রয়েছে যেন AP=3/7× AB এবং AQ=4/9× AC হয়। BQ ও CP বাহুদ্বয় পরস্পরকে O বিন্দুতে ছেদ করে। AO এর বর্ধিতাংশ BC কে R বিন্দুতে ছেদ করে। BR/BC কে x/y আকারে লেখা যায় যেখানে x, y পরস্পর সহমৌলিক সংখ্যা, x+ y এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dinajpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dinajpur-7",
+    "slug": "gonit-utsob-2024-jr-dinajpur-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dinajpur Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dinajpur প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "If p, q, r are three distinct prime numbers and each greater than 3, then what is the largest possible positive integer by which (p−q)(q−r)(r−p) is completely divisible?",
+      "bn": "যদি p, q, r সংখ্যাগুলো 3 থেকে বড় যেকোনো তিনটি ভিন্ন মৌলিক সংখ্যা হয়, তাহলে সবচেয়ে বড় কোন ধনাত্মক পূর্ণসংখ্যা দ্বারা (p−q)(q−r)(r−p) সর্বদাই নিঃশেষে বিভাজ্য হবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dinajpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-dinajpur-8",
+    "slug": "gonit-utsob-2024-jr-dinajpur-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Dinajpur Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Dinajpur প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "Anupom has a magic box that converts a number into its square the next day. Anupom wanted to play with the box. On the first day, he kept 23 in the box. The next day, he got a number from the box. He discarded all the digits except the last two (least significant) and inserted it again in the box. If he continued the process everyday, then what number would he keep in the box on the 2024th day?",
+      "bn": "অনুপমের কাছে একটি জাদুর বাক্স আছে, যেখানে কোনো সংখ্যা রাখলেই পরেরদিন তা সংখ্যাটির বর্গের সমান হয়ে যায়। অনুপম সেই বাক্সটি নিয়ে খেলতে ভালোবাসে । সে প্রথমদিন সেই বাক্সে 23 রাখে এবং পরেরদিন যে সংখ্যা পায়, তার শেষ দুই অংক বাদে বাকি অংকগুলো ফেলে দেয় এবং অবশিষ্ট সংখ্যাটিকে আবার বাক্সে রাখে। এভাবে প্রতিদিন এই কাজ করলে, 2024 তম দিনে সে কোন সংখ্যাটি বাক্সে রাখবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Dinajpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-faridpur-1",
+    "slug": "gonit-utsob-2024-jr-faridpur-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Faridpur Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Faridpur প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "Zihan went to the store to buy paper and pen. The price of paper is 9 taka and the price of pen is 4 taka. If Zihan had 97 taka, what is the maximum number of papers he could buy so that he had 12 taka left?",
+      "bn": "জিহান কাগজ ও কলম কিনতে দোকানে গেলো। কাগজের দাম 9 টাকা এবং কলমের দাম 4 টাকা । জিহানের কাছে 97 টাকা থাকলে সে সর্বোচ্চ কতটি কাগজ কিনতে পারবে যেন তার কাছে 12 টাকা বাকি থাকে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Faridpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-faridpur-2",
+    "slug": "gonit-utsob-2024-jr-faridpur-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Faridpur Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Faridpur প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "A is 70% of B, B is 50% of C, C is 40% of D. Then what percentage of D is A?",
+      "bn": "A হ্লো B এর 70% , B হ্লো C এর 50% , C হ্লো D এর 40% । তাহলে A, D এর কত শতাংশ?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Faridpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-faridpur-3",
+    "slug": "gonit-utsob-2024-jr-faridpur-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Faridpur Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Faridpur প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "n! (n factorial) is the product of all integers from 1 to n. Arif added 3 to the factorial of a number and found it to be a perfect cube number. What is the maximum number that Arif can choose?",
+      "bn": "n! (n ফ্যাক্টরিয়াল) হলো 1 থেকে n পর্যন্ত সকল পূর্ণসংখ্যার গুণফল । আরিফ একটি সংখ্যার ফ্যাক্টরিয়ালের সাথে 3 যোগ করে দেখলো সেটি একটি পূর্ণ ঘনসংখ্যা হয়। আরিফের বাছাই করা সংখ্যাটি সর্বোচ্চ কত হতে পারে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Faridpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-faridpur-4",
+    "slug": "gonit-utsob-2024-jr-faridpur-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Faridpur Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Faridpur প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "Emon has a huge solid cylinder with a radius of 512 units. He wants to cut the cylinder from the outer side in a way such that in the end, there remains one solid cylinder and some pipes whose external radii are being half sequentially. If the radii of the cylinder and the pipes are integers, then maximum how many pipes are possible to get?",
+      "bn": "ইমনের কাছে 512 একক ব্যাসার্ধের একটি বিশাল নিরেট সিলিন্ডার আছে। সে সিলিন্ডারকে বাইরে থেকে এমনভাবে কাটতে চায় যেন শেষে একটিমাত্র নিরেট সিলিন্ডার থাকে, এবং কাটার পর যে কয়েকটি পাইপ পাওয়া যায় তাদের বহিঃব্যাসার্ধ ক্রমান্বয়ে অর্ধেক হতে থাকে । যদি পাইপ এবং সিলিন্ডারের ব্যাসার্ধ পূর্ণসংখ্যা হয়, তাহলে সর্বোচ্চ কয়টি পাইপ পাওয়া সম্ভব?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Faridpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-faridpur-5",
+    "slug": "gonit-utsob-2024-jr-faridpur-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Faridpur Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Faridpur প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "ABCD is a cyclic trapezoid where AB||CD, AB= 4, CD= 6 and the perpendicular distance between AB and CD is 5. If the radius of the circle, where the ABCD trapezoid inscribed in, is √x, then find the value of x.",
+      "bn": "ABCD একটি বৃত্তস্থ ট্রাপিজিয়াম, যেখানে AB||CD, AB= 4, CD= 6 এবং AB ও CD এর লম্ব দূরত্ব 5। ABCD ট্রাপিজিয়ামের পরিবৃত্তের ব্যাসার্ধ √x হলে, x এর মান কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Faridpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-faridpur-6",
+    "slug": "gonit-utsob-2024-jr-faridpur-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Faridpur Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Faridpur প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "How many pairs of different prime numbers within 100 exist such that the difference of their squares is a perfect square number? (Here, consider (a,b) and (b,a) as the same pair.)",
+      "bn": "100 এর চেয়ে ছোট ভিন্ন ভিন্ন মৌলিক সংখ্যার এমন কতগুলো জোড়া আছে যাদের বর্গের বিয়োগফল একটি বর্গসংখ্যা? (এখানে, (a,b) এবং (b,a) দুটি একই জোড়া হিসেবে বিবেচনা কর।)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Faridpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-faridpur-7",
+    "slug": "gonit-utsob-2024-jr-faridpur-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Faridpur Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Faridpur প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "Payel and Pratyya are playing a number game. At each move, Payel takes a positive integer of his choice and writes the last digit of its square in a secret diary. What is the minimum number of moves after which Pratyya will be able to say with certainty that at least one digit has been written more than once in Payel's secret diary?",
+      "bn": "পায়েল ও প্রত্যয় একটি সংখ্যার গেম খেলছে। প্রতি চালে পায়েল নিজের ইচ্ছামত একটি ধনাত্মক পূর্ণসংখ্যা নেয়, এবং সেটির বর্গের শেষ অঙ্কটি একটি গোপন খাতায় লিখে রাখে। সর্বনিম্ন কত চাল পর প্রত্যয় নিশ্চিতভাবে বলতে পারবে পায়েলের গোপন খাতায় অন্তত একটি অংক একাধিকবার লেখা হয়েছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Faridpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-faridpur-8",
+    "slug": "gonit-utsob-2024-jr-faridpur-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Faridpur Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Faridpur প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "f(x+ 1, y) − f(x, y) = x, f(x, y) −f(x, y+ 1) = y, f(0, 0) = 0। If f(a, b) = 101, then find the minimum value of a+ b.",
+      "bn": "f(a, b) = 101 হলে, a+ b এর সর্বনিম্ন মান বের করো। f(x+ 1, y) − f(x, y) = x, f(x, y) −f(x, y+ 1) = y, f(0, 0) = 0."
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Faridpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-feni-1",
+    "slug": "gonit-utsob-2024-jr-feni-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Feni Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Feni প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "Majed has two magic stones in his hand. If they are rubbed once, a stone will come out from each stone. How many times the stones had to be rubbed to make the stone number 100?",
+      "bn": "মাজেদের হাতে দুইটি জাদুর পাথর আছে। এদেরকে একবার ঘষা দিলে প্রত্যেকটি পাথর থেকে একটি করে পাথর বের হয়। পাথর সংখ্যা 100 হওয়ার জন্য কতবার পাথর ঘষতে হয়েছিল?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Feni",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-feni-2",
+    "slug": "gonit-utsob-2024-jr-feni-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Feni Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Feni প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "61 has to be made by only using the number 16. Addition, subtraction, multiplication, division and square root can be used as helpers. Minimum how many 16^{'}s will be needed for this? (Avoid negative numbers)",
+      "bn": "শুধুমাত্র 16 সংখ্যাটি ব্যবহার করে 61 বানাতে হবে। সহায়ক হিসেবে যোগ, বিয়োগ, গুণ, ভাগ এবং বর্গমূল ব্যবহার করা যাবে। এটা করতে সর্বনিম্ন কয়টি 16 প্রয়োজন হবে? (ঋণাত্মক সংখ্যা উপেক্ষা করো)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Feni",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-feni-3",
+    "slug": "gonit-utsob-2024-jr-feni-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Feni Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Feni প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "How many qubic factors does the number 2^{20} × 3^{10}× 5^{8} have?",
+      "bn": "2^{20} × 3^{10}× 5^{8} সংখ্যাটির কতগুলো পূর্ণ ঘন উৎপাদক আছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Feni",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-feni-4",
+    "slug": "gonit-utsob-2024-jr-feni-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Feni Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Feni প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "OA= 2 and in the square OBDF, OD= 8. The area of the shadowed region can be written as a−π/b. Find the value of a+ b. ![figure](/images/feni_q04.png)",
+      "bn": "OA= 2 এবং OBDF বর্গে OD= 8. কালো অংশটির ক্ষেত্রফলকে a−π/b আকারে লেখা যায়। a+ b এর মান নির্ণয় করো। ![figure](/images/feni_q04.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Feni",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-feni-5",
+    "slug": "gonit-utsob-2024-jr-feni-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Feni Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Feni প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "Emon is trapped inside a glass sphere. He stood against the surface of the sphere and held a laser beam so that it makes a particular angle with the inner surface of the sphere. If α= 60°, then the light reflects 2 times on the surface of the sphere and returns to Emon. If α= 20°, then minimum how many number of turns will the light take to return to Emon?",
+      "bn": "ইমন একটি কাঁচের গোলকের ভিতর বন্দি। সে গোলকের পৃষ্ঠের সাথে দাঁড়িয়ে একটি লেজার লাইট এমনভাবে ধরলো যেন তা গোলকের ভিতরের পৃষ্ঠে একটি নির্দিষ্ট কোণে বাঁক হয়। যদি α= 60° হয়, তাহলে লাইটটি গোলকের পৃষ্ঠে 2 বার বাঁক নিয়ে ইমনের কাছে ফিরে আসে। α= 20° হলে, লাইটটি সর্বনিম্ন কতবার বাঁক নিয়ে ইমনের কাছে ফিরে আসবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Feni",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-feni-6",
+    "slug": "gonit-utsob-2024-jr-feni-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Feni Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Feni প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "The three circles in the figure externally touches each other. The radius of the circles are 8. The area of the shaded region can be represented by a√b−cπ. Find the value of a+ b+ c. ![figure](/images/feni_q06.png)",
+      "bn": "চিত্রের তিনটি সমান বৃত্তই একে অপরকে বহিঃস্পর্শ করে। বৃত্তগুলোর ব্যাসার্ধ 8। গাঢ়কৃত অংশের ক্ষেত্রফলকে a√b− cπ আকারে প্রকাশ করা যায়। a+ b+ c এর মান নির্ণয় করো। ![figure](/images/feni_q06.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Feni",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-feni-7",
+    "slug": "gonit-utsob-2024-jr-feni-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Feni Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Feni প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "A wooden cube, n unit on a side, is painted red on all faces and then cut into n^{3} unit cubes. Exactly one-eighth portions of the total number of faces of unit cubes are red. How many sides of the smaller cubes need to be newly painted red, so that exactly one-fourth portion of the total number of faces of the unit cubes are red?",
+      "bn": "একটি কাঠের কিউব, যার এক বাহু n একক, তার সবগুলো তলে লাল রঙ করা হলো এবং n^{3} টি একক কিউব করে কাটা হলো একক কিউবগুলোর তলের মোট ক্ষেত্রফলের ঠিক এক-অষ্টমাংশ লাল। একক কিউবগুলোর কত পাশে নতুন করে লাল রঙ করতে হবে, যেন সেগুলোর মোট পাশের এক-চতুর্থাংশ লাল হয়?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Feni",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-feni-8",
+    "slug": "gonit-utsob-2024-jr-feni-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Feni Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Feni প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "Niloy drew a pattern similar to that shown in the figure, the horizontal distance between the points M and N is ‘a’ and the vertical distance between the points M and N is ‘b’. This pattern is drawn from 1 to 2024 and the value of a, b is extracted. Find the value of b/a in the latter case. ![figure](/images/feni_q08.png)",
+      "bn": "নিলয় চিত্রের মতো প্যাটার্ন আঁকলে M বিন্দু এবং N বিন্দুর মাঝে পাশাপাশি দূরত্ব a এবং উপরে নিচে দূরত্ব b পায়। এই প্যাটার্নে 1 থেকে 2024 পর্যন্ত আঁকা হলো এবং a, b এর মান বের করা হলো। পরবর্তী ক্ষেত্রে b/a এর মান নির্ণয় করো। ![figure](/images/feni_q08.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Feni",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-gazipur-1",
+    "slug": "gonit-utsob-2024-jr-gazipur-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Gazipur Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Gazipur প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "In a 20 over cricket match, Bangladesh scored 160 runs. Find the average run per over in that match.",
+      "bn": "একটি 20 ওভারের ক্রিকেট ম্যাচে বাংলাদেশের মোট রান 160। সেই ম্যাচে প্রতি ওভারে গড়ে কত রান করা হয়েছিল?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Gazipur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-gazipur-2",
+    "slug": "gonit-utsob-2024-jr-gazipur-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Gazipur Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Gazipur প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "Shithil likes juice a lot. He has three separate glasses with Mango juice, Orange juice and Lychee juice. He takes 600 ml Mango juice, 320 ml Orange juice and 300 ml Lychee juice and mixes them. He wants to make a mixture with Mango juice, Orange juice and Lychee juice with the ratio of 12:7:6. Then how much more Orange juice needs to be added to get the desired ratio?",
+      "bn": "শিথিল জুস খুব পছন্দ করে। সে তিনটি গ্লাসে আলাদাভাবে আমের জুস, কমলার জুস এবং লিচুর জুস নিয়ে বসেছে। সে 600 মিলি আমের জুস, 320 মিলি কমলার জুস, 300 মিলি লিচুর জুস নিয়ে একটি মিশ্রণ তৈরি করলো। এখানে মিশ্রণে আমের জুস, কমলার জুস ও লিচুর জুসের অনুপাত 12:7:6 করতে চাইলে কত মিলি অতিরিক্ত কমলার জুস যোগ করতে হবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Gazipur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-gazipur-3",
+    "slug": "gonit-utsob-2024-jr-gazipur-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Gazipur Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Gazipur প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "In this figure, AB||CD and ∠DAB=∠ABC. If AD=5 then, find the value of the side BC. ![figure](/images/gazipur_q03.png)",
+      "bn": "নিচের চিত্রে, AB||CD এবং ∠DAB=∠ABC. AD=5 হলে, BC বাহুর মান নির্ণয় করো। ![figure](/images/gazipur_q03.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Gazipur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-gazipur-4",
+    "slug": "gonit-utsob-2024-jr-gazipur-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Gazipur Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Gazipur প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "x, y, z are three odd numbers such that x! × y! × z! = 10! . Find the value of x+y+z. f(x+1) = f(x) + x^{2 }+ x + 1;",
+      "bn": "x, y, z এমন তিনটি বিজোড় সংখ্যা যেন x! × y! × z! = 10! হয়। x+y+z এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Gazipur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-gazipur-5",
+    "slug": "gonit-utsob-2024-jr-gazipur-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Gazipur Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Gazipur প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "f(1) = 1; f(55) = ?",
+      "bn": "f(1) = 1; f(55) = ?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Gazipur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-gazipur-6",
+    "slug": "gonit-utsob-2024-jr-gazipur-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Gazipur Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Gazipur প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "ABC is a triangle where P and Q are two points on AB and AC respectively. Here, AP=3/7× AB and AQ=4/9× AC. Sides BQ and CP intersects each other at point O. When AO is extended, it intersects BC at point R. If BR/BC can be expressed as x/y where x, y are coprime, then find the value of x+ y.",
+      "bn": "ABC ত্রিভুজের বাহু AB ও AC এর উপর যথাক্রমে P ও Q বিন্দু দুইটি এমনভাবে রয়েছে যেন AP=3/7× AB এবং AQ=4/9× AC হয়। BQ ও CP বাহুদ্বয় পরস্পরকে O বিন্দুতে ছেদ করে। AO এর বর্ধিতাংশ BC কে R বিন্দুতে ছেদ করে। BR/BC কে x/y আকারে লেখা যায় যেখানে x, y পরস্পর সহমৌলিক সংখ্যা, x+ y এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Gazipur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-gazipur-7",
+    "slug": "gonit-utsob-2024-jr-gazipur-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Gazipur Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Gazipur প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "If p, q, r are three distinct prime numbers and each greater than 3, then what is the largest possible positive integer by which (p−q)(q−r)(r−p) is completely divisible?",
+      "bn": "যদি p, q, r সংখ্যাগুলো 3 থেকে বড় যেকোনো তিনটি ভিন্ন মৌলিক সংখ্যা হয়, তাহলে সবচেয়ে বড় কোন ধনাত্মক পূর্ণসংখ্যা দ্বারা (p−q)(q−r)(r−p) সর্বদাই নিঃশেষে বিভাজ্য হবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Gazipur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-gazipur-8",
+    "slug": "gonit-utsob-2024-jr-gazipur-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Gazipur Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Gazipur প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "Anupom has a magic box that converts a number into its square the next day. Anupom wanted to play with the box. On the first day, he kept 23 in the box. The next day, he got a number from the box. He discarded all the digits except the last two (least significant) and inserted it again in the box. If he continued the process everyday, then what number would he keep in the box on the 2024th day?",
+      "bn": "অনুপমের কাছে একটি জাদুর বাক্স আছে, যেখানে কোনো সংখ্যা রাখলেই পরেরদিন তা সংখ্যাটির বর্গের সমান হয়ে যায়। অনুপম সেই বাক্সটি নিয়ে খেলতে ভালোবাসে । সে প্রথমদিন সেই বাক্সে 23 রাখে এবং পরেরদিন যে সংখ্যা পায়, তার শেষ দুই অংক বাদে বাকি অংকগুলো ফেলে দেয় এবং অবশিষ্ট সংখ্যাটিকে আবার বাক্সে রাখে। এভাবে প্রতিদিন এই কাজ করলে, 2024 তম দিনে সে কোন সংখ্যাটি বাক্সে রাখবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Gazipur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-jashore-1",
+    "slug": "gonit-utsob-2024-jr-jashore-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Jashore Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Jashore প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "The average marks obtained by 12 students in an examination is 57. The average marks decrease by 1 mark when the marks of a student was corrected. How much did the student's marks decrease?",
+      "bn": "একটি পরীক্ষায় 12 জন শিক্ষার্থীর প্রাপ্ত নম্বরের গড় 57। একজন শিক্ষার্থীর প্রাপ্ত নম্বরের কিছু সংশোধন হওয়ায় শিক্ষার্থীদের গড় নম্বর 1 কমে গেলো । এ শিক্ষার্থীর প্রাপ্ত নম্বর কতটুকু কমেছিলো?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Jashore",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-jashore-2",
+    "slug": "gonit-utsob-2024-jr-jashore-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Jashore Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Jashore প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "Emon has some tiles with the ratio of length and width 3: 2. He wants to make a square only using those tiles. Minimum how many tiles does he need to make a square?",
+      "bn": "ইমনের কাছে কিছু টাইলস আছে যার দৈর্ঘ্য ও প্রস্থের অনুপাত 3: 2। সে শুধুমাত্র এই টাইলসগুলো ব্যবহার করে একটি বর্গ বানাতে চায়। বর্গ বানাতে তার সর্বনিম্ন কতটি টাইলস দরকার?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Jashore",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-jashore-3",
+    "slug": "gonit-utsob-2024-jr-jashore-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Jashore Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Jashore প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "A village has 6 houses which are labeled as 1, 2, 3, 4, 5 and 6. Each of the houses is connected to all other houses and any two houses are connected to each other by only one road. The cost of constructing a road is equal to the greater labels between two label of houses that are connected by the road. Find the total cost of constructing all the roads of that village.",
+      "bn": "একটি গ্রামে 6টি বাড়ি আছে যেগুলোকে 1, 2, 3, 4, 5এবং 6 হিসেবে লেবেল করা হয়েছে। প্রতিটি বাড়ি একে অপরের সাথে রাস্তার মাধ্যমে সংযুক্ত এবং যে কোন দুটি বাড়ি শুধুমাত্র একটি রাস্তা দিয়েই একে অপরের সাথে সংযুক্ত আছে। প্রতিটি রাস্তার নির্মাণ খরচ হচ্ছে ওই রাস্তাটি সংযুক্তকারী দুটি বাড়ির লেবেলের মধ্যে বৃহত্তর লেবেলের মানের সমান। ওই গ্রামের সকল রাস্তা বানাতে মোট খরচ নির্ণয় কর।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Jashore",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-jashore-4",
+    "slug": "gonit-utsob-2024-jr-jashore-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Jashore Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Jashore প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "The first and last digit of a four-digit number are 1 and 4 respectively. The product of 2 digits in the middle is a two-digit even number and the sum of those number is a one-digit odd number. At the same time the product of two digits is two times of their sum. None of these four digits can appear more than once in the number. Find the largest number.",
+      "bn": "চার অংক বিশিষ্ট একটি সংখ্যার প্রথম ও শেষ অংক যথাক্রমে 1, 4। মধ্যবর্তী 2 টি অংকের গুণফল একটি দুই অংক বিশিষ্ট জোড় সংখ্যা এবং এদের যোগফল এক অংক বিশিষ্ট বিজোড় সংখ্যা । একই সাথে অংক দুটির গুণফল তাদের যোগফলের দ্বিগুণ। এই চার অংকের কোন অংকই একের অধিক বার বসতে পারে না। বড় সংখ্যাটি নির্ণয় কর।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Jashore",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-jashore-5",
+    "slug": "gonit-utsob-2024-jr-jashore-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Jashore Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Jashore প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "You bought some chocolates and ice creams. Each chocolate cost 270 taka and each ice cream cost 180 taka. You spent same amount of money for chocolates and ice creams. How much money you have spent on each item on average?",
+      "bn": "তুমি কিছু সংখ্যক চকলেট ও আইসক্রিম কিনলে, যেখানে প্রতিটি চকলেটের দাম 270 টাকা এবং প্রতিটি আইসক্রিমের দাম 180 টাকা । চকলেট আর আইসক্রিমের পেছনে তোমার খরচ পরস্পর সমান । গড়ে প্রতিটি আইটেমের পেছনে তোমাকে কত টাকা খরচ করতে হয়েছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Jashore",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-jashore-6",
+    "slug": "gonit-utsob-2024-jr-jashore-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Jashore Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Jashore প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "Majedur wanted to do something interesting using alphabets and numbers. So, he assigned numbers from 1 to 26 for all English alphabets - thus A= 1, B= 2… . Z= 26. Then he converts his name (MAJEDUR) into a number. Using the digits of the converted number, he creates a palindrome number of 5 digits. What is the minimum value of a palindrome number? [N.B. You can use a digit maximum as many times as you get it. E.g.: if you get the number 6, 3 times, you can use it maximum 3 times. It’s not necessary to use each & every number]",
+      "bn": "মাজেদুর বর্ণমালা এবং সংখ্যা ব্যবহার করে মজার কিছু করতে চাচ্ছিলো। তাই সে সমস্ত ইংরেজি বর্ণমালার জন্য 1 থেকে 26 পর্যন্ত সংখ্যা নির্ধারণ করেছে। এভাবে A= 1, B= 2… . Z= 26। তারপর সে তার নামকে (MAJEDUR) সংখ্যায় রূপান্তর করে। রূপান্তরিত সংখ্যার অংকগুলো ব্যবহার করে সে 5 অংকের একটি প্যালিনড্রোম সংখ্যা তৈরি করে। প্যালিনড্রোম সংখ্যাটির সর্বনিম্ন মান কত? [বিঃদ্রঃ- একটি অংক যতবার পাবে সর্বোচ্চ ততবার ই ব্যবহার করতে পারবে। যেমন 6 অংকটি 3 বার পেলে সেটি সর্বোচ্চ 3 বার ই ব্যবহার করতে পারবে । প্রতিটি অংক ব্যবহার করার প্রয়োজন নেই]"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Jashore",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-jashore-7",
+    "slug": "gonit-utsob-2024-jr-jashore-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Jashore Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Jashore প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "Here, in the O centered circle, AO= AD and DC= 2AD. The area of ∆AOD is √3. The difference between the area of the rectangle ABCD and the area of the black part can be expressed as a^{3}−aπ/b+ √b, where a, b are two positive integers. Find the value of b+ a. ![figure](/images/jashore_q07.png)",
+      "bn": "চিত্রে O কেন্দ্রবিশিষ্ট বৃত্তে, AO= AD এবং DC= 2AD। ∆AOD এর ক্ষেত্রফল √3। আয়তক্ষেত্র ABCD এর ক্ষেত্রফল থেকে কালো অংশের ক্ষেত্রফল বিয়োগ করলে, বিয়োগফলকে a^{3}−aπ/b+ √b আকারে প্রকাশ করা যায়, যেখানে a, b দুটি ধনাত্মক পূর্ণ সংখ্যা b+ a এর মান নির্ণয় কর। ![figure](/images/jashore_q07.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Jashore",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-jashore-8",
+    "slug": "gonit-utsob-2024-jr-jashore-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Jashore Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Jashore প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "A quadrilateral bipyramidal shape is obtained by adding 6 midpoints of the surfaces of an equilateral cube. The ratio of the volume of this bipyramid and the volume of the cube is m/n, where m, n are coprime. Now, find the value of m+ n.",
+      "bn": "একটি সুষম ঘনকের পৃষ্ঠগুলোর মধ্যবিন্দু 6 টি যোগ করে একটি চতুর্ভুজাকার দ্বিপিরামিডীয় আকৃতি পাওয়া গেল । এই দ্বিপিরামিডটির আয়তন ও ঘনকের আয়তনের অনুপাত m/nযেখানে m, n পরস্পর সহমৌলিক। এখন m+ n এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Jashore",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-khulna-1",
+    "slug": "gonit-utsob-2024-jr-khulna-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Khulna Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Khulna প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "The values of the sides of two squares are 5 and 9 respectively. Find the difference of the perimeter of larger square and smaller square.",
+      "bn": "দুইটি বর্গের বাহুগুলোর দৈর্ঘ্য যথাক্রমে 5 এবং 9। বৃহত্তম বর্গক্ষেত্র এবং ক্ষুদ্রতম বর্গক্ষেত্র দুইটির পরিসীমার পার্থক্য কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Khulna",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-khulna-2",
+    "slug": "gonit-utsob-2024-jr-khulna-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Khulna Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Khulna প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "n is a positive integer. The LCM of n and 80 is 1200, and the GCD of n and 80 is 20. Find the value of n.",
+      "bn": "n একটি ধনাত্নক পূর্ণসংখ্যা। n ও 80 এর ল.সা.গু 1200 এবং n ও 80 এর গ.সা.গু 20। n এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Khulna",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-khulna-3",
+    "slug": "gonit-utsob-2024-jr-khulna-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Khulna Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Khulna প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "Tahmid went to a strange country where 3-digit password are used. If the person is a girl, the first digit of the password will be 2 and if the person is a boy, the first digit of the password will be 1. And 0, 1, 2 cannot be used for the remaining digits. Then how many passwords can be used in that strange country?",
+      "bn": "তাহমিদ একটা আজব দেশে গিয়েছে, যেখানে সবাই 3 অংকের পাসওয়ার্ড নম্বর ব্যবহার করা হয়। পাসওয়ার্ড ব্যবহারকারী মেয়ে হলে প্রথম অংক হবে 2 এবং ছেলে হলে প্রথম অংকটি হবে 1। বাকি ডিজিট গুলিতে 0, 1, 2 ব্যবহার করা যাবে না। তাহলে সেই দেশে মোট কতগুলি পাসওয়ার্ড ব্যবহার করা সম্ভব?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Khulna",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-khulna-4",
+    "slug": "gonit-utsob-2024-jr-khulna-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Khulna Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Khulna প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "Find the value of (2^{2024}−2^{2020})/(2^{2020}−2^{2016}) .",
+      "bn": "(2^{2024} − 2^{2020})/(2^{2020} − 2^{2016}) এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Khulna",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-khulna-5",
+    "slug": "gonit-utsob-2024-jr-khulna-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Khulna Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Khulna প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "How many positive integers are there that are factors of at least one of 12^{12}, 14^{12} and 18^{9}?",
+      "bn": "এমন কতগুলো ধনাত্মক পূর্ণসংখ্যা আছে যারা 12^{12}, 14^{12} এবং 18^{9} এর অন্তত যেকোনো একটি সংখ্যার উৎপাদক?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Khulna",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-khulna-6",
+    "slug": "gonit-utsob-2024-jr-khulna-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Khulna Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Khulna প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "In this figure, there are some circular shapes with hollow and without hollow. The outer perimeter of a hollow shape is twice the outer perimeter of its previous hollow shape. The ratio of the inner radius and the outer radius of the hollow shapes is 1:2. The perimeter of any solid shape is the average of the outer perimeter of the hollow shape on its two sides. If you take any three figures in such a way that two hollow shapes are on both sides, then the ratio of the area of the black part of the second and first shapes is a and the ratio of the area of the black part of the third and second shapes is b. Determine the value of a× b. ![figure](/images/khulna_q06.png)",
+      "bn": "চিত্রে কিছু ফাঁপা আর কিছু নিরেট বৃত্তাকার আকৃতি দেখানো হয়েছে। একটি ফাঁপা আকৃতির বহিঃস্থ পরিসীমা তার আগের ফাঁপা আকৃতির বহিঃস্থ পরিসীমার দ্বিগুণ। ফাঁপা আকৃতিগুলোর অন্তঃব্যাসার্ধ ও বহিঃব্যাসার্ধের অনুপাত 1:2। যেকোনো নিরেট আকৃতির পরিসীমা তার দুইপাশের ফাঁপা আকৃতির বহিঃস্থ পরিসীমা এর গড়ের মানের সমান। যদি পাশাপাশি তিনটি চিত্র এমনভাবে নেওয়া হয় যেনো দুইপাশে দুইটি ফাঁপা আকৃতি থাকে, তাহলে দ্বিতীয় ও প্রথম আকৃতির কালো অংশের ক্ষেত্রফলের অনুপাত a এবং তৃতীয় ও দ্বিতীয় আকৃতির কালো অংশের ক্ষেত্রফলের অনুপাত b হয়। a× b এর মান নির্ণয় করো। ![figure](/images/khulna_q06.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Khulna",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-khulna-7",
+    "slug": "gonit-utsob-2024-jr-khulna-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Khulna Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Khulna প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "Triangle AEF is an equilateral triangle inscribed in square ABCD. If the ratio of the areas of triangle AEF and square ABCD can be written as q√p−p, find the value of p+ q. ![figure](/images/khulna_q07.png)",
+      "bn": "AEF ত্রিভুজটি ABCD বর্গক্ষেত্রে অন্তর্লিখিত একটি সমবাহু ত্রিভুজ। ত্রিভুজ AEF ও বর্গ ABCD এর ক্ষেত্রফলের অনুপাতকে q√p−p আকারে লিখা গেলে p+ q এর মান নির্ণয় করো। ![figure](/images/khulna_q07.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Khulna",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-khulna-8",
+    "slug": "gonit-utsob-2024-jr-khulna-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Khulna Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Khulna প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "1^{3}+ 2^{3}+ 3^{3}+. . . +n^{3} is divisible by n+ 3, find the maximum value of n.",
+      "bn": "1^{3}+ 2^{3}+ 3^{3}+. . . +n^{3} যদি n+ 3 দ্বারা নিঃশেষে বিভাজ্য হয়। n এর সর্বোচ্চ মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Khulna",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-kushtia-1",
+    "slug": "gonit-utsob-2024-jr-kushtia-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Kushtia Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Kushtia প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "Zeba has a mystery number. When she multiplies it by 5 and then adds 3, she gets the number 18. What is Zeba's mystery number?",
+      "bn": "জেবার একটা রহস্য সংখ্যা আছে। যখন সে এটিকে 5 দ্বারা গুণ করে এবং তারপর 3 যোগ করে, তখন সে 18 পায়। জেবার রহস্য সংখ্যাটি কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Kushtia",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-kushtia-2",
+    "slug": "gonit-utsob-2024-jr-kushtia-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Kushtia Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Kushtia প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "Faiza has some books. She can divide her books equally among her 4 friends, 12 friends, 15 friends and 24 friends. So, what is the minimum number of books Faiza has?",
+      "bn": "ফাইজার কাছে কিছু বই আছে। সে তার বই গুলো তার 4 জন বন্ধু, 12 জন বন্ধু 15 জন বন্ধু এবং 24 জন বন্ধুর মাঝে সমান ভাবে ভাগ করে দিতে পারে। তাহলে ফাইজার কাছে সর্বনিম্ন কতটি বই আছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Kushtia",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-kushtia-3",
+    "slug": "gonit-utsob-2024-jr-kushtia-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Kushtia Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Kushtia প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "Saief loves to invent new things with mathematics. He invented a new operator like Plus, Minus, Multiplication and Division. He named the operator the diamond operator (◇). When a diamond operator is between any two numbers, the result will be the product of the sum of the two numbers and the difference between those two numbers. Example: 5◇3=(5+3)×(5-3). So, what value will Saief get, if he calculates (12◇11)◇2?",
+      "bn": "সাইফ গণিত নিয়ে নতুন নতুন আবিষ্কার করতে খুব পছন্দ করে। সে যোগ, বিয়োগ, গুণ, ভাগের মতো নতুন একটি অপারেটর আবিষ্কার করলো। এই অপারেটরটির সে নাম দিল ডায়মন্ড অপারেটর (◇)। ডায়মন্ড অপারেটরের কাজ হলো দুইটি সংখ্যার মাঝখানে ডায়মন্ড অপারেটর দিলে, সংখ্যা দুইটির যোগফল ও বিয়োগফলের গুণফল পাওয়া যাবে। যেমনঃ 5◇3=(5+3)×(5-3). তাহলে একইভাবে সাইফ (12◇11)◇2 এর মান বের করলে কত পাবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Kushtia",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-kushtia-4",
+    "slug": "gonit-utsob-2024-jr-kushtia-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Kushtia Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Kushtia প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "p and q are two prime numbers such that p^{3}+1=q^{2}. Find the value of p + q.",
+      "bn": "p ও q এমন দুইটি মৌলিক সংখ্যা যেন, p^{3}+1=q^{2} হয়। p + q এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Kushtia",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-kushtia-5",
+    "slug": "gonit-utsob-2024-jr-kushtia-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Kushtia Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Kushtia প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "A stick of y meters length is kept vertically x meters before a wall. If a light is illuminated from a height of 5 meters in the wall, then the shadow of the stick becomes 3 meters. If the light is moved up 1 more meter, then the shadow length reduces 1 meter. x+y = ?",
+      "bn": "একটি দেয়ালের x মিটার সামনে y মিটার লম্বা একটি লাঠি খাড়াভাবে রাখা আছে। দেয়ালের গোড়া থেকে 5 মিটার উপরে একটি লাইট জ্বালালে মাটিতে লাঠির ছায়ার দৈর্ঘ্য হয় 3 মিটার। লাইটটি আরও 1 মিটার উপরে তুললে লাঠির ছায়ার দৈর্ঘ্য 1 মিটার কমে যায়। x+y = ?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Kushtia",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-kushtia-6",
+    "slug": "gonit-utsob-2024-jr-kushtia-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Kushtia Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Kushtia প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "In the figure, BD, EF, GH are perpendicular on AC and AD=DE=EG=GC. The area of ΔABD can be written as a/b× GC× GH where a, b are coprime. a+b = ? ![figure](/images/kushtia_q06.png)",
+      "bn": "চিত্রে BD, EF, GH প্রত্যেকে AC এর উপরে লম্ব এবং AD=DE=EG=GC হলে, ΔABD এর ক্ষেত্রফলকে a/b× GC× GH আকারে লেখা যায় যেখানে a, b পরস্পর সহমৌলিক। a+b = ? ![figure](/images/kushtia_q06.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Kushtia",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-kushtia-7",
+    "slug": "gonit-utsob-2024-jr-kushtia-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Kushtia Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Kushtia প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "King Shahriar was told a total of 1001 stories by his Begum Scheherazade every night, known as the Arabian Nights. If Scheherazade told GCD(k, 101) stories on k-th night instead of telling one story every night, then how many stories would be the total of these 1001 stories of Rajini? (Here, GCD(k,101) is the Greatest Common Divisor of k and 101.)",
+      "bn": "বাদশাহ শাহরিয়ারকে তাঁর বেগম শেহেরজাদ প্রতিরাতে একটি করে মোট 1001 টি গল্প শুনিয়েছিলেন, যা আরব্য রজনীর গল্প নামে পরিচিত। যদি শেহেরজাদ প্রতি রাতে একটি করে গল্প না শুনিয়ে k-তম রাতে GCD(k, 101) টি গল্প শোনাতেন, তাহলে এই 1001 টি রজনীর সবগুলো গল্প মিলিয়ে মোট কতোগুলো গল্প হতো? (এখানে, GCD(k,101) হলো k ও 101 এর গ.সা.গু)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Kushtia",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-kushtia-8",
+    "slug": "gonit-utsob-2024-jr-kushtia-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Kushtia Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Kushtia প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "If AE = 4 and EF = 3, the area of square ABCD can be written as p/q. Find the minimum value of p+q. ![figure](/images/kushtia_q08.png)",
+      "bn": "AE = 4 এবং EF = 3 হলে, ABCD বর্গক্ষেত্রের ক্ষেত্রফল p/q আকারে লিখা যায় p+q এর সর্বনিম্ন মান নির্ণয় করো। ![figure](/images/kushtia_q08.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Kushtia",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-mymensingh-1",
+    "slug": "gonit-utsob-2024-jr-mymensingh-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Mymensingh Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Mymensingh প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "The average of three distinct positive integers is 5. What is the largest possible number among those three integers?",
+      "bn": "তিনটি ভিন্ন ভিন্ন ধনাত্বক পূর্ণসংখ্যার গড় 5। সংখ্যা তিনটির মধ্যে সম্ভাব্য সর্বোচ্চ সংখ্যাটি কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Mymensingh",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-mymensingh-2",
+    "slug": "gonit-utsob-2024-jr-mymensingh-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Mymensingh Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Mymensingh প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "Niloy can keep 100 pencils or 120 pens or 150 erasers in his bag. After keeping 25 pencils and 30 pens, maximum how many erasers can he keep in his bag?",
+      "bn": "নিলয় তার ব্যাগে 100 টি পেন্সিল অথবা 120 টি কলম অথবা 150 টি রাবার রাখতে পারে। সে তার ব্যাগে 25 টি পেন্সিল এবং 30 টি কলম রাখার পর সর্বোচ্চ কতটি রাবার রাখতে পারবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Mymensingh",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-mymensingh-3",
+    "slug": "gonit-utsob-2024-jr-mymensingh-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Mymensingh Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Mymensingh প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "In the given diagram, radius OC = 2 and ∠BAC= 30°. ΔABC is a right-angled triangle. If the perimeter of ΔABC can be written as a+ 2√b, then find the value of a+ b. ![figure](/images/mymensingh_q03.png)",
+      "bn": "প্রদত্ত চিত্রে ব্যাসার্ধ OC = 2 এবং ∠BAC= 30°. ΔABC একটি সমকোণী ত্রিভুজ। ΔABC এর পরিসীমা a+ 2√b আকারে লেখা গেলে, a+ b এর মান নির্ণয় কর। ![figure](/images/mymensingh_q03.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Mymensingh",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-mymensingh-4",
+    "slug": "gonit-utsob-2024-jr-mymensingh-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Mymensingh Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Mymensingh প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "You have an infinite number of 1, 2 and 3 taka notes. You have to buy a pen worth of 12 taka. How many ways can you buy that pen using those notes by paying exactly 12 taka?",
+      "bn": "তোমার কাছে অসীম সংখ্যক 1, 2 এবং 3 টাকার নোট রয়েছে। তোমাকে 12 টাকা মূল্যের একটি কলম কিনতে হবে। সেই নোটগুলি ব্যবহার করে ঠিক 12 টাকা দিয়ে তুমি কত উপায়ে সেই কলমটি কিনতে পারবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Mymensingh",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-mymensingh-5",
+    "slug": "gonit-utsob-2024-jr-mymensingh-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Mymensingh Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Mymensingh প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "Sadia cuts a square birthday cake in a such way that she gets the maximum number of pieces. (It is okay if the slices of the cake are not equal and there is no need to cut the cake through the center). She cuts the cake a couple of times and sees that after distributing one piece to each guest, one piece remains. After cutting it 3 more times she saw that everyone gets 2 pieces of cake. Now, at least how many guests were there at the birthday party?",
+      "bn": "সাদিয়া তার জন্মদিনের বর্গাকার একটি কেক এমনভাবে কাটলো যেন সে সর্বোচ্চ সংখ্যক টুকরা পায়। (কেকের টুকরা সমান না হলেও সমস্যা নেই এবং কেক মাঝ বরাবর কাটতে হবে এমন কোনো কথা নেই) সে কয়েকবার কেকটি কেটে দেখলো, সকল অতিথিকে এক টুকরা করে দিলে একটি টুকরা অবশিষ্ট থাকে । সে আরও 3 বার কাটার পর দেখল, প্রত্যেকে 2 টুকরো করে কেক পেল। এখন জন্মদিনে সর্বনিন্ন কতজন অতিথি ছিল?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Mymensingh",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-mymensingh-6",
+    "slug": "gonit-utsob-2024-jr-mymensingh-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Mymensingh Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Mymensingh প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "At the Prothom Alo office, there are 1000 employees working. Each of them has an ID number from 1 to 1000. Those whose ID numbers have exactly 3 odd digits work in Dhaka. Those whose ID numbers have exactly 2 odd digits work in Rajshahi. The rest of the people work in other places. How many people work in other places?",
+      "bn": "প্রথম আলো অফিসে 1000 জন কর্মচারী কর্মরত অবস্থায় আছে। এদের প্রত্যেকের ID নাম্বার 1 থেকে 1000 পর্যন্ত। যাদের ID নাম্বারের ঠিক 3 টি ডিজিট বিজোড়, তারা ঢাকায় কর্মরত। যাদের ID নাম্বারের ঠিক 2 টি ডিজিট বিজোড়, তারা রাজশাহীতে কর্মরত। আর বাকি সবাই অন্যান্য স্থানে কর্মরত। অন্যান্য স্থানে কর্মরতদের সংখ্যা কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Mymensingh",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-mymensingh-7",
+    "slug": "gonit-utsob-2024-jr-mymensingh-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Mymensingh Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Mymensingh প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "The perimeter of a triangle with side lengths of 1.5π, 2.5π and 2π is equal to the circumference of the circle with center O. In the figure, AB= BC= 2√2. If the area of OABC can be written as a√b, then find the value of a+ b. ![figure](/images/mymensingh_q07.png)",
+      "bn": "1.5π, 2.5π এবং 2π বাহুবিশিষ্ট একটা ত্রিভুজের পরিসীমা O কেন্দ্রবিশিষ্ট বৃত্তটির পরিধির সমান চিত্রে, AB= BC= 2√2। যদি OABC চতুর্ভুজের ক্ষেত্রফলকে a√b আকারে লেখা যায়, তবে a+ b এর মান নির্ণয় কর। ![figure](/images/mymensingh_q07.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Mymensingh",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-mymensingh-8",
+    "slug": "gonit-utsob-2024-jr-mymensingh-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Mymensingh Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Mymensingh প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "n! refers to the product of all the integers from 1 to n. For example, 5! = 1× 2× 3× 4× 5. Niloy has a number which is 117!. His friend Tahmid has infinite number of 5’s. What is the minimum number of 5’s Niloy should get from his friend and multiply to 117! to get the maximum number of trailing 0’s? (Trailing 0’s means 0’s at the right end of the number)",
+      "bn": "n! বলতে 1 থেকে n পর্যন্ত সকল পূর্ণসংখ্যার গুণফলকে বুঝায়। যেমনঃ 5! = 1× 2× 3× 4× 5. নিলয়ের কাছে 117! সংখ্যাটি আছে। তার বন্ধু তাহমিদের কাছে অসীম সংখ্যক 5 আছে। নিলয়কে তাহমিদের কাছ থেকে সর্বনিম্ন কতটি 5 নিয়ে 117! এর সাথে গুণ করলে গুণফলটির শেষে সর্বাধিক সংখ্যক 0 থাকে? সৈংখ্যাটির ডান প্রান্তে 0 থাকে)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Mymensingh",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narayanganj-1",
+    "slug": "gonit-utsob-2024-jr-narayanganj-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narayanganj Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narayanganj প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "The sum of two primes is 7. What is the product of those two primes?",
+      "bn": "দুইটি মৌলিক সংখ্যার যোগফল 7 । সংখ্যা দুইটির গুণফল কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narayanganj",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narayanganj-2",
+    "slug": "gonit-utsob-2024-jr-narayanganj-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narayanganj Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narayanganj প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "x and y are two positive integers. x× y= 196 and LCM of x and y is not equal to any of these numbers. Find the highest value of x+ y. ![figure](/images/narayanganj_q02.png)",
+      "bn": "x ও y দুইটি ধনাত্মক পূর্ণসংখ্যা। x× y= 196 এবং x ও y এর ল.সা.গু, সংখ্যা দুটির কোনোটির সমান নয়। x+ y এর সর্বোচ্চ মান নির্ণয় করো । ![figure](/images/narayanganj_q02.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narayanganj",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narayanganj-3",
+    "slug": "gonit-utsob-2024-jr-narayanganj-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narayanganj Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narayanganj প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "ADC is an arc whose center is B and radius is BA. AEC is a half-circle whose diameter is AC. If ∠ABC= 90°, AB= BC= 4, then what is the area of the black shaded region?",
+      "bn": "ADC হ্লো B কে কেন্দ্র করে BA ব্যাসার্ধ নিয়ে আঁকা একটি বৃত্তচাপ। AEC হ্লো AC কে ব্যাস ধরে আঁকা অর্ধবৃত্ত। ∠ABC= 90°, AB= BC= 4 হলে কালো অংশের ক্ষেত্রফল কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narayanganj",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narayanganj-4",
+    "slug": "gonit-utsob-2024-jr-narayanganj-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narayanganj Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narayanganj প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "At the 2023 World Cup Bangladeshi Cricketer Nazmul Hossain Shanto scored 213 runs, Tawhid Hridoy scored 115 runs.Tanzid Hasan Tamim scored 97 runs. Shanto played 9 matches, Hridoy played 5 matches and Tanzid played 9 matches. In the world cup Bangladesh scored 2125 runs in total. If Shanto, Hridoy and Tanzid scored a/b portion of the total runs then find the value of a+ 7b−17.",
+      "bn": "2023 বিশ্বকাপে বাংলাদেশের ক্রিকেটার নাজমুল হোসেন শান্ত সর্বমোট 213 রান করেন। অন্যদিকে তাওহিদ হৃদয় সর্বমোট 115 রান করেন। তানজিদ হাসান তামিম সর্বমোট 97 রান করেন। শান্ত 9 ম্যাচ, হৃদয় 5 ম্যাচ এবং তানজিদ 9 ম্যাচ খেলেন। বিশ্বকাপে বাংলাদেশ দল সর্বমোট 2125 রান করে । শান্ত, হৃদয় এবং তানজিদ মিলে দলের মোট রানের a/b অংশ করলে, a+ 7b−17 এর মান কত হবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narayanganj",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narayanganj-5",
+    "slug": "gonit-utsob-2024-jr-narayanganj-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narayanganj Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narayanganj প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "A clock malfunctioned oddly. After 11 pm, each time the clock speed gets half after the hour arm completes a full rotation. Just when the clock reaches such a situation that a minute will take more than 2024 minutes to complete, then what will be the time on the clock?",
+      "bn": "একটা ঘড়ি অদ্ভুতভাবে নষ্ট হয়ে গেল । রাত এগারোটা বাজার পর প্রতিবার ঘন্টার কাঁটা একবার সম্পূর্ণ ঘুরে আসলে ঘড়ির গতি অর্ধেক হয়ে যায়। ঠিক যেই মুহূর্তে ঘড়িটার অবস্থা এমন হবে, যে এক মিনিট অতিবাহিত হতে 2024 মিনিটের বেশি সময় লাগবে, তখন ঘড়িতে কয়টা বাজবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narayanganj",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narayanganj-6",
+    "slug": "gonit-utsob-2024-jr-narayanganj-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narayanganj Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narayanganj প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "Palindrome numbers are those which remain the same if we write them in reverse - such as 2112 or 66. How many numbers are there from 1 to 2024 that can be made palindromic by attaching the first digit to the end of the numbers? (Example: the first digit of the number 133 is 1. By attaching 1 at the end of the number 133, we get 1331 which is a palindrome number)",
+      "bn": "প্যালিনড্রোম সংখ্যা হলো সেসব সংখ্যা যাদের উল্টো করে লিখলেও একই থাকে - যেমন 2112 বা 66 . তাহলে 1 থেকে 2024 পর্যন্ত কয়টি সংখ্যা আছে যে সংখ্যাগুলোর শেষে এ সংখ্যাগুলোর প্রথম অংকটি বসিয়ে তাদেরকে প্যালিনড্রোম সংখ্যা বানানো যায়? (যেমন 133 সংখ্যাটির প্রথম অংক 1 কে 133 এর পরে বসালে 1331 হয়, যা একটি প্যালিনড্রোম সংখ্যা)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narayanganj",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narayanganj-7",
+    "slug": "gonit-utsob-2024-jr-narayanganj-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narayanganj Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narayanganj প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "y= 10^{2024} −x , where x is a prime number. For which minimum value of x, y is completely divisible by 9? ![figure](/images/narayanganj_q07.png)",
+      "bn": "y= 10^{2024} −x যেখানে x একটি মৌলিক সংখ্যা। x এর স্ষুদ্রতম কোন মানের জন! y সংখ্যাটি 9 দ্বারা নিঃশেষে বিভাজ্য হবে? ![figure](/images/narayanganj_q07.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narayanganj",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narayanganj-8",
+    "slug": "gonit-utsob-2024-jr-narayanganj-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narayanganj Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narayanganj প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "In the figure, the radius of the small white circle is 1 and the radius of the large white circle is 9. The two black circles and the two dashed circles have equal radii. The two black circles touch the large white circle and the other two dashed circles. The two dashed circles touch the smaller white circle and the other two black circles. If the radius of the black circle is written as a+ √b, find the value of a+ b.",
+      "bn": "চিত্রে ছোট সাদা বৃত্তের ব্যাসার্ধ 1 এবং বড় সাদা বৃত্তের ব্যাসার্ধ 9। কালো বৃত্ত দুটি এবং ডোরাকাটাকৃত দুটি বৃত্তের ব্যাসার্ধ সমান । কালো বৃত্ত দুটি বড় সাদা বৃত্ত এবং অপর দুটি ডোরাকাটাকৃত বৃত্তকে স্পর্শ করে। ডোরাকাটাকৃত দুটি বৃত্ত ছোট সাদা বৃত্ত এবং অপর দুটি কালো বৃত্তকে স্পর্শ করে। কালো বৃত্তের ব্যাসার্ধকে a+ √b আকারে লিখা গেলে, a+ b এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narayanganj",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narsingdi-1",
+    "slug": "gonit-utsob-2024-jr-narsingdi-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narsingdi Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narsingdi প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "The average marks obtained by 12 students in an examination is 57. The average marks decrease by 1 mark when the marks of a student was corrected. How much did the student's marks decrease?",
+      "bn": "একটি পরীক্ষায় 12 জন শিক্ষার্থীর প্রাপ্ত নম্বরের গড় 57। একজন শিক্ষার্থীর প্রাপ্ত নম্বরের কিছু সংশোধন হওয়ায় শিক্ষার্থীদের গড় নম্বর 1 কমে গেলো । এ শিক্ষার্থীর প্রাপ্ত নম্বর কতটুকু কমেছিলো?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narsingdi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narsingdi-2",
+    "slug": "gonit-utsob-2024-jr-narsingdi-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narsingdi Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narsingdi প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "Emon has some tiles with the ratio of length and width 3: 2. He wants to make a square only using those tiles. Minimum how many tiles does he need to make a square?",
+      "bn": "ইমনের কাছে কিছু টাইলস আছে যার দৈর্ঘ্য ও প্রস্থের অনুপাত 3: 2। সে শুধুমাত্র এই টাইলসগুলো ব্যবহার করে একটি বর্গ বানাতে চায়। বর্গ বানাতে তার সর্বনিম্ন কতটি টাইলস দরকার?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narsingdi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narsingdi-3",
+    "slug": "gonit-utsob-2024-jr-narsingdi-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narsingdi Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narsingdi প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "A village has 6 houses which are labeled as 1, 2, 3, 4, 5 and 6. Each of the houses is connected to all other houses and any two houses are connected to each other by only one road. The cost of constructing a road is equal to the greater labels between two label of houses that are connected by the road. Find the total cost of constructing all the roads of that village.",
+      "bn": "একটি গ্রামে 6টি বাড়ি আছে যেগুলোকে 1, 2, 3, 4, 5এবং 6 হিসেবে লেবেল করা হয়েছে। প্রতিটি বাড়ি একে অপরের সাথে রাস্তার মাধ্যমে সংযুক্ত এবং যে কোন দুটি বাড়ি শুধুমাত্র একটি রাস্তা দিয়েই একে অপরের সাথে সংযুক্ত আছে। প্রতিটি রাস্তার নির্মাণ খরচ হচ্ছে ওই রাস্তাটি সংযুক্তকারী দুটি বাড়ির লেবেলের মধ্যে বৃহত্তর লেবেলের মানের সমান। ওই গ্রামের সকল রাস্তা বানাতে মোট খরচ নির্ণয় কর।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narsingdi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narsingdi-4",
+    "slug": "gonit-utsob-2024-jr-narsingdi-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narsingdi Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narsingdi প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "The first and last digit of a four-digit number are 1 and 4 respectively. The product of 2 digits in the middle is a two-digit even number and the sum of those number is a one-digit odd number. At the same time the product of two digits is two times of their sum. None of these four digits can appear more than once in the number. Find the largest number.",
+      "bn": "চার অংক বিশিষ্ট একটি সংখ্যার প্রথম ও শেষ অংক যথাক্রমে 1, 4। মধ্যবর্তী 2 টি অংকের গুণফল একটি দুই অংক বিশিষ্ট জোড় সংখ্যা এবং এদের যোগফল এক অংক বিশিষ্ট বিজোড় সংখ্যা । একই সাথে অংক দুটির গুণফল তাদের যোগফলের দ্বিগুণ। এই চার অংকের কোন অংকই একের অধিক বার বসতে পারে না। বড় সংখ্যাটি নির্ণয় কর।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narsingdi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narsingdi-5",
+    "slug": "gonit-utsob-2024-jr-narsingdi-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narsingdi Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narsingdi প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "You bought some chocolates and ice creams. Each chocolate cost 270 taka and each ice cream cost 180 taka. You spent same amount of money for chocolates and ice creams. How much money you have spent on each item on average?",
+      "bn": "তুমি কিছু সংখ্যক চকলেট ও আইসক্রিম কিনলে, যেখানে প্রতিটি চকলেটের দাম 270 টাকা এবং প্রতিটি আইসক্রিমের দাম 180 টাকা । চকলেট আর আইসক্রিমের পেছনে তোমার খরচ পরস্পর সমান । গড়ে প্রতিটি আইটেমের পেছনে তোমাকে কত টাকা খরচ করতে হয়েছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narsingdi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narsingdi-6",
+    "slug": "gonit-utsob-2024-jr-narsingdi-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narsingdi Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narsingdi প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "Majedur wanted to do something interesting using alphabets and numbers. So, he assigned numbers from 1 to 26 for all English alphabets - thus A= 1, B= 2… . Z= 26. Then he converts his name (MAJEDUR) into a number. Using the digits of the converted number, he creates a palindrome number of 5 digits. What is the minimum value of a palindrome number? [N.B. You can use a digit maximum as many times as you get it. E.g.: if you get the number 6, 3 times, you can use it maximum 3 times. It’s not necessary to use each & every number]",
+      "bn": "মাজেদুর বর্ণমালা এবং সংখ্যা ব্যবহার করে মজার কিছু করতে চাচ্ছিলো। তাই সে সমস্ত ইংরেজি বর্ণমালার জন্য 1 থেকে 26 পর্যন্ত সংখ্যা নির্ধারণ করেছে। এভাবে A= 1, B= 2… . Z= 26। তারপর সে তার নামকে (MAJEDUR) সংখ্যায় রূপান্তর করে। রূপান্তরিত সংখ্যার অংকগুলো ব্যবহার করে সে 5 অংকের একটি প্যালিনড্রোম সংখ্যা তৈরি করে। প্যালিনড্রোম সংখ্যাটির সর্বনিম্ন মান কত? [বিঃদ্রঃ- একটি অংক যতবার পাবে সর্বোচ্চ ততবার ই ব্যবহার করতে পারবে। যেমন 6 অংকটি 3 বার পেলে সেটি সর্বোচ্চ 3 বার ই ব্যবহার করতে পারবে । প্রতিটি অংক ব্যবহার করার প্রয়োজন নেই]"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narsingdi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narsingdi-7",
+    "slug": "gonit-utsob-2024-jr-narsingdi-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narsingdi Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narsingdi প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "Here, in the O centered circle, AO= AD and DC= 2AD. The area of ∆AOD is √3. The difference between the area of the rectangle ABCD and the area of the black part can be expressed as a^{3}−aπ/b+ √b, where a, b are two positive integers. Find the value of b+ a. ![figure](/images/narsingdi_q07.png)",
+      "bn": "চিত্রে O কেন্দ্রবিশিষ্ট বৃত্তে, AO= AD এবং DC= 2AD। ∆AOD এর ক্ষেত্রফল √3। আয়তক্ষেত্র ABCD এর ক্ষেত্রফল থেকে কালো অংশের ক্ষেত্রফল বিয়োগ করলে, বিয়োগফলকে a^{3}−aπ/b+ √b আকারে প্রকাশ করা যায়, যেখানে a, b দুটি ধনাত্মক পূর্ণ সংখ্যা b+ a এর মান নির্ণয় কর। ![figure](/images/narsingdi_q07.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narsingdi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-narsingdi-8",
+    "slug": "gonit-utsob-2024-jr-narsingdi-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Narsingdi Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Narsingdi প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "A quadrilateral bipyramidal shape is obtained by adding 6 midpoints of the surfaces of an equilateral cube. The ratio of the volume of this bipyramid and the volume of the cube is m/n, where m, n are coprime. Now, find the value of m+ n.",
+      "bn": "একটি সুষম ঘনকের পৃষ্ঠগুলোর মধ্যবিন্দু 6 টি যোগ করে একটি চতুর্ভুজাকার দ্বিপিরামিডীয় আকৃতি পাওয়া গেল । এই দ্বিপিরামিডটির আয়তন ও ঘনকের আয়তনের অনুপাত m/nযেখানে m, n পরস্পর সহমৌলিক। এখন m+ n এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Narsingdi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rajshahi-1",
+    "slug": "gonit-utsob-2024-jr-rajshahi-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rajshahi Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rajshahi প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "Majed has two magic stones in his hand. If they are rubbed once, a stone will come out from each stone. How many times the stones had to be rubbed to make the stone number 100?",
+      "bn": "মাজেদের হাতে দুইটি জাদুর পাথর আছে। এদেরকে একবার ঘষা দিলে প্রত্যেকটি পাথর থেকে একটি করে পাথর বের হয়। পাথর সংখ্যা 100 হওয়ার জন্য কতবার পাথর ঘষতে হয়েছিল?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rajshahi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rajshahi-2",
+    "slug": "gonit-utsob-2024-jr-rajshahi-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rajshahi Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rajshahi প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "61 has to be made by only using the number 16. Addition, subtraction, multiplication, division and square root can be used as helpers. Minimum how many 16^{'}s will be needed for this? (Avoid negative numbers)",
+      "bn": "শুধুমাত্র 16 সংখ্যাটি ব্যবহার করে 61 বানাতে হবে। সহায়ক হিসেবে যোগ, বিয়োগ, গুণ, ভাগ এবং বর্গমূল ব্যবহার করা যাবে। এটা করতে সর্বনিম্ন কয়টি 16 প্রয়োজন হবে? (ঋণাত্মক সংখ্যা উপেক্ষা করো)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rajshahi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rajshahi-3",
+    "slug": "gonit-utsob-2024-jr-rajshahi-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rajshahi Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rajshahi প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "How many qubic factors does the number 2^{20} × 3^{10}× 5^{8} have?",
+      "bn": "2^{20} × 3^{10}× 5^{8} সংখ্যাটির কতগুলো পূর্ণ ঘন উৎপাদক আছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rajshahi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rajshahi-4",
+    "slug": "gonit-utsob-2024-jr-rajshahi-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rajshahi Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rajshahi প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "OA= 2 and in the square OBDF, OD= 8. The area of the shadowed region can be written as a−π/b. Find the value of a+ b. ![figure](/images/rajshahi_q04.png)",
+      "bn": "OA= 2 এবং OBDF বর্গে OD= 8. কালো অংশটির ক্ষেত্রফলকে a−π/b আকারে লেখা যায়। a+ b এর মান নির্ণয় করো। ![figure](/images/rajshahi_q04.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rajshahi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rajshahi-5",
+    "slug": "gonit-utsob-2024-jr-rajshahi-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rajshahi Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rajshahi প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "Emon is trapped inside a glass sphere. He stood against the surface of the sphere and held a laser beam so that it makes a particular angle with the inner surface of the sphere. If α= 60°, then the light reflects 2 times on the surface of the sphere and returns to Emon. If α= 20°, then minimum how many number of turns will the light take to return to Emon?",
+      "bn": "ইমন একটি কাঁচের গোলকের ভিতর বন্দি। সে গোলকের পৃষ্ঠের সাথে দাঁড়িয়ে একটি লেজার লাইট এমনভাবে ধরলো যেন তা গোলকের ভিতরের পৃষ্ঠে একটি নির্দিষ্ট কোণে বাঁক হয়। যদি α= 60° হয়, তাহলে লাইটটি গোলকের পৃষ্ঠে 2 বার বাঁক নিয়ে ইমনের কাছে ফিরে আসে। α= 20° হলে, লাইটটি সর্বনিম্ন কতবার বাঁক নিয়ে ইমনের কাছে ফিরে আসবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rajshahi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rajshahi-6",
+    "slug": "gonit-utsob-2024-jr-rajshahi-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rajshahi Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rajshahi প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "The three circles in the figure externally touches each other. The radius of the circles are 8. The area of the shaded region can be represented by a√b−cπ. Find the value of a+ b+ c. ![figure](/images/rajshahi_q06.png)",
+      "bn": "চিত্রের তিনটি সমান বৃত্তই একে অপরকে বহিঃস্পর্শ করে। বৃত্তগুলোর ব্যাসার্ধ 8। গাঢ়কৃত অংশের ক্ষেত্রফলকে a√b− cπ আকারে প্রকাশ করা যায়। a+ b+ c এর মান নির্ণয় করো। ![figure](/images/rajshahi_q06.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rajshahi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rajshahi-7",
+    "slug": "gonit-utsob-2024-jr-rajshahi-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rajshahi Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rajshahi প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "A wooden cube, n unit on a side, is painted red on all faces and then cut into n^{3} unit cubes. Exactly one-eighth portions of the total number of faces of unit cubes are red. How many sides of the smaller cubes need to be newly painted red, so that exactly one-fourth portion of the total number of faces of the unit cubes are red?",
+      "bn": "একটি কাঠের কিউব, যার এক বাহু n একক, তার সবগুলো তলে লাল রঙ করা হলো এবং n^{3} টি একক কিউব করে কাটা হলো একক কিউবগুলোর তলের মোট ক্ষেত্রফলের ঠিক এক-অষ্টমাংশ লাল। একক কিউবগুলোর কত পাশে নতুন করে লাল রঙ করতে হবে, যেন সেগুলোর মোট পাশের এক-চতুর্থাংশ লাল হয়?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rajshahi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rajshahi-8",
+    "slug": "gonit-utsob-2024-jr-rajshahi-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rajshahi Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rajshahi প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "Niloy drew a pattern similar to that shown in the figure, the horizontal distance between the points M and N is ‘a’ and the vertical distance between the points M and N is ‘b’. This pattern is drawn from 1 to 2024 and the value of a, b is extracted. Find the value of b/a in the latter case. ![figure](/images/rajshahi_q08.png)",
+      "bn": "নিলয় চিত্রের মতো প্যাটার্ন আঁকলে M বিন্দু এবং N বিন্দুর মাঝে পাশাপাশি দূরত্ব a এবং উপরে নিচে দূরত্ব b পায়। এই প্যাটার্নে 1 থেকে 2024 পর্যন্ত আঁকা হলো এবং a, b এর মান বের করা হলো। পরবর্তী ক্ষেত্রে b/a এর মান নির্ণয় করো। ![figure](/images/rajshahi_q08.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rajshahi",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rangpur-1",
+    "slug": "gonit-utsob-2024-jr-rangpur-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rangpur Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rangpur প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "Zeba has a mystery number. When she multiplies it by 5 and then adds 3, she gets the number 18. What is Zeba's mystery number?",
+      "bn": "জেবার একটা রহস্য সংখ্যা আছে। যখন সে এটিকে 5 দ্বারা গুণ করে এবং তারপর 3 যোগ করে, তখন সে 18 পায়। জেবার রহস্য সংখ্যাটি কত?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rangpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rangpur-2",
+    "slug": "gonit-utsob-2024-jr-rangpur-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rangpur Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rangpur প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "Faiza has some books. She can divide her books equally among her 4 friends, 12 friends, 15 friends and 24 friends. So, what is the minimum number of books Faiza has?",
+      "bn": "ফাইজার কাছে কিছু বই আছে। সে তার বই গুলো তার 4 জন বন্ধু, 12 জন বন্ধু 15 জন বন্ধু এবং 24 জন বন্ধুর মাঝে সমান ভাবে ভাগ করে দিতে পারে। তাহলে ফাইজার কাছে সর্বনিম্ন কতটি বই আছে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rangpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rangpur-3",
+    "slug": "gonit-utsob-2024-jr-rangpur-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rangpur Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rangpur প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "Saief loves to invent new things with mathematics. He invented a new operator like Plus, Minus, Multiplication and Division. He named the operator the diamond operator (◇). When a diamond operator is between any two numbers, the result will be the product of the sum of the two numbers and the difference between those two numbers. Example: 5◇3=(5+3)×(5-3). So, what value will Saief get, if he calculates (12◇11)◇2?",
+      "bn": "সাইফ গণিত নিয়ে নতুন নতুন আবিষ্কার করতে খুব পছন্দ করে। সে যোগ, বিয়োগ, গুণ, ভাগের মতো নতুন একটি অপারেটর আবিষ্কার করলো। এই অপারেটরটির সে নাম দিল ডায়মন্ড অপারেটর (◇)। ডায়মন্ড অপারেটরের কাজ হলো দুইটি সংখ্যার মাঝখানে ডায়মন্ড অপারেটর দিলে, সংখ্যা দুইটির যোগফল ও বিয়োগফলের গুণফল পাওয়া যাবে। যেমনঃ 5◇3=(5+3)×(5-3). তাহলে একইভাবে সাইফ (12◇11)◇2 এর মান বের করলে কত পাবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rangpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rangpur-4",
+    "slug": "gonit-utsob-2024-jr-rangpur-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rangpur Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rangpur প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "p and q are two prime numbers such that p^{3}+1=q^{2}. Find the value of p + q.",
+      "bn": "p ও q এমন দুইটি মৌলিক সংখ্যা যেন, p^{3}+1=q^{2} হয়। p + q এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rangpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rangpur-5",
+    "slug": "gonit-utsob-2024-jr-rangpur-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rangpur Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rangpur প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "A stick of y meters length is kept vertically x meters before a wall. If a light is illuminated from a height of 5 meters in the wall, then the shadow of the stick becomes 3 meters. If the light is moved up 1 more meter, then the shadow length reduces 1 meter. x+y = ?",
+      "bn": "একটি দেয়ালের x মিটার সামনে y মিটার লম্বা একটি লাঠি খাড়াভাবে রাখা আছে। দেয়ালের গোড়া থেকে 5 মিটার উপরে একটি লাইট জ্বালালে মাটিতে লাঠির ছায়ার দৈর্ঘ্য হয় 3 মিটার। লাইটটি আরও 1 মিটার উপরে তুললে লাঠির ছায়ার দৈর্ঘ্য 1 মিটার কমে যায়। x+y = ?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rangpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rangpur-6",
+    "slug": "gonit-utsob-2024-jr-rangpur-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rangpur Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rangpur প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "In the figure, BD, EF, GH are perpendicular on AC and AD=DE=EG=GC. The area of ΔABD can be written as a/b× GC× GH where a, b are coprime. a+b = ? ![figure](/images/rangpur_q06.png)",
+      "bn": "চিত্রে BD, EF, GH প্রত্যেকে AC এর উপরে লম্ব এবং AD=DE=EG=GC হলে, ΔABD এর ক্ষেত্রফলকে a/b× GC× GH আকারে লেখা যায় যেখানে a, b পরস্পর সহমৌলিক। a+b = ? ![figure](/images/rangpur_q06.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rangpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rangpur-7",
+    "slug": "gonit-utsob-2024-jr-rangpur-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rangpur Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rangpur প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "King Shahriar was told a total of 1001 stories by his Begum Scheherazade every night, known as the Arabian Nights. If Scheherazade told GCD(k, 101) stories on k-th night instead of telling one story every night, then how many stories would be the total of these 1001 stories of Rajini? (Here, GCD(k,101) is the Greatest Common Divisor of k and 101.)",
+      "bn": "বাদশাহ শাহরিয়ারকে তাঁর বেগম শেহেরজাদ প্রতিরাতে একটি করে মোট 1001 টি গল্প শুনিয়েছিলেন, যা আরব্য রজনীর গল্প নামে পরিচিত। যদি শেহেরজাদ প্রতি রাতে একটি করে গল্প না শুনিয়ে k-তম রাতে GCD(k, 101) টি গল্প শোনাতেন, তাহলে এই 1001 টি রজনীর সবগুলো গল্প মিলিয়ে মোট কতোগুলো গল্প হতো? (এখানে, GCD(k,101) হলো k ও 101 এর গ.সা.গু)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rangpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-rangpur-8",
+    "slug": "gonit-utsob-2024-jr-rangpur-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Rangpur Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Rangpur প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "If AE = 4 and EF = 3, the area of square ABCD can be written as p/q. Find the minimum value of p+q. ![figure](/images/rangpur_q08.png)",
+      "bn": "AE = 4 এবং EF = 3 হলে, ABCD বর্গক্ষেত্রের ক্ষেত্রফল p/q আকারে লিখা যায় p+q এর সর্বনিম্ন মান নির্ণয় করো। ![figure](/images/rangpur_q08.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Rangpur",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-sylhet-1",
+    "slug": "gonit-utsob-2024-jr-sylhet-1",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Sylhet Q1",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Sylhet প্রশ্ন 1"
+    },
+    "statement": {
+      "en": "The digit ‘6’ is written at the beginning of a 3 digit number. If the doubled value of the new 4 digit number is 50 times of the first 3 digit number, then find the 3 digit number.",
+      "bn": "3 অন্কবিশিষ্ট একটি সংখ্যার সামনে ‘6’ অঙ্কটি লেখা হল। নতুন 4 অঙ্কের সংখ্যাটির দ্বিগুণ, প্রথম সংখ্যাটির 50 গুণ হলে, 3 অঙ্কবিশিষ্ট সংখ্যাটি নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Sylhet",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-sylhet-2",
+    "slug": "gonit-utsob-2024-jr-sylhet-2",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Sylhet Q2",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Sylhet প্রশ্ন 2"
+    },
+    "statement": {
+      "en": "The area of the right-angled triangle ΔABD is 60, AB= 8 and C is any point. What can be the minimum integer value of the perimeter of shape ABCD? ![figure](/images/sylhet_q02.png)",
+      "bn": "ΔABD সমকোণী ত্রিভুজের ক্ষেত্রফল 60, AB= 8 এবং C যেকোনো বিন্দু ABCD ক্ষেত্রটির পরিসীমা পূর্ণসংখ্যায় সর্বনিম্ন কত হতে পারে? ![figure](/images/sylhet_q02.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Sylhet",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-sylhet-3",
+    "slug": "gonit-utsob-2024-jr-sylhet-3",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Sylhet Q3",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Sylhet প্রশ্ন 3"
+    },
+    "statement": {
+      "en": "There were some people in a room who shook hands with each other and the number of total handshakes was 45. If more people enter the room, the number of handshakes becomes 22 times of the initial. How many people need to enter the room?",
+      "bn": "একটি রুমে কিছু সংখ্যক মানুষ ছিলো যারা নিজেদের মধ্যে সবাই সবার সাথে করমর্দন করায় মোট করমর্দন সংখ্যা হয় 45। যদি রুমে আরও মানুষ প্রবেশ করে, তাহলে করমর্দনের সংখ্যা আগের 22 গুণ হয়। রুমে কতজন মানুষ প্রবেশ করতে হবে?"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Sylhet",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-sylhet-4",
+    "slug": "gonit-utsob-2024-jr-sylhet-4",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Sylhet Q4",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Sylhet প্রশ্ন 4"
+    },
+    "statement": {
+      "en": "The branches of a tree are being divided in a strange way. At first there was only one branch at the tree. After the first division, the number of branches gets doubled, and after the next division, the number of branches gets tripled of its previous number- in this way, the branches are being doubled and tripled sequentially. After the 2024^{th} division, a leaf grows at each of the branches of the tree. The total number of leaves can be expressed as a^{b}, where a, b are integers and 20< a< 40. Find the value of a+ b.",
+      "bn": "একটি গাছের ডালগুলো অদ্ভুতভাবে বিভাজিত হচ্ছে। একদম শুরুতে গাছটিতে একটিমাত্র ডাল ছিলো। প্রথমবার বিভাজনে ডাল সংখ্যা দ্বিগুণ, তার পরেরবার বিভাজনে ডালসংখ্যা তিনগুণ- এভাবে ডালসংখ্যা ক্রমাগত দ্বিগুণ, তিনগুণ হচ্ছে। 2024 বার বিভাজন শেষে গাছটির প্রতিটা ডালে একটি করে পাতা গজালো। পাতার সংখ্যাকে a^{b} আকারে লেখা যায় যেখানে a, b পূর্ণসংখ্যা এবং 20< a< 40। a+ b এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Sylhet",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-sylhet-5",
+    "slug": "gonit-utsob-2024-jr-sylhet-5",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Sylhet Q5",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Sylhet প্রশ্ন 5"
+    },
+    "statement": {
+      "en": "If (2+ 1)( 2^{2}+ 1)(2^{2²}+ 1)… … … (2^{2¹⁰}+ 1)+ 1= 2^{n}, then find the value of n.",
+      "bn": "(2+ 1)( 2^{2}+ 1)(2^{2²}+ 1)… … … (2^{2¹⁰}+ 1)+ 1= 2^{n} হলে, n এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Sylhet",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-sylhet-6",
+    "slug": "gonit-utsob-2024-jr-sylhet-6",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Sylhet Q6",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Sylhet প্রশ্ন 6"
+    },
+    "statement": {
+      "en": "ABCD is a rhombus and BEDF is a square. ∠ADC= 120°, AB= 5. If the area of the shaded region can be expressed by a/b(√c−d). Find the value of ab+ cd. (Where a, b, c, d are co-prime) ![figure](/images/sylhet_q06.png)",
+      "bn": "ABCD একটি রম্বস এবং BEDF একটি বর্গ। ∠ADC= 120°, AB= 5 । গাঢ়কৃত অংশের ক্ষেত্রফলকে a/b(√c−d) আকারে প্রকাশ করা যায়। ab+ cd এর মান নির্ণয় করো। (যেখানে a, b, c, d পরস্পর সহমৌলিক সংখ্যা) ![figure](/images/sylhet_q06.png)"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Sylhet",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-sylhet-7",
+    "slug": "gonit-utsob-2024-jr-sylhet-7",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Sylhet Q7",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Sylhet প্রশ্ন 7"
+    },
+    "statement": {
+      "en": "The number a̅5̅5̅b̅c̅ is divisible by 8, 9 and 11, where a, b, c are three different digits. Find the value of 2a+ 3b+ 4c .",
+      "bn": "a̅5̅5̅b̅c̅ সংখ্যাটি 8, 9 এবং 11 দ্বারা বিভাজ্য, যেখানে a, b, c তিনটি ভিন্ন ভিন্ন অংক । 2a+ 3b+ 4c এর মান নির্ণয় করো।"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Sylhet",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  },
+  {
+    "id": "gonit-utsob-2024-jr-sylhet-8",
+    "slug": "gonit-utsob-2024-jr-sylhet-8",
+    "type": "OLYMPIAD",
+    "topic": "NUMBER_THEORY",
+    "category": "JUNIOR",
+    "difficulty": "MEDIUM",
+    "title": {
+      "en": "Gonit Utsob 2024 Junior Regional - Sylhet Q8",
+      "bn": "গণিত উৎসব ২০২৪ জুনিয়র অঞ্চলিক - Sylhet প্রশ্ন 8"
+    },
+    "statement": {
+      "en": "Consider a positive integer n such that n! will be the smallest among those that are divisible by 2^{2024} , 3^{2024} and 5^{2024}. Find the value of n. [For any positive integer k, k! = 1× 2× 3× 4× … .× (k−1) × k ]",
+      "bn": "এমন একটি ধনাত্মক পূর্ণসংখ্যা n বিবেচনা করো যেনো n! হবে 2^{2024} , 3^{2024} ও 5^{2024} দ্বারা নিঃশেষে বিভাজ্য সংখ্যাগুলোর মধ্যে সর্বনিম্ন n এর মান নির্ণয় করো। [ যেকোনো ধনাত্মক পূর্ণসংখ্যা k এর জন্য, k! = 1× 2× 3× 4× … .× (k−1) × k ]"
+    },
+    "source": "Gonit Utsob 2024 Junior Regional - Sylhet",
+    "archiveOnly": true,
+    "answer": "",
+    "solution": {
+      "en": "",
+      "bn": ""
+    }
+  }
+]
