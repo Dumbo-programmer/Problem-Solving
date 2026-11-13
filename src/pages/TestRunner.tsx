@@ -225,7 +225,7 @@ export default function TestRunner() {
         </div>
         <div className="mt-2.5 h-1.5 w-full overflow-hidden rounded-full bg-slate-100">
           <div
-            className="h-full rounded-full bg-gradient-to-r from-accent-500 to-accent-400 transition-[width] duration-300"
+            className="h-full rounded-full bg-accent-500 transition-[width] duration-300"
             style={{ width: `${pct}%` }}
           />
         </div>

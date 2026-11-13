@@ -33,7 +33,7 @@ export default function ProblemCard({
   };
 
   return (
-    <article className="card overflow-hidden transition-shadow duration-200 hover:shadow-lift">
+    <article className="card overflow-hidden">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}

@@ -300,6 +300,40 @@ export const STRINGS: Record<string, { en: string; bn: string }> = {
   "home.competeBoard": { en: "Full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড" },
   "home.competeSolved": { en: "solved", bn: "সমাধান" },
 
+  /* ---- simplified home ---- */
+  "home.simpleHeroTitle": { en: "Learn maths by solving it.", bn: "সমাধান করেই গণিত শেখা।" },
+  "home.simpleHeroSub": {
+    en: "A bilingual problem bank from Prothom Alo's Gonit Ishkul — practise at your own pace, sit timed tests, and see where you stand.",
+    bn: "প্রথম আলোর গণিত ইশকুলের দ্বিভাষিক সমস্যার মজুদ — নিজের গতিতে প্র্যাকটিস করো, সময় ধরে টেস্ট দাও, আর দেখো তুমি কোথায় দাঁড়িয়ে আছ।"
+  },
+  "home.simplePracticeT": { en: "Start with the problem bank", bn: "শুরু করো সমস্যার মজুদ দিয়ে" },
+  "home.simplePracticeD": {
+    en: "{n} problems across four topics and four levels, each with a full bilingual solution.",
+    bn: "চারটি টপিক ও চারটি স্তরে {n}টি সমস্যা, প্রতিটিরই পূর্ণ দ্বিভাষিক সমাধান।"
+  },
+  "home.simpleTestT": { en: "Build a timed practice test", bn: "সময়বদ্ধ প্র্যাকটিস টেস্ট তৈরি করো" },
+  "home.simpleTestD": {
+    en: "Choose a question count and a clock, then sit a paper that grades itself the moment you submit.",
+    bn: "প্রশ্নসংখ্যা ও সময় ঠিক করো, তারপর এমন একটি কাগজ দাও যা জমা দেওয়ার সাথে সাথেই নিজেই মূল্যায়ন হয়।"
+  },
+  "home.simpleCompeteT": { en: "Compete every week and month", bn: "প্রতি সপ্তাহে ও মাসে প্রতিযোগিতা" },
+  "home.simpleCompeteD": {
+    en: "One timed paper opens each week and a bigger one each month, ranked live on the leaderboard.",
+    bn: "প্রতি সপ্তাহে একটি ও প্রতি মাসে আরও বড় একটি সময়বদ্ধ কাগজ, লিডারবোর্ডে লাইভ র‍্যাঙ্কিং।"
+  },
+  "home.simpleCompeteCta": { en: "See contests", bn: "প্রতিযোগিতা দেখো" },
+  "home.simpleLbTitle": { en: "Top solvers", bn: "শীর্ষ সমাধানকারী" },
+  "home.simpleLbD": {
+    en: "Problems solved by learners across every paper, updated live.",
+    bn: "সব কাগজ মিলিয়ে শিক্ষার্থীদের সমাধান করা সমস্যা, লাইভ আপডেট।"
+  },
+  "home.simpleLbViewAll": { en: "View full leaderboard", bn: "সম্পূর্ণ লিডারবোর্ড দেখো" },
+  "home.simpleCtaTitle": { en: "Ready for your first problem?", bn: "প্রথম সমস্যাটি সমাধান করতে প্রস্তুত?" },
+  "home.simpleCtaD": {
+    en: "Open the bank and solve one in seconds — no account needed.",
+    bn: "মজুদ খুলে কয়েক সেকেন্ডেই একটি সমস্যা সমাধান করো — অ্যাকাউন্ট লাগবে না।"
+  },
+
   /* ---- 404 ---- */
   "notFound.body": {
     en: "The page you're looking for doesn't exist or has moved.",

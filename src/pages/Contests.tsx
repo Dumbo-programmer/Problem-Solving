@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { ArrowRight, CalendarDays, Clock, Crown, FlaskConical, Loader2, LogIn, Play, Swords, Timer, Trophy, UserRound, Users } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
-import PageDecor from "../components/PageDecor";
+import { PageHeader } from "../components/Layout";
 import { fetchContestRatings, fetchPastTests, fetchScheduledTests, fetchStandings } from "../lib/api";
 import { countdownParts, phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
@@ -231,21 +231,17 @@ export default function Contests() {
   };
 
   return (
-    <div className="relative">
-      <PageDecor seed={6} />
-      <div className="shell py-10 lg:py-14">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div className="max-w-2xl">
-          <p className="eyebrow">{t("tests.eyebrow")}</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-            {t("tests.title")}
-          </h1>
-          <p className="mt-3 text-slate-600">{t("tests.intro")}</p>
-        </div>
-        <Link to="/leaderboard" className="btn-ghost">
-          <Trophy size={16} /> {t("nav.leaderboard")}
-        </Link>
-      </header>
+    <div className="shell section-y">
+      <PageHeader
+        eyebrow={t("tests.eyebrow")}
+        title={t("tests.title")}
+        description={t("tests.intro")}
+        actions={
+          <Link to="/leaderboard" className="btn-ghost">
+            <Trophy size={16} /> {t("nav.leaderboard")}
+          </Link>
+        }
+      />
 
       <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2">
         <p className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
@@ -464,7 +460,6 @@ export default function Contests() {
           <ContestRatingPanel rows={rating} accountId={user?.id} />
         </aside>
       </div>
-      </div>
     </div>
   );
 }
@@ -637,8 +632,6 @@ export function ContestRatingPanel({
 /* Winners board — recent test leaders, above the papers               */
 /* ------------------------------------------------------------------ */
 
-const MEDALS = ["🥇", "🥈", "🥉"];
-
 /**
  * The winners of the most recent weekly/monthly paper, shown at the top of the
  * tests page so the contest result is visible without opening a standings
@@ -665,10 +658,6 @@ export function WinnersBoard({
       aria-labelledby="winners-title"
       className="card relative mt-6 overflow-hidden p-5 sm:p-6"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-amber-400/15 blur-3xl"
-      />
       <div className="relative flex flex-wrap items-end justify-between gap-3">
         <div>
           <p className="eyebrow inline-flex items-center gap-1.5">
@@ -710,8 +699,8 @@ export function WinnersBoard({
                   : "border-slate-200 bg-slate-50/60"
               }`}
             >
-              <span className="text-2xl leading-none" aria-hidden>
-                {MEDALS[i] ?? row.rank}
+              <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-accent-100 font-mono text-xs font-bold text-accent-700">
+                {i + 1}
               </span>
               <div className="min-w-0">
                 <p className="truncate font-semibold text-ink-900">

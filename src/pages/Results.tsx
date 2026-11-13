@@ -69,11 +69,10 @@ export default function Results() {
   const showSaved = (location.state as { saved?: boolean } | null)?.saved;
 
   return (
-    <div className="shell max-w-3xl py-10 lg:py-14">
+    <div className="shell max-w-3xl section-y">
       {/* ---- scorecard ---- */}
-      <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 shadow-lift sm:p-8">
-        <div className="pointer-events-none absolute -right-20 -top-20 h-56 w-56 rounded-full bg-accent-400/20 blur-3xl" />
-        <div className="relative">
+      <div className="rounded-panel border border-slate-200 bg-white p-6 sm:p-8">
+        <div>
           <p className="eyebrow">{t("result.title")}</p>
           <h1 className="mt-2 text-2xl font-bold tracking-tight text-ink-900">{test.title}</h1>
           {showSaved && (

@@ -1,18 +1,17 @@
 import { Link } from "react-router-dom";
-import { BookOpen, Trophy, UserRound } from "lucide-react";
+import { Facebook, Globe } from "lucide-react";
 import { useI18n, TOPIC_LABELS } from "../lib/i18n";
-import { CATEGORIES, TOPICS } from "../data/types";
-import { PROBLEMS } from "../data";
 import BrandLockup from "./BrandLockup";
 import type { ProblemTopic } from "../lib/types";
 
 /**
- * The footer carries the full site map: brand + a small stat strip up top,
- * then three link columns (explore / compete / account) and a slim bottom bar.
+ * A quiet footer: brand and tagline, three short link columns, then the
+ * copyright line. No stats and no decorative panels.
  */
 export default function Footer() {
   const { t, L } = useI18n();
   const year = new Date().getFullYear();
+
   const topics: { topic: ProblemTopic; href: string }[] = [
     { topic: "NUMBER_THEORY", href: "https://www.prothomalo.com/collection/number-theory-math-school" },
     { topic: "GEOMETRY", href: "https://www.prothomalo.com/collection/number-theory-math-school" },
@@ -20,19 +19,13 @@ export default function Footer() {
     { topic: "PROBABILITY", href: "https://www.prothomalo.com/collection/probability-math-school" }
   ];
 
-  const stats = [
-    { value: PROBLEMS.length, label: t("footer.statProblems") },
-    { value: TOPICS.length, label: t("footer.statTopics") },
-    { value: CATEGORIES.length, label: t("footer.statLevels") }
-  ];
-
-  const linkClass =
-    "text-sm text-slate-600 transition-colors hover:text-accent-600";
+  const linkClass = "text-sm text-slate-600 transition-colors hover:text-accent-700";
+  const headingClass = "text-xs font-semibold uppercase tracking-[0.18em] text-slate-400";
 
   return (
-    <footer className="mt-20 border-t border-slate-200 bg-slate-50/70">
+    <footer className="mt-20 border-t border-slate-200">
       <div className="shell grid gap-10 py-12 md:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
-        {/* ---- brand + stats ---- */}
+        {/* ---- brand ---- */}
         <div>
           <BrandLockup size="lg" linked={false} />
           <p className="mt-5 max-w-sm text-sm leading-relaxed text-slate-600">
@@ -42,21 +35,31 @@ export default function Footer() {
             {t("footer.partner")}
           </p>
 
-          <dl className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <dt className="font-mono text-xl font-bold text-ink-900">{stat.value}</dt>
-                <dd className="text-xs text-slate-500">{stat.label}</dd>
-              </div>
-            ))}
-          </dl>
+          <div className="mt-5 flex items-center gap-1">
+            <a
+              href="https://www.facebook.com/PA.GonitIshkul"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-ink-900"
+              aria-label="Facebook"
+            >
+              <Facebook size={17} strokeWidth={1.75} />
+            </a>
+            <a
+              href="https://www.prothomalo.com/collection/math-school"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-ink-900"
+              aria-label={t("footer.visitPalo")}
+            >
+              <Globe size={17} strokeWidth={1.75} />
+            </a>
+          </div>
         </div>
 
-        {/* ---- explore (topics) ---- */}
+        {/* ---- explore ---- */}
         <div>
-          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-            <BookOpen size={13} /> {t("footer.explore")}
-          </h3>
+          <h3 className={headingClass}>{t("footer.explore")}</h3>
           <ul className="mt-4 space-y-2.5">
             {topics.map(({ topic, href }) => (
               <li key={topic}>
@@ -70,9 +73,7 @@ export default function Footer() {
 
         {/* ---- compete ---- */}
         <div>
-          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-            <Trophy size={13} /> {t("footer.compete")}
-          </h3>
+          <h3 className={headingClass}>{t("footer.compete")}</h3>
           <ul className="mt-4 space-y-2.5">
             <li>
               <Link to="/problems" className={linkClass}>
@@ -104,9 +105,7 @@ export default function Footer() {
 
         {/* ---- account ---- */}
         <div>
-          <h3 className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
-            <UserRound size={13} /> {t("footer.account")}
-          </h3>
+          <h3 className={headingClass}>{t("footer.account")}</h3>
           <ul className="mt-4 space-y-2.5">
             <li>
               <Link to="/login" className={linkClass}>
@@ -124,7 +123,7 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link to="/admin" className="text-sm text-slate-400 transition-colors hover:text-accent-600">
+              <Link to="/admin" className="text-sm text-slate-400 transition-colors hover:text-accent-700">
                 {t("admin.title")}
               </Link>
             </li>
@@ -135,16 +134,16 @@ export default function Footer() {
       <div className="border-t border-slate-200 py-5">
         <div className="shell flex flex-col items-center justify-between gap-3 text-xs text-slate-500 sm:flex-row">
           <p>{t("misc.copyright", { year })}</p>
+          <p className="text-slate-400">{t("footer.madeFor")}</p>
           <a
             href="https://www.prothomalo.com/collection/math-school"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full border border-palo/25 bg-palo/5 px-3 py-1.5 font-medium text-palo transition-colors hover:border-palo/50 hover:bg-palo/10"
+            className="inline-flex items-center gap-2 font-medium text-slate-500 transition-colors hover:text-accent-700"
           >
             <img src="/prothom-alo.svg" alt="" className="h-3.5 w-auto" loading="lazy" decoding="async" />
             {t("footer.partnerShort")}
           </a>
-          <p className="text-slate-400">{t("footer.madeFor")}</p>
         </div>
       </div>
     </footer>

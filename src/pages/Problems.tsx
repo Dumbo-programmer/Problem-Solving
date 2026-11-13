@@ -6,7 +6,7 @@ import { useProblemBank } from "../lib/useProblems";
 import { filterProblems } from "../lib/filters";
 import FilterPanel, { EMPTY_FACETS, facetsToFilters, type FacetState } from "../components/FilterPanel";
 import ProblemCard from "../components/ProblemCard";
-import PageDecor from "../components/PageDecor";
+import { PageHeader } from "../components/Layout";
 import type { ProblemTopic } from "../lib/types";
 
 /**
@@ -35,16 +35,12 @@ export default function Problems() {
   );
 
   return (
-    <div className="relative">
-      <PageDecor seed={2} />
-      <div className="shell py-10 lg:py-14">
-      <header className="max-w-2xl">
-        <p className="eyebrow">{t("nav.problems")}</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-          {t("archive.title")}
-        </h1>
-        <p className="mt-3 text-slate-600">{t("archive.lede")}</p>
-      </header>
+    <div className="shell section-y">
+      <PageHeader
+        eyebrow={t("nav.problems")}
+        title={t("archive.title")}
+        description={t("archive.lede")}
+      />
 
       <div className="mt-8 grid items-start gap-6 lg:grid-cols-[19rem_1fr]">
         <aside className="lg:sticky lg:top-20">
@@ -79,7 +75,6 @@ export default function Problems() {
             </div>
           )}
         </section>
-      </div>
       </div>
     </div>
   );

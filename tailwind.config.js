@@ -12,6 +12,18 @@ export default {
         12: "0.12",
         14: "0.14"
       },
+      // Shared layout tokens — change these once to retune the whole site.
+      maxWidth: {
+        content: "72rem"
+      },
+      spacing: {
+        section: "3rem",
+        "section-lg": "4rem"
+      },
+      borderRadius: {
+        card: "0.75rem",
+        panel: "1rem"
+      },
       colors: {
         // Warm newsprint charcoal — the "ink" the site is set in.
         ink: {

@@ -6,7 +6,7 @@ import { useProblemBank } from "../lib/useProblems";
 import { filterProblems, pickProblems } from "../lib/filters";
 import FilterPanel, { EMPTY_FACETS, facetsToFilters, type FacetState } from "../components/FilterPanel";
 import MathText from "../components/MathText";
-import PageDecor from "../components/PageDecor";
+import { PageHeader } from "../components/Layout";
 import { DifficultyBadge, TopicBadge } from "../components/Badges";
 import PastTestsPanel from "../components/PastTestsPanel";
 import { newTestId } from "../lib/storage";
@@ -81,16 +81,13 @@ export default function Practice() {
   const perProblem = chosen.length ? (duration / chosen.length).toFixed(1) : "0";
 
   return (
-    <div className="relative">
-      <PageDecor seed={7} />
-      <div className="shell py-10 lg:py-14">
-      <header className="max-w-2xl">
-        <p className="eyebrow">{t("nav.practice")}</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-          {t("builder.title")}
-        </h1>
-        <p className="mt-3 text-slate-600">{t("builder.lede")}</p>
-      </header>
+    <div>
+      <div className="shell pt-section lg:pt-section-lg">
+        <PageHeader
+          eyebrow={t("nav.practice")}
+          title={t("builder.title")}
+          description={t("builder.lede")}
+        />
 
       <div className="mt-8 grid items-start gap-6 lg:grid-cols-[1fr_20rem]">
         {/* ------------- left: configuration ------------- */}
@@ -293,7 +290,7 @@ export default function Practice() {
         </aside>
       </div>
       </div>
-      <div className="shell pb-10 lg:pb-14">
+      <div className="shell pb-section lg:pb-section-lg">
         <PastTestsPanel />
       </div>
     </div>

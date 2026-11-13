@@ -1,25 +1,18 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { Award, Crown, Loader2, Medal, Trophy, UserRound } from "lucide-react";
+import { Award, Loader2, Trophy, UserRound } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
 import { fetchLeaderboard } from "../lib/api";
-import PageDecor from "../components/PageDecor";
-import { formatDuration } from "../lib/leaderboard";
 import { getClientId } from "../lib/storage";
+import { PageHeader } from "../components/Layout";
+import LeaderboardList from "../components/LeaderboardList";
 import type { LeaderboardWindow, PeriodRow } from "../lib/types";
 
 /**
  * The overall leaderboard: how many problems has each learner solved across
  * every scheduled test? Tabs roll the window (week / month / all time) without
  * changing the metric; the signed-in learner's own row is always highlighted.
- *
- * This is the *problems solved* board. Contest rating lives on the contest
- * tab — the two never mix.
- *
- * The board is open to every visitor; only attempts sat under an account are
- * ever ranked, so a signed-out visitor reads the board without a row of
- * their own.
  */
 
 const TABS: { key: LeaderboardWindow; label: string }[] = [
@@ -27,13 +20,6 @@ const TABS: { key: LeaderboardWindow; label: string }[] = [
   { key: "month", label: "lb.tab.month" },
   { key: "all", label: "lb.tab.all" }
 ];
-
-function rankMedal(rank: number) {
-  if (rank === 1) return <Medal size={17} className="text-amber-500" />;
-  if (rank === 2) return <Medal size={17} className="text-slate-400" />;
-  if (rank === 3) return <Medal size={17} className="text-amber-700/70" />;
-  return <span className="font-mono font-bold text-ink-900">{rank}</span>;
-}
 
 export default function Leaderboard() {
   const { t } = useI18n();
@@ -65,7 +51,8 @@ export default function Leaderboard() {
 
   // A learner is "you" when the board row is theirs: server-marked, or the
   // row's owner id matches the signed-in account / this browser.
-  const isMe = (row: PeriodRow) => row.isYou || (accountId ? row.clientId === accountId : row.clientId === `anon:${clientId}`);
+  const isMe = (row: PeriodRow) =>
+    row.isYou || (accountId ? row.clientId === accountId : row.clientId === `anon:${clientId}`);
   const you = useMemo(
     () => rows?.find((r) => isMe(r)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -73,29 +60,21 @@ export default function Leaderboard() {
   );
 
   return (
-    <div className="relative">
-      <PageDecor seed={4} />
-      <div className="shell py-10 lg:py-14">
-      <header className="max-w-3xl">
-        <p className="eyebrow">{t("lb.eyebrow")}</p>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-          {t("lb.title")}
-        </h1>
-        <p className="mt-3 text-slate-600">{t("lb.intro")}</p>
-      </header>
+    <div className="shell section-y">
+      <PageHeader eyebrow={t("lb.eyebrow")} title={t("lb.title")} description={t("lb.intro")} />
 
       {/* ---- window tabs + sync state ---- */}
-      <div className="mt-7 flex flex-wrap items-center justify-between gap-3">
-        <div className="inline-flex rounded-xl border border-slate-200 bg-slate-50 p-1">
+      <div className="mt-8 flex flex-wrap items-center justify-between gap-x-6 gap-y-2 border-b border-slate-200">
+        <div className="flex gap-6">
           {TABS.map((tabDef) => (
             <button
               key={tabDef.key}
               type="button"
               onClick={() => setTab(tabDef.key)}
-              className={`rounded-lg px-3.5 py-1.5 text-xs font-semibold transition-colors ${
+              className={`-mb-px border-b-2 pb-3 text-sm font-semibold transition-colors ${
                 tab === tabDef.key
-                  ? "bg-white text-ink-900 shadow-soft"
-                  : "text-slate-500 hover:text-slate-800"
+                  ? "border-accent-600 text-ink-900"
+                  : "border-transparent text-slate-500 hover:text-ink-900"
               }`}
             >
               {t(tabDef.label)}
@@ -103,98 +82,46 @@ export default function Leaderboard() {
           ))}
         </div>
 
-        <p className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
+        <p className="inline-flex items-center gap-1.5 pb-3 text-xs font-medium text-slate-500">
           <span className={`h-1.5 w-1.5 rounded-full ${source === "cloud" ? "bg-emerald-500" : "bg-amber-500"}`} />
           {source === "cloud" ? t("lb.source.cloud") : t("lb.source.local")}
         </p>
       </div>
 
       {/* ---- your standing ---- */}
-      <div className="mt-4">
-        {rows === null ? null : you ? (
-          <div className="card flex flex-wrap items-center gap-x-6 gap-y-2 border-accent-500/30 bg-accent-500/5 p-4">
-            <span className="inline-flex items-center gap-2 text-sm font-bold text-ink-900">
-              <UserRound size={16} className="text-accent-500" /> {you.name}
-            </span>
-            <span className="text-sm text-slate-600">
-              {t("lb.yourRank", { rank: you.rank, solved: you.correct })}
-            </span>
-            <span className="text-xs text-slate-500">
-              {t("lb.col.tests")}: {you.tests} · {t("lb.col.best")}: {you.bestPct}%
-            </span>
-          </div>
-        ) : user ? (
-          <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
-            <p className="text-sm text-slate-600">{t("lb.notRanked")}</p>
-            <Link to="/contests" className="btn-primary h-9 px-3.5 text-xs">
-              <Trophy size={14} /> {t("nav.contests")}
-            </Link>
-          </div>
-        ) : (
-          <div className="card flex flex-wrap items-center justify-between gap-3 p-4">
-            <p className="text-sm text-slate-600">{t("lb.signedOut")}</p>
-            <Link to="/login" className="btn-ghost h-9 px-3.5 text-xs">
-              {t("lb.signIn")}
-            </Link>
-          </div>
-        )}
-      </div>
-
-      {/* ---- top-3 podium ---- */}
-      {rows && rows.length >= 3 && (
-        <div className="mt-6 grid gap-4 sm:grid-cols-3">
-          {[1, 0, 2].map((idx) => {
-            const row = rows[idx];
-            if (!row) return null;
-            const lane = idx; // 0 = champion, 1 = runner-up, 2 = third
-            const isYou = isMe(row);
-            const tone =
-              lane === 0
-                ? "border-amber-400/60 bg-gradient-to-br from-amber-50 to-white"
-                : lane === 1
-                  ? "border-slate-300/70 bg-gradient-to-br from-slate-50 to-white"
-                  : "border-orange-300/60 bg-gradient-to-br from-orange-50 to-white";
-            return (
-              <div
-                key={row.clientId}
-                className={`relative flex flex-col items-center rounded-2xl border p-5 text-center shadow-soft ${tone} ${
-                  lane === 0 ? "sm:order-2" : lane === 1 ? "sm:order-1" : "sm:order-3"
-                }`}
-              >
-                <span
-                  className={`grid h-12 w-12 place-items-center rounded-full bg-gradient-to-br text-white shadow-soft ${
-                    lane === 0
-                      ? "from-amber-300 to-amber-500"
-                      : lane === 1
-                        ? "from-slate-300 to-slate-500"
-                        : "from-orange-300 to-orange-500"
-                  }`}
-                >
-                  {lane === 0 ? <Crown size={20} /> : <Medal size={20} />}
-                </span>
-                <span className="mt-3 max-w-full truncate text-sm font-bold text-ink-900">
-                  {row.name}
-                </span>
-                <span className="mt-1 text-xs text-slate-500">
-                  {t("lb.col.solved")}: <span className="font-mono font-bold text-ink-900">{row.correct}</span>
-                </span>
-                <span className="mt-3 rounded-full bg-white/70 px-3 py-1 font-mono text-xs font-bold text-accent-700 shadow-soft">
-                  #{row.rank}
-                </span>
-                {isYou && (
-                  <span className="absolute right-3 top-3 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
-                    {t("lb.you")}
-                  </span>
-                )}
-              </div>
-            );
-          })}
+      {rows !== null && (
+        <div className="mt-6">
+          {you ? (
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-1 rounded-card bg-accent-50 px-4 py-3">
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-ink-900">
+                <UserRound size={16} className="text-accent-600" />
+                {you.name}
+              </span>
+              <span className="text-sm text-slate-600">
+                {t("lb.yourRank", { rank: you.rank, solved: you.correct })}
+              </span>
+            </div>
+          ) : user ? (
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="text-sm text-slate-600">{t("lb.notRanked")}</p>
+              <Link to="/contests" className="btn-primary h-9 px-3.5 text-xs">
+                <Trophy size={14} /> {t("nav.contests")}
+              </Link>
+            </div>
+          ) : (
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <p className="text-sm text-slate-600">{t("lb.signedOut")}</p>
+              <Link to="/login" className="btn-ghost h-9 px-3.5 text-xs">
+                {t("lb.signIn")}
+              </Link>
+            </div>
+          )}
         </div>
       )}
 
       {/* ---- board ---- */}
       {rows === null ? (
-        <div className="mt-6 flex items-center gap-2 text-sm text-slate-500">
+        <div className="mt-8 flex items-center gap-2 text-sm text-slate-500">
           <Loader2 size={16} className="animate-spin" /> {t("misc.loading")}
         </div>
       ) : rows.length === 0 ? (
@@ -206,64 +133,8 @@ export default function Leaderboard() {
           </Link>
         </div>
       ) : (
-        <div className="card mt-6 overflow-x-auto p-0">
-          <table className="w-full min-w-[36rem] text-left text-sm">
-            <thead>
-              <tr className="border-b border-slate-200 text-slate-400">
-                <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider">{t("lb.col.rank")}</th>
-                <th className="px-4 py-3 text-xs font-semibold uppercase tracking-wider">{t("lb.col.name")}</th>
-                <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">
-                  {t("lb.col.solved")}
-                </th>
-                <th className="px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider">
-                  {t("lb.col.tests")}
-                </th>
-                <th className="hidden px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider sm:table-cell">
-                  {t("lb.col.best")}
-                </th>
-                <th className="hidden px-4 py-3 text-right text-xs font-semibold uppercase tracking-wider sm:table-cell">
-                  {t("lb.col.time")}
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {rows.slice(0, 100).map((row) => {
-                const isYou = isMe(row);
-                return (
-                  <tr
-                    key={row.clientId}
-                    className={`border-b border-slate-100 transition-colors last:border-0 ${
-                      isYou ? "bg-accent-500/10" : "hover:bg-slate-50"
-                    }`}
-                  >
-                    <td className="px-4 py-3">
-                      <span className="inline-flex items-center gap-1.5">{rankMedal(row.rank)}</span>
-                    </td>
-                    <td className="max-w-[14rem] truncate px-4 py-3 font-semibold text-ink-900">
-                      {row.name}
-                      {isYou && (
-                        <span className="ml-2 rounded bg-accent-500/20 px-1.5 py-0.5 text-[10px] font-bold text-accent-700">
-                          {t("lb.you")}
-                        </span>
-                      )}
-                    </td>
-                    <td className="px-4 py-3 text-right font-mono text-base font-bold text-ink-900">
-                      {row.correct}
-                    </td>
-                    <td className="px-4 py-3 text-right font-mono text-slate-600">
-                      {row.tests}
-                    </td>
-                    <td className="hidden px-4 py-3 text-right font-mono text-slate-600 sm:table-cell">
-                      {row.bestPct}%
-                    </td>
-                    <td className="hidden px-4 py-3 text-right font-mono text-slate-500 sm:table-cell">
-                      {formatDuration(row.timeTakenSec)}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+        <div className="card mt-6 overflow-hidden">
+          <LeaderboardList rows={rows.slice(0, 100)} isYou={isMe} />
         </div>
       )}
 
@@ -271,10 +142,9 @@ export default function Leaderboard() {
         <span className="inline-flex items-center gap-1.5">
           <Award size={14} className="text-accent-500" /> {t("lb.hint")}
         </span>
-        <Link to="/contests" className="font-medium text-accent-600 hover:text-accent-500">
+        <Link to="/contests" className="font-medium text-accent-700 hover:text-accent-600">
           {t("nav.contests")} →
         </Link>
-      </div>
       </div>
     </div>
   );

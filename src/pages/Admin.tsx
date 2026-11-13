@@ -34,7 +34,7 @@ import {
   logoutAdmin
 } from "../lib/api";
 import { readAdminToken } from "../lib/storage";
-import PageDecor from "../components/PageDecor";
+import { PageHeader } from "../components/Layout";
 import { phaseOf } from "../lib/scheduled";
 import { formatDuration } from "../lib/leaderboard";
 import type { AdminLearner, AdminOverview, AdminSubmission } from "../lib/api";
@@ -239,20 +239,16 @@ function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: (
   const [tab, setTab] = useState<Tab>("overview");
 
   return (
-    <div className="relative">
-      <PageDecor seed={12} />
-      <div className="shell py-10 lg:py-14">
-      <header className="flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="eyebrow">{t("admin.eyebrow")}</p>
-          <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
-            {t("admin.title")}
-          </h1>
-        </div>
-        <button type="button" onClick={onLogout} className="btn-quiet h-9 px-3.5 text-xs">
-          <LogOut size={14} /> {t("admin.logout")}
-        </button>
-      </header>
+    <div className="shell section-y">
+      <PageHeader
+        eyebrow={t("admin.eyebrow")}
+        title={t("admin.title")}
+        actions={
+          <button type="button" onClick={onLogout} className="btn-quiet h-9 px-3.5 text-xs">
+            <LogOut size={14} /> {t("admin.logout")}
+          </button>
+        }
+      />
 
       <div className="mt-6 flex flex-wrap gap-1.5 border-b border-slate-200 pb-3">
         {TABS.map((def) => (
@@ -275,7 +271,6 @@ function Dashboard({ onLogout, onExpired }: { onLogout: () => void; onExpired: (
       {tab === "problems" && <ProblemsPanel onExpired={onExpired} />}
       {tab === "tests" && <TestsPanel onExpired={onExpired} />}
       {tab === "submissions" && <SubmissionsPanel onExpired={onExpired} />}
-      </div>
     </div>
   );
 }

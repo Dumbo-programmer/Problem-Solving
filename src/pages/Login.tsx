@@ -21,7 +21,6 @@ import {
 } from "lucide-react";
 import { useI18n } from "../lib/i18n";
 import { useAuth } from "../lib/auth";
-import PageDecor from "../components/PageDecor";
 import { fetchLeaderboard, fetchPastTests, HttpError } from "../lib/api";
 import type { PeriodRow, PracticeTest } from "../lib/types";
 
@@ -48,9 +47,7 @@ export default function Login() {
   const gated = Boolean(params.get("next"));
 
   return (
-    <div className="relative">
-      <PageDecor seed={9} count={12} />
-      <div className="shell py-10 lg:py-16">
+    <div className="shell section-y">
       {gated && !user && (
         <div className="card mb-6 flex items-start gap-3 border-accent-500/40 bg-accent-500/5 p-4">
           <LockKeyhole size={18} className="mt-0.5 shrink-0 text-accent-500" />
@@ -63,7 +60,6 @@ export default function Login() {
       <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-12">
         {user ? <AccountCard locale={locale} /> : <AuthCard mode={mode} />}
         <DashboardPanel />
-      </div>
       </div>
     </div>
   );
@@ -136,11 +132,6 @@ function AuthCard({ mode }: { mode: Mode }) {
 
   return (
     <section aria-labelledby="auth-title" className="card relative overflow-hidden p-6 sm:p-8">
-      {/* Decorative corner glow */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-accent-400/20 blur-3xl"
-      />
       <p className="eyebrow">{t("auth.eyebrow")}</p>
       <h1
         id="auth-title"
@@ -314,16 +305,12 @@ function AccountCard({ locale }: { locale: string }) {
 
   return (
     <section aria-labelledby="account-title" className="card relative overflow-hidden p-6 sm:p-8">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -left-16 -top-16 h-48 w-48 rounded-full bg-accent-400/20 blur-3xl"
-      />
       <p className="eyebrow">{t("auth.account")}</p>
       <h1
         id="account-title"
         className="mt-2 flex items-center gap-3 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl"
       >
-        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-accent-400 to-accent-600 text-lg font-bold text-white shadow-soft">
+        <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-accent-600 text-lg font-bold text-white">
           {me.displayName.slice(0, 2).toUpperCase()}
         </span>
         <span className="min-w-0 break-words">{me.displayName}</span>
@@ -456,14 +443,7 @@ function DashboardPanel() {
   ];
 
   return (
-    <aside className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 pt-16 shadow-soft sm:p-8 sm:pt-20">
-      {/* a single quiet brand glow */}
-      <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-accent-200/30 blur-3xl" />
-        <div className="absolute inset-x-0 bottom-0 h-32 overflow-hidden">
-          <div className="retro-horizon !h-32 opacity-60" />
-        </div>
-      </div>
+    <aside className="rounded-panel border border-slate-200 bg-white p-6 sm:p-8">
 
       <p className="eyebrow relative">{t("auth.dash.eyebrow")}</p>
       <h2 className="relative mt-2 text-xl font-bold tracking-tight text-slate-900">
@@ -562,7 +542,7 @@ function TabLink({
       to={to}
       className={`inline-flex items-center gap-1.5 rounded-lg px-3.5 py-1.5 text-sm font-semibold transition-colors ${
         active
-          ? "bg-white text-accent-700 shadow-soft"
+          ? "bg-white text-accent-700"
           : "text-slate-500 hover:text-slate-800"
       }`}
     >

@@ -193,7 +193,7 @@ export default function PastTestsPanel() {
             const pct = test.maxScore > 0 ? Math.round((test.correctCount / test.maxScore) * 100) : 0;
             const done = test.status === "SUBMITTED";
             return (
-              <article key={test.id} className="card p-5 transition-shadow hover:shadow-lift">
+              <article key={test.id} className="card p-5">
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="min-w-0 flex-1">
                     <h3 className="truncate text-[15px] font-bold text-ink-900">{test.title}</h3>
@@ -239,10 +239,10 @@ export default function PastTestsPanel() {
                     <div
                       className={`h-full rounded-full ${
                         pct >= 60
-                          ? "bg-gradient-to-r from-emerald-500 to-emerald-400"
+                          ? "bg-emerald-500"
                           : pct >= 40
-                            ? "bg-gradient-to-r from-amber-500 to-amber-400"
-                            : "bg-gradient-to-r from-rose-500 to-rose-400"
+                            ? "bg-amber-500"
+                            : "bg-rose-500"
                       }`}
                       style={{ width: `${pct}%` }}
                     />
